@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+}
+@Scripts.Render("~/bundles/Home")
+<div class="container">
+    <h1>Home</h1>
+    <a href="~/Cards/GetMangoCard/" data-bind="visible:viewModel.wechatuser.Id()==null">获取MangoCard</a>
+    <a href="~/Cards/">我的Mango Cards</a>
+    <div data-bind="visible:viewModel.wechatuser.Id()!=null">
+        <p data-bind="text:viewModel.wechatuser.NickName"></p>
+        <img data-bind="attr:{src:viewModel.wechatuser.Headimgurl}" alt="" />
+    </div>
+    <hr />
+
+    <!--循环CardType json类型查看api "/api/CardType/" -->
+    <ul data-bind="foreach:viewModel.cardTypes">
+        <li>
+            <span data-bind="text:Name">
+            </span>
+            <ul data-bind="foreach:SubCardTypeModels">
+                <li>
+                    <span data-bind="text:Name"></span>
+                    <ul data-bind="foreach:CardDemoModels">
+                        <li data-bind="text:Name"></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!--end-->
+    <!--循环雇员 json类型查看api "/api/Employee/" -->
+    <h2>雇员</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>性别</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach:viewModel.employees">
+            <tr>
+                <td data-bind="text:Name"></td>
+                <td data-bind="text:Gender"></td>
+            </tr>
+        </tbody>
+    </table>
+    <!--end-->
+</div>

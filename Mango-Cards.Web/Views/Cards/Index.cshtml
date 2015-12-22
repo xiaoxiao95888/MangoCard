@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+}
+@Scripts.Render("~/bundles/Cards")
+<div class="container">
+    <ul data-bind="foreach:viewModel.mycards">
+        <li>
+            <span data-bind="text:Name"></span>
+            <ul data-bind="foreach:MangoCardModels">
+                <li>
+                    <span data-bind="text:Title"></span>
+                    <span data-bind="text:Description"></span>
+                    <span data-bind="text:IsPublish"></span>
+                    <img data-bind="attr:{src:ThumbnailUrl}" />
+                    <a href="#" data-bind="click:Cards.viewModel.SelectCard">选择</a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+    <h2>基础数据</h2>
+    <span>浏览：<span data-bind="text:viewModel.selectedcard.PvCount"></span></span>
+    <span>分享：<span data-bind="text:viewModel.selectedcard.ShareTimeCount"></span></span>
+    <hr />
+    <h2>html</h2>
+    <textarea data-bind="text:viewModel.selectedcard.HtmlCode"></textarea>
+</div>

@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango-Cards.Service", "Mango-Cards.Service\Mango-Cards.Service.csproj", "{555D4AFA-FFBD-47A9-972E-64BECB9FC7D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango-Cards.Web", "Mango-Cards.Web\Mango-Cards.Web.csproj", "{9CF4DFA0-6D08-452A-92C8-A23D1EB13D33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangoCards.Test", "MangoCards.Test\MangoCards.Test.csproj", "{CB3944A7-4522-4619-B8BA-3A61FB5E0E60}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B5AAEAD0-7378-4804-A484-4B7593D593A6}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango-Cards.Library", "Mango-Cards.Library\Mango-Cards.Library.csproj", "{3EA9638D-90A0-491F-92E7-4C8AAADE902D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{555D4AFA-FFBD-47A9-972E-64BECB9FC7D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{555D4AFA-FFBD-47A9-972E-64BECB9FC7D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{555D4AFA-FFBD-47A9-972E-64BECB9FC7D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{555D4AFA-FFBD-47A9-972E-64BECB9FC7D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CF4DFA0-6D08-452A-92C8-A23D1EB13D33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CF4DFA0-6D08-452A-92C8-A23D1EB13D33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CF4DFA0-6D08-452A-92C8-A23D1EB13D33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CF4DFA0-6D08-452A-92C8-A23D1EB13D33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB3944A7-4522-4619-B8BA-3A61FB5E0E60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB3944A7-4522-4619-B8BA-3A61FB5E0E60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB3944A7-4522-4619-B8BA-3A61FB5E0E60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB3944A7-4522-4619-B8BA-3A61FB5E0E60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EA9638D-90A0-491F-92E7-4C8AAADE902D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EA9638D-90A0-491F-92E7-4C8AAADE902D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EA9638D-90A0-491F-92E7-4C8AAADE902D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EA9638D-90A0-491F-92E7-4C8AAADE902D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
