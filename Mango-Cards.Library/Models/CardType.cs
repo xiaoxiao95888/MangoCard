@@ -10,6 +10,7 @@ namespace Mango_Cards.Library.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string Code { get; set; }
         public virtual CardType Parent { get; set; }
         public virtual ICollection<CardDemo> CardDemos { get; set; }
         public virtual ICollection<MangoCard> MangoCards { get; set; }
