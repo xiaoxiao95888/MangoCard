@@ -26,8 +26,6 @@ namespace Mango_Cards.Web.Controllers.API
             var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
             Mapper.Reset();
             Mapper.CreateMap<MangoCard, MangoCardModel>().ForMember(n => n.HtmlCode, opt => opt.Ignore());
-            Mapper.CreateMap<CardType, CardTypeModel>()
-                .ForMember(n => n.MangoCardModels, opt => opt.MapFrom(src => src.MangoCards));
             return
                 wechatuser.MangoCards.Where(n => !n.IsDeleted)
                     .GroupBy(n => n.CardType)

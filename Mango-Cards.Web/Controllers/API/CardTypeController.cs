@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
 using AutoMapper;
 using Mango_Cards.Library.Models;
 using Mango_Cards.Library.Services;
@@ -21,8 +18,7 @@ namespace Mango_Cards.Web.Controllers.API
         public object Get()
         {
             Mapper.Reset();
-            Mapper.CreateMap<CardDemo, CardDemoModel>();
-            Mapper.CreateMap<CardType, CardTypeModel>().ForMember(n => n.CardDemoModels, opt => opt.MapFrom(src => src.CardDemos));
+            Mapper.CreateMap<CardType, CardTypeModel>();
             var all = _cardTypeService.GetCardTypes().ToList();
             var roots = all.Where(n => n.Parent == null).ToList();
             var result = new List<CardTypeModel>();
@@ -33,8 +29,7 @@ namespace Mango_Cards.Web.Controllers.API
         public object Get(Guid id)
         {
             Mapper.Reset();
-            Mapper.CreateMap<CardDemo, CardDemoModel>();
-            Mapper.CreateMap<CardType, CardTypeModel>().ForMember(n => n.CardDemoModels, opt => opt.MapFrom(src => src.CardDemos));
+            Mapper.CreateMap<CardType, CardTypeModel>();
             var all = _cardTypeService.GetCardTypes().ToList();
             var root = all.FirstOrDefault(n => n.Id == id);
             var result = new CardTypeModel();
