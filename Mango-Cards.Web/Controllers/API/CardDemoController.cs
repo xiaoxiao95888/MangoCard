@@ -18,7 +18,7 @@ namespace Mango_Cards.Web.Controllers.API
         {
             Mapper.Reset();
             Mapper.CreateMap<CardType, CardTypeModel>();
-            Mapper.CreateMap<CardDemo, CardDemoModel>().ForMember(n => n.CardTypeModel, opt => opt.MapFrom(src => src.CardType)).ForMember(n => n.HtmlCode, opt => opt.Ignore());
+            Mapper.CreateMap<CardDemo, CardDemoModel>().ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id)).ForMember(n => n.HtmlCode, opt => opt.Ignore());
             return _cardDemoService.GetCardDemos().Select(Mapper.Map<CardDemo, CardDemoModel>);
         }
         public object Get(Guid id)
@@ -26,7 +26,7 @@ namespace Mango_Cards.Web.Controllers.API
             Mapper.Reset();
             Mapper.CreateMap<CardType, CardTypeModel>();
             Mapper.CreateMap<CardDemo, CardDemoModel>()
-                .ForMember(n => n.CardTypeModel, opt => opt.MapFrom(src => src.CardType));
+                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id));
             return Mapper.Map<CardDemo, CardDemoModel>(_cardDemoService.GetCardDemo(id));
         }
     }
