@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using AutoMapper;
 using Mango_Cards.Library.Models;
@@ -11,14 +12,19 @@ namespace Mango_Cards.Web.Controllers.API
     public class CardTypeController : BaseApiController
     {
         private readonly ICardTypeService _cardTypeService;
+        private readonly string _cardThumbnailPath;
         public CardTypeController(ICardTypeService cardTypeService)
         {
             _cardTypeService = cardTypeService;
+            _cardThumbnailPath = ConfigurationManager.AppSettings["CardThumbnailPath"];
         }
         public object Get()
         {
             Mapper.Reset();
-            Mapper.CreateMap<CardDemo, CardDemoModel>();
+            Mapper.CreateMap<CardDemo, CardDemoModel>().ForMember(n => n.ThumbnailUrl,
+                    opt =>
+                        opt.MapFrom(
+                            src => src.Thumbnail != null ? (_cardThumbnailPath + "/" + src.Thumbnail) : string.Empty));
             Mapper.CreateMap<CardType, CardTypeModel>().ForMember(n => n.CardDemoModels, opt => opt.MapFrom(src => src.CardDemos));
             var all = _cardTypeService.GetCardTypes().ToList();
             var roots = all.Where(n => n.Parent == null).ToList();
@@ -30,7 +36,10 @@ namespace Mango_Cards.Web.Controllers.API
         public object Get(Guid id)
         {
             Mapper.Reset();
-            Mapper.CreateMap<CardDemo, CardDemoModel>();
+            Mapper.CreateMap<CardDemo, CardDemoModel>().ForMember(n => n.ThumbnailUrl,
+                    opt =>
+                        opt.MapFrom(
+                            src => src.Thumbnail != null ? (_cardThumbnailPath + "/" + src.Thumbnail) : string.Empty));
             Mapper.CreateMap<CardType, CardTypeModel>().ForMember(n => n.CardDemoModels, opt => opt.MapFrom(src => src.CardDemos));
             var all = _cardTypeService.GetCardTypes().ToList();
             var root = all.FirstOrDefault(n => n.Id == id);

@@ -10,6 +10,8 @@ namespace Mango_Cards.Web.Models
         public Guid Id { get; set; }
         public Guid CardTypeId { get; set; }
         public string Name { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
         public string HtmlCode { get; set; }
         public string ThumbnailUrl { get; set; }
         public Guid? EmployeeId { get; set; }
