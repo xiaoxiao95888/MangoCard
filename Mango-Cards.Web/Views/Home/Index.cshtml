@@ -1,49 +1,110 @@
 ﻿@{
     ViewBag.Title = "Home";
-    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
 }
 @Scripts.Render("~/bundles/Home")
-<div class="container">
-    <h1>Home</h1>
-    <a href="~/Cards/GetMangoCard/" data-bind="visible:viewModel.wechatuser.Id()==null">获取MangoCard</a>
-    <a href="~/Cards/">我的Mango Cards</a>
-    <div data-bind="visible:viewModel.wechatuser.Id()!=null">
-        <p data-bind="text:viewModel.wechatuser.NickName"></p>
-        <img data-bind="attr:{src:viewModel.wechatuser.Headimgurl}" alt="" />
-    </div>
-    <hr />
+<!-- Fullwidth Slider -->
+<div class="home-section fullwidth-slider-fade bg-dark" id="home">
+    <!-- Slide Item -->
+    <section class="home-section bg-scroll bg-dark-alfa-50" data-background="images/full-width-images/section-bg-1.jpg">
+        <div class="js-height-full container">
+            <!-- Hero Content -->
+            <div class="home-content">
+                <div class="home-text">
+                    <h1 class="hs-line-8 no-transp font-alt mb-50 mb-xs-30">
+                        <b class="btn btn-mod btn-w btn-round btn-icon btn-large"> <i class="fa fa-heart-o fa-sm"></i> Mango Cards</b>￼ ￼
+                    </h1>
+                    <h2 class="hs-line-14 font-alt mb-50 mb-xs-30">
+                        基于微信,极致
+                    </h2>
+                    <h1 class="hs-line-8 no-transp font-alt mb-50 mb-xs-30">
+                        简便创新的方式
+                    </h1>
+                </div>
+            </div>
+            <!-- End Hero Content -->
+        </div>
+    </section>
+    <!-- End Slide Item -->
+    <!-- Slide Item -->
+    <section class="home-section bg-scroll bg-dark-alfa-30" data-background="images/full-width-images/section-bg-2.jpg">
+        <div class="js-height-full container">
+            <!-- Hero Content -->
+            <div class="home-content">
+                <div class="home-text">
+                    <h2 class="hs-line-14 font-alt mb-50 mb-xs-30">
+                        订制个性化
+                    </h2>
+                    <h1 class="hs-line-8 no-transp font-alt mb-50 mb-xs-30">
+                        <b class="btn btn-mod btn-w btn-round btn-icon btn-large"> <i class="fa fa-heart-o fa-sm"></i> Mango Cards</b>
+                    </h1>
+                </div>
+            </div>
+            <!-- End Hero Content -->
+        </div>
+    </section>
+    <!-- End Slide Item -->
+    <!-- Slide Item -->
+    <section class="home-section bg-scroll bg-dark-alfa-30" data-background="images/full-width-images/section-bg-3.jpg">
+        <div class="js-height-full container">
+            <!-- Hero Content -->
+            <div class="home-content">
+                <div class="home-text">
+                    <h2 class="hs-line-14 font-alt mb-50 mb-xs-30">
+                        构建您的创意无限的世界
+                    </h2>
+                    <h1 class="hs-line-8 no-transp font-alt mb-50 mb-xs-30">
+                        <b class="btn btn-mod btn-w btn-round btn-icon btn-large"> <i class="fa fa-heart-o fa-sm"></i> Mango Cards</b>
+                    </h1>
+                </div>
+            </div>
+            <!-- End Hero Content -->
+        </div>
+    </section>
+    <!-- End Slide Item -->
 
-    <!--循环CardType json类型查看api "/api/CardType/" -->
-    <ul data-bind="foreach:viewModel.cardTypes">
-        <li>
-            <span data-bind="text:Name">
-            </span>
-            <ul data-bind="foreach:SubCardTypeModels">
-                <li>
-                    <span data-bind="text:Name"></span>
-                    <ul data-bind="foreach:CardDemoModels">
-                        <li data-bind="text:Name"></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <!--end-->
-    <!--循环雇员 json类型查看api "/api/Employee/" -->
-    <h2>雇员</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>性别</th>
-            </tr>
-        </thead>
-        <tbody data-bind="foreach:viewModel.employees">
-            <tr>
-                <td data-bind="text:Name"></td>
-                <td data-bind="text:Gender"></td>
-            </tr>
-        </tbody>
-    </table>
-    <!--end-->
 </div>
+<!-- End Fullwidth Slider -->
+<!-- Portfolio Section -->
+<div data-bind="foreach:viewModel.cardTypes">
+    <section class="page-section pt-50 pb-20">
+        <div class="container relative section-portfolio">
+            <h2 class="section-title font-alt mb-70 mb-sm-40" data-bind="text:Name"></h2>
+            <!-- Works Filter -->
+            <div class="works-filter font-alt  align-center" data-bind="foreach:SubCardTypeModels">
+                <a href="#" class="filter active" data-bind="text:'全部',attr:{'data-filter':'*'},visible:$index()==0"></a>
+                <a href="#" class="filter" data-bind="text:Name,attr:{'data-filter':'.'+Id()}"></a>
+            </div>
+            <!-- End Works Filter -->
+            <!-- Works Grid -->
+            <ul class="works-grid work-grid-3 work-grid-gut clearfix font-alt hover-black hide-titles" id="work-grid"
+                data-bind="foreach:SubCardTypeModels">
+                <!-- End Work Item -->
+                <div data-bind="foreach:CardDemoModels">
+                    <!-- Work Item (Lightbox) -->
+                    <li class="work-item mix" data-bind="css:CardTypeId()">
+                        <a href="images/portfolio/full-project-1.jpg" class="work-lightbox-link mfp-image">
+                            <div class="work-img">
+                                <img data-bind="attr:{'src':ThumbnailUrl,'alt':Name}" />
+                            </div>
+                            <div class="work-intro">
+                                <h3 class="work-title" data-bind="text:Name"></h3>
+                                <div class="work-descr">
+                                    <div class="mb-10">
+                                        <a class="btn btn-mod btn-border-w btn-round btn-medium" href="#">选择</a>
+                                    </div>
+                                    <div data-bind="qrbind:Id" style="background-color: white">
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <!-- End Work Item -->
+                </div>
+
+            </ul>
+            <!-- End Works Grid -->
+
+        </div>
+    </section>
+</div>
+<!-- End Portfolio Section -->
