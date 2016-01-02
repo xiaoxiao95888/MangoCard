@@ -25,13 +25,23 @@ namespace Mango_Cards.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css"));
+            //coverr
+            bundles.Add(new StyleBundle("~/Content/coverr").Include(
+                      "~/Content/coverr.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                 "~/Scripts/knockout-3.2.0.js",
                 "~/Scripts/knockout.mapping-latest.js"));
+            //knockout
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+                        "~/Scripts/knockout-3.2.0.js", "~/Scripts/knockout.mapping-latest.js"));
+            //coverr
+            bundles.Add(new ScriptBundle("~/bundles/coverr").Include(
+                       "~/Scripts/coverr.js"));
             //Home
             bundles.Add(new ScriptBundle("~/bundles/Home").Include(
-                        "~/Scripts/JS/Home.js"));
+                "~/Scripts/knockout-isotope.js",
+                "~/Scripts/JS/Home.js"));
             //jquery-qrcode
             bundles.Add(new ScriptBundle("~/bundles/jqueryqrcode").Include(
                         "~/Scripts/jquery.qrcode.min.js", "~/Scripts/qrcode.min.js"));

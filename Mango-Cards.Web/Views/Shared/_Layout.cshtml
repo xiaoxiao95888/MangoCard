@@ -1,99 +1,47 @@
-﻿<!doctype html>
-<html class="no-js" lang="">
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="description" content="">
-    <!--[if IE]>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <title>Mango Cards</title>
-    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Open+Sans:400italic,700italic,400,300,700">
-    <link rel="stylesheet" href="http://fonts.useso.com/css?family=Dosis:300,400,700">
-    <link rel="stylesheet" href="styles/vendor.css">
-    <link rel="stylesheet" href="styles/main.css">
-    <script src="scripts/vendor/modernizr.js"></script>
-    <script src="scripts/vendor.js"></script>
-    <script src="scripts/plugins.js"></script>
-    <script src="scripts/previousJS.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body class="appear-animate">
-    <!--[if lt IE 10]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-      your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <!-- Page Loader -->
-    <div class="page-loader">
-        <div class="loader">Loading...</div>
-    </div>
-    <!-- End Page Loader -->
-    <!-- Page Wrap -->
-    <div class="page" id="top">
-        <!-- Navigation panel -->
-        <nav class="main-nav  stick-fixed transparent dark ">
-            <div class="full-wrapper relative clearfix">
-                <!-- Logo ( * your text or image into link tag *) -->
-                <div class="nav-logo-wrap local-scroll">
-                    <a href="#top" class="logo">
-                        <img src="images/logo-white.png" alt="" />
-                    </a>
-                </div>
-                <div class="mobile-nav">
-                    <i class="fa fa-bars"></i>
-                </div>
-                <!--Main Menu-->
-                <div class="inner-nav desktop-nav">
-                    <ul class="clearlist scroll-nav local-scroll">
-                        <li class="active"><a href="#home">获取Mango Card</a></li>
-                    </ul>
-                </div>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("应用程序名称", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-        </nav>
-        <!-- End Navigation panel -->
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
+                    <li>@Html.ActionLink("关于", "About", "Home")</li>
+                    <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div>
         @RenderBody()
-        <!-- Footer -->
-        <footer class="page-section bg-gray-lighter footer pb-60">
-            <div class="container">
-                <!-- Footer Logo -->
-                <div class="local-scroll mb-30 wow fadeInUp" data-wow-duration="1.5s">
-                    <a href="#top"><img src="images/logo-footer.png" width="78" height="36" alt="" /></a>
-                </div>
-                <!-- End Footer Logo -->
-                <!-- Social Links -->
-                <div class="footer-social-links mb-110 mb-xs-60">
-                    <a href="#" title="Facebook" target="_blank"><i class="fa fa-facebook"></i></a>
-                    <a href="#" title="Twitter" target="_blank"><i class="fa fa-twitter"></i></a>
-                    <a href="#" title="Wechat" target="_blank"><i class="fa fa-wechat"></i></a>
-                    <!--<a href="#" title="Behance" target="_blank"><i class="fa fa-behance"></i></a>
-                    <a href="#" title="LinkedIn+" target="_blank"><i class="fa fa-linkedin"></i></a>
-                    <a href="#" title="Pinterest" target="_blank"><i class="fa fa-pinterest"></i></a>-->
-                </div>
-                <!-- End Social Links -->
-                <!-- Footer Text -->
-                <div class="footer-text">
-                    <!-- Copyright -->
-                    <div class="footer-copy font-alt">
-                        <a href="http://www.mangoeasy.com" target="_blank">&copy; Mango-E 2015</a>.
-                    </div>
-                    <!-- End Copyright -->
-                    <div class="footer-made">
-                        Made by the people who grow up with internet.
-                    </div>
-                </div>
-                <!-- End Footer Text -->
-            </div>
-
-            <!-- Top Link -->
-            <div class="local-scroll">
-                <a href="#top" class="link-to-top"><i class="fa fa-caret-up"></i></a>
-            </div>
-            <!-- End Top Link -->
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
         </footer>
-        <!-- End Foter -->
-
     </div>
-    <!-- End Page Wrap -->
-    <script src="scripts/main.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
-
