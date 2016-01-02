@@ -281,6 +281,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\coverr.js" />
+    <Content Include="Scripts\isotope.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
@@ -297,11 +298,7 @@
     <Content Include="Scripts\JS\GetMangoCard.js" />
     <Content Include="Scripts\JS\home.js" />
     <Content Include="Scripts\JS\LoginConfirmation.js" />
-    <Content Include="Scripts\knockout-2.2.0.debug.js" />
-    <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
-    <Content Include="Scripts\knockout-isotope.js" />
-    <Content Include="Scripts\knockout-isotope.min.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\qrcode.js" />

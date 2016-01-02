@@ -2,6 +2,7 @@ var Home = {
     viewModel: {
         cardTypes: ko.observableArray(),
         employees: ko.observableArray(),
+        typeToShow: ko.observable(),
         wechatuser: {
             Id: ko.observable(),
             NickName: ko.observable(),
@@ -11,9 +12,41 @@ var Home = {
             Province: ko.observable(),
             Country: ko.observable(),
             Headimgurl: ko.observable(),
-        }
+        },
     }
 };
+
+Home.viewModel.carddemos = ko.computed({
+    read: function () {
+        var filter = Home.viewModel.typeToShow();
+        var demos = [];
+        var all = ko.toJS(Home.viewModel.cardTypes);
+        ko.utils.arrayForEach(all, function (type) {
+            ko.utils.arrayForEach(type.SubCardTypeModels, function (sub) {
+                ko.utils.arrayForEach(sub.CardDemoModels, function (demo) {
+                    demos.push(demo)
+                });
+            });
+        });
+        return demos;
+    }
+});
+var $container;
+function initialize() {
+    $container = $('#isotope').isotope({
+        layoutMode: 'fitRows',        
+    });
+
+}
+Home.viewModel.filters = function (data, event) {
+    var filterValue= $(event.target).attr('data-filter')
+
+    
+    // use filterFn if matches value    
+    $container.isotope({ filter: filterValue });
+};
+
+
 ko.bindingHandlers.qrbind = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
         // This will be called when the binding is first applied to an element
@@ -29,8 +62,9 @@ $(function () {
     ko.applyBindings(Home);
     $.get("http://api.card.mangoeasy.com/api/CardType/", function (data) {
         ko.mapping.fromJS(data, {}, Home.viewModel.cardTypes);
+        initialize();
         $.get("http://api.card.mangoeasy.com/api/Employee/", function (employees) {
-            ko.mapping.fromJS(employees, {}, Home.viewModel.employees);            
+            ko.mapping.fromJS(employees, {}, Home.viewModel.employees);
             $.get("http://api.card.mangoeasy.com/api/WeChatUser/", function (wechatuser) {
                 if (wechatuser != null) {
                     ko.mapping.fromJS(wechatuser, {}, Home.viewModel.wechatuser);

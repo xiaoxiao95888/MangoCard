@@ -1,46 +1,28 @@
 ﻿@{
     ViewBag.Title = "Home";
 }
-@Scripts.Render("~/bundles/Home")
+
 @RenderPage("~/Views/Shared/header.cshtml")
 
+@Scripts.Render("~/bundles/Home")
 <!-- Page Content -->
 <div class="container">
 
     <div class="row" data-bind="foreach:viewModel.cardTypes">
         <h2 class="text-center" data-bind="text:Name"></h2>
-
-        <ul class="nav nav-tabs nav-justified filter-button-group" data-bind="foreach:SubCardTypeModels">
+        <ul class="nav nav-tabs nav-justified filter-button-group">
+            <li><a href="#" class="active" data-bind="click:Home.viewModel.filters" data-filter="*">全部</a></li>
+            <!-- ko foreach:SubCardTypeModels -->
             <li>
-                <a href="#" data-bind="text:Name"></a>
+                <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Home.viewModel.filters"></a>
             </li>
-
-
-            @*<li class="active btn-filter-videos" role="presentation"><a data-filter="*" href="#">All</a></li>
-                <li class="btn-filter-videos" role="presentation"><a data-filter=".food" href="#">Food</a></li>
-                <li class="btn-filter-videos" role="presentation"><a data-filter=".mood" href="#">Mood</a></li>
-                <li class="btn-filter-videos" role="presentation"><a data-filter=".nature" href="#">Nature</a></li>
-                <li class="btn-filter-videos" role="presentation"><a data-filter=".tech" href="#">Tech</a></li>
-                <li class="btn-filter-videos" role="presentation"><a data-filter=".artsy" href="#">Artsy</a></li>
-                <li class="btn-filter-videos" role="presentation"><a data-filter=".people" href="#">People</a></li>
-                <li class="btn-filter-videos" role="presentation"><a data-filter=".urban" href="#">Urban</a></li>
-                <li class="btn-filter-videos" role="presentation"><a data-filter=".animals" href="#">Animals</a></li>*@
+            <!-- /ko -->
         </ul>
     </div>
-    <div class="row" style="margin-top:40px">
-        <div class="col-md-4 ">
+    <div class="row" style="margin-top:40px" data-bind="foreach:viewModel.carddemos" id="isotope">
+        <div class="col-md-4 " data-bind="css:CardTypeId">
             <a href="#">
-                <img alt="" src="http://placehold.it/700x400" class="img-responsive img-rounded">
-            </a>
-        </div>
-        <div class="col-md-4 ">
-            <a href="#">
-                <img alt="" src="http://placehold.it/700x400" class="img-responsive img-rounded">
-            </a>
-        </div>
-        <div class="col-md-4 ">
-            <a href="#">
-                <img alt="" src="http://placehold.it/700x400" class="img-responsive img-rounded">
+                <img data-bind="attr:{'alt':Name}" src="http://placehold.it/700x400" class="img-responsive img-rounded">
             </a>
         </div>
     </div>
