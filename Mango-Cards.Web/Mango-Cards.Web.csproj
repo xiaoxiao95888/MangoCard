@@ -266,8 +266,11 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\coverr.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\regencielight-webfont.svg" />
     <Content Include="Global.asax" />
@@ -280,6 +283,12 @@
     <Content Include="fonts\regencielight-webfont.ttf" />
     <Content Include="fonts\regencielight-webfont.woff" />
     <Content Include="fonts\regencielight-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Content\font-awesome.css.map" />
     <None Include="Properties\PublishProfiles\MangoCards.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="MP4\We-Work-We-Wait.mp4" />
@@ -291,6 +300,7 @@
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Scripts\jquery-2.1.4-vsdoc.js" />
+    <Content Include="Scripts\jquery.easing.1.3.js" />
     <Content Include="Scripts\jquery.hoverdir.js" />
     <Content Include="Scripts\jquery.qrcode.js" />
     <Content Include="Scripts\jquery.qrcode.min.js" />
