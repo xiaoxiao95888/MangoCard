@@ -2,7 +2,7 @@ var Home = {
     viewModel: {
         cardTypes: ko.observableArray(),
         employees: ko.observableArray(),
-        typeToShow: ko.observable(),
+        typetoshow: ko.observable('*'),
         wechatuser: {
             Id: ko.observable(),
             NickName: ko.observable(),
@@ -18,7 +18,6 @@ var Home = {
 
 Home.viewModel.carddemos = ko.computed({
     read: function () {
-        var filter = Home.viewModel.typeToShow();
         var demos = [];
         var all = ko.toJS(Home.viewModel.cardTypes);
         ko.utils.arrayForEach(all, function (type) {
@@ -34,14 +33,14 @@ Home.viewModel.carddemos = ko.computed({
 var $container;
 function initialize() {
     $container = $('#isotope').isotope({
-        layoutMode: 'fitRows',        
+        layoutMode: 'fitRows',
     });
-
+    $(' #isotope > li ').each(function () { $(this).hoverdir(); });
 }
 Home.viewModel.filters = function (data, event) {
-    var filterValue= $(event.target).attr('data-filter')
-
-    
+    var dom = $(event.target);
+    var filterValue = dom.attr('data-filter')
+    Home.viewModel.typetoshow(filterValue);
     // use filterFn if matches value    
     $container.isotope({ filter: filterValue });
 };

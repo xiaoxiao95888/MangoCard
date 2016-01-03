@@ -24,7 +24,7 @@ namespace Mango_Cards.Web
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css"));
+                      "~/Content/bootstrap.css", "~/Content/Site.css"));
             //coverr
             bundles.Add(new StyleBundle("~/Content/coverr").Include(
                       "~/Content/coverr.css"));
@@ -32,13 +32,14 @@ namespace Mango_Cards.Web
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                 "~/Scripts/knockout-3.2.0.js",
                 "~/Scripts/knockout.mapping-latest.js"));
-          
-            //coverr
-            bundles.Add(new ScriptBundle("~/bundles/coverr").Include(
-                       "~/Scripts/coverr.js"));
+
+            //header
+            bundles.Add(new ScriptBundle("~/bundles/header").Include(
+                       "~/Scripts/coverr.js", "~/Scripts/jquery.scrollTo.js", "~/Scripts/js/header.js"));
             //Home
             bundles.Add(new ScriptBundle("~/bundles/Home").Include(
-                "~/Scripts/isotope.js",
+                "~/Scripts/isotope.js",                
+                "~/Scripts/jquery.hoverdir.js",
                 "~/Scripts/JS/Home.js"));
             //jquery-qrcode
             bundles.Add(new ScriptBundle("~/bundles/jqueryqrcode").Include(

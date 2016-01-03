@@ -4222,7 +4222,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar {
   position: relative;
-  min-height: 50px;
+  min-height: 64px;
   margin-bottom: 20px;
   /*border: 1px solid transparent;*/
 }
@@ -4333,7 +4333,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   height: 50px;
   padding: 15px 15px;
   font-size: 18px;
-  line-height: 20px;
+  line-height: 32px;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -4383,7 +4383,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-nav > li > a {
   padding-top: 10px;
   padding-bottom: 10px;
-  line-height: 20px;
+  line-height: 32px;
 }
 @media (max-width: 767px) {
   .navbar-nav .open .dropdown-menu {
@@ -4650,22 +4650,22 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   border-color: #080808;
 }
 .navbar-inverse .navbar-brand {
-  color: #9d9d9d;
+  color: #fff;
 }
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
-  color: #fff;
+  color: #9d9d9d;
   background-color: transparent;
 }
 .navbar-inverse .navbar-text {
   color: #9d9d9d;
 }
 .navbar-inverse .navbar-nav > li > a {
-  color: #9d9d9d;
+  color: #fff;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
-  color: #fff;
+  color: #9d9d9d;
   background-color: transparent;
 }
 .navbar-inverse .navbar-nav > .active > a,

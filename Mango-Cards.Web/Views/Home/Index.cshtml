@@ -6,25 +6,27 @@
 
 @Scripts.Render("~/bundles/Home")
 <!-- Page Content -->
-<div class="container">
 
+<div class="container" id="cardtypes">
     <div class="row" data-bind="foreach:viewModel.cardTypes">
         <h2 class="text-center" data-bind="text:Name"></h2>
         <ul class="nav nav-tabs nav-justified filter-button-group">
-            <li><a href="#" class="active" data-bind="click:Home.viewModel.filters" data-filter="*">全部</a></li>
+            <li><a href="#" data-bind="click:Home.viewModel.filters,css:(Home.viewModel.typetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
             <!-- ko foreach:SubCardTypeModels -->
             <li>
-                <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Home.viewModel.filters"></a>
+                <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Home.viewModel.filters,css:(Home.viewModel.typetoshow()==('.'+Id())?'active':'')"></a>
             </li>
             <!-- /ko -->
         </ul>
     </div>
-    <div class="row" style="margin-top:40px" data-bind="foreach:viewModel.carddemos" id="isotope">
-        <div class="col-md-4 " data-bind="css:CardTypeId">
+    <ul class="list-unstyled da-thumbs" style="margin-top:40px" data-bind="foreach:viewModel.carddemos" id="isotope">
+        <li class="col-md-4 portfolio-item" data-bind="css:CardTypeId">
             <a href="#">
                 <img data-bind="attr:{'alt':Name}" src="http://placehold.it/700x400" class="img-responsive img-rounded">
+                <div class="img-rounded"><span>Natalie & Justin Cleaning by Justin Younger</span></div>
             </a>
-        </div>
-    </div>
+        </li>
+    </ul>
 </div>
+
 <!-- /.container -->
