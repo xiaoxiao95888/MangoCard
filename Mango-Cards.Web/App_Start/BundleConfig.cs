@@ -38,8 +38,8 @@ namespace Mango_Cards.Web
                        "~/Scripts/coverr.js", "~/Scripts/jquery.easing.1.3.js", "~/Scripts/js/header.js"));
             //Home
             bundles.Add(new ScriptBundle("~/bundles/Home").Include(
-                "~/Scripts/isotope.js",                
-                "~/Scripts/jquery.hoverdir.js",
+                "~/Scripts/isotope.js",
+                "~/Scripts/knockout.isotope.js",
                 "~/Scripts/JS/Home.js"));
             //jquery-qrcode
             bundles.Add(new ScriptBundle("~/bundles/jqueryqrcode").Include(

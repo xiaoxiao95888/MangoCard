@@ -13,36 +13,33 @@ var Home = {
             Country: ko.observable(),
             Headimgurl: ko.observable(),
         },
+        isotopeOptions: { itemSelector: ".portfolio-item" }
+
     }
 };
 
-Home.viewModel.carddemos = ko.computed({
-    read: function () {
-        var demos = [];
-        var all = ko.toJS(Home.viewModel.cardTypes);
-        ko.utils.arrayForEach(all, function (type) {
-            ko.utils.arrayForEach(type.SubCardTypeModels, function (sub) {
-                ko.utils.arrayForEach(sub.CardDemoModels, function (demo) {
-                    demos.push(demo)
-                });
+Home.viewModel.carddemos = ko.computed(function () {
+    var demos = [];
+    var all = ko.toJS(Home.viewModel.cardTypes);
+    ko.utils.arrayForEach(all, function (type) {
+        ko.utils.arrayForEach(type.SubCardTypeModels, function (sub) {
+            ko.utils.arrayForEach(sub.CardDemoModels, function (demo) {
+                demos.push(demo)
             });
         });
-        return demos;
-    }
-});
-var $container;
-function initialize() {
-    $container = $('#isotope').isotope({
-        layoutMode: 'fitRows',
     });
-    $(' #isotope > li ').each(function () { $(this).hoverdir(); });
-}
+   
+    return demos;
+});
+
 Home.viewModel.filters = function (data, event) {
+
     var dom = $(event.target);
     var filterValue = dom.attr('data-filter')
     Home.viewModel.typetoshow(filterValue);
-    // use filterFn if matches value    
-    $container.isotope({ filter: filterValue });
+    //// use filterFn if matches value    
+
+    $('#container').isotope({ filter: filterValue });
 };
 
 
@@ -61,7 +58,6 @@ $(function () {
     ko.applyBindings(Home);
     $.get("http://api.card.mangoeasy.com/api/CardType/", function (data) {
         ko.mapping.fromJS(data, {}, Home.viewModel.cardTypes);
-        initialize();
         $.get("http://api.card.mangoeasy.com/api/Employee/", function (employees) {
             ko.mapping.fromJS(employees, {}, Home.viewModel.employees);
             $.get("http://api.card.mangoeasy.com/api/WeChatUser/", function (wechatuser) {

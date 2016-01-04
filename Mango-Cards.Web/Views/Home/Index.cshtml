@@ -19,12 +19,18 @@
             <!-- /ko -->
         </ul>
     </div>
-    <ul class="list-unstyled da-thumbs" style="margin-top:40px" data-bind="foreach:viewModel.carddemos" id="isotope">
+    <ul class="list-unstyled" style="margin-top:40px" data-bind="isotope: { data: viewModel.carddemos, options: viewModel.isotopeOptions }" id="container">
         <li class="col-md-4 portfolio-item" data-bind="css:CardTypeId">
-            <a href="#">
+            <div class="grid-item">
+                <div class="caption img-rounded">
+                    <div class="item-container">
+                        <div class="item-inner-container">
+                            <h4>Thumbnail Headline</h4>
+                        </div>
+                    </div>
+                </div>
                 <img data-bind="attr:{'alt':Name}" src="http://placehold.it/700x400" class="img-responsive img-rounded">
-                <div class="img-rounded"><span>Natalie & Justin Cleaning by Justin Younger</span></div>
-            </a>
+            </div>
         </li>
     </ul>
 </div>
