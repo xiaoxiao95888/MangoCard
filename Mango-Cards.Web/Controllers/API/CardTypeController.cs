@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Web;
 using AutoMapper;
 using Mango_Cards.Library.Models;
 using Mango_Cards.Library.Services;
@@ -20,11 +21,13 @@ namespace Mango_Cards.Web.Controllers.API
         }
         public object Get()
         {
+            var host = HttpContext.Current.Request.Url.Host;
             Mapper.Reset();
             Mapper.CreateMap<CardDemo, CardDemoModel>().ForMember(n => n.ThumbnailUrl,
-                    opt =>
-                        opt.MapFrom(
-                            src => src.Thumbnail != null ? (_cardThumbnailPath + "/" + src.Thumbnail) : string.Empty));
+                opt =>
+                    opt.MapFrom(
+                        src => src.Thumbnail != null ? (_cardThumbnailPath + "/" + src.Thumbnail) : string.Empty))
+                .ForMember(n => n.Url, opt => opt.MapFrom(src => host + "/demo/" + src.Id));
             Mapper.CreateMap<CardType, CardTypeModel>().ForMember(n => n.CardDemoModels, opt => opt.MapFrom(src => src.CardDemos));
             var all = _cardTypeService.GetCardTypes().ToList();
             var roots = all.Where(n => n.Parent == null).ToList();
@@ -35,11 +38,13 @@ namespace Mango_Cards.Web.Controllers.API
 
         public object Get(Guid id)
         {
+            var host = HttpContext.Current.Request.Url.Host;
             Mapper.Reset();
             Mapper.CreateMap<CardDemo, CardDemoModel>().ForMember(n => n.ThumbnailUrl,
-                    opt =>
-                        opt.MapFrom(
-                            src => src.Thumbnail != null ? (_cardThumbnailPath + "/" + src.Thumbnail) : string.Empty));
+                opt =>
+                    opt.MapFrom(
+                        src => src.Thumbnail != null ? (_cardThumbnailPath + "/" + src.Thumbnail) : string.Empty))
+                .ForMember(n => n.Url, opt => opt.MapFrom(src => host + "/demo/" + src.Id));
             Mapper.CreateMap<CardType, CardTypeModel>().ForMember(n => n.CardDemoModels, opt => opt.MapFrom(src => src.CardDemos));
             var all = _cardTypeService.GetCardTypes().ToList();
             var root = all.FirstOrDefault(n => n.Id == id);

@@ -44,11 +44,11 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true" style="font-family: sans-serif">×</span></button>
-                <h4 class="modal-title" data-bind="text:Home.viewModel.selectdemo()!=null?Home.viewModel.selectdemo().Name:''">Modal title</h4>
+                @*<button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true" style="font-family: sans-serif">×</span></button>*@
+                <p class="modal-title text-center" data-bind="text:Home.viewModel.selectdemo()!=null?Home.viewModel.selectdemo().Name:''">Modal title</p>
             </div>
             <div class="modal-body text-center" data-bind="qrbind:viewModel.demourl">
-           
+
             </div>
             <div class="modal-footer modal-footer-center">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

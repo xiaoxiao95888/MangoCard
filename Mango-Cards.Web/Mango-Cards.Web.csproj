@@ -278,6 +278,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="images\logo.png" />
     <Content Include="OGV\We-Work-We-Wait.ogv" />
     <Content Include="fonts\regencielight-webfont.eot" />
     <Content Include="fonts\regencielight-webfont.ttf" />
