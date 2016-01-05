@@ -7,6 +7,7 @@
 .portfolio-item {
     margin-bottom: 25px;
 }
+
 .grid-item {
     cursor: pointer;
     position: relative;
@@ -25,6 +26,7 @@
     color: #fff !important;
     z-index: 2;
 }
+
 .item-container {
     display: table;
     width: 100%;
@@ -36,15 +38,16 @@
     display: table-cell;
     vertical-align: middle;
 }
-#cardtypes {
-    padding: 64px;
-}
 
-    #cardtypes h2 {
-        /*font-family: RegencieLight;*/
-        padding-bottom: 20px;
-        letter-spacing: 5px;
+    .item-inner-container a {
+        padding: 10px;
     }
+
+#cardtypes h2 {
+    /*font-family: RegencieLight;*/
+    padding-bottom: 20px;
+    letter-spacing: 5px;
+}
 
 .navbar-mango {
     background-color: #333;

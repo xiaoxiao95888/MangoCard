@@ -10,7 +10,7 @@
 <div class="container" id="cardtypes">
     <div class="row" data-bind="foreach:viewModel.cardTypes">
         <h2 class="text-center" data-bind="text:Name"></h2>
-        <ul class="nav nav-tabs nav-justified filter-button-group">
+        <ul class="nav nav-tabs nav-justified">
             <li><a href="#" data-bind="click:Home.viewModel.filters,css:(Home.viewModel.typetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
             <!-- ko foreach:SubCardTypeModels -->
             <li>
@@ -19,20 +19,22 @@
             <!-- /ko -->
         </ul>
     </div>
-    <ul class="list-unstyled" style="margin-top:40px" data-bind="isotope: { data: viewModel.carddemos, options: viewModel.isotopeOptions }" id="container">
-        <li class="col-md-4 portfolio-item" data-bind="css:CardTypeId">
+    <div class="row" style="margin-top:40px" data-bind="isotope: { data: viewModel.carddemos, options: viewModel.isotopeOptions }" id="container">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 portfolio-item" data-bind="css:CardTypeId">
             <div class="grid-item">
                 <div class="caption img-rounded">
                     <div class="item-container">
                         <div class="item-inner-container">
-                            <h4>Thumbnail Headline</h4>
+
+                            <a class="text-white" href="#">查看</a>
+                            <a class="text-white" href="#">选择</a>
                         </div>
                     </div>
                 </div>
                 <img data-bind="attr:{'alt':Name}" src="http://placehold.it/700x400" class="img-responsive img-rounded">
             </div>
-        </li>
-    </ul>
+        </div>
+    </div>
 </div>
 
 <!-- /.container -->
