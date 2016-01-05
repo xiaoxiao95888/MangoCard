@@ -3,6 +3,7 @@ var Home = {
         cardTypes: ko.observableArray(),
         employees: ko.observableArray(),
         typetoshow: ko.observable('*'),
+        selectdemo:ko.observable(),
         wechatuser: {
             Id: ko.observable(),
             NickName: ko.observable(),
@@ -24,7 +25,7 @@ Home.viewModel.carddemos = ko.computed(function () {
     ko.utils.arrayForEach(all, function (type) {
         ko.utils.arrayForEach(type.SubCardTypeModels, function (sub) {
             ko.utils.arrayForEach(sub.CardDemoModels, function (demo) {
-                demos.push(demo)
+                demos.push(demo);
             });
         });
     });
@@ -35,13 +36,19 @@ Home.viewModel.carddemos = ko.computed(function () {
 Home.viewModel.filters = function (data, event) {
 
     var dom = $(event.target);
-    var filterValue = dom.attr('data-filter')
+    var filterValue = dom.attr('data-filter');
     Home.viewModel.typetoshow(filterValue);
     //// use filterFn if matches value    
 
     $('#container').isotope({ filter: filterValue });
 };
-
+Home.viewModel.showqrcode = function() {
+    Home.viewModel.selectdemo(ko.toJS(this));
+    $('#Dialog').modal({
+        show: true,
+        backdrop: 'static'
+    });
+};
 
 ko.bindingHandlers.qrbind = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
@@ -49,9 +56,13 @@ ko.bindingHandlers.qrbind = {
         // Set up any initial state, event handlers, etc. here
     },
     update: function (element, valueAccessor) {
-        var data = ko.unwrap(valueAccessor());
-        var url = window.location.href + "demo.html?id=" + data;
-        $(element).qrcode(url);
+        var data =ko.toJS(Home.viewModel.selectdemo);
+        if (data != null) {
+            var url = window.location.href + "demo.html?id=" + data.Id;
+            $(element).empty();
+            $(element).qrcode(url);
+        }
+        
     }
 };
 $(function () {

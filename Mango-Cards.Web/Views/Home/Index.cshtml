@@ -26,7 +26,7 @@
                     <div class="item-container">
                         <div class="item-inner-container">
 
-                            <a class="text-white" href="#">查看</a>
+                            <a class="text-white" data-bind="click:Home.viewModel.showqrcode" href="#">查看</a>
                             <a class="text-white" href="#">选择</a>
                         </div>
                     </div>
@@ -36,5 +36,23 @@
         </div>
     </div>
 </div>
-
 <!-- /.container -->
+<!-- Small modal -->
+
+
+<div class="modal fade" tabindex="-1" id='Dialog' aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true" style="font-family: sans-serif">×</span></button>
+                <h4 class="modal-title" data-bind="text:Home.viewModel.selectdemo()!=null?Home.viewModel.selectdemo().Name:''">Modal title</h4>
+            </div>
+            <div class="modal-body text-center" data-bind="qrbind:viewModel.demourl">
+           
+            </div>
+            <div class="modal-footer modal-footer-center">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
