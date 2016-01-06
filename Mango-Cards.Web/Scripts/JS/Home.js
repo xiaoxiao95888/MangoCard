@@ -57,19 +57,26 @@ Home.viewModel.closedialog = function () {
     
 };
 Home.viewModel.longPolling = function (result) {
-    $.get('/comet/LongPolling/', { state: result.state }, function (data) {
-        if (data.State == result.state) {
-            $.get("/api/WeChatUser/", function (wechatuser) {
-                if (wechatuser != null) {
-                    ko.mapping.fromJS(wechatuser, {}, Home.viewModel.wechatuser);
-                    Home.viewModel.isshowqrcode(false);
-                }
-            });
+    $.ajax({
+        cache: false,
+        type: 'get',
+        url: '/comet/LongPolling/',
+        data: { state: result.state },
+        success:function(data) {
+            if (data.State == result.state) {
+                $.get("/api/WeChatUser/", function (wechatuser) {
+                    if (wechatuser != null) {
+                        ko.mapping.fromJS(wechatuser, {}, Home.viewModel.wechatuser);
+                        Home.viewModel.isshowqrcode(false);
+                    }
+                });
 
-        } else if(Home.viewModel.showdialog()==true) {
-            Home.viewModel.longPolling(result);
+            } else if (Home.viewModel.showdialog() == true) {
+                setTimeout(Home.viewModel.longPolling(result), 0);
+            }
         }
     });
+    
 };
 Home.viewModel.mycards = function () {
     $.get('/api/GetWechatLoginQrCode/', function (result) {
