@@ -64,7 +64,7 @@ namespace Mango_Cards.Web.Controllers.API
                     model.CreateTime = DateTime.Now;
                     model.Id = loginLogId;
                 }
-                
+
                 return model;
             }
             return null;

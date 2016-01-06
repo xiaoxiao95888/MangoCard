@@ -3,7 +3,9 @@ var Home = {
         cardTypes: ko.observableArray(),
         employees: ko.observableArray(),
         typetoshow: ko.observable('*'),
-        selectdemo:ko.observable(),
+        showdialog: ko.observable(false),
+        isshowqrcode: ko.observable(true),
+        selectdemo: ko.observable(),
         wechatuser: {
             Id: ko.observable(),
             NickName: ko.observable(),
@@ -29,12 +31,11 @@ Home.viewModel.carddemos = ko.computed(function () {
             });
         });
     });
-   
+
     return demos;
 });
 
 Home.viewModel.filters = function (data, event) {
-
     var dom = $(event.target);
     var filterValue = dom.attr('data-filter');
     Home.viewModel.typetoshow(filterValue);
@@ -42,16 +43,37 @@ Home.viewModel.filters = function (data, event) {
 
     $('#container').isotope({ filter: filterValue });
 };
-Home.viewModel.showqrcode = function() {
+Home.viewModel.showqrcode = function () {
+    Home.viewModel.isshowqrcode(true);
     Home.viewModel.selectdemo(ko.toJS(this));
     $('#Dialog').modal({
         show: true,
         backdrop: 'static'
     });
 };
-Home.viewModel.mycards = function() {
-    $.get('/api/GetWechatLoginQrCode/', function(result) {
-        var model = {            
+Home.viewModel.closedialog = function () {
+    Home.viewModel.showdialog(false);
+    $('#Dialog').modal('hide');
+    
+};
+Home.viewModel.longPolling = function (result) {
+    $.get('/comet/LongPolling/', { state: result.state }, function (data) {
+        if (data.State == result.state) {
+            $.get("/api/WeChatUser/", function (wechatuser) {
+                if (wechatuser != null) {
+                    ko.mapping.fromJS(wechatuser, {}, Home.viewModel.wechatuser);
+                    Home.viewModel.isshowqrcode(false);
+                }
+            });
+
+        } else if(Home.viewModel.showdialog()==true) {
+            Home.viewModel.longPolling(result);
+        }
+    });
+};
+Home.viewModel.mycards = function () {
+    $.get('/api/GetWechatLoginQrCode/', function (result) {
+        var model = {
             Name: result.Name,
             Url: result.weChartloginUrl
         };
@@ -60,6 +82,22 @@ Home.viewModel.mycards = function() {
             show: true,
             backdrop: 'static'
         });
+        Home.viewModel.showdialog(true);
+        Home.viewModel.longPolling(result);
+    });
+};
+//Çå¿Õwechatuser
+Home.viewModel.clearwechatuser = function () {
+    for (var index in Home.viewModel.wechatuser) {
+        if (ko.isObservable(Home.viewModel.wechatuser[index])) {
+            Home.viewModel.wechatuser[index](null);
+        }
+    }
+};
+Home.viewModel.logout = function() {
+    $.get('/LogOff/Logout/', function (result) {
+        Home.viewModel.clearwechatuser();
+        Home.viewModel.isshowqrcode(true);
     });
 };
 ko.bindingHandlers.qrbind = {
@@ -73,7 +111,7 @@ ko.bindingHandlers.qrbind = {
             $(element).empty();
             $(element).qrcode(data.Url);
         }
-        
+
     }
 };
 $(function () {
@@ -90,5 +128,5 @@ $(function () {
             });
         });
     });
-})
+});
 

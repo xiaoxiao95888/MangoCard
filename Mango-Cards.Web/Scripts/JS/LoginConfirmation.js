@@ -1,6 +1,6 @@
 ﻿var LoginConfirmation = {
     viewModel: {
-        
+        confirmed: ko.observable(false)
     }
 };
 function getQueryStringByName(name) {
@@ -11,6 +11,7 @@ function getQueryStringByName(name) {
     return result[1];
 }
 LoginConfirmation.viewModel.Confirmation = function () {
+
     var model = {
         code: getQueryStringByName("code"),
         state: getQueryStringByName("state")
@@ -18,8 +19,8 @@ LoginConfirmation.viewModel.Confirmation = function () {
     $.get('/api/HeaderSetting/', function (base64) {
         $.ajax({
             type: "get",
-            data:model,
-            url: "http://WeChatService.mangoeasy.com/api/WeChartUserInfo/",
+            data: model,
+            url: "http://WeChatService.mangoeasy.com:3000/api/WeChartUserInfo/",
             beforeSend: function (xhr) { //beforeSend定义全局变量
                 xhr.setRequestHeader("Authorization", base64); //Authorization 需要授权,即身体验证
             },
@@ -34,11 +35,11 @@ LoginConfirmation.viewModel.Confirmation = function () {
                             City: xhr.responseJSON.city,
                             Province: xhr.responseJSON.province,
                             Country: xhr.responseJSON.country,
-                            Headimgurl: xhr.responseJSON.headimgurl,
+                            Headimgurl: xhr.responseJSON. headimgurl,
                         }
                     };
-                    $.post('/api/LoginConfirmation/', loginlomodel, function(result) {
-                        alert(result.WeChatUserModel.openId);
+                    $.post('/api/LoginConfirmation/', loginlomodel, function (result) {
+                        LoginConfirmation.viewModel.confirmed(true);
                     });
                 }
             }
@@ -47,5 +48,5 @@ LoginConfirmation.viewModel.Confirmation = function () {
 };
 $(function () {
     ko.applyBindings(LoginConfirmation);
-    $('#state').text(getQueryStringByName("state"));
+    LoginConfirmation.viewModel.Confirmation();
 });

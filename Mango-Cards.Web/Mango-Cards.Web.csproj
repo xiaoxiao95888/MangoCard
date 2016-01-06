@@ -235,6 +235,7 @@
     <Compile Include="Controllers\API\CometController.cs" />
     <Compile Include="Controllers\API\HeaderSettingController.cs" />
     <Compile Include="Controllers\API\LoginConfirmationController.cs" />
+    <Compile Include="Controllers\API\LogOffController.cs" />
     <Compile Include="Controllers\API\MyCardsController.cs" />
     <Compile Include="Controllers\API\WeChatUserController.cs" />
     <Compile Include="Controllers\CardsController.cs" />
@@ -279,6 +280,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="images\logo.png" />
+    <Content Include="images\logomobile.png" />
     <Content Include="OGV\We-Work-We-Wait.ogv" />
     <Content Include="fonts\regencielight-webfont.eot" />
     <Content Include="fonts\regencielight-webfont.ttf" />
@@ -366,7 +368,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_EmptyLayout.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Cards\GetMangoCard.cshtml" />
     <Content Include="Scripts\qrcode.min.js.map" />
     <Content Include="Views\Home\LoginConfirmation.cshtml" />

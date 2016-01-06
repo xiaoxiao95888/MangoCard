@@ -38,7 +38,7 @@ namespace Mango_Cards.Web.Controllers.API
                         {
                             Id = log.Id,
                             CreateTime = log.CreateTime,
-                            State = log.State
+                            State = log.State,
                         };
                     }
 

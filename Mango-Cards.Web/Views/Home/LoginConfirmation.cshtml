@@ -1,25 +1,38 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "LoginConfirmation";
-    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
     var queryString = Request.QueryString;
 }
 @Scripts.Render("~/bundles/LoginConfirmation")
-<h2>LoginConfirmation</h2>
-@{
-    if (queryString != null)
-    {
-        if (!string.IsNullOrEmpty(queryString["Code"]))
-        {
-            <h2>@queryString["Code"]</h2>
-            <h2 id="state"></h2>
-            <button class="btn btn-primary" data-bind="click:viewModel.Confirmation">确认登录</button>         
+<div style="position: absolute; top: 0; right: 0; width: 100%; height: 100%; text-align: center; ">
+    <div class="item-container">
+        <div class="item-inner-container">
+            <div class="container">
+                <div class="row">
+                    <h1>Mango Cards</h1>
+                    <p>基于微信，简单易用传播广泛</p>
+                    <h1 class="">
+                        <i class="fa fa-angle-down"></i>
+                    </h1>
+                    @{
+                        if (queryString != null)
+                        {
+                            if (!string.IsNullOrEmpty(queryString["Code"]))
+                            {
+                                <p>登陆成功，请在屏幕上确认</p>
 
-        }
-        else
-        {
-            <h1>未授权登录</h1>
-        }
-    }
-}
+                            }
+                            else
+                            {
+                                <p>未授权登录</p>
+                            }
+                        }
+                    }
+                </div>
+            </div>
 
+
+        </div>
+
+    </div>
+</div>

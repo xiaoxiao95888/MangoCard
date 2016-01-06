@@ -47,12 +47,16 @@
                 @*<button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true" style="font-family: sans-serif">×</span></button>*@
                 <p class="modal-title text-center" data-bind="text:Home.viewModel.selectdemo()!=null?Home.viewModel.selectdemo().Name:''">Modal title</p>
             </div>
-            <div class="modal-body text-center" data-bind="qrbind:viewModel.demourl">
+            <div class="modal-body text-center" data-bind="qrbind:viewModel.demourl,visible:viewModel.isshowqrcode()">
 
             </div>
+            <div class="modal-body text-center" data-bind="visible:!viewModel.isshowqrcode()">
+                <img style="width: 268px;height: 268px;" data-bind="attr:{'src':viewModel.wechatuser.Headimgurl,'alt':viewModel.wechatuser.NickName}" />
+            </div>
             <div class="modal-footer modal-footer-center">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-bind="click:viewModel.closedialog">Close</button>
             </div>
         </div>
     </div>
 </div>
+

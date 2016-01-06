@@ -27,8 +27,9 @@
                 @*@Html.Partial("_LoginPartial")*@
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#" data-bind="click:viewModel.mycards">我的 Mango Card</a>
+                        <a href="#" data-bind="click:viewModel.mycards,text:(viewModel.wechatuser.NickName()!=null? viewModel.wechatuser.NickName() + '的 Mango Card':'我的 Mango Card')"></a>
                     </li>
+                    <li><a href="#" data-bind="visible:viewModel.wechatuser.Id()!=null,click:viewModel.logout">注销</a></li>
                 </ul>
             </div>
         </div>
