@@ -6,17 +6,13 @@ using System.Web.Mvc;
 
 namespace Mango_Cards.Web.Controllers
 {
+    [Authorize]
     public class CardsController : Controller
-    {
-         [Authorize]
+    {         
         // GET: Cards
         public ActionResult Index()
         {
             return View();
-        }
-        public ActionResult GetMangoCard()
-        {
-            return View();
-        }
+        }        
     }
 }

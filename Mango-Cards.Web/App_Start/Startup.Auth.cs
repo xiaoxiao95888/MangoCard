@@ -26,7 +26,7 @@ namespace Mango_Cards.Web
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Cards/GetMangoCard/"),
+                LoginPath = new PathString("/Home/Index/"),
                 Provider = new CookieAuthenticationProvider
                 {
                     // 当用户登录时使应用程序可以验证安全戳。

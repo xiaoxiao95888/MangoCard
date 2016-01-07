@@ -53,7 +53,7 @@ namespace Mango_Cards.Web
             bundles.Add(new ScriptBundle("~/bundles/LoginConfirmation").Include(
                       "~/Scripts/JS/LoginConfirmation.js"));
             //Cards
-            bundles.Add(new ScriptBundle("~/bundles/Cards").Include(
+            bundles.Add(new ScriptBundle("~/bundles/cards").Include(
                     "~/Scripts/JS/Cards.js"));
         }
     }

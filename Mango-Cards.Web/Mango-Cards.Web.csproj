@@ -314,8 +314,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\JS\Cards.js" />
-    <Content Include="Scripts\JS\GetMangoCard.js" />
+    <Content Include="Scripts\JS\cards.js" />
     <Content Include="Scripts\JS\header.js" />
     <Content Include="Scripts\JS\home.js" />
     <Content Include="Scripts\JS\LoginConfirmation.js" />
@@ -369,7 +368,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
-    <Content Include="Views\Cards\GetMangoCard.cshtml" />
     <Content Include="Scripts\qrcode.min.js.map" />
     <Content Include="Views\Home\LoginConfirmation.cshtml" />
     <Content Include="Views\Cards\Index.cshtml" />
@@ -378,6 +376,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -19,11 +19,11 @@ namespace Mango_Cards.Web.Controllers
         }
         public ActionResult Index()
         {
-            ////test
-            //var authenticationManager = HttpContext.GetOwinContext().Authentication;
-            //var identity = UserService.CreateIdentity(_weChatUserService.GetWeChatUser(new Guid("0DDAFD2A-CEDC-48B0-9ADC-E91393AF4A50")), DefaultAuthenticationTypes.ApplicationCookie);
-            //authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            //authenticationManager.SignIn(new AuthenticationProperties(), identity);
+            //test
+            var authenticationManager = HttpContext.GetOwinContext().Authentication;
+            var identity = UserService.CreateIdentity(_weChatUserService.GetWeChatUsers().FirstOrDefault(), DefaultAuthenticationTypes.ApplicationCookie);
+            authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            authenticationManager.SignIn(new AuthenticationProperties(), identity);
             return View();
         }
         public ActionResult About()

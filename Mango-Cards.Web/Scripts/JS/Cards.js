@@ -7,7 +7,17 @@
             PvCount: ko.observable(),
             ShareTimeCount: ko.observable(),
             IsPublish: ko.observable()
-        }
+        },
+        wechatuser: {
+            Id: ko.observable(),
+            NickName: ko.observable(),
+            Gender: ko.observable(),
+            Language: ko.observable(),
+            City: ko.observable(),
+            Province: ko.observable(),
+            Country: ko.observable(),
+            Headimgurl: ko.observable(),
+        },
     }
 };
 Cards.viewModel.SelectCard = function () {
@@ -20,7 +30,14 @@ Cards.viewModel.SelectCard = function () {
 };
 $(function () {
     ko.applyBindings(Cards);
-    $.get('/api/MyCards/', function(cards) {
-        ko.mapping.fromJS(cards, {}, Cards.viewModel.mycards);
+    $.get("/api/WeChatUser/", function (wechatuser) {
+        if (wechatuser != null) {
+            ko.mapping.fromJS(wechatuser, {}, Home.viewModel.wechatuser);
+            $.get('/api/MyCards/', function (cards) {
+                ko.mapping.fromJS(cards, {}, Cards.viewModel.mycards);
+
+            });
+        }
     });
+    
 });
