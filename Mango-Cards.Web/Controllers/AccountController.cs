@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Mango_Cards.Web.Models;
+using System.Configuration;
 
 namespace Mango_Cards.Web.Controllers
 {
@@ -22,7 +23,7 @@ namespace Mango_Cards.Web.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +35,9 @@ namespace Mango_Cards.Web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -51,7 +52,23 @@ namespace Mango_Cards.Web.Controllers
                 _userManager = value;
             }
         }
+        /// <summary>
+        /// 缩短微信重定向url长度的二维码
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult LoginUrl()
+        {
+            var state = Request["state"];
+            var backUrl = "http://" + HttpContext.Request.Url.Host + Url.Action("LoginConfirmation", "Home");            
+            var weChartloginUrl =
+                string.Format(
+                    "https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope=snsapi_userinfo&state={2}#wechat_redirect",
+                    ConfigurationManager.AppSettings["AppId"], backUrl, state);
 
+            return Redirect(weChartloginUrl);
+        }
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -120,7 +137,7 @@ namespace Mango_Cards.Web.Controllers
             // 如果用户输入错误代码的次数达到指定的次数，则会将
             // 该用户帐户锁定指定的时间。
             // 可以在 IdentityConfig 中配置帐户锁定设置
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -155,8 +172,8 @@ namespace Mango_Cards.Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // 有关如何启用帐户确认和密码重置的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=320771
                     // 发送包含此链接的电子邮件
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

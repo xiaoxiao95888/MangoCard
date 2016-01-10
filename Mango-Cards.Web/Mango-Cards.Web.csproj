@@ -231,8 +231,8 @@
     <Compile Include="Controllers\API\CardTypeController.cs" />
     <Compile Include="Controllers\API\EmployeeController.cs" />
     <Compile Include="Controllers\API\CardDemoController.cs" />
-    <Compile Include="Controllers\API\GetWechatLoginQRCodeController.cs" />
     <Compile Include="Controllers\API\CometController.cs" />
+    <Compile Include="Controllers\API\GetWechatLoginQRCodeController.cs" />
     <Compile Include="Controllers\API\HeaderSettingController.cs" />
     <Compile Include="Controllers\API\LoginConfirmationController.cs" />
     <Compile Include="Controllers\API\LogOffController.cs" />
@@ -317,6 +317,7 @@
     <Content Include="Scripts\JS\cards.js" />
     <Content Include="Scripts\JS\header.js" />
     <Content Include="Scripts\JS\home.js" />
+    <Content Include="Scripts\JS\login.js" />
     <Content Include="Scripts\JS\LoginConfirmation.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\knockout.isotope.js" />
@@ -373,10 +374,10 @@
     <Content Include="Views\Cards\Index.cshtml" />
     <Content Include="Views\Shared\header.cshtml" />
     <Content Include="WEBM\We-Work-We-Wait.webm" />
+    <Content Include="Views\Account\LoginUrl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

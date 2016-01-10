@@ -13,14 +13,21 @@ namespace Mango_Cards.Web.Controllers.API
     {
         public object Get()
         {
-            var state = Guid.NewGuid().ToString();
-            var backUrl = HttpUtility.UrlEncode("http://card.mangoeasy.com/home/loginconfirmation");
-            var weChartloginUrl =
-                string.Format(
-                    "https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope=snsapi_userinfo&state={2}#wechat_redirect",
-                    ConfigurationManager.AppSettings["AppId"], backUrl, state);
+            var state = GenerateId();
+            ////登录成功后跳转的地址:
+            //var successurl ="http://"+ HttpContext.Current.Request.Url.Host;
+            var weChartloginUrl = "http://" + HttpContext.Current.Request.Url.Host + "/Account" + "/LoginUrl?state=" + state;
+            return new { weChartloginUrl, state };
+        }
+        private string GenerateId()
+        {
+            long i = 1;
+            foreach (byte b in Guid.NewGuid().ToByteArray())
+            {
+                i *= ((int)b + 1);
+            }
+            return string.Format("{0:x}", i - DateTime.Now.Ticks);
 
-            return new { weChartloginUrl, state,Name="扫一扫登陆" };
         }
     }
 }

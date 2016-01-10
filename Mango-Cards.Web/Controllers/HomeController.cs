@@ -20,10 +20,10 @@ namespace Mango_Cards.Web.Controllers
         public ActionResult Index()
         {
             //test
-            var authenticationManager = HttpContext.GetOwinContext().Authentication;
-            var identity = UserService.CreateIdentity(_weChatUserService.GetWeChatUsers().FirstOrDefault(), DefaultAuthenticationTypes.ApplicationCookie);
-            authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            authenticationManager.SignIn(new AuthenticationProperties(), identity);
+            //var authenticationManager = HttpContext.GetOwinContext().Authentication;
+            //var identity = UserService.CreateIdentity(_weChatUserService.GetWeChatUsers().FirstOrDefault(), DefaultAuthenticationTypes.ApplicationCookie);
+            //authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            //authenticationManager.SignIn(new AuthenticationProperties(), identity);
             return View();
         }
         public ActionResult About()

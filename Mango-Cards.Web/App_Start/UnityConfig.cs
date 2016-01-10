@@ -4,6 +4,7 @@ using Microsoft.Practices.Unity;
 using Mango_Cards.Library.Services;
 using Mango_Cards.Service.Services;
 using Unity.Mvc5;
+using Mango_Cards.Web.Controllers;
 
 namespace Mango_Cards.Web
 {
@@ -29,6 +30,8 @@ namespace Mango_Cards.Web
             container.RegisterType<IEmployeeService, EmployeeService>();
             container.RegisterType<ILoginLogService, LoginLogService>();
             container.RegisterType<IWeChatUserService, WeChatUserService>();
+
+            container.RegisterType<AccountController>(new InjectionConstructor());
         }
     }
 }

@@ -64,6 +64,7 @@ namespace Mango_Cards.Web
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+            UnityConfig.RegisterComponents();
         }
     }
 }
