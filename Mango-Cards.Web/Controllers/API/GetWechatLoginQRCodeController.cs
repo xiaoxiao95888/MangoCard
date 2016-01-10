@@ -13,12 +13,11 @@ namespace Mango_Cards.Web.Controllers.API
     {
         public object Get()
         {
-            var state = GenerateId();
-            ////登录成功后跳转的地址:
-            //var successurl ="http://"+ HttpContext.Current.Request.Url.Host;
-            var weChartloginUrl = "http://" + HttpContext.Current.Request.Url.Host + "/Account" + "/LoginUrl?state=" + state;
+            var state = GenerateId();            
+            var weChartloginUrl = "http://" + HttpContext.Current.Request.Url.Host + "/Account" + "/LoginUrl/" + state;
             return new { weChartloginUrl, state };
         }
+        
         private string GenerateId()
         {
             long i = 1;

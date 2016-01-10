@@ -7,34 +7,39 @@
 @Scripts.Render("~/bundles/Home")
 <!-- Page Content -->
 
-<div class="container" id="cardtypes">
-    <div class="row" data-bind="foreach:viewModel.cardTypes">
-        <h2 class="text-center" data-bind="text:Name"></h2>
-        <ul class="nav nav-tabs nav-justified">
-            <li><a href="#" data-bind="click:Home.viewModel.filters,css:(Home.viewModel.typetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
-            <!-- ko foreach:SubCardTypeModels -->
-            <li>
-                <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Home.viewModel.filters,css:(Home.viewModel.typetoshow()==('.'+Id())?'active':'')"></a>
-            </li>
-            <!-- /ko -->
-        </ul>
-    </div>
-    <div class="row" style="margin-top:40px" data-bind="isotope: { data: viewModel.carddemos, options: viewModel.isotopeOptions }" id="container">
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 portfolio-item" data-bind="css:CardTypeId">
-            <div class="grid-item">
-                <div class="caption img-rounded">
-                    <div class="item-container">
-                        <div class="item-inner-container">
+<div id="cardtypes" >
+    <div class="container" >
+        <div class="row" data-bind="foreach:viewModel.cardTypes">
+            <h2 class="text-center" data-bind="text:Name"></h2>
+            <ul class="nav nav-tabs nav-justified">
+                <li><a href="#" data-bind="click:Home.viewModel.filters,css:(Home.viewModel.typetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
+                <!-- ko foreach:SubCardTypeModels -->
+                <li>
+                    <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Home.viewModel.filters,css:(Home.viewModel.typetoshow()==('.'+Id())?'active':'')"></a>
+                </li>
+                <!-- /ko -->
+            </ul>
+        </div>
+        <div class="row" style="margin-top:40px" data-bind="isotope: { data: viewModel.carddemos, options: viewModel.isotopeOptions }" id="container">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 portfolio-item" data-bind="css:CardTypeId">
+                <div class="grid-item">
+                    <div class="caption img-rounded">
+                        <div class="item-container">
+                            <div class="item-inner-container">
 
-                            <a class="text-white" data-bind="click:Home.viewModel.showqrcode" href="#">查看</a>
-                            <a class="text-white" href="#">选择</a>
+                                <a class="text-white" data-bind="click:Home.viewModel.showqrcode" href="#">查看</a>
+                                <a class="text-white" href="#">选择</a>
+                            </div>
                         </div>
                     </div>
+                    <img data-bind="attr:{'alt':Name}" src="http://placehold.it/700x400" class="img-responsive img-rounded">
                 </div>
-                <img data-bind="attr:{'alt':Name}" src="http://placehold.it/700x400" class="img-responsive img-rounded">
             </div>
         </div>
+
     </div>
+
+   
 </div>
 <!-- /.container -->
 <!-- Small modal -->
@@ -47,12 +52,12 @@
                 @*<button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true" style="font-family: sans-serif">×</span></button>*@
                 <p class="modal-title text-center" data-bind="text:Home.viewModel.selectdemo()!=null?Home.viewModel.selectdemo().Name:''">Modal title</p>
             </div>
-            <div class="modal-body text-center" data-bind="qrbind:viewModel.demourl,visible:viewModel.isshowqrcode()">
+            <div class="modal-body text-center" data-bind="qrbind:viewModel.demourl">
 
             </div>
-            <div class="modal-body text-center" data-bind="visible:!viewModel.isshowqrcode()">
+            @*<div class="modal-body text-center" data-bind="visible:!viewModel.isshowqrcode()">
                 <img style="width: 268px;height: 268px;" data-bind="attr:{'src':viewModel.wechatuser.Headimgurl,'alt':viewModel.wechatuser.NickName}" />
-            </div>
+            </div>*@
             <div class="modal-footer modal-footer-center">
                 <button type="button" class="btn btn-default" data-bind="click:viewModel.closedialog">Close</button>
             </div>

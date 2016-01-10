@@ -3,8 +3,6 @@ var Home = {
         cardTypes: ko.observableArray(),
         employees: ko.observableArray(),
         typetoshow: ko.observable('*'),
-        showdialog: ko.observable(false),
-        isshowqrcode: ko.observable(true),
         selectdemo: ko.observable(),
         wechatuser: {
             Id: ko.observable(),
@@ -44,7 +42,7 @@ Home.viewModel.filters = function (data, event) {
     $('#container').isotope({ filter: filterValue });
 };
 Home.viewModel.showqrcode = function () {
-    Home.viewModel.isshowqrcode(true);
+   
     Home.viewModel.selectdemo(ko.toJS(this));
     $('#Dialog').modal({
         show: true,
@@ -55,57 +53,6 @@ Home.viewModel.closedialog = function () {
     Home.viewModel.showdialog(false);
     $('#Dialog').modal('hide');
     
-};
-Home.viewModel.longPolling = function (result) {
-    $.ajax({
-        cache: false,
-        type: 'get',
-        url: '/comet/LongPolling/',
-        data: { state: result.state },
-        success:function(data) {
-            if (data.State == result.state) {
-                $.get("/api/WeChatUser/", function (wechatuser) {
-                    if (wechatuser != null) {
-                        ko.mapping.fromJS(wechatuser, {}, Home.viewModel.wechatuser);
-                        Home.viewModel.isshowqrcode(false);
-                    }
-                });
-
-            } else if (Home.viewModel.showdialog() == true) {
-                setTimeout(Home.viewModel.longPolling(result), 0);
-            }
-        }
-    });
-    
-};
-Home.viewModel.mycards = function () {
-    $.get('/api/GetWechatLoginQrCode/', function (result) {
-        var model = {
-            Name: result.Name,
-            Url: result.weChartloginUrl
-        };
-        Home.viewModel.selectdemo(model);
-        $('#Dialog').modal({
-            show: true,
-            backdrop: 'static'
-        });
-        Home.viewModel.showdialog(true);
-        Home.viewModel.longPolling(result);
-    });
-};
-//Çå¿Õwechatuser
-Home.viewModel.clearwechatuser = function () {
-    for (var index in Home.viewModel.wechatuser) {
-        if (ko.isObservable(Home.viewModel.wechatuser[index])) {
-            Home.viewModel.wechatuser[index](null);
-        }
-    }
-};
-Home.viewModel.logout = function() {
-    $.get('/LogOff/Logout/', function (result) {
-        Home.viewModel.clearwechatuser();
-        Home.viewModel.isshowqrcode(true);
-    });
 };
 ko.bindingHandlers.qrbind = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel) {

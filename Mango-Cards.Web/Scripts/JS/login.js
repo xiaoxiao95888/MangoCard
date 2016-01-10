@@ -51,7 +51,7 @@ ko.bindingHandlers.qrbind = {
     }
 };
 $(function () {
-    ko.applyBindings(Login);
+    ko.applyBindings(Login);   
     $.get('/api/GetWechatLoginQrCode/', function (result) {
         Login.viewModel.wchatLoginQrCode(result.weChartloginUrl)
         Login.viewModel.longPolling(result);

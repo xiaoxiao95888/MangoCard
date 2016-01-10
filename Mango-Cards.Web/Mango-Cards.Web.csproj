@@ -368,7 +368,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\_LoginConfirmationLayout.cshtml" />
     <Content Include="Scripts\qrcode.min.js.map" />
     <Content Include="Views\Home\LoginConfirmation.cshtml" />
     <Content Include="Views\Cards\Index.cshtml" />
