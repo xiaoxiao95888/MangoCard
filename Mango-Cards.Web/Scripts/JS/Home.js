@@ -50,7 +50,6 @@ Home.viewModel.showqrcode = function () {
     });
 };
 Home.viewModel.closedialog = function () {
-    Home.viewModel.showdialog(false);
     $('#Dialog').modal('hide');
     
 };

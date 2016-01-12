@@ -13,8 +13,8 @@ namespace Mango_Cards.Web.Controllers.API
     {
         public object Get()
         {
-            var state = GenerateId();            
-            var weChartloginUrl = "http://" + HttpContext.Current.Request.Url.Host + "/Account" + "/LoginUrl/" + state;
+            var state = GenerateId();
+            var weChartloginUrl = "http://" + HttpContext.Current.Request.Url.Host + "/Account" + "/LoginUrl?state=" + state;
             return new { weChartloginUrl, state };
         }
         

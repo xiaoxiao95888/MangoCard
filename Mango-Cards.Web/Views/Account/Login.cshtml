@@ -6,8 +6,6 @@
 @Scripts.Render("~/bundles/login")
 
 
-
-
 <div class="item-container">
     <div class="item-inner-container">
         <div class="container">
@@ -17,18 +15,19 @@
                 <h1 class="">
                     <i class="fa fa-angle-down"></i>
                 </h1>
-                <div data-bind="qrbind:viewModel.wchatLoginQrCode"></div>
+                <p data-bind="qrbind:viewModel.wchatLoginQrCode,visible:!viewModel.haslogin()"></p>
+                <p data-bind="visible:viewModel.haslogin()">
+                    <img class="img-rounded" style="width: 268px; height: 268px; " data-bind="attr:{'src':viewModel.wechatuser.Headimgurl,'alt':viewModel.wechatuser.NickName}" />
+                </p>
+                <p>
+                    <a href="#" class="btn btn-default" data-bind="visible:viewModel.haslogin,click:viewModel.ConfirmLogin">确认登录</a>
+                </p>
+
             </div>
         </div>
 
-
     </div>
-
 </div>
-
-
-
-
 
 
 
@@ -85,7 +84,6 @@
         </section>
     </div>
     </div>*@
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

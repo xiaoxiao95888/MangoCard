@@ -10,10 +10,12 @@
             Province: ko.observable(),
             Country: ko.observable(),
             Headimgurl: ko.observable(),
-        }
+        },
+        haslogin: ko.observable(false)
     }
 };
 Login.viewModel.longPolling = function (result) {
+    Login.viewModel.haslogin(false);
     $.ajax({
         cache: false,
         type: 'get',
@@ -25,7 +27,8 @@ Login.viewModel.longPolling = function (result) {
                     if (wechatuser != null) {
                         ko.mapping.fromJS(wechatuser, {}, Login.viewModel.wechatuser);
                         //登录成功
-                        location.href = "..";
+                        //location.href = "..";
+                        Login.viewModel.haslogin(true);
                     }
                 });
 
@@ -35,6 +38,9 @@ Login.viewModel.longPolling = function (result) {
         }
     });
 
+};
+Login.viewModel.ConfirmLogin = function () {
+    location.href = "..";
 };
 ko.bindingHandlers.qrbind = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
@@ -51,9 +57,9 @@ ko.bindingHandlers.qrbind = {
     }
 };
 $(function () {
-    ko.applyBindings(Login);   
+    ko.applyBindings(Login);
     $.get('/api/GetWechatLoginQrCode/', function (result) {
-        Login.viewModel.wchatLoginQrCode(result.weChartloginUrl)
+        Login.viewModel.wchatLoginQrCode(result.weChartloginUrl);
         Login.viewModel.longPolling(result);
     });
 });

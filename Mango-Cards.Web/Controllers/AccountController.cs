@@ -52,14 +52,15 @@ namespace Mango_Cards.Web.Controllers
                 _userManager = value;
             }
         }
+
         /// <summary>
         /// 缩短微信重定向url长度的二维码
         /// </summary>
-        /// <param name="returnUrl"></param>
         /// <returns></returns>
         [AllowAnonymous]
-        public ActionResult LoginUrl(string state)
-        {           
+        public ActionResult LoginUrl()
+        {
+            var state = Request["state"];
             var backUrl = "http://" + HttpContext.Request.Url.Host + Url.Action("LoginConfirmation", "Home");            
             var weChartloginUrl =
                 string.Format(
