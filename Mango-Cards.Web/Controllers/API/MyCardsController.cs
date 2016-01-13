@@ -25,12 +25,19 @@ namespace Mango_Cards.Web.Controllers.API
         {
             var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
             Mapper.Reset();
-            Mapper.CreateMap<MangoCard, MangoCardModel>().ForMember(n => n.HtmlCode, opt => opt.Ignore());
+            Mapper.CreateMap<MangoCard, MangoCardModel>()
+                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
+                .ForMember(n => n.HtmlCode, opt => opt.Ignore());
+
             return
                 wechatuser.MangoCards.Where(n => !n.IsDeleted)
                     .GroupBy(n => n.CardType)
-                    .Select(n => n.Key)
-                    .Select(Mapper.Map<CardType, CardTypeModel>);
+                    .Select(n => new MangoCardTypeModel
+                    {
+                        Id = n.Key.Id,
+                        Name = n.Key.Name,
+                        MangoCardModels =n.Select(Mapper.Map<MangoCard, MangoCardModel>).ToArray()
+                    });
         }
         /// <summary>
         /// 获取基础数据

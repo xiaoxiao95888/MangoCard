@@ -59,6 +59,8 @@ namespace Mango_Cards.Web
                       "~/Scripts/JS/LoginConfirmation.js"));
             //Cards
             bundles.Add(new ScriptBundle("~/bundles/cards").Include(
+                "~/Scripts/isotope.js",
+                "~/Scripts/knockout.isotope.js",
                     "~/Scripts/JS/Cards.js"));
         }
     }

@@ -256,6 +256,7 @@
     <Compile Include="Models\LoginLogModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MangoCardModel.cs" />
+    <Compile Include="Models\MangoCardTypeModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\PvDataModel.cs" />
     <Compile Include="Models\ResponseModel.cs" />

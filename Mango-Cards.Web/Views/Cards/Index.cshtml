@@ -2,26 +2,62 @@
     ViewBag.Title = "Index";
 }
 @Scripts.Render("~/bundles/Cards")
-<div class="container">
-    <ul data-bind="foreach:viewModel.mycards">
-        <li>
-            <span data-bind="text:Name"></span>
-            <ul data-bind="foreach:MangoCardModels">
-                <li>
-                    <span data-bind="text:Title"></span>
-                    <span data-bind="text:Description"></span>
-                    <span data-bind="text:IsPublish"></span>
-                    <img data-bind="attr:{src:ThumbnailUrl}" />
-                    <a href="#" data-bind="click:Cards.viewModel.SelectCard">选择</a>
-                </li>
-            </ul>
-        </li>
 
-    </ul>
-    <h2>基础数据</h2>
-    <span>浏览：<span data-bind="text:viewModel.selectedcard.PvCount"></span></span>
-    <span>分享：<span data-bind="text:viewModel.selectedcard.ShareTimeCount"></span></span>
-    <hr />
-    <h2>html</h2>
-    <textarea data-bind="text:viewModel.selectedcard.HtmlCode"></textarea>
+<div class="container">
+    <div class="row">
+        <h2 class="text-center">My Cards</h2>
+        <ul class="nav nav-tabs nav-justified">
+            <li><a href="#" data-bind="click:Cards.viewModel.filters,css:(Cards.viewModel.typetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
+            <!-- ko foreach:viewModel.mycardtypes -->
+            <li>
+                <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Cards.viewModel.filters,css:(Cards.viewModel.typetoshow()==('.'+Id())?'active':'')"></a>
+            </li>
+            <!-- /ko -->
+        </ul>
+    </div>
+    <div class="row" style="margin-top:40px" data-bind="isotope: { data: viewModel.mycards, options: viewModel.isotopeOptions }" id="container">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 portfolio-item" data-bind="css:CardTypeId">
+            <div class="grid-item">
+                <div class="caption img-rounded">
+                    <div class="item-container">
+                        <div class="item-inner-container">
+
+                            @*<a class="text-white" data-bind="click:Home.viewModel.showqrcode" href="#">查看</a>
+                                <a class="text-white" href="#">选择</a>*@
+                        </div>
+                    </div>
+                </div>
+                <img data-bind="attr:{'alt':Title}" src="http://placehold.it/700x400" class="img-responsive img-rounded">
+            </div>
+        </div>
+    </div>
+
 </div>
+
+
+
+
+
+@*<div class="container">
+        <ul data-bind="foreach:viewModel.mycards">
+            <li>
+                <span data-bind="text:Name"></span>
+                <ul data-bind="foreach:MangoCardModels">
+                    <li>
+                        <span data-bind="text:Title"></span>
+                        <span data-bind="text:Description"></span>
+                        <span data-bind="text:IsPublish"></span>
+                        <img data-bind="attr:{src:ThumbnailUrl}" />
+                        <a href="#" data-bind="click:Cards.viewModel.SelectCard">选择</a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+        <h2>基础数据</h2>
+        <span>浏览：<span data-bind="text:viewModel.selectedcard.PvCount"></span></span>
+        <span>分享：<span data-bind="text:viewModel.selectedcard.ShareTimeCount"></span></span>
+        <hr />
+        <h2>html</h2>
+        <textarea data-bind="text:viewModel.selectedcard.HtmlCode"></textarea>
+    </div>*@

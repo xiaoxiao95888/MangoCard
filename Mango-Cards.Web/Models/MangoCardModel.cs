@@ -11,7 +11,7 @@ namespace Mango_Cards.Web.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public string ThumbnailUrl { get; set; }
-        public CardTypeModel CardTypeModel { get; set; }
+        public Guid CardTypeId { get; set; }
         public string HtmlCode { get; set; }
         /// <summary>
         /// 是否发布
