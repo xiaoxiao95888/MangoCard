@@ -22,6 +22,7 @@
         isotopeOptions: { itemSelector: ".portfolio-item" }
     }
 };
+
 Cards.viewModel.mycards = ko.computed(function () {
     var demos = [];
     var all = ko.toJS(Cards.viewModel.mycardtypes);
@@ -48,10 +49,10 @@ Cards.viewModel.filters = function (data, event) {
     //// use filterFn if matches value    
 
     $('#container').isotope({ filter: filterValue });
+    
 };
 $(function () {
     ko.applyBindings(Cards);
-    
     $.get("/api/WeChatUser/", function (wechatuser) {
         if (wechatuser != null) {
             ko.mapping.fromJS(wechatuser, {}, Cards.viewModel.wechatuser);

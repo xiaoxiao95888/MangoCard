@@ -55,7 +55,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CardTypeService.cs" />
     <Compile Include="Services\EmployeeService.cs" />
-    <Compile Include="Services\CardDemoService.cs" />
     <Compile Include="Services\LoginLogService.cs" />
     <Compile Include="Services\WeChatUserService.cs" />
   </ItemGroup>

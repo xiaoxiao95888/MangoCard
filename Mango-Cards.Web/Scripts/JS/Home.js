@@ -24,7 +24,7 @@ Home.viewModel.carddemos = ko.computed(function () {
     var all = ko.toJS(Home.viewModel.cardTypes);
     ko.utils.arrayForEach(all, function (type) {
         ko.utils.arrayForEach(type.SubCardTypeModels, function (sub) {
-            ko.utils.arrayForEach(sub.CardDemoModels, function (demo) {
+            ko.utils.arrayForEach(sub.MangoCardModels, function (demo) {
                 demos.push(demo);
             });
         });

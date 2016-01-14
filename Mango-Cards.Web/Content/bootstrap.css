@@ -1401,7 +1401,8 @@ html {
 }
 
 body {
-    font-family: "RegencieLight","Helvetica Neue", Helvetica, Arial, "Microsoft YaHei", Î¢ÈíÑÅºÚ,STXihei, »ªÎÄÏ¸ºÚ,sans-serif;
+    /*font-family: "RegencieLight","Helvetica Neue", Helvetica, Arial, "Microsoft YaHei", Î¢ÈíÑÅºÚ,STXihei, »ªÎÄÏ¸ºÚ,sans-serif;*/
+    font-family: inherit;
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;

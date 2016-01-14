@@ -230,7 +230,6 @@
     <Compile Include="Controllers\API\BaseApiController.cs" />
     <Compile Include="Controllers\API\CardTypeController.cs" />
     <Compile Include="Controllers\API\EmployeeController.cs" />
-    <Compile Include="Controllers\API\CardDemoController.cs" />
     <Compile Include="Controllers\API\CometController.cs" />
     <Compile Include="Controllers\API\GetWechatLoginQRCodeController.cs" />
     <Compile Include="Controllers\API\HeaderSettingController.cs" />
@@ -247,11 +246,11 @@
     <Compile Include="Infrastructure\Filters\Extensions.cs" />
     <Compile Include="Infrastructure\UserService.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CardDemoModel.cs" />
     <Compile Include="Models\CardTypeModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\Enum\Gender.cs" />
+    <Compile Include="Models\Enum\PageType.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginLogModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />

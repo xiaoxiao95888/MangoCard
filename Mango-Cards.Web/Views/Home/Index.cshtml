@@ -20,7 +20,7 @@
                 <!-- /ko -->
             </ul>
         </div>
-        <div class="row" style="margin-top:40px" data-bind="isotope: { data: viewModel.carddemos, options: viewModel.isotopeOptions }" id="container">
+        <div class="row" style="margin-top:25px" data-bind="isotope: { data: viewModel.carddemos, options: viewModel.isotopeOptions }" id="container">
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 portfolio-item" data-bind="css:CardTypeId">
                 <div class="grid-item">
                     <div class="caption img-rounded">
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     </div>
-                    <img data-bind="attr:{'alt':Name}" src="http://placehold.it/700x400" class="img-responsive img-rounded">
+                    <img data-bind="attr:{'alt':Title}" src="http://placehold.it/700x400" class="img-responsive img-rounded">
                 </div>
             </div>
         </div>
@@ -50,14 +50,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 @*<button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true" style="font-family: sans-serif">×</span></button>*@
-                <p class="modal-title text-center" data-bind="text:Home.viewModel.selectdemo()!=null?Home.viewModel.selectdemo().Name:''">Modal title</p>
+                <p class="modal-title text-center" data-bind="text:Home.viewModel.selectdemo()!=null?Home.viewModel.selectdemo().Title:''">Modal title</p>
             </div>
             <div class="modal-body text-center" data-bind="qrbind:viewModel.demourl">
 
             </div>
-            @*<div class="modal-body text-center" data-bind="visible:!viewModel.isshowqrcode()">
-                <img style="width: 268px;height: 268px;" data-bind="attr:{'src':viewModel.wechatuser.Headimgurl,'alt':viewModel.wechatuser.NickName}" />
-            </div>*@
             <div class="modal-footer modal-footer-center">
                 <button type="button" class="btn btn-default" data-bind="click:viewModel.closedialog">Close</button>
             </div>

@@ -9,7 +9,6 @@ namespace Mango_Cards.Service
     public class MangoCardsDataContext : DbContext, IDataContext
     {
         public IDbSet<Company> Companies { get; set; }
-        public IDbSet<CardDemo> CardDemos { get; set; }
         public IDbSet<Employee> Employees { get; set; }
         public IDbSet<CardType> CardTypes { get; set; }
         public IDbSet<LoginLog> LoginLogs { get; set; }

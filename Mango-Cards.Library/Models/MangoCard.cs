@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Mango_Cards.Library.Models.Enum;
 using Mango_Cards.Library.Models.Interfaces;
 
 namespace Mango_Cards.Library.Models
@@ -11,6 +12,14 @@ namespace Mango_Cards.Library.Models
         public Guid Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public virtual ICollection<Field> Fields { get; set; }
+        /// <summary>
+        /// 页面类型
+        /// </summary>
+        public virtual PageType PageType { get; set; }
+        /// <summary>
+        /// share出去的缩略图
+        /// </summary>
         public string ThumbnailUrl { get; set; }
         public virtual CardType CardType { get; set; }
         /// <summary>
@@ -31,6 +40,7 @@ namespace Mango_Cards.Library.Models
         /// </summary>
         public virtual ICollection<ShareTime> ShareTimes { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
+
         public DateTime? UpdateTime { get; set; }
         public DateTime CreatedTime { get; set; }
         public bool IsDeleted { get; set; }

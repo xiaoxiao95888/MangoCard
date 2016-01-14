@@ -62,14 +62,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="MangoCardsDataContext.cs" />
-    <Compile Include="Migrations\201512300634469_Initial.cs" />
-    <Compile Include="Migrations\201512300634469_Initial.Designer.cs">
-      <DependentUpon>201512300634469_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512300701014_Initial1.cs" />
-    <Compile Include="Migrations\201512300701014_Initial1.Designer.cs">
-      <DependentUpon>201512300701014_Initial1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,14 +75,6 @@
       <Project>{3EA9638D-90A0-491F-92E7-4C8AAADE902D}</Project>
       <Name>Mango-Cards.Library</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512300634469_Initial.resx">
-      <DependentUpon>201512300634469_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512300701014_Initial1.resx">
-      <DependentUpon>201512300701014_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

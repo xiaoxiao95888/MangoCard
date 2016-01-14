@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Mango_Cards.Web.Models.Enum;
 
 namespace Mango_Cards.Web.Models
 {
@@ -12,6 +13,7 @@ namespace Mango_Cards.Web.Models
         public string Description { get; set; }
         public string ThumbnailUrl { get; set; }
         public Guid CardTypeId { get; set; }
+        public PageType PageType { get; set; }
         public string HtmlCode { get; set; }
         /// <summary>
         /// 是否发布

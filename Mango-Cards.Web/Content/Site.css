@@ -1,23 +1,29 @@
-﻿body {
-    padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-}
-
-@font-face {
+﻿@font-face {
     font-family: 'RegencieLight';
     src: url('../fonts/regencielight-webfont.eot');
     src: url('../fonts/regencielight-webfont.svg') format('svg'),url('../fonts/regencielight-webfont.woff') format('woff'),url('../fonts/regencielight-webfont.woff2') format('woff2'),url('../fonts/regencielight-webfont.ttf') format('truetype');
 }
+body {
+    padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */  
+}
+
+
 
 .portfolio-item {
     margin-bottom: 25px;
 }
-
+.align-middle {
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
 .grid-item {
     cursor: pointer;
     position: relative;
     overflow: hidden;
 }
-
+.title {
+    padding: 20px;
+}
 .caption {
     position: absolute;
     top: 0;

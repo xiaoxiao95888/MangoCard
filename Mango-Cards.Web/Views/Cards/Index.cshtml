@@ -5,8 +5,13 @@
 
 <div class="container">
     <div class="row">
-        <h2 class="text-center">My Cards</h2>
-        <ul class="nav nav-tabs nav-justified">
+        <h2 class="text-center title">我的卡片 </h2>
+        <div class="well text-center" data-bind="visible:viewModel.mycards().length==0">
+            <div class="align-middle">
+                您尚未选择任何 Mango Card
+            </div>
+        </div>
+        <ul class="nav nav-tabs nav-justified" data-bind="if:viewModel.mycards().length>0">
             <li><a href="#" data-bind="click:Cards.viewModel.filters,css:(Cards.viewModel.typetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
             <!-- ko foreach:viewModel.mycardtypes -->
             <li>
@@ -15,7 +20,7 @@
             <!-- /ko -->
         </ul>
     </div>
-    <div class="row" style="margin-top:40px" data-bind="isotope: { data: viewModel.mycards, options: viewModel.isotopeOptions }" id="container">
+    <div class="row" style="margin-top:25px;" data-bind="isotope: { data: viewModel.mycards, options: viewModel.isotopeOptions }" id="container">
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 portfolio-item" data-bind="css:CardTypeId">
             <div class="grid-item">
                 <div class="caption img-rounded">
