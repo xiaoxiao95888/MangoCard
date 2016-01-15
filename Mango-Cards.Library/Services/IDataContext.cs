@@ -16,6 +16,7 @@ namespace Mango_Cards.Library.Services
         IDbSet<CardType> CardTypes { get; set; }
         IDbSet<LoginLog> LoginLogs { get; set; }
         IDbSet<WeChatUser> WeChatUsers { get; set; }
+        IDbSet<MangoCard> MangoCards { get; set; }
         int SaveChanges();
         IDbSet<TEntity> Set<TEntity>() where TEntity : class;
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;

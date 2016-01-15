@@ -13,6 +13,7 @@ namespace MangoCards.Test
         public IDbSet<CardType> CardTypes { get; set; }
         public IDbSet<LoginLog> LoginLogs { get; set; }
         public IDbSet<WeChatUser> WeChatUsers { get; set; }
+        public IDbSet<MangoCard> MangoCards { get; set; }
         IDbSet<TEntity> IDataContext.Set<TEntity>()
         {
             return this.Set<TEntity>();

@@ -55,6 +55,7 @@
     <Compile Include="Models\Field.cs" />
     <Compile Include="Models\LoginLog.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\PageValue.cs" />
     <Compile Include="Models\PvData.cs" />
     <Compile Include="Models\CardReview.cs" />
     <Compile Include="Models\CardType.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Services\IEmployeeService.cs" />
     <Compile Include="Services\IDataContext.cs" />
     <Compile Include="Services\ILoginLogService.cs" />
+    <Compile Include="Services\IMangoCardService.cs" />
     <Compile Include="Services\IWeChatUserService.cs" />
   </ItemGroup>
   <ItemGroup>

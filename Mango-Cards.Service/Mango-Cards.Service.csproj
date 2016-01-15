@@ -56,6 +56,7 @@
     <Compile Include="Services\CardTypeService.cs" />
     <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="Services\LoginLogService.cs" />
+    <Compile Include="Services\MangoCardService.cs" />
     <Compile Include="Services\WeChatUserService.cs" />
   </ItemGroup>
   <ItemGroup>

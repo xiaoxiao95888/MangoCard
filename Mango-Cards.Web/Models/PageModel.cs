@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Mango_Cards.Web.Models.Enum
+namespace Mango_Cards.Web.Models
 {
-    public enum PageType
+    public class PageModel
     {
-        Demo,
-        Normal
+        public string Code { get; set; }
     }
 }

@@ -127,6 +127,9 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.7.6\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -249,14 +252,18 @@
     <Compile Include="Models\CardTypeModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\Enum\FieldType.cs" />
     <Compile Include="Models\Enum\Gender.cs" />
     <Compile Include="Models\Enum\PageType.cs" />
+    <Compile Include="Models\FieldModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginLogModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MangoCardModel.cs" />
     <Compile Include="Models\MangoCardTypeModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
+    <Compile Include="Models\PageModel.cs" />
+    <Compile Include="Models\PageValueModel.cs" />
     <Compile Include="Models\PvDataModel.cs" />
     <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\ShareTimeModel.cs" />
@@ -375,6 +382,7 @@
     <Content Include="Views\Shared\header.cshtml" />
     <Content Include="WEBM\We-Work-We-Wait.webm" />
     <Content Include="Views\Account\LoginUrl.cshtml" />
+    <Content Include="Views\Cards\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

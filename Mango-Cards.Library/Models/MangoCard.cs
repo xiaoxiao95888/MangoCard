@@ -14,6 +14,10 @@ namespace Mango_Cards.Library.Models
         public string Description { get; set; }
         public virtual ICollection<Field> Fields { get; set; }
         /// <summary>
+        /// 页面收集到的数据
+        /// </summary>
+        public virtual ICollection<PageValue> PageValues { get; set; } 
+        /// <summary>
         /// 页面类型
         /// </summary>
         public virtual PageType PageType { get; set; }
