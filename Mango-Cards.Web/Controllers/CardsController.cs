@@ -21,7 +21,7 @@ namespace Mango_Cards.Web.Controllers
             return View();
         }
 
-        public ActionResult Test(Guid id)
+        public ActionResult View(Guid id)
         {
             var card = _mangoCardService.GetMangoCard(id);
             Mapper.Reset();

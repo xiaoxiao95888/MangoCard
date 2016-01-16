@@ -262,7 +262,6 @@
     <Compile Include="Models\MangoCardModel.cs" />
     <Compile Include="Models\MangoCardTypeModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
-    <Compile Include="Models\PageModel.cs" />
     <Compile Include="Models\PageValueModel.cs" />
     <Compile Include="Models\PvDataModel.cs" />
     <Compile Include="Models\ResponseModel.cs" />
@@ -382,7 +381,7 @@
     <Content Include="Views\Shared\header.cshtml" />
     <Content Include="WEBM\We-Work-We-Wait.webm" />
     <Content Include="Views\Account\LoginUrl.cshtml" />
-    <Content Include="Views\Cards\Test.cshtml" />
+    <Content Include="Views\Cards\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

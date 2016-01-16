@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace Mango_Cards.Web.Models
 {
     public class MangoCardModel
-    {      
+    {
         public Guid Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -29,8 +29,7 @@ namespace Mango_Cards.Web.Models
         {
             get
             {
-                var dy = PageValueModels.Select(item => Json.Decode(item.Value)).ToList();
-                return dy;
+                return (PageValueModels != null && PageValueModels.Any()) ? PageValueModels.Select(item => Json.Decode(item.Value)).ToList() : null;
             }
         }
 
@@ -38,13 +37,17 @@ namespace Mango_Cards.Web.Models
         {
             get
             {
-                var customer = new ExpandoObject();
-                var dict = (System.Collections.Generic.IDictionary<String, Object>)customer;
-                foreach (var item in FieldModels)
+                if (FieldModels != null && FieldModels.Any())
                 {
-                    dict.Add(item.Name, item.FieldValue);
+                    var customer = new ExpandoObject();
+                    var dict = (System.Collections.Generic.IDictionary<String, Object>)customer;
+                    foreach (var item in FieldModels)
+                    {
+                        dict.Add(item.Name, item.FieldValue);
+                    }
+                    return customer;
                 }
-                return customer;
+                return null;
             }
         }
 
