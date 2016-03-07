@@ -12,6 +12,7 @@ namespace Mango_Cards.Library.Models
         public Guid Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public Guid? FromMangoCardId { get; set; }
         public virtual ICollection<Field> Fields { get; set; }
         /// <summary>
         /// 页面收集到的数据
