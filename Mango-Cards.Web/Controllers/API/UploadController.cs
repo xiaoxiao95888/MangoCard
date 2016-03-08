@@ -43,13 +43,16 @@ namespace Mango_Cards.Web.Controllers.API
                     var extension = string.IsNullOrEmpty(fileExtension) == false
                         ? fileExtension.ToUpper().Replace(".", string.Empty)
                         : string.Empty;
-                    var typeId = string.IsNullOrEmpty(extension)
-                        ? _mediaTypeService.GetMediaTypes().Where(n => n.Extension == string.Empty).Select(n => n.Id)
-                            .FirstOrDefault()
-                        : _mediaTypeService.GetMediaTypes()
+                    var typeId =
+                        _mediaTypeService.GetMediaTypes()
                             .Where(n => n.Extension.Contains(extension))
                             .Select(n => n.Id)
                             .FirstOrDefault();
+                    if (typeId == Guid.Empty)
+                    {
+                        typeId = _mediaTypeService.GetMediaTypes().Where(n => n.Extension == null).Select(n => n.Id)
+                            .FirstOrDefault();
+                    }
                     var newFileName = fileNamePrefix + fileExtension;
                     fileFullPath = uploadFilePath + newFileName;
                     file.SaveAs(uploadFilePath + newFileName);
