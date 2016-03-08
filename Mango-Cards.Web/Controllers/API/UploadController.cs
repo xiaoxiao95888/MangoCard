@@ -28,8 +28,9 @@ namespace Mango_Cards.Web.Controllers.API
             var fileFullPath = string.Empty;
             try
             {
+                var weChatUserId = HttpContext.Current.User.Identity.GetUser().Id;
                 var file = HttpContext.Current.Request.Files[0];
-                var uploadFilePath = ConfigurationManager.AppSettings["UploadFilePath"];
+                var uploadFilePath = ConfigurationManager.AppSettings["UploadFilePath"] + weChatUserId + @"\";
                 if (!Directory.Exists(uploadFilePath))
                 {
                     Directory.CreateDirectory(uploadFilePath);
@@ -63,7 +64,7 @@ namespace Mango_Cards.Web.Controllers.API
                         ExtensionName = extension,
                         MediaTypeId = typeId,
                         Name = newFileName,
-                        WeChatUserId = HttpContext.Current.User.Identity.GetUser().Id
+                        WeChatUserId = weChatUserId
                     };
                     _mediaService.Insert(media);
                 }
