@@ -11,6 +11,8 @@ namespace Mango_Cards.Library.Services
 {
     public interface IDataContext : IObjectContextAdapter, IDisposable
     {
+        IDbSet<Media> Mediae { get; set; }
+        IDbSet<MediaType> MediaTypes { get; set; }
         IDbSet<Company> Companies { get; set; }
         IDbSet<Employee> Employees { get; set; }
         IDbSet<CardType> CardTypes { get; set; }

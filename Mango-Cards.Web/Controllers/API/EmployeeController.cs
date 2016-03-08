@@ -15,7 +15,7 @@ namespace Mango_Cards.Web.Controllers.API
         }
         public object Get()
         {
-            Mapper.Reset();
+            
             Mapper.CreateMap<Employee, EmployeeModel>();
             return _employeeService.GetEmployees().Select(Mapper.Map<Employee, EmployeeModel>);
         }

@@ -24,7 +24,7 @@ namespace Mango_Cards.Web.Controllers.API
         public object Get()
         {
             var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
-            Mapper.Reset();
+            
             Mapper.CreateMap<MangoCard, MangoCardModel>()
                 .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
                 .ForMember(n => n.HtmlCode, opt => opt.Ignore());
@@ -47,7 +47,7 @@ namespace Mango_Cards.Web.Controllers.API
         public object Get(Guid id)
         {
             var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
-            Mapper.Reset();
+            
             Mapper.CreateMap<CardType, CardTypeModel>();
             Mapper.CreateMap<MangoCard, MangoCardModel>()
                 .ForMember(n => n.PvCount, opt => opt.MapFrom(src => src.PvDatas.Count))

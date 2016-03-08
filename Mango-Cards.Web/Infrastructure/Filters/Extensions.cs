@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
-using AutoMapper;
 using Mango_Cards.Library.Services;
 using Mango_Cards.Web.Models;
 using Mango_Cards.Web.Models.Enum;

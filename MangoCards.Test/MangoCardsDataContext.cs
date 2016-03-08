@@ -8,6 +8,8 @@ namespace MangoCards.Test
 {
     public class MangoCardsDataContext : DbContext, IDataContext
     {
+        public IDbSet<MediaType> MediaTypes { get; set; }
+        public IDbSet<Media> Mediae { get; set; }
         public IDbSet<Company> Companies { get; set; }
         public IDbSet<Employee> Employees { get; set; }
         public IDbSet<CardType> CardTypes { get; set; }

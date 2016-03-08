@@ -239,7 +239,9 @@
     <Compile Include="Controllers\API\LoginConfirmationController.cs" />
     <Compile Include="Controllers\API\LogOffController.cs" />
     <Compile Include="Controllers\API\MyCardsController.cs" />
+    <Compile Include="Controllers\API\UploadController.cs" />
     <Compile Include="Controllers\API\WeChatUserController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -385,6 +387,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

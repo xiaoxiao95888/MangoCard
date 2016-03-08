@@ -23,7 +23,6 @@ namespace Mango_Cards.Web.Controllers.API
         public object Get()
         {
             var host = HttpContext.Current.Request.Url.Host;
-            Mapper.Reset();
             Mapper.CreateMap<MangoCard, MangoCardModel>()
                 .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
                 .ForMember(n => n.HtmlCode, opt => opt.Ignore());
@@ -39,7 +38,7 @@ namespace Mango_Cards.Web.Controllers.API
         public object Get(Guid id)
         {
             var host = HttpContext.Current.Request.Url.Host;
-            Mapper.Reset();
+            
             Mapper.CreateMap<MangoCard, MangoCardModel>()
                 .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
                 .ForMember(n => n.HtmlCode, opt => opt.Ignore());

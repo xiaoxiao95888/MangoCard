@@ -40,7 +40,35 @@
 </div>
 
 
-
+<div class="container">
+    <div class="row">
+        <h2 class="text-center title">我的素材 </h2>
+        <div class="well text-center" data-bind="visible:viewModel.mymediaetypes().length==0">
+            <div class="align-middle">
+                <p data-bind="text:viewModel.file.Name()==null?'您尚未上传任何素材':(viewModel.file.Verify()?viewModel.file.Name:'文件大小超出限制')"></p>
+                <div style="max-width: 200px; margin: auto" data-bind="visible:viewModel.file.Verify">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" style="min-width: 2em;" data-bind="style:{'width':viewModel.uploadprogress.Valuenow()}">
+                            <span data-bind="text:viewModel.uploadprogress.Valuenow"></span>
+                        </div>
+                    </div>
+                </div>
+                <form method="post" enctype="multipart/form-data" action="/API/Upload">
+                    <button type="button" class="btn btn-success" data-bind="click:viewModel.openfileselect">上传本地素材</button>
+                    <input type="file" id="file" name="file" style="display: none" data-bind="event:{change:viewModel.fileselected}" />
+                </form>
+            </div>
+        </div>
+        <ul class="nav nav-tabs nav-justified" data-bind="if:viewModel.mymediaetypes().length>0">
+            <li><a href="#" data-bind="click:Cards.viewModel.filters,css:(Cards.viewModel.mediatypetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
+            <!-- ko foreach:viewModel.mycardtypes -->
+            <li>
+                <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Cards.viewModel.filters,css:(Cards.viewModel.mediatypetoshow()==('.'+Id())?'active':'')"></a>
+            </li>
+            <!-- /ko -->
+        </ul>
+    </div>
+</div>
 
 
 @*<div class="container">

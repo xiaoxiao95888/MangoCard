@@ -24,7 +24,6 @@ namespace Mango_Cards.Web.Controllers
         public ActionResult View(Guid id)
         {
             var card = _mangoCardService.GetMangoCard(id);
-            Mapper.Reset();
             Mapper.CreateMap<PageValue, PageValueModel>();
             Mapper.CreateMap<Field, FieldModel>().ForMember(n=>n.FieldType,opt=>opt.MapFrom(src=>src.FieldType));
             Mapper.CreateMap<MangoCard, MangoCardModel>()
