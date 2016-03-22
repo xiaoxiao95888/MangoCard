@@ -14,5 +14,6 @@ namespace Mango_Cards.Library.Models
         /// 后缀
         /// </summary>
         public string Extension { get; set; }
+        public virtual ICollection<Media> Mediae { get; set; } 
     }
 }

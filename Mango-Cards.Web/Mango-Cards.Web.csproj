@@ -238,6 +238,7 @@
     <Compile Include="Controllers\API\HeaderSettingController.cs" />
     <Compile Include="Controllers\API\LoginConfirmationController.cs" />
     <Compile Include="Controllers\API\LogOffController.cs" />
+    <Compile Include="Controllers\API\MediaController.cs" />
     <Compile Include="Controllers\API\MyCardsController.cs" />
     <Compile Include="Controllers\API\UploadController.cs" />
     <Compile Include="Controllers\API\WeChatUserController.cs" />
@@ -263,6 +264,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MangoCardModel.cs" />
     <Compile Include="Models\MangoCardTypeModel.cs" />
+    <Compile Include="Models\MediaModel.cs" />
+    <Compile Include="Models\MediaTypeModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\PageValueModel.cs" />
     <Compile Include="Models\PvDataModel.cs" />
@@ -277,6 +280,7 @@
     <Content Include="Content\coverr.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\jquery.nailthumb.1.1.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -287,6 +291,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="images\css.png" />
+    <Content Include="images\file.png" />
+    <Content Include="images\js.png" />
     <Content Include="images\logo.png" />
     <Content Include="images\logomobile.png" />
     <Content Include="OGV\We-Work-We-Wait.ogv" />
@@ -313,6 +320,7 @@
     <None Include="Scripts\jquery-2.1.4-vsdoc.js" />
     <Content Include="Scripts\jquery.easing.1.3.js" />
     <Content Include="Scripts\jquery.hoverdir.js" />
+    <Content Include="Scripts\jquery.nailthumb.1.1.js" />
     <Content Include="Scripts\jquery.qrcode.js" />
     <Content Include="Scripts\jquery.qrcode.min.js" />
     <Content Include="Scripts\jquery.qrcode.min.js.map" />
@@ -331,6 +339,8 @@
     <Content Include="Scripts\knockout.isotope.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\qrcode.js" />
     <Content Include="Scripts\qrcode.min.js" />
     <Content Include="Scripts\respond.js" />
@@ -387,7 +397,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

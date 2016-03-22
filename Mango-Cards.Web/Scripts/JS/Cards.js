@@ -21,13 +21,36 @@
             Country: ko.observable(),
             Headimgurl: ko.observable()
         },
-        isotopeOptions: { itemSelector: ".portfolio-item" },
+        isotopeOptions: { itemSelector: ".portfolio-item", layoutMode: "masonry" },
+        //isotopeOptions: { itemSelector: ".portfolio-item", layoutMode: "fitRows" },
         file: {
             Name: ko.observable(),
             Verify: ko.observable(false),
+            UploadProgress :ko.observable(false)
         },
         uploadprogress: {
             Valuenow: ko.observable("0%")
+        }
+    }
+};
+ko.bindingHandlers.date = {
+    update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        var value = valueAccessor();
+        var allBindings = allBindingsAccessor();
+        var valueUnwrapped = ko.utils.unwrapObservable(value);
+
+        // Date formats: http://momentjs.com/docs/#/displaying/format/
+        var pattern = allBindings.format || "YYYY/MM/DD";
+
+        var output = "-";
+        if (valueUnwrapped !== null && valueUnwrapped !== undefined && valueUnwrapped.length > 0) {
+            output = moment(valueUnwrapped).format(pattern);
+        }
+
+        if ($(element).is("input") === true) {
+            $(element).val(output);
+        } else {
+            $(element).text(output);
         }
     }
 };
@@ -43,10 +66,10 @@ Cards.viewModel.mycards = ko.computed(function () {
     return demos;
 });
 Cards.viewModel.SelectCard = function () {
-    var model = {        
-      id:this.Id()  
+    var model = {
+        id: this.Id()
     };
-    $.get("/api/MyCards/",model, function (card) {
+    $.get("/api/MyCards/", model, function (card) {
         ko.mapping.fromJS(card, {}, Cards.viewModel.selectedcard);
     });
 };
@@ -57,10 +80,32 @@ Cards.viewModel.filters = function (data, event) {
     //// use filterFn if matches value    
 
     $("#container").isotope({ filter: filterValue });
-    
+
 };
+Cards.viewModel.mediafilters = function (data, event) {
+    var dom = $(event.target);
+    var filterValue = dom.attr("data-filter");
+    Cards.viewModel.mediatypetoshow(filterValue);
+    //// use filterFn if matches value    
+
+    $("#mediacontainer").isotope({ filter: filterValue });
+
+};
+Cards.viewModel.mediademos = ko.computed(function () {
+    var demos = [];
+    var all = ko.toJS(Cards.viewModel.mymediaetypes);
+    ko.utils.arrayForEach(all, function (type) {
+        ko.utils.arrayForEach(type.MediaModels, function (demo) {
+            demos.push(demo);
+        });
+    });
+    return demos;
+});
 //上传素材
 Cards.viewModel.openfileselect = function () {
+    Cards.viewModel.mediatypetoshow("*");
+
+    $("#mediacontainer").isotope({ filter: "*" });
     $("#file").click();
 };
 Cards.viewModel.fileselected = function () {
@@ -69,9 +114,10 @@ Cards.viewModel.fileselected = function () {
         Cards.viewModel.file.Name(file.name);
         if (file.size > 5120000) {
             Cards.viewModel.file.Verify(false);
+            Cards.viewModel.file.UploadProgress(false);
         } else {
             Cards.viewModel.file.Verify(true);
-            
+            Cards.viewModel.file.UploadProgress(true);
             var fd = new FormData();
             fd.append("file", file);
             var xhr = new XMLHttpRequest();
@@ -82,7 +128,7 @@ Cards.viewModel.fileselected = function () {
             xhr.open("POST", "/Api/Upload");
             xhr.send(fd);
         }
-        
+
     }
 };
 function uploadProgress(evt) {
@@ -99,12 +145,17 @@ function uploadComplete(evt) {
     /* This event is raised when the server send back a response */
     if (!evt.target.response.Error) {
         Cards.viewModel.file.Name("上传成功!");
-
-
+        Cards.viewModel.file.UploadProgress(false);
+        //刷新素材列表
+        $.get("/api/Media/", function (media) {
+            ko.mapping.fromJS(media, {}, Cards.viewModel.mymediaetypes);
+            jQuery('.nailthumb-container').nailthumb();
+            $("#mediacontainer").isotope({ filter: Cards.viewModel.mediatypetoshow() });
+        });
     } else {
         Cards.viewModel.file.Name("上传失败!");
     }
-   
+
 }
 function uploadFailed(evt) {
     alert("There was an error attempting to upload the file.");
@@ -119,8 +170,13 @@ $(function () {
             ko.mapping.fromJS(wechatuser, {}, Cards.viewModel.wechatuser);
             $.get("/api/MyCards/", function (cards) {
                 ko.mapping.fromJS(cards, {}, Cards.viewModel.mycardtypes);
+                $.get("/api/Media/", function (media) {
+                    ko.mapping.fromJS(media, {}, Cards.viewModel.mymediaetypes);
+                    jQuery('.nailthumb-container').nailthumb();
+                });
             });
+
         }
     });
-    
+
 });

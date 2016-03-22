@@ -146,8 +146,8 @@
             }
 
             ko.bindingHandlers.foreach.init(element, ko.bindingHandlers.isotope.makeForeachValueAccessor(valueAccessor), allBindingsAccessor, viewModel, bindingContext);
-            
-            
+
+
             return { controlsDescendantBindings: true };
         },
         update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -171,13 +171,13 @@
 
             initialized = true;
             $('.grid-item').hover(
-      function () {
-          $(this).find('.caption').fadeIn(250)
-      },
-      function () {
-          $(this).find('.caption').fadeOut(205)
-      }
-  );
+                function() {
+                    $(this).find('.caption').fadeIn(250);
+                },
+                function() {
+                    $(this).find('.caption').fadeOut(205);
+                }
+            );
             return { controlsDescendantBindings: true };
         }
     };

@@ -22,7 +22,9 @@ namespace Mango_Cards.Web
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
-
+            //moment
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                "~/Scripts/moment-with-locales.min.js"));
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css", "~/Content/Site.css", "~/Content/font-awesome.css"));
             //coverr
@@ -59,9 +61,13 @@ namespace Mango_Cards.Web
                       "~/Scripts/JS/LoginConfirmation.js"));
             //Cards
             bundles.Add(new ScriptBundle("~/bundles/cards").Include(
+                 "~/Scripts/jquery.nailthumb.1.1.js",
                 "~/Scripts/isotope.js",
                 "~/Scripts/knockout.isotope.js",
                     "~/Scripts/JS/Cards.js"));
+            //Cards
+            bundles.Add(new StyleBundle("~/Content/Cards").Include(
+                     "~/Content/jquery.nailthumb.1.1.css"));
         }
     }
 }
