@@ -21,15 +21,35 @@
             Country: ko.observable(),
             Headimgurl: ko.observable()
         },
-        isotopeOptions: { itemSelector: ".portfolio-item", layoutMode: "masonry" },
-        //isotopeOptions: { itemSelector: ".portfolio-item", layoutMode: "fitRows" },
         file: {
             Name: ko.observable(),
             Verify: ko.observable(false),
-            UploadProgress :ko.observable(false)
+            UploadProgress: ko.observable(false)
         },
         uploadprogress: {
             Valuenow: ko.observable("0%")
+        }
+    }
+};
+ko.bindingHandlers.isotope = {
+    init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+
+    },
+    update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+
+        var $el = $(element);
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        var $container = $(value.container);
+        $container.isotope({
+            itemSelector: value.itemSelector,
+            layoutMode: "masonry"
+        });
+        if ($el != null) {
+            $container.isotope('appended', $el);
+            $container.imagesLoaded().progress(function () {
+                $container.isotope('reloadItems');
+                $container.isotope({ filter: Cards.viewModel.mediatypetoshow() });
+            });
         }
     }
 };
@@ -79,7 +99,7 @@ Cards.viewModel.filters = function (data, event) {
     Cards.viewModel.typetoshow(filterValue);
     //// use filterFn if matches value    
 
-    $("#container").isotope({ filter: filterValue });
+    $grid.isotope({ filter: filterValue });
 
 };
 Cards.viewModel.mediafilters = function (data, event) {
@@ -87,8 +107,7 @@ Cards.viewModel.mediafilters = function (data, event) {
     var filterValue = dom.attr("data-filter");
     Cards.viewModel.mediatypetoshow(filterValue);
     //// use filterFn if matches value    
-
-    $("#mediacontainer").isotope({ filter: filterValue });
+    $grid.isotope({ filter: filterValue });
 
 };
 Cards.viewModel.mediademos = ko.computed(function () {
@@ -103,10 +122,33 @@ Cards.viewModel.mediademos = ko.computed(function () {
 });
 //上传素材
 Cards.viewModel.openfileselect = function () {
-    Cards.viewModel.mediatypetoshow("*");
-
-    $("#mediacontainer").isotope({ filter: "*" });
     $("#file").click();
+};
+//删除素材
+Cards.viewModel.delete = function () {
+    var selectedmedia = ko.mapping.toJS(this);
+    Helper.ShowConfirmationDialog({
+        message: "是否确认删除?",
+        confirmFunction: function () {
+            $.ajax({
+                type: "delete",
+                url: "/api/Media/" + selectedmedia.Id,
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    if (result.Error) {
+                        Helper.ShowErrorDialog(result.Message);
+                    } else {
+                        //Helper.ShowSuccessDialog(Messages.Success);
+                        //刷新素材列表
+                        $.get("/api/Media/", function (media) {
+                            ko.mapping.fromJS(media, {}, Cards.viewModel.mymediaetypes);
+                        });
+                    }
+                }
+            });
+        }
+    });
 };
 Cards.viewModel.fileselected = function () {
     var file = document.getElementById("file").files[0];
@@ -149,14 +191,19 @@ function uploadComplete(evt) {
         //刷新素材列表
         $.get("/api/Media/", function (media) {
             ko.mapping.fromJS(media, {}, Cards.viewModel.mymediaetypes);
-            jQuery('.nailthumb-container').nailthumb();
-            $("#mediacontainer").isotope({ filter: Cards.viewModel.mediatypetoshow() });
+            ko.mapping.fromJS({
+                Name: null,
+                Verify: false,
+                UploadProgress: false
+            }, {}, Cards.viewModel.file);
+
         });
     } else {
         Cards.viewModel.file.Name("上传失败!");
     }
 
 }
+
 function uploadFailed(evt) {
     alert("There was an error attempting to upload the file.");
 }
@@ -172,7 +219,6 @@ $(function () {
                 ko.mapping.fromJS(cards, {}, Cards.viewModel.mycardtypes);
                 $.get("/api/Media/", function (media) {
                     ko.mapping.fromJS(media, {}, Cards.viewModel.mymediaetypes);
-                    jQuery('.nailthumb-container').nailthumb();
                 });
             });
 

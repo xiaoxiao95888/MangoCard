@@ -11,6 +11,7 @@
     @Scripts.Render("~/bundles/knockout")
     @Scripts.Render("~/bundles/moment")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/Main")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top navbar-mango">
@@ -37,7 +38,7 @@
     </div>
 
     @RenderBody()
-
+    @RenderPage("~/Views/Shared/MessageDialog.cshtml")
     <footer class="text-center" style="padding: 20px">
         <p>&copy;MANGO-E 2016.</p>
         <p>Made by the people grow up with internet.</p>

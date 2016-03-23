@@ -16,7 +16,7 @@ namespace Mango_Cards.Web.Controllers.API
                 Error = false
             };
         }
-        protected ResponseModel Failed(string message)
+        protected ResponseModel Failed(string message = null)
         {
             return new ResponseModel
             {

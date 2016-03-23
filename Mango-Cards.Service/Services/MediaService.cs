@@ -20,7 +20,7 @@ namespace Mango_Cards.Service.Services
             var item = GetMedia(id);
             if (item != null)
             {
-                item.IsDeleted = true;
+                DbContext.Mediae.Remove(item);
                 Update();
             }
         }

@@ -43,13 +43,27 @@ namespace Mango_Cards.Web.Controllers.API
                                     : (src.MediaType.Name == "CSS"
                                         ? cssThumbnailUrl
                                         : (src.MediaType.Name == "JS" ? jsThumbnailUrl : fileThumbnailUrl))));
-            var model = wechatuser.Mediae.Where(n => !n.IsDeleted).OrderByDescending(n=>n.CreatedTime).GroupBy(n => n.MediaType).Select(n => new MediaTypeModel
+            var model = wechatuser.Mediae.Where(n => !n.IsDeleted).OrderByDescending(n => n.CreatedTime).GroupBy(n => n.MediaType).Select(n => new MediaTypeModel
             {
                 Id = n.Key.Id,
                 MediaModels = n.Select(Mapper.Map<Media, MediaModel>).ToArray(),
                 Name = n.Key.Name
             });
             return model;
+        }
+
+        public object Delete(Guid id)
+        {
+            var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
+            var medid = wechatuser.Mediae.FirstOrDefault(n => n.IsDeleted == false && n.Id == id);
+            if (medid != null)
+            {
+                _mediaService.Delete(id);
+                var fileFullPath = ConfigurationManager.AppSettings["UploadFilePath"] + wechatuser.Id + @"\" + medid.Name;
+                System.IO.File.Delete(fileFullPath);
+                return Success();
+            }
+            return Failed("删除失败");
         }
     }
 }

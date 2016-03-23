@@ -22,11 +22,13 @@ namespace Mango_Cards.Web
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
+            bundles.Add(new ScriptBundle("~/bundles/Main").Include(
+                "~/Scripts/JS/Main.js"));
             //moment
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
                 "~/Scripts/moment-with-locales.min.js"));
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css", "~/Content/Site.css", "~/Content/font-awesome.css"));
+                "~/Content/bootstrap.css", "~/Content/Site.css", "~/Content/font-awesome.css"));
             //coverr
             bundles.Add(new StyleBundle("~/Content/coverr").Include(
                       "~/Content/coverr.css"));
@@ -37,18 +39,16 @@ namespace Mango_Cards.Web
 
             //header
             bundles.Add(new ScriptBundle("~/bundles/header").Include(
-                       "~/Scripts/coverr.js", "~/Scripts/jquery.easing.1.3.js", "~/Scripts/js/header.js"));
+                "~/Scripts/coverr.js", "~/Scripts/jquery.easing.1.3.js", "~/Scripts/js/header.js"));
             //login
             bundles.Add(new ScriptBundle("~/bundles/login").Include(
                "~/Scripts/jquery.qrcode.js",
-               "~/Scripts/qrcode.js",              
+               "~/Scripts/qrcode.js",
                "~/Scripts/JS/login.js"));
             //Home
             bundles.Add(new ScriptBundle("~/bundles/Home").Include(
                 "~/Scripts/jquery.qrcode.js",
                 "~/Scripts/qrcode.js",
-                "~/Scripts/isotope.js",
-                "~/Scripts/knockout.isotope.js",
                 "~/Scripts/JS/Home.js"));
             //jquery-qrcode
             bundles.Add(new ScriptBundle("~/bundles/jqueryqrcode").Include(
@@ -61,13 +61,8 @@ namespace Mango_Cards.Web
                       "~/Scripts/JS/LoginConfirmation.js"));
             //Cards
             bundles.Add(new ScriptBundle("~/bundles/cards").Include(
-                 "~/Scripts/jquery.nailthumb.1.1.js",
-                "~/Scripts/isotope.js",
-                "~/Scripts/knockout.isotope.js",
+                // "~/Scripts/jquery.nailthumb.1.1.js",
                     "~/Scripts/JS/Cards.js"));
-            //Cards
-            bundles.Add(new StyleBundle("~/Content/Cards").Include(
-                     "~/Content/jquery.nailthumb.1.1.css"));
         }
     }
 }
