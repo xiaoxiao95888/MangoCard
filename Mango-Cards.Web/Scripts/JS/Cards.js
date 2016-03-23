@@ -99,7 +99,7 @@ Cards.viewModel.filters = function (data, event) {
     Cards.viewModel.typetoshow(filterValue);
     //// use filterFn if matches value    
 
-    $grid.isotope({ filter: filterValue });
+    $("#mediacontainer").isotope({ filter: filterValue });
 
 };
 Cards.viewModel.mediafilters = function (data, event) {
@@ -107,7 +107,7 @@ Cards.viewModel.mediafilters = function (data, event) {
     var filterValue = dom.attr("data-filter");
     Cards.viewModel.mediatypetoshow(filterValue);
     //// use filterFn if matches value    
-    $grid.isotope({ filter: filterValue });
+    $("#mediacontainer").isotope({ filter: filterValue });
 
 };
 Cards.viewModel.mediademos = ko.computed(function () {
