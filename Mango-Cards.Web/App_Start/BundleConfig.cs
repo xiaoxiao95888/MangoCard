@@ -22,13 +22,18 @@ namespace Mango_Cards.Web
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
+            //main
             bundles.Add(new ScriptBundle("~/bundles/Main").Include(
                 "~/Scripts/JS/Main.js"));
             //moment
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
                 "~/Scripts/moment-with-locales.min.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap.css", "~/Content/Site.css", "~/Content/font-awesome.css"));
+                "~/Content/bootstrap.css",
+                "~/Content/Site.css",
+                "~/Content/font-awesome.css"
+                ));
             //coverr
             bundles.Add(new StyleBundle("~/Content/coverr").Include(
                       "~/Content/coverr.css"));
@@ -48,6 +53,8 @@ namespace Mango_Cards.Web
             //Home
             bundles.Add(new ScriptBundle("~/bundles/Home").Include(
                 "~/Scripts/jquery.qrcode.js",
+                "~/Scripts/imagesloaded.pkgd.js",
+                "~/Scripts/isotope.pkgd.js",
                 "~/Scripts/qrcode.js",
                 "~/Scripts/JS/Home.js"));
             //jquery-qrcode
@@ -61,8 +68,11 @@ namespace Mango_Cards.Web
                       "~/Scripts/JS/LoginConfirmation.js"));
             //Cards
             bundles.Add(new ScriptBundle("~/bundles/cards").Include(
+                "~/Scripts/imagesloaded.pkgd.js",
+                "~/Scripts/isotope.pkgd.js",
+                "~/Scripts/clipboard.js",
                 // "~/Scripts/jquery.nailthumb.1.1.js",
-                    "~/Scripts/JS/Cards.js"));
+                "~/Scripts/JS/Cards.js"));
         }
     }
 }

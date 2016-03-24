@@ -12,13 +12,39 @@ var Home = {
             City: ko.observable(),
             Province: ko.observable(),
             Country: ko.observable(),
-            Headimgurl: ko.observable(),
-        },
-        isotopeOptions: { itemSelector: ".portfolio-item" }
-
+            Headimgurl: ko.observable()
+        }
     }
 };
+ko.bindingHandlers.isotope = {
+    init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 
+    },
+    update: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
+
+        var $el = $(element);
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        var $container = $(value.container);
+        $container.isotope({
+            itemSelector: value.itemSelector,
+            layoutMode: "masonry"
+        });
+        if ($el != null) {
+            $container.isotope('appended', $el);
+            $container.imagesLoaded().progress(function () {
+                $container.isotope('reloadItems');
+                $container.isotope({ filter: Home.viewModel.typetoshow() });
+            });
+            $('.grid-item').hover(
+                function() {
+                    $(this).find('.caption').fadeIn(250);
+                },
+                function() {
+                    $(this).find('.caption').fadeOut(205);
+                });
+        }
+    }
+};
 Home.viewModel.carddemos = ko.computed(function () {
     var demos = [];
     var all = ko.toJS(Home.viewModel.cardTypes);

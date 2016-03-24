@@ -49,6 +49,7 @@ ko.bindingHandlers.isotope = {
             $container.imagesLoaded().progress(function () {
                 $container.isotope('reloadItems');
                 $container.isotope({ filter: Cards.viewModel.mediatypetoshow() });
+                $container.isotope({ filter: Cards.viewModel.typetoshow() });
             });
         }
     }
@@ -82,7 +83,6 @@ Cards.viewModel.mycards = ko.computed(function () {
             demos.push(card);
         });
     });
-
     return demos;
 });
 Cards.viewModel.SelectCard = function () {
@@ -99,7 +99,7 @@ Cards.viewModel.filters = function (data, event) {
     Cards.viewModel.typetoshow(filterValue);
     //// use filterFn if matches value    
 
-    $("#mediacontainer").isotope({ filter: filterValue });
+    $("#container").isotope({ filter: filterValue });
 
 };
 Cards.viewModel.mediafilters = function (data, event) {
@@ -150,6 +150,28 @@ Cards.viewModel.delete = function () {
         }
     });
 };
+//拷贝素材URL
+Cards.viewModel.copylink = function (data, event) {
+    var dom = $(event.target);
+    var btn = dom.parents('.caption').find('.hide')[0];
+    var clipboard = new Clipboard(btn);
+    clipboard.on('success', function (e) {
+        console.log(e);
+    });
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+    btn.click();
+    dom.tooltip({
+        title:"Copied!"
+    });
+    dom.tooltip('show');
+    dom.on('hidden.bs.tooltip', function() {
+        dom.tooltip('destroy');
+    });
+
+};
+
 Cards.viewModel.fileselected = function () {
     var file = document.getElementById("file").files[0];
     if (file != null) {
@@ -224,5 +246,4 @@ $(function () {
 
         }
     });
-
 });

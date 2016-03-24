@@ -312,7 +312,10 @@
     <Content Include="MP4\We-Work-We-Wait.mp4" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\clipboard.js" />
     <Content Include="Scripts\coverr.js" />
+    <Content Include="Scripts\imagesloaded.pkgd.js" />
+    <Content Include="Scripts\isotope.pkgd.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />

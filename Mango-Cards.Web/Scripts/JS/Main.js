@@ -37,10 +37,13 @@ var Helper = {
     },
     ShowConfirmationDialog: function (parm) {
         var dialog = $("#Confirmation");
-        dialog.find(".modal-title").text("提示");
-        dialog.find(".modal-body p").empty();
-        dialog.find(".modal-body p").append(parm.message);
-        dialog.modal("show");
+        //dialog.find(".modal-title").text("提示");
+        dialog.find(".modal-header p").empty();
+        dialog.find(".modal-header p").append(parm.message);
+        dialog.modal({
+            show: true,
+            backdrop: 'static'
+        });
         callback = parm.confirmFunction;
     },
     getGuid: function () {
@@ -71,7 +74,7 @@ var Messages = {
 };
 $(function () {
     var dialog = $("#Confirmation");
-    var confirmbtn = dialog.find(".btn-primary");
+    var confirmbtn = dialog.find("#btn-confirmation");
     confirmbtn.click(function () {
         dialog.modal("hide");
         if (callback != null) {
@@ -79,41 +82,3 @@ $(function () {
         }
     });
 });
-
-
-//var $container = $("#container");
-//ko.bindingHandlers.isotope = {
-//    init: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {},
-//    update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-//        var $el = $(element);
-//        var value = ko.utils.unwrapObservable(valueAccessor());
-//        var $container = $(value.container);
-//        $container.isotope({ itemSelector: value.itemSelector });
-//        $container.isotope('appended', $el);
-//    }
-//};
-//var box = function(input) {
-//    var _color = ko.observable(input);
-//    return { color: _color };
-//};
-//var layout = function() {
-//    var _items = ko.observableArray([new box('red'), new box('red'), new box('cyan'), new box('cyan'), new box('green'), new box('cyan'), new box('red'), new box('green')]);
-//    return { items: _items, addItem: add }
-
-//    function add(item) {
-//        console.log('item: ' + item);
-//        _items.push(new box(item));
-//    }
-//};
-//var vm = new layout();
-//ko.applyBindings(vm);
-//$('#filters a').click(function() {
-//    var selector = $(this).attr('data-filter');
-//    $container.isotope({ filter: selector });
-//    return false;
-//});
-//$('#commands a').click(function () {
-//    var data = $(this).attr('data');
-//    vm.addItem(data);
-//    return false;
-//});

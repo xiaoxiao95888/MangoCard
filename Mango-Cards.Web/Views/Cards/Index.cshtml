@@ -1,8 +1,7 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
-<script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.js"></script>
+
 @Scripts.Render("~/bundles/Cards")
 <div class="container">
     <div class="row">
@@ -29,15 +28,15 @@
                         <div class="item-inner-container">
 
                             @*<a class="text-white" data-bind="click:Home.viewModel.showqrcode" href="#">查看</a>
-                                <a class="text-white" href="#">选择</a>
-                            </div>*@
+                                    <a class="text-white" href="#">选择</a>
+                                </div>*@
                         </div>
                     </div>
-                    <img data-bind="attr:{'alt':Title}" src="http://placehold.it/700x400" class="img-responsive img-rounded">
                 </div>
+                <img data-bind="attr:{'alt':Title}" src="http://placehold.it/700x400" class="img-responsive img-rounded">
             </div>
         </div>
-
+    </div>
 </div>
 
 
@@ -85,17 +84,15 @@
             <div class="thumbnail">
                 <img data-bind="attr:{'alt':Name,src:ThumbnailUrl}" />
                 <div class="caption">
-                    <p data-bind="text:FileName" style="word-wrap: break-word;"></p>
+                    <p class="text-center" data-bind="text:FileName" style="word-wrap: break-word;"></p>
                     <p>
-                        <span data-bind="date:UpdateTime">a</span>
+                        <small data-bind="date:UpdateTime"></small>
                         <span style="float: right">
-
-                            <a href="#" title="拷贝链接">
-                                <span class="glyphicon glyphicon-copy"></span>
-                            </a>
-                            <a href="#" title="删除" data-bind="click:Cards.viewModel.delete">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </a>
+                            <span class="btn-group btn-group-xs" role="group">
+                                <a class="btn btn-default" data-bind="click:Cards.viewModel.copylink"><i class="fa fa-link"></i></a>
+                                <button type="button" class="hide" data-bind="attr:{'data-clipboard-text':Url}"></button>
+                                <button type="button" class="btn btn-default" data-bind="click:Cards.viewModel.delete" title="删除"><i class="fa fa-trash"></i></button>
+                            </span>
                         </span>
                     </p>
                 </div>
