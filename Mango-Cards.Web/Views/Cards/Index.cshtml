@@ -20,26 +20,103 @@
             <!-- /ko -->
         </ul>
     </div>
-    <div class="row" style="margin-top:25px;" data-bind="foreach: viewModel.mycards" id="container">
+
+    <div class="row" style="margin-top: 25px;" data-bind="foreach: viewModel.mycards" id="container">
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 card-item" data-bind="css:CardTypeId,isotope: {container: '#container', itemSelector: '.card-item'}">
             <div class="grid-item">
                 <div class="caption img-rounded">
                     <div class="item-container">
-                        <div class="item-inner-container">
-
-                            @*<a class="text-white" data-bind="click:Home.viewModel.showqrcode" href="#">查看</a>
-                                    <a class="text-white" href="#">选择</a>
-                                </div>*@
+                        <div class="item-inner-container text-spacing-large">
+                            <h4 data-bind="text:Title" style="padding: 10px"></h4>
+                            <h5 style="padding: 5px"><a class="text-white" href="#">预览</a><a class="text-white" href="#">编辑</a><a class="text-white" href="#" data-bind="click:Cards.viewModel.data">数据</a></h5>
+                            <h5 style="padding: 5px" data-bind="date:UpdateTime"></h5>
                         </div>
                     </div>
                 </div>
-                <img data-bind="attr:{'alt':Title}" src="http://placehold.it/700x400" class="img-responsive img-rounded">
+                <img data-bind="attr:{'alt':Title}" src="http://media.mangocard.local/b3871941-17c0-4c0a-8b80-1dcb00da4f4a/c112c71c-4a22-4d55-a699-444b5163fde9.jpg" class="img-responsive img-rounded">
             </div>
         </div>
     </div>
+    <hr data-bind="visible:viewModel.mycards().length!=0" />
 </div>
 
+<div class="container" data-bind="visible:Cards.viewModel.baseaccessdata.CardTitle()!=null">
+    <div class="row">
+        <h2 class="text-center title">数据 </h2>
+    </div>
+    <p>
+        <span data-bind="text:Cards.viewModel.baseaccessdata.CardTitle"></span>
+        <span style="float: right">
+            类型：<span data-bind="text:Cards.viewModel.baseaccessdata.CardType"></span>
+        </span>
+    </p>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>基础</span>
+                <span class="pull-right">
+                    <a href="#" class="text-gray"><i class="fa fa-refresh"></i></a>
+                </span>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <div class="col-md-4 col-sm-6 pull-right">
+                        <h4 class="text-center">
+                            浏览用户数
+                        </h4>
+                        <p class="text-center" data-bind="text:Cards.viewModel.baseaccessdata.PvDataCount"></p>
+                    </div>
 
+                </div>
+
+                <div class="col-md-6">
+                    <div class="col-md-4 col-sm-6 pull-left">
+                        <h4 class="text-center">
+                            分享次数
+                        </h4>
+                        <p class="text-center" data-bind="text:viewModel.baseaccessdata.ShareTimeCount"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>表单数据</span>
+                <span class="pull-right">
+                    <a href="#" class="text-gray" data-bind="click:Cards.viewModel.refreshpagevalue"><i class="fa fa-refresh"></i></a>
+                </span>
+            </div>
+            <div class="text-center panel-body" data-bind="visible:viewModel.pagedata().length==0">
+                <div class="align-middle">
+                    尚未无数据
+                </div>
+            </div>
+            <table class="table table-bordered"  data-bind="visible:viewModel.pagedata().length!=0">
+                <tbody>
+                    <tr>
+                        <td>aaa</td>
+                        <td>bbb</td>
+                        <td>aaa</td>
+                        <td>bbb</td>
+                    </tr>
+                    <tr>
+                        <td>aaa</td>
+                        <td>bbb</td>
+                        <td>aaa</td>
+                        <td>bbb</td>
+                    </tr>
+                    <tr>
+                        <td>aaa</td>
+                        <td>bbb</td>
+                        <td>aaa</td>
+                        <td>bbb</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
 <div class="container">
     <div class="row">
         <h2 class="text-center title">我的素材 </h2>

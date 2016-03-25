@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Web.Helpers;
 using Mango_Cards.Web.Models.Enum;
-using Microsoft.Ajax.Utilities;
-using Newtonsoft.Json;
 
 namespace Mango_Cards.Web.Models
 {
@@ -21,17 +18,17 @@ namespace Mango_Cards.Web.Models
         /// 页面所需的field
         /// </summary>
         public FieldModel[] FieldModels { get; set; }
-        /// <summary>
-        /// 页面收集到的数据
-        /// </summary>
-        public PageValueModel[] PageValueModels { get; set; }
-        public dynamic PageValues
-        {
-            get
-            {
-                return (PageValueModels != null && PageValueModels.Any()) ? PageValueModels.Select(item => Json.Decode(item.Value)).ToList() : null;
-            }
-        }
+        ///// <summary>
+        ///// 页面收集到的数据
+        ///// </summary>
+        //public PageValueModel[] PageValueModels { get; set; }
+        //public dynamic PageValues
+        //{
+        //    get
+        //    {
+        //        return (PageValueModels != null && PageValueModels.Any()) ? PageValueModels.Select(item => Json.Decode(item.Value)).ToList() : null;
+        //    }
+        //}
 
         public dynamic Field
         {
@@ -51,7 +48,7 @@ namespace Mango_Cards.Web.Models
             }
         }
 
-        public string HtmlCode { get; set; }
+        public string PageHtmlCode { get; set; }
         /// <summary>
         /// 是否发布
         /// </summary>

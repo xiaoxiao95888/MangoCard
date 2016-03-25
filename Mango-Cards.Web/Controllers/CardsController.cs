@@ -24,13 +24,12 @@ namespace Mango_Cards.Web.Controllers
         public ActionResult View(Guid id)
         {
             var card = _mangoCardService.GetMangoCard(id);
-            Mapper.CreateMap<PageValue, PageValueModel>();
             Mapper.CreateMap<Field, FieldModel>().ForMember(n=>n.FieldType,opt=>opt.MapFrom(src=>src.FieldType));
             Mapper.CreateMap<MangoCard, MangoCardModel>()
                 .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
-                .ForMember(n => n.FieldModels, opt => opt.MapFrom(src => src.Fields))
-                .ForMember(n => n.PageValueModels, opt => opt.MapFrom(src => src.PageValues));
+                .ForMember(n => n.FieldModels, opt => opt.MapFrom(src => src.Fields));
             var model = Mapper.Map<MangoCard, MangoCardModel>(card);
+            model.PageHtmlCode = card.HtmlCode;
             return View(model);
         }
     }

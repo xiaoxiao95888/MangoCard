@@ -15,7 +15,7 @@ body {
   margin-bottom: 10%;
 }
 .grid-item {
-    cursor: pointer;
+    /*cursor: pointer;*/
     position: relative;
     overflow: hidden;
 }
@@ -112,6 +112,14 @@ body {
 
 .text-white {
     color: #fff !important;
+    text-decoration:none !important;
+}
+.text-gray {
+    color: #333 !important;
+    text-decoration:none !important;
+}
+.text-spacing-large {
+     letter-spacing: 10px;
 }
 /**** Isotope Filtering ****/
 

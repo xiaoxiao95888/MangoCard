@@ -24,9 +24,7 @@ namespace Mango_Cards.Web.Controllers.API
         {
             var host = HttpContext.Current.Request.Url.Host;
             Mapper.CreateMap<MangoCard, MangoCardModel>()
-                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
-                .ForMember(n => n.HtmlCode, opt => opt.Ignore());
-
+                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id));
             Mapper.CreateMap<CardType, CardTypeModel>().ForMember(n => n.MangoCardModels, opt => opt.MapFrom(src => src.MangoCards.Where(m => m.PageType == PageType.Demo)));
             var all = _cardTypeService.GetCardTypes().ToList();
             var roots = all.Where(n => n.Parent == null).ToList();
@@ -38,10 +36,9 @@ namespace Mango_Cards.Web.Controllers.API
         public object Get(Guid id)
         {
             var host = HttpContext.Current.Request.Url.Host;
-            
+
             Mapper.CreateMap<MangoCard, MangoCardModel>()
-                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
-                .ForMember(n => n.HtmlCode, opt => opt.Ignore());
+                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id));
             Mapper.CreateMap<CardType, CardTypeModel>().ForMember(n => n.MangoCardModels, opt => opt.MapFrom(src => src.MangoCards.Where(m => m.PageType == PageType.Demo)));
             var all = _cardTypeService.GetCardTypes().ToList();
             var root = all.FirstOrDefault(n => n.Id == id);

@@ -28,9 +28,18 @@
         },
         uploadprogress: {
             Valuenow: ko.observable("0%")
-        }
+        },
+        selectcard: ko.observable(),
+        pagedata: ko.observableArray(),
+        baseaccessdata: {
+            CardTitle: ko.observable(),
+            CardType: ko.observable(),
+            PvDataCount: ko.observable(),
+            ShareTimeCount: ko.observable()
+        },
     }
 };
+
 ko.bindingHandlers.isotope = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 
@@ -45,12 +54,19 @@ ko.bindingHandlers.isotope = {
             layoutMode: "masonry"
         });
         if ($el != null) {
-            $container.isotope('appended', $el);
+            $container.isotope("appended", $el);
             $container.imagesLoaded().progress(function () {
-                $container.isotope('reloadItems');
+                $container.isotope("reloadItems");
                 $container.isotope({ filter: Cards.viewModel.mediatypetoshow() });
                 $container.isotope({ filter: Cards.viewModel.typetoshow() });
             });
+            $(".grid-item").hover(
+                function () {
+                    $(this).find(".caption").fadeIn(250);
+                },
+                function () {
+                    $(this).find(".caption").fadeOut(205);
+                });
         }
     }
 };
@@ -74,6 +90,28 @@ ko.bindingHandlers.date = {
             $(element).text(output);
         }
     }
+};
+//点击编辑
+Cards.viewModel.edit = function () {
+
+};
+//点击显示数据
+Cards.viewModel.data = function () {
+    var model = ko.toJS(this);
+    Cards.viewModel.selectcard(model);
+    $.get("/api/PageValue/" + model.Id, function (result) {
+        ko.mapping.fromJS(result, {}, Cards.viewModel.pagedata);
+    });
+    $.get("/api/BasicAccessData/" + model.Id, function (result) {
+        ko.mapping.fromJS(result, {}, Cards.viewModel.baseaccessdata);
+    });
+};
+//刷新表单数据
+Cards.viewModel.refreshpagevalue = function () {
+    var model = ko.toJS(Cards.viewModel.selectcard);
+    $.get("/api/PageValue/" + model.Id, function (result) {
+        ko.mapping.fromJS(result, {}, Cards.viewModel.pagedata);
+    });
 };
 Cards.viewModel.mycards = ko.computed(function () {
     var demos = [];
@@ -153,21 +191,21 @@ Cards.viewModel.delete = function () {
 //拷贝素材URL
 Cards.viewModel.copylink = function (data, event) {
     var dom = $(event.target);
-    var btn = dom.parents('.caption').find('.hide')[0];
+    var btn = dom.parents(".caption").find(".hide")[0];
     var clipboard = new Clipboard(btn);
-    clipboard.on('success', function (e) {
+    clipboard.on("success", function (e) {
         console.log(e);
     });
-    clipboard.on('error', function (e) {
+    clipboard.on("error", function (e) {
         console.log(e);
     });
     btn.click();
     dom.tooltip({
-        title:"Copied!"
+        title: "Copied!"
     });
-    dom.tooltip('show');
-    dom.on('hidden.bs.tooltip', function() {
-        dom.tooltip('destroy');
+    dom.tooltip("show");
+    dom.on("hidden.bs.tooltip", function () {
+        dom.tooltip("destroy");
     });
 
 };

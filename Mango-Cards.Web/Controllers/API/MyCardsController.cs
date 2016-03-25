@@ -24,11 +24,8 @@ namespace Mango_Cards.Web.Controllers.API
         public object Get()
         {
             var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
-            
             Mapper.CreateMap<MangoCard, MangoCardModel>()
-                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
-                .ForMember(n => n.HtmlCode, opt => opt.Ignore());
-
+                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id));
             return
                 wechatuser.MangoCards.Where(n => !n.IsDeleted)
                     .GroupBy(n => n.CardType)
@@ -38,21 +35,6 @@ namespace Mango_Cards.Web.Controllers.API
                         Name = n.Key.Name,
                         MangoCardModels =n.Select(Mapper.Map<MangoCard, MangoCardModel>).ToArray()
                     });
-        }
-        /// <summary>
-        /// 获取基础数据
-        /// </summary>
-        /// <param name="id">mango card id</param>
-        /// <returns></returns>
-        public object Get(Guid id)
-        {
-            var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
-            
-            Mapper.CreateMap<CardType, CardTypeModel>();
-            Mapper.CreateMap<MangoCard, MangoCardModel>()
-                .ForMember(n => n.PvCount, opt => opt.MapFrom(src => src.PvDatas.Count))
-                .ForMember(n => n.ShareTimeCount, opt => opt.MapFrom(src => src.ShareTimes.Count));
-            return Mapper.Map<MangoCard, MangoCardModel>(wechatuser.MangoCards.FirstOrDefault(n => n.Id==id));
         }
     }
 }

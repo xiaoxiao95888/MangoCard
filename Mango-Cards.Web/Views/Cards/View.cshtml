@@ -10,9 +10,9 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@Model.Title</title>
-    
 </head>
 <body>
-    @Html.Raw(Engine.Razor.RunCompile(Model.HtmlCode, Model.HtmlCode, Model.GetType(), Model))
+    @Html.Raw(Engine.Razor.RunCompile(Model.PageHtmlCode, Model.PageHtmlCode, Model.GetType(), Model))
+
 </body>
 </html>

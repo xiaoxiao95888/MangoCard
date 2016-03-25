@@ -10,7 +10,7 @@ namespace Mango_Cards.Library.Models.Enum
     {
         数字,
         文本,
-        多媒体,
+        图片,
         日期,
         布尔
     }

@@ -231,6 +231,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\BaseApiController.cs" />
+    <Compile Include="Controllers\API\BasicAccessDataController.cs" />
     <Compile Include="Controllers\API\CardTypeController.cs" />
     <Compile Include="Controllers\API\EmployeeController.cs" />
     <Compile Include="Controllers\API\CometController.cs" />
@@ -238,8 +239,10 @@
     <Compile Include="Controllers\API\HeaderSettingController.cs" />
     <Compile Include="Controllers\API\LoginConfirmationController.cs" />
     <Compile Include="Controllers\API\LogOffController.cs" />
+    <Compile Include="Controllers\API\MangoCardController.cs" />
     <Compile Include="Controllers\API\MediaController.cs" />
     <Compile Include="Controllers\API\MyCardsController.cs" />
+    <Compile Include="Controllers\API\PageValueController.cs" />
     <Compile Include="Controllers\API\UploadController.cs" />
     <Compile Include="Controllers\API\WeChatUserController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
