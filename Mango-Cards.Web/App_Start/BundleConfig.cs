@@ -73,6 +73,7 @@ namespace Mango_Cards.Web
                 "~/Scripts/clipboard.js",
                 // "~/Scripts/jquery.nailthumb.1.1.js",
                 "~/Scripts/JS/Cards.js"));
+            
         }
     }
 }

@@ -30,7 +30,10 @@
             Valuenow: ko.observable("0%")
         },
         selectcard: ko.observable(),
-        pagedata: ko.observableArray(),
+        pagedata: {
+            Fields: ko.observableArray(),
+            Rows: ko.observableArray(),
+        },
         baseaccessdata: {
             CardTitle: ko.observable(),
             CardType: ko.observable(),
@@ -91,16 +94,53 @@ ko.bindingHandlers.date = {
         }
     }
 };
+function buildHtmlTable(result) {
+    var columns = addAllColumnHeaders(result);
+    var rows = [];
+    for (var i = 0 ; i < result.length ; i++) {
+        var cellValues = [];
+        for (var colIndex = 0 ; colIndex < columns.length ; colIndex++) {
+            var cellValue = result[i][columns[colIndex]];
+
+            if (cellValue == null) { cellValue = ""; }
+
+            cellValues.push({ value: cellValue });
+        }
+        rows.push({ tdvalues: cellValues });
+    }
+    ko.mapping.fromJS(rows, {}, Cards.viewModel.pagedata.Rows);
+}
+
+// Adds a header row to the table and returns the set of columns.
+// Need to do union of keys from all records as some records may not contain
+// all records
+function addAllColumnHeaders(myList) {
+    var columnSet = [];
+    for (var i = 0 ; i < myList.length ; i++) {
+        var rowHash = myList[i];
+        for (var key in rowHash) {
+            if ($.inArray(key, columnSet) == -1) {
+                columnSet.push(key);
+
+            }
+        }
+    }
+    ko.mapping.fromJS(columnSet, {}, Cards.viewModel.pagedata.Fields);
+    return columnSet;
+}
 //点击编辑
 Cards.viewModel.edit = function () {
 
 };
+
 //点击显示数据
 Cards.viewModel.data = function () {
     var model = ko.toJS(this);
     Cards.viewModel.selectcard(model);
     $.get("/api/PageValue/" + model.Id, function (result) {
-        ko.mapping.fromJS(result, {}, Cards.viewModel.pagedata);
+
+        buildHtmlTable(result);
+
     });
     $.get("/api/BasicAccessData/" + model.Id, function (result) {
         ko.mapping.fromJS(result, {}, Cards.viewModel.baseaccessdata);
@@ -110,7 +150,7 @@ Cards.viewModel.data = function () {
 Cards.viewModel.refreshpagevalue = function () {
     var model = ko.toJS(Cards.viewModel.selectcard);
     $.get("/api/PageValue/" + model.Id, function (result) {
-        ko.mapping.fromJS(result, {}, Cards.viewModel.pagedata);
+        buildHtmlTable(result);
     });
 };
 Cards.viewModel.mycards = ko.computed(function () {
