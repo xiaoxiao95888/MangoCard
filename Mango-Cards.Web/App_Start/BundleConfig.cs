@@ -24,7 +24,7 @@ namespace Mango_Cards.Web
                       "~/Scripts/respond.js"));
             //main
             bundles.Add(new ScriptBundle("~/bundles/Main").Include(
-                "~/Scripts/JS/Main.js"));
+                "~/Scripts/JS/Main.js", "~/Scripts/jquery.easing.1.3.js"));
             //moment
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
                 "~/Scripts/moment-with-locales.min.js"));
@@ -44,7 +44,7 @@ namespace Mango_Cards.Web
 
             //header
             bundles.Add(new ScriptBundle("~/bundles/header").Include(
-                "~/Scripts/coverr.js", "~/Scripts/jquery.easing.1.3.js", "~/Scripts/js/header.js"));
+                "~/Scripts/coverr.js", "~/Scripts/js/header.js"));
             //login
             bundles.Add(new ScriptBundle("~/bundles/login").Include(
                "~/Scripts/jquery.qrcode.js",
@@ -71,9 +71,18 @@ namespace Mango_Cards.Web
                 "~/Scripts/imagesloaded.pkgd.js",
                 "~/Scripts/isotope.pkgd.js",
                 "~/Scripts/clipboard.js",
-                // "~/Scripts/jquery.nailthumb.1.1.js",
+                "~/Scripts/jquery.nailthumb.1.1.js",
+                "~/Scripts/codemirror.js",
+                "~/Scripts/mode/javascript/javascript.js",
+                "~/Scripts/mode/css/css.js",
+                "~/Scripts/mode/xml/xml.js",
+                "~/Scripts/mode/htmlmixed/htmlmixed.js",
                 "~/Scripts/JS/Cards.js"));
-            
+            //Cards
+            bundles.Add(new StyleBundle("~/Content/Cards").Include(
+                "~/Content/codemirror.css"
+                ));
+
         }
     }
 }

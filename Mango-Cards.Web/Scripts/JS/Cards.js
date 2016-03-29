@@ -6,9 +6,10 @@
         typetoshow: ko.observable("*"),
         selectedcard: {
             Id: ko.observable(),
-            HtmlCode: ko.observable(),
-            PvCount: ko.observable(),
-            ShareTimeCount: ko.observable(),
+            Title: ko.observable(),
+            PageHtmlCode: ko.observable(),
+            //PvCount: ko.observable(),
+            //ShareTimeCount: ko.observable(),
             IsPublish: ko.observable()
         },
         wechatuser: {
@@ -29,21 +30,20 @@
         uploadprogress: {
             Valuenow: ko.observable("0%")
         },
-        selectcard: ko.observable(),
         pagedata: {
             Fields: ko.observableArray(),
             Rows: ko.observableArray(),
         },
+        selectcard: ko.observable(),
         baseaccessdata: {
             CardTitle: ko.observable(),
             CardType: ko.observable(),
             PvDataCount: ko.observable(),
             ShareTimeCount: ko.observable()
-        },
+        }
     }
 };
-
-ko.bindingHandlers.isotope = {
+ko.bindingHandlers.isotopetype = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 
     },
@@ -57,20 +57,27 @@ ko.bindingHandlers.isotope = {
             layoutMode: "masonry"
         });
         if ($el != null) {
-            $container.isotope("appended", $el);
+            $container.isotope('appended', $el);
             $container.imagesLoaded().progress(function () {
-                $container.isotope("reloadItems");
-                $container.isotope({ filter: Cards.viewModel.mediatypetoshow() });
+                $container.isotope('reloadItems');
                 $container.isotope({ filter: Cards.viewModel.typetoshow() });
             });
-            $(".grid-item").hover(
-                function () {
-                    $(this).find(".caption").fadeIn(250);
-                },
-                function () {
-                    $(this).find(".caption").fadeOut(205);
-                });
         }
+        $('.grid-item').hover(
+               function () {
+                   $(this).find('.caption').fadeIn(250);
+               },
+               function () {
+                   $(this).find('.caption').fadeOut(205);
+               });
+    }
+};
+ko.bindingHandlers.nailthumb = {
+    update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        var $el = $(element);
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        $el.attr("src", value.url).imagesLoaded($el, function () { $el.nailthumb({ width: 155, height: 116 }); });
+        //$el.attr("src", value.url);
     }
 };
 ko.bindingHandlers.date = {
@@ -119,7 +126,7 @@ function addAllColumnHeaders(myList) {
     for (var i = 0 ; i < myList.length ; i++) {
         var rowHash = myList[i];
         for (var key in rowHash) {
-            if ($.inArray(key, columnSet) == -1) {
+            if ($.inArray(key, columnSet) === -1) {
                 columnSet.push(key);
 
             }
@@ -130,7 +137,15 @@ function addAllColumnHeaders(myList) {
 }
 //点击编辑
 Cards.viewModel.edit = function () {
-
+    var model = ko.toJS(this);
+    $.get("/api/MyCards/" + model.Id, function (card) {
+        ko.mapping.fromJS(card, {}, Cards.viewModel.selectedcard);
+       
+        //定位
+        $("html, body").stop().animate({
+            scrollTop: $("#dataedit").offset().top - 25
+        }, 600);
+    });
 };
 
 //点击显示数据
@@ -138,20 +153,39 @@ Cards.viewModel.data = function () {
     var model = ko.toJS(this);
     Cards.viewModel.selectcard(model);
     $.get("/api/PageValue/" + model.Id, function (result) {
-
         buildHtmlTable(result);
-
+        //定位
+        $("html, body").stop().animate({
+            scrollTop: $("#dataview").offset().top - 25
+        }, 600);
     });
     $.get("/api/BasicAccessData/" + model.Id, function (result) {
         ko.mapping.fromJS(result, {}, Cards.viewModel.baseaccessdata);
     });
 };
 //刷新表单数据
-Cards.viewModel.refreshpagevalue = function () {
+Cards.viewModel.refreshformpagevalue = function (data, event) {
+    var dom = $(event.target);
+    dom.removeClass("fa-refresh");
+    dom.addClass("fa-spinner fa-pulse");
     var model = ko.toJS(Cards.viewModel.selectcard);
     $.get("/api/PageValue/" + model.Id, function (result) {
         buildHtmlTable(result);
+        dom.removeClass("fa-spinner fa-pulse");
+        dom.addClass("fa-refresh");
     });
+};
+//刷新基础数据
+Cards.viewModel.refreshbasepagevalue = function (data, event) {
+    //var dom = $(event.target);
+    //dom.removeClass("fa-refresh");
+    //dom.addClass("fa-spinner fa-pulse");
+    //var model = ko.toJS(Cards.viewModel.selectcard);
+    //$.get("/api/PageValue/" + model.Id, function (result) {
+    //    buildHtmlTable(result);
+    //    dom.removeClass("fa-spinner fa-pulse");
+    //    dom.addClass("fa-refresh");
+    //});
 };
 Cards.viewModel.mycards = ko.computed(function () {
     var demos = [];
@@ -163,14 +197,7 @@ Cards.viewModel.mycards = ko.computed(function () {
     });
     return demos;
 });
-Cards.viewModel.SelectCard = function () {
-    var model = {
-        id: this.Id()
-    };
-    $.get("/api/MyCards/", model, function (card) {
-        ko.mapping.fromJS(card, {}, Cards.viewModel.selectedcard);
-    });
-};
+
 Cards.viewModel.filters = function (data, event) {
     var dom = $(event.target);
     var filterValue = dom.attr("data-filter");
@@ -184,9 +211,25 @@ Cards.viewModel.mediafilters = function (data, event) {
     var dom = $(event.target);
     var filterValue = dom.attr("data-filter");
     Cards.viewModel.mediatypetoshow(filterValue);
-    //// use filterFn if matches value    
-    $("#mediacontainer").isotope({ filter: filterValue });
-
+    Cards.viewModel.mediafiltersshow();
+};
+Cards.viewModel.mediafiltersshow = function () {
+    var filterValue = Cards.viewModel.mediatypetoshow();
+    if (filterValue === "*") {
+        $(".imggrid").animate({
+            opacity: 'show'
+        }, 600);
+    } else {
+        $(".imggrid").each(function () {
+            if ($(this).hasClass(filterValue.replace(".", ""))) {
+                $(this).animate({
+                    opacity: 'show'
+                }, 600);
+            } else {
+                $(this).hide();
+            }
+        });
+    }
 };
 Cards.viewModel.mediademos = ko.computed(function () {
     var demos = [];
@@ -221,6 +264,7 @@ Cards.viewModel.delete = function () {
                         //刷新素材列表
                         $.get("/api/Media/", function (media) {
                             ko.mapping.fromJS(media, {}, Cards.viewModel.mymediaetypes);
+                            Cards.viewModel.mediafiltersshow();
                         });
                     }
                 }
@@ -249,7 +293,27 @@ Cards.viewModel.copylink = function (data, event) {
     });
 
 };
-
+//tab
+var myCodeMirror;
+Cards.viewModel.tab = function (data, event) {
+    var dom = $(event.target);
+    event.preventDefault();
+    dom.tab('show');
+    if (dom.attr("id") === "advancedlink") {
+        $("#editnormal").hide();
+        $("#editadvanced").show(function() {
+            var area = document.getElementById('editadvanced');
+            myCodeMirror = CodeMirror(area, {
+                value: Cards.viewModel.selectedcard.PageHtmlCode(),
+                lineNumbers: true,
+                mode: "htmlmixed"
+            });
+        });
+    } else {
+        $("#editadvanced").hide();
+        $("#editnormal").show();
+    }
+};
 Cards.viewModel.fileselected = function () {
     var file = document.getElementById("file").files[0];
     if (file != null) {
@@ -296,7 +360,7 @@ function uploadComplete(evt) {
                 Verify: false,
                 UploadProgress: false
             }, {}, Cards.viewModel.file);
-
+            Cards.viewModel.mediafiltersshow();
         });
     } else {
         Cards.viewModel.file.Name("上传失败!");
@@ -312,6 +376,7 @@ function uploadCanceled(evt) {
 }
 $(function () {
     ko.applyBindings(Cards);
+
     $.get("/api/WeChatUser/", function (wechatuser) {
         if (wechatuser != null) {
             ko.mapping.fromJS(wechatuser, {}, Cards.viewModel.wechatuser);

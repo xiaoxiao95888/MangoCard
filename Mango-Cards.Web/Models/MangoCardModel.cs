@@ -44,7 +44,7 @@ namespace Mango_Cards.Web.Models
                     }
                     return customer;
                 }
-                return null;
+                return "";
             }
         }
 

@@ -3,33 +3,34 @@
 }
 
 @Scripts.Render("~/bundles/Cards")
+@Styles.Render("~/Content/Cards")
 
 <div class="container">
-    <div class="row">
-        <h2 class="text-center title">我的卡片 </h2>
-        <div class="well text-center" data-bind="visible:viewModel.mycards().length==0">
-            <div class="align-middle">
-                您尚未选择任何 Mango Card
-            </div>
+
+    <h2 class="text-center title">我的卡片 </h2>
+    <div class="well text-center" data-bind="visible:viewModel.mycards().length==0">
+        <div class="align-middle">
+            您尚未选择任何 Mango Card
         </div>
-        <ul class="nav nav-tabs nav-justified" data-bind="if:viewModel.mycards().length>0">
-            <li><a href="#" data-bind="click:Cards.viewModel.filters,css:(Cards.viewModel.typetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
-            <!-- ko foreach:viewModel.mycardtypes -->
-            <li>
-                <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Cards.viewModel.filters,css:(Cards.viewModel.typetoshow()==('.'+Id())?'active':'')"></a>
-            </li>
-            <!-- /ko -->
-        </ul>
     </div>
+    <ul class="nav nav-tabs nav-justified" data-bind="if:viewModel.mycards().length>0">
+        <li><a href="#" data-bind="click:Cards.viewModel.filters,css:(Cards.viewModel.typetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
+        <!-- ko foreach:viewModel.mycardtypes -->
+        <li>
+            <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Cards.viewModel.filters,css:(Cards.viewModel.typetoshow()==('.'+Id())?'active':'')"></a>
+        </li>
+        <!-- /ko -->
+    </ul>
+
 
     <div class="row" style="margin-top: 25px;" data-bind="foreach: viewModel.mycards" id="container">
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 card-item" data-bind="css:CardTypeId,isotope: {container: '#container', itemSelector: '.card-item'}">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 card-item" data-bind="css:CardTypeId,isotopetype: {container: '#container', itemSelector: '.card-item'}">
             <div class="grid-item">
                 <div class="caption img-rounded">
                     <div class="item-container">
-                        <div class="item-inner-container text-spacing-large">
+                        <div class="item-inner-container">
                             <h4 data-bind="text:Title" style="padding: 10px"></h4>
-                            <h5 style="padding: 5px"><a class="text-white" href="#">预览</a><a class="text-white" href="#">编辑</a><a class="text-white" href="#" data-bind="click:Cards.viewModel.data">数据</a></h5>
+                            <h5 style="padding: 5px"><a class="text-white" href="#">预览</a><a class="text-white" href="#" data-bind="click:Cards.viewModel.edit">编辑</a><a class="text-white" href="#" data-bind="click:Cards.viewModel.data">数据</a></h5>
                             <h5 style="padding: 5px" data-bind="date:UpdateTime"></h5>
                         </div>
                     </div>
@@ -40,23 +41,49 @@
     </div>
     <hr data-bind="visible:viewModel.mycards().length!=0" />
 </div>
+<div id="dataedit">
+    <div class="container" data-bind="visible:Cards.viewModel.selectedcard.Id()!=null">
+        <div class="row">
+            <h2 class="text-center title" data-bind="text:viewModel.selectedcard.Title">编辑</h2>
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="active" role="presentation">
+                <a href="#" data-bind="click:Cards.viewModel.tab" id="normallink">简单模式</a>
+            </li>
+            <li role="presentation">
+                <a href="#" data-bind="click:Cards.viewModel.tab" id="advancedlink">高级模式</a>
 
-<div class="container" data-bind="visible:Cards.viewModel.baseaccessdata.CardTitle()!=null">
-    <div class="row">
-        <h2 class="text-center title">数据 </h2>
+            </li>
+        </ul>
+        <div class="tab-content" id="editnormal">
+           
+
+        </div>
+        <div class="tab-content" id="editadvanced">
+            @*<div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="//jsfiddle.net/lock0/k9c3xLg6/"></iframe>
+            </div>*@
+
+        </div>
     </div>
-    <p>
-        <span data-bind="text:Cards.viewModel.baseaccessdata.CardTitle"></span>
-        <span style="float: right">
-            类型：<span data-bind="text:Cards.viewModel.baseaccessdata.CardType"></span>
-        </span>
-    </p>
-    <div class="row">
+</div>
+<div id="dataview">
+    <div class="container" data-bind="visible:Cards.viewModel.baseaccessdata.CardTitle()!=null">
+        <div class="row">
+            <h2 class="text-center title">数据 </h2>
+        </div>
+        <p>
+            <span data-bind="text:Cards.viewModel.baseaccessdata.CardTitle"></span>
+            <span style="float: right">
+                类型：<span data-bind="text:Cards.viewModel.baseaccessdata.CardType"></span>
+            </span>
+        </p>
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <span>基础</span>
                 <span class="pull-right">
-                    <a href="#" class="text-gray"><i class="fa fa-refresh"></i></a>
+                    <a href="#" class="text-gray" data-bind="click:Cards.viewModel.refreshbasepagevalue"><i class="fa fa-refresh"></i></a>
                 </span>
             </div>
             <div class="panel-body">
@@ -84,7 +111,7 @@
             <div class="panel-heading">
                 <span>表单数据</span>
                 <span class="pull-right">
-                    <a href="#" class="text-gray" data-bind="click:Cards.viewModel.refreshpagevalue"><i class="fa fa-refresh"></i></a>
+                    <a href="#" class="text-gray" data-bind="click:Cards.viewModel.refreshformpagevalue"><i class="fa fa-refresh"></i></a>
                 </span>
             </div>
             <div class="text-center panel-body" data-bind="visible:viewModel.pagedata.Fields().length==0">
@@ -108,54 +135,58 @@
             </table>
         </div>
 
+
     </div>
 </div>
 <div class="container">
-    <div class="row">
-        <h2 class="text-center title">我的素材 </h2>
-        <div class="well text-center" data-bind="visible:viewModel.mymediaetypes().length==0">
-            <div class="align-middle">
-                <p data-bind="text:viewModel.file.Name()==null?'您尚未上传任何素材':(viewModel.file.Verify()?viewModel.file.Name:'文件大小超出限制')"></p>
-                <div style="max-width: 200px; margin: auto" data-bind="visible:viewModel.file.Verify">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped active" role="progressbar" style="min-width: 2em;" data-bind="style:{'width':viewModel.uploadprogress.Valuenow()}">
-                            <span data-bind="text:viewModel.uploadprogress.Valuenow"></span>
-                        </div>
-                    </div>
-                </div>
-                <form method="post" enctype="multipart/form-data" action="/API/Upload">
-                    <button type="button" class="btn btn-success" data-bind="click:viewModel.openfileselect">上传本地素材</button>
-                    <input type="file" id="file" name="file" style="display: none" data-bind="event:{change:viewModel.fileselected}" />
-                </form>
-            </div>
-        </div>
-        <ul class="nav nav-tabs nav-justified" data-bind="if:viewModel.mymediaetypes().length>0">
-            <li><a href="#" data-bind="click:Cards.viewModel.mediafilters,css:(Cards.viewModel.mediatypetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
-            <!-- ko foreach:viewModel.mymediaetypes -->
-            <li>
-                <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Cards.viewModel.mediafilters,css:(Cards.viewModel.mediatypetoshow()==('.'+Id())?'active':'')"></a>
-            </li>
-            <!-- /ko -->
-            <li>
-                <a href="#" data-bind="click:viewModel.openfileselect,visible:viewModel.file.UploadProgress()==false">
-                    上传本地素材
-                </a>
-                <div class="progress" style="margin-bottom: 0;" data-bind="visible:viewModel.file.UploadProgress">
+
+    <h2 class="text-center title">我的素材 </h2>
+    <div class="well text-center" data-bind="visible:viewModel.mymediaetypes().length==0">
+        <div class="align-middle">
+            <p data-bind="text:viewModel.file.Name()==null?'您尚未上传任何素材':(viewModel.file.Verify()?viewModel.file.Name:'文件大小超出限制')"></p>
+            <div style="max-width: 200px; margin: auto" data-bind="visible:viewModel.file.Verify">
+                <div class="progress">
                     <div class="progress-bar progress-bar-striped active" role="progressbar" style="min-width: 2em;" data-bind="style:{'width':viewModel.uploadprogress.Valuenow()}">
                         <span data-bind="text:viewModel.uploadprogress.Valuenow"></span>
                     </div>
                 </div>
-            </li>
-        </ul>
+            </div>
+            <form method="post" enctype="multipart/form-data" action="/API/Upload">
+                <button type="button" class="btn btn-success" data-bind="click:viewModel.openfileselect">上传本地素材</button>
+                <input type="file" id="file" name="file" style="display: none" data-bind="event:{change:viewModel.fileselected}" />
+            </form>
+        </div>
     </div>
+    <ul class="nav nav-tabs nav-justified" data-bind="if:viewModel.mymediaetypes().length>0">
+        <li><a href="#" data-bind="click:Cards.viewModel.mediafilters,css:(Cards.viewModel.mediatypetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
+        <!-- ko foreach:viewModel.mymediaetypes -->
+        <li>
+            <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Cards.viewModel.mediafilters,css:(Cards.viewModel.mediatypetoshow()==('.'+Id())?'active':'')"></a>
+        </li>
+        <!-- /ko -->
+        <li>
+            <a href="#" data-bind="click:viewModel.openfileselect,visible:viewModel.file.UploadProgress()==false">
+                上传本地素材
+            </a>
+            <div class="progress" style="margin-bottom: 0;" data-bind="visible:viewModel.file.UploadProgress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" style="min-width: 2em;" data-bind="style:{'width':viewModel.uploadprogress.Valuenow()}">
+                    <span data-bind="text:viewModel.uploadprogress.Valuenow"></span>
+                </div>
+            </div>
+        </li>
+    </ul>
 
-    <div class="row" style="margin-top:25px;" data-bind="foreach:viewModel.mediademos" id="mediacontainer">
-        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 media-item" data-bind="css:MediaTypeId,isotope: {container: '#mediacontainer', itemSelector: '.media-item'}">
-            <div class="thumbnail">
-                <img data-bind="attr:{'alt':Name,src:ThumbnailUrl}" />
-                <div class="caption">
-                    <p class="text-center" data-bind="text:FileName" style="word-wrap: break-word;"></p>
-                    <p>
+
+    <div class="row" style="margin-top:25px;" data-bind="foreach:viewModel.mediademos">
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 imggrid" data-bind="css:MediaTypeId">
+            <div class="thumbnail" style="width: 165px">
+                <img style="width:115px; height:116px" data-bind="nailthumb:{url:ThumbnailUrl}" />
+                <div class="caption ">
+                    <div class="text-center">
+                        <input class="text-center" style="width: 130px;border: 0; margin-bottom: 10px" data-bind="value:FileName" />
+                    </div>
+
+                    <p style="margin-bottom: 0">
                         <small data-bind="date:UpdateTime"></small>
                         <span style="float: right">
                             <span class="btn-group btn-group-xs" role="group">

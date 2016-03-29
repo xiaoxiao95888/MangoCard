@@ -36,5 +36,21 @@ namespace Mango_Cards.Web.Controllers.API
                         MangoCardModels =n.Select(Mapper.Map<MangoCard, MangoCardModel>).ToArray()
                     });
         }
+
+        public object Get(Guid id)
+        {
+            var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
+            Mapper.CreateMap<MangoCard, MangoCardModel>()
+                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id));
+            var card = wechatuser.MangoCards.FirstOrDefault(n => n.IsDeleted == false && n.Id == id);
+            if (card != null)
+            {
+                var model = Mapper.Map<MangoCard, MangoCardModel>(card);
+                model.PageHtmlCode = card.HtmlCode;
+                return model;
+            }
+            return null;
+            
+        }
     }
 }

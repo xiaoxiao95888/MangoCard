@@ -59,8 +59,7 @@ body {
 
 #cardtypes h2 {
     /*font-family: RegencieLight;*/
-    padding-top: 55px;
-    padding-bottom: 20px;
+    padding: 20px;
     letter-spacing: 5px;
 }
 
