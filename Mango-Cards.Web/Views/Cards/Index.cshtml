@@ -21,8 +21,6 @@
         </li>
         <!-- /ko -->
     </ul>
-
-
     <div class="row" style="margin-top: 25px;" data-bind="foreach: viewModel.mycards" id="container">
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 card-item" data-bind="css:CardTypeId,isotopetype: {container: '#container', itemSelector: '.card-item'}">
             <div class="grid-item">
@@ -52,18 +50,50 @@
             </li>
             <li role="presentation">
                 <a href="#" data-bind="click:Cards.viewModel.tab" id="advancedlink">高级模式</a>
-
             </li>
         </ul>
-        <div class="tab-content" id="editnormal">
-           
-
+        <div class="tab-content" style="border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd;" id="editnormal">
+            <div class="text-center" style="height: 200px; line-height: 200px" data-bind="visible:viewModel.selectedcard.FieldModels().length==0">
+                没有需要自定义的属性
+            </div>
+            <div class="form-horizontal" data-bind="visible:viewModel.selectedcard.FieldModels().length!=0" style="padding: 10px;width: 600px; margin: auto">
+                <!-- ko foreach:viewModel.selectedcard.FieldModels -->
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">
+                        <span data-bind="text:Name"></span>
+                        <span>
+                            <a class="text-gray" href="#">
+                                <i class="fa fa-question-circle"></i>
+                            </a>
+                        </span>
+                    </label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" data-bind="value:FieldValue">
+                            <span class="input-group-addon" data-bind="text:FieldTypeName"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <a href="#" class="btn btn-default" data-bind="click:Cards.viewModel.normalsave">
+                            <span>保存</span>
+                            <i class="fa fa-spinner fa-pulse hide"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="tab-content" id="editadvanced">
-            @*<div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="//jsfiddle.net/lock0/k9c3xLg6/"></iframe>
-            </div>*@
-
+        <div class="tab-content" id="editadvanced" style="border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd;">
+            <div id="editadvancedarea" style="padding: 5px">
+            </div>
+            <p class="text-center" style="padding-top: 15px;">
+                <a href="#" class="btn btn-default" data-bind="click:Cards.viewModel.advancedsave">
+                    <span>保存</span>
+                    <i class="fa fa-spinner fa-pulse hide"></i>
+                </a>
+            </p>
         </div>
     </div>
 </div>
@@ -78,7 +108,6 @@
                 类型：<span data-bind="text:Cards.viewModel.baseaccessdata.CardType"></span>
             </span>
         </p>
-
         <div class="panel panel-default">
             <div class="panel-heading">
                 <span>基础</span>
@@ -94,9 +123,7 @@
                         </h4>
                         <p class="text-center" data-bind="text:Cards.viewModel.baseaccessdata.PvDataCount"></p>
                     </div>
-
                 </div>
-
                 <div class="col-md-6">
                     <div class="col-md-4 col-sm-6 pull-left">
                         <h4 class="text-center">
@@ -119,7 +146,6 @@
                     尚未无数据
                 </div>
             </div>
-
             <table class="table table-bordered" data-bind="visible:viewModel.pagedata.Fields().length!=0">
                 <thead>
                     <tr data-bind="foreach:Cards.viewModel.pagedata.Fields">
@@ -127,19 +153,15 @@
                     </tr>
                 </thead>
                 <tbody data-bind="foreach:Cards.viewModel.pagedata.Rows">
-
                     <tr data-bind="foreach:tdvalues">
                         <td data-bind="text:value"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
-
     </div>
 </div>
 <div class="container">
-
     <h2 class="text-center title">我的素材 </h2>
     <div class="well text-center" data-bind="visible:viewModel.mymediaetypes().length==0">
         <div class="align-middle">
@@ -175,8 +197,6 @@
             </div>
         </li>
     </ul>
-
-
     <div class="row" style="margin-top:25px;" data-bind="foreach:viewModel.mediademos">
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 imggrid" data-bind="css:MediaTypeId">
             <div class="thumbnail" style="width: 165px">
@@ -185,7 +205,6 @@
                     <div class="text-center">
                         <input class="text-center" style="width: 130px;border: 0; margin-bottom: 10px" data-bind="value:FileName" />
                     </div>
-
                     <p style="margin-bottom: 0">
                         <small data-bind="date:UpdateTime"></small>
                         <span style="float: right">

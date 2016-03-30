@@ -8,6 +8,7 @@
             Id: ko.observable(),
             Title: ko.observable(),
             PageHtmlCode: ko.observable(),
+            FieldModels: ko.observableArray(),
             //PvCount: ko.observable(),
             //ShareTimeCount: ko.observable(),
             IsPublish: ko.observable()
@@ -32,7 +33,7 @@
         },
         pagedata: {
             Fields: ko.observableArray(),
-            Rows: ko.observableArray(),
+            Rows: ko.observableArray()
         },
         selectcard: ko.observable(),
         baseaccessdata: {
@@ -40,7 +41,8 @@
             CardType: ko.observable(),
             PvDataCount: ko.observable(),
             ShareTimeCount: ko.observable()
-        }
+        },
+        codeMirror: ko.observable()
     }
 };
 ko.bindingHandlers.isotopetype = {
@@ -137,17 +139,70 @@ function addAllColumnHeaders(myList) {
 }
 //点击编辑
 Cards.viewModel.edit = function () {
+    $("#normallink").click();
     var model = ko.toJS(this);
     $.get("/api/MyCards/" + model.Id, function (card) {
         ko.mapping.fromJS(card, {}, Cards.viewModel.selectedcard);
-       
         //定位
         $("html, body").stop().animate({
             scrollTop: $("#dataedit").offset().top - 25
         }, 600);
     });
 };
-
+//高级编辑保存
+Cards.viewModel.advancedsave = function (data, event) {
+    var dom = $(event.target);
+    dom.find("span").hide();
+    dom.find("i").removeClass("hide");
+    var model = {
+        PageHtmlCode: Cards.viewModel.codeMirror().codemirror.doc.cm.getValue()
+    }
+    $.ajax({
+        type: "put",
+        url: "/api/MyCards/" + Cards.viewModel.selectedcard.Id(),
+        contentType: "application/json",
+        data:JSON.stringify(model),
+        dataType: "json",
+        success: function (result) {
+            if (result.Error) {
+                Helper.ShowErrorDialog(result.Message);
+            } else {
+                Helper.ShowSuccessDialog(Messages.Success);
+                dom.find("span").show();
+                dom.find("i").addClass("hide");
+                $.get("/api/MyCards/", function (cards) {
+                    ko.mapping.fromJS(cards, {}, Cards.viewModel.mycardtypes);
+                });
+            }
+        }
+    });
+};
+//普通编辑保存
+Cards.viewModel.normalsave = function (data, event) {
+    var dom = $(event.target);
+    dom.find("span").hide();
+    dom.find("i").removeClass("hide");
+    var model = ko.mapping.toJS(Cards.viewModel.selectedcard);
+    $.ajax({
+        type: "put",
+        url: "/api/FieldUpdate/" + model.Id,
+        contentType: "application/json",
+        data: JSON.stringify(model),
+        dataType: "json",
+        success: function (result) {
+            if (result.Error) {
+                Helper.ShowErrorDialog(result.Message);
+            } else {
+                Helper.ShowSuccessDialog(Messages.Success);
+                dom.find("span").show();
+                dom.find("i").addClass("hide");
+                $.get("/api/MyCards/", function (cards) {
+                    ko.mapping.fromJS(cards, {}, Cards.viewModel.mycardtypes);
+                });
+            }
+        }
+    });
+};
 //点击显示数据
 Cards.viewModel.data = function () {
     var model = ko.toJS(this);
@@ -294,20 +349,32 @@ Cards.viewModel.copylink = function (data, event) {
 
 };
 //tab
-var myCodeMirror;
 Cards.viewModel.tab = function (data, event) {
     var dom = $(event.target);
     event.preventDefault();
     dom.tab('show');
     if (dom.attr("id") === "advancedlink") {
         $("#editnormal").hide();
-        $("#editadvanced").show(function() {
-            var area = document.getElementById('editadvanced');
-            myCodeMirror = CodeMirror(area, {
-                value: Cards.viewModel.selectedcard.PageHtmlCode(),
-                lineNumbers: true,
-                mode: "htmlmixed"
-            });
+        $("#editadvanced").show(function () {
+            var area = document.getElementById('editadvancedarea');
+            if (Cards.viewModel.codeMirror() == null) {
+                var codemirror = CodeMirror(area, {
+                    value: Cards.viewModel.selectedcard.PageHtmlCode(),
+                    lineNumbers: true,
+                    lineWrapping: true,
+                    mode: "htmlmixed",
+                    theme: "ambiance"
+                });
+                var model = {
+                    codemirror: codemirror,
+                    cardId: Cards.viewModel.selectedcard.Id()
+                }
+                Cards.viewModel.codeMirror(model);
+            } else if (Cards.viewModel.selectedcard.Id() !== Cards.viewModel.codeMirror().cardId) {
+                Cards.viewModel.codeMirror().codemirror.doc.cm.clearHistory();
+                Cards.viewModel.codeMirror().codemirror.doc.cm.setValue(Cards.viewModel.selectedcard.PageHtmlCode());
+                Cards.viewModel.codeMirror().cardId = Cards.viewModel.selectedcard.Id();
+            }
         });
     } else {
         $("#editadvanced").hide();

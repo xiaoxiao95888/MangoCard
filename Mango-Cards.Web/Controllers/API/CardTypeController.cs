@@ -7,6 +7,8 @@ using AutoMapper;
 using Mango_Cards.Library.Models;
 using Mango_Cards.Library.Models.Enum;
 using Mango_Cards.Library.Services;
+using Mango_Cards.Web.MapperHelper;
+using Mango_Cards.Web.MapperHelper.IMapperInterfaces;
 using Mango_Cards.Web.Models;
 
 namespace Mango_Cards.Web.Controllers.API
@@ -15,17 +17,16 @@ namespace Mango_Cards.Web.Controllers.API
     {
         private readonly ICardTypeService _cardTypeService;
         private readonly string _cardThumbnailPath;
-        public CardTypeController(ICardTypeService cardTypeService)
+        public CardTypeController(ICardTypeService cardTypeService, IMapperFactory mapperFactory)
         {
             _cardTypeService = cardTypeService;
+            mapperFactory.GetMangoCardMapper().Create();
+            mapperFactory.GetCardTypeMapper().Create();
             _cardThumbnailPath = ConfigurationManager.AppSettings["CardThumbnailPath"];
         }
         public object Get()
         {
             var host = HttpContext.Current.Request.Url.Host;
-            Mapper.CreateMap<MangoCard, MangoCardModel>()
-                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id));
-            Mapper.CreateMap<CardType, CardTypeModel>().ForMember(n => n.MangoCardModels, opt => opt.MapFrom(src => src.MangoCards.Where(m => m.PageType == PageType.Demo)));
             var all = _cardTypeService.GetCardTypes().ToList();
             var roots = all.Where(n => n.Parent == null).ToList();
             var result = new List<CardTypeModel>();
@@ -36,10 +37,6 @@ namespace Mango_Cards.Web.Controllers.API
         public object Get(Guid id)
         {
             var host = HttpContext.Current.Request.Url.Host;
-
-            Mapper.CreateMap<MangoCard, MangoCardModel>()
-                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id));
-            Mapper.CreateMap<CardType, CardTypeModel>().ForMember(n => n.MangoCardModels, opt => opt.MapFrom(src => src.MangoCards.Where(m => m.PageType == PageType.Demo)));
             var all = _cardTypeService.GetCardTypes().ToList();
             var root = all.FirstOrDefault(n => n.Id == id);
             var result = new CardTypeModel();

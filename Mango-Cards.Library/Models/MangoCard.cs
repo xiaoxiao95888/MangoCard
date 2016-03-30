@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Mango_Cards.Library.Models.Enum;
 using Mango_Cards.Library.Models.Interfaces;
 
@@ -12,6 +12,8 @@ namespace Mango_Cards.Library.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public Guid? FromMangoCardId { get; set; }
+        [ForeignKey("FromMangoCardId")]
+        public virtual MangoCard FromMangoCard { get; set; }
         public virtual ICollection<Field> Fields { get; set; }
         /// <summary>
         /// 页面收集到的数据

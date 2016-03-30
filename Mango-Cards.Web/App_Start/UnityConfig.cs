@@ -5,6 +5,7 @@ using Mango_Cards.Library.Services;
 using Mango_Cards.Service.Services;
 using Unity.Mvc5;
 using Mango_Cards.Web.Controllers;
+using Mango_Cards.Web.MapperHelper;
 
 namespace Mango_Cards.Web
 {
@@ -32,7 +33,9 @@ namespace Mango_Cards.Web
             container.RegisterType<IMangoCardService, MangoCardService>();
             container.RegisterType<IMediaService, MediaService>();
             container.RegisterType<IMediaTypeService, MediaTypeService>();
-
+            #region mapper inject
+            container.RegisterType<IMapperFactory, MapperFactory>();
+            #endregion
             container.RegisterType<AccountController>(new InjectionConstructor());
         }
     }

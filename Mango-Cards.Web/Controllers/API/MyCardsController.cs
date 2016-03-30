@@ -9,6 +9,7 @@ using AutoMapper;
 using Mango_Cards.Library.Models;
 using Mango_Cards.Library.Services;
 using Mango_Cards.Web.Infrastructure.Filters;
+using Mango_Cards.Web.MapperHelper;
 using Mango_Cards.Web.Models;
 
 namespace Mango_Cards.Web.Controllers.API
@@ -17,15 +18,16 @@ namespace Mango_Cards.Web.Controllers.API
     public class MyCardsController : BaseApiController
     {
         private readonly IWeChatUserService _weChatUserService;
-        public MyCardsController(IWeChatUserService weChatUserService)
+
+        public MyCardsController(IWeChatUserService weChatUserService, IMapperFactory mapperFactory)
         {
             _weChatUserService = weChatUserService;
+            mapperFactory.GetMangoCardMapper().Create();
         }
         public object Get()
         {
             var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
-            Mapper.CreateMap<MangoCard, MangoCardModel>()
-                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id));
+            
             return
                 wechatuser.MangoCards.Where(n => !n.IsDeleted)
                     .GroupBy(n => n.CardType)
@@ -33,15 +35,13 @@ namespace Mango_Cards.Web.Controllers.API
                     {
                         Id = n.Key.Id,
                         Name = n.Key.Name,
-                        MangoCardModels =n.Select(Mapper.Map<MangoCard, MangoCardModel>).ToArray()
+                        MangoCardModels = n.Select(Mapper.Map<MangoCard, MangoCardModel>).ToArray()
                     });
         }
 
         public object Get(Guid id)
         {
             var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
-            Mapper.CreateMap<MangoCard, MangoCardModel>()
-                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id));
             var card = wechatuser.MangoCards.FirstOrDefault(n => n.IsDeleted == false && n.Id == id);
             if (card != null)
             {
@@ -50,7 +50,28 @@ namespace Mango_Cards.Web.Controllers.API
                 return model;
             }
             return null;
-            
+
+        }
+
+        public object Put(Guid id, MangoCardModel model)
+        {
+            var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
+            var card = wechatuser.MangoCards.FirstOrDefault(n => n.IsDeleted == false && n.Id == id);
+            if (card != null)
+            {
+                card.HtmlCode = model.PageHtmlCode;
+                try
+                {
+                    _weChatUserService.Update();
+                    return Success();
+                }
+                catch (Exception ex)
+                {
+                    return Failed();
+                }
+
+            }
+            return Failed("Can't find card!");
         }
     }
 }

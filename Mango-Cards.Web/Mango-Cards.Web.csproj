@@ -236,6 +236,7 @@
     <Compile Include="Controllers\API\CardTypeController.cs" />
     <Compile Include="Controllers\API\EmployeeController.cs" />
     <Compile Include="Controllers\API\CometController.cs" />
+    <Compile Include="Controllers\API\FieldUpdateController.cs" />
     <Compile Include="Controllers\API\GetWechatLoginQRCodeController.cs" />
     <Compile Include="Controllers\API\HeaderSettingController.cs" />
     <Compile Include="Controllers\API\LoginConfirmationController.cs" />
@@ -255,6 +256,13 @@
     </Compile>
     <Compile Include="Infrastructure\Filters\Extensions.cs" />
     <Compile Include="Infrastructure\UserService.cs" />
+    <Compile Include="MapperHelper\CardTypeMapper.cs" />
+    <Compile Include="MapperHelper\IMapper.cs" />
+    <Compile Include="MapperHelper\IMapperFactory.cs" />
+    <Compile Include="MapperHelper\IMapperInterfaces\ICardTypeMapper.cs" />
+    <Compile Include="MapperHelper\IMapperInterfaces\IMangoCardMapper.cs" />
+    <Compile Include="MapperHelper\MangoCardMapper.cs" />
+    <Compile Include="MapperHelper\MapperFactory.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CardTypeModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
@@ -287,6 +295,51 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\jquery.nailthumb.1.1.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\theme\3024-day.css" />
+    <Content Include="Content\theme\3024-night.css" />
+    <Content Include="Content\theme\abcdef.css" />
+    <Content Include="Content\theme\ambiance-mobile.css" />
+    <Content Include="Content\theme\ambiance.css" />
+    <Content Include="Content\theme\base16-dark.css" />
+    <Content Include="Content\theme\base16-light.css" />
+    <Content Include="Content\theme\bespin.css" />
+    <Content Include="Content\theme\blackboard.css" />
+    <Content Include="Content\theme\cobalt.css" />
+    <Content Include="Content\theme\colorforth.css" />
+    <Content Include="Content\theme\dracula.css" />
+    <Content Include="Content\theme\eclipse.css" />
+    <Content Include="Content\theme\elegant.css" />
+    <Content Include="Content\theme\erlang-dark.css" />
+    <Content Include="Content\theme\hopscotch.css" />
+    <Content Include="Content\theme\icecoder.css" />
+    <Content Include="Content\theme\isotope.css" />
+    <Content Include="Content\theme\lesser-dark.css" />
+    <Content Include="Content\theme\liquibyte.css" />
+    <Content Include="Content\theme\material.css" />
+    <Content Include="Content\theme\mbo.css" />
+    <Content Include="Content\theme\mdn-like.css" />
+    <Content Include="Content\theme\midnight.css" />
+    <Content Include="Content\theme\monokai.css" />
+    <Content Include="Content\theme\neat.css" />
+    <Content Include="Content\theme\neo.css" />
+    <Content Include="Content\theme\night.css" />
+    <Content Include="Content\theme\paraiso-dark.css" />
+    <Content Include="Content\theme\paraiso-light.css" />
+    <Content Include="Content\theme\pastel-on-dark.css" />
+    <Content Include="Content\theme\railscasts.css" />
+    <Content Include="Content\theme\rubyblue.css" />
+    <Content Include="Content\theme\seti.css" />
+    <Content Include="Content\theme\solarized.css" />
+    <Content Include="Content\theme\the-matrix.css" />
+    <Content Include="Content\theme\tomorrow-night-bright.css" />
+    <Content Include="Content\theme\tomorrow-night-eighties.css" />
+    <Content Include="Content\theme\ttcn.css" />
+    <Content Include="Content\theme\twilight.css" />
+    <Content Include="Content\theme\vibrant-ink.css" />
+    <Content Include="Content\theme\xq-dark.css" />
+    <Content Include="Content\theme\xq-light.css" />
+    <Content Include="Content\theme\yeti.css" />
+    <Content Include="Content\theme\zenburn.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -671,6 +724,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\FieldUpdate\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
