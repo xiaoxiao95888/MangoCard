@@ -23,6 +23,20 @@
     </ul>
     <div class="row" style="margin-top: 25px;" data-bind="foreach: viewModel.mycards" id="container">
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 card-item" data-bind="css:CardTypeId,isotopetype: {container: '#container', itemSelector: '.card-item'}">
+            <div class="grid-item video-layout">
+                <div class="caption img-rounded">
+                    <div class="item-container">
+                        <div class="item-inner-container">
+                            <h4 data-bind="text:Title" style="padding: 10px"></h4>
+                            <h5 style="padding: 5px"><a class="text-white" href="#">预览</a><a class="text-white" href="#" data-bind="click:Cards.viewModel.edit">编辑</a><a class="text-white" href="#" data-bind="click:Cards.viewModel.data">数据</a></h5>
+                            <h5 style="padding: 5px" data-bind="date:UpdateTime"></h5>
+                        </div>
+                    </div>
+                </div>
+                <img data-bind="attr:{'src':ThumbnailUrl}" class="img-responsive img-rounded">
+            </div>
+        </div>
+        @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 card-item" data-bind="css:CardTypeId,isotopetype: {container: '#container', itemSelector: '.card-item'}">
             <div class="grid-item">
                 <div class="caption img-rounded">
                     <div class="item-container">
@@ -33,9 +47,9 @@
                         </div>
                     </div>
                 </div>
-                <img data-bind="attr:{'alt':Title}" src="http://placehold.it/700x400" class="img-responsive img-rounded">
+                <img data-bind="attr:{'src':ThumbnailUrl}" class="img-responsive img-rounded">
             </div>
-        </div>
+        </div>*@
     </div>
     <hr data-bind="visible:viewModel.mycards().length!=0" />
 </div>

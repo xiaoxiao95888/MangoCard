@@ -16,13 +16,11 @@ namespace Mango_Cards.Web.Controllers.API
     public class CardTypeController : BaseApiController
     {
         private readonly ICardTypeService _cardTypeService;
-        private readonly string _cardThumbnailPath;
         public CardTypeController(ICardTypeService cardTypeService, IMapperFactory mapperFactory)
         {
             _cardTypeService = cardTypeService;
             mapperFactory.GetMangoCardMapper().Create();
             mapperFactory.GetCardTypeMapper().Create();
-            _cardThumbnailPath = ConfigurationManager.AppSettings["CardThumbnailPath"];
         }
         public object Get()
         {

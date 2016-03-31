@@ -7,8 +7,8 @@
 @Scripts.Render("~/bundles/Home")
 <!-- Page Content -->
 
-<div id="cardtypes" >
-    <div class="container" >
+<div id="cardtypes">
+    <div class="container">
         <div class="row" data-bind="foreach:viewModel.cardTypes">
             <h2 class="text-center" data-bind="text:Name"></h2>
             <ul class="nav nav-tabs nav-justified">
@@ -20,9 +20,9 @@
                 <!-- /ko -->
             </ul>
         </div>
-        <div class="row" style="margin-top:25px" data-bind="foreach:viewModel.carddemos"  id="container">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 portfolio-item" data-bind="css:CardTypeId,isotope: {container: '#container', itemSelector: '.portfolio-item'}">
-                <div class="grid-item">
+        <div class="row" style="margin-top:25px" data-bind="foreach:viewModel.carddemos" id="container">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 portfolio-item " data-bind="css:CardTypeId,isotope: {container: '#container', itemSelector: '.portfolio-item'}">
+                <div class="grid-item video-layout">
                     <div class="caption img-rounded">
                         <div class="item-container">
                             <div class="item-inner-container">
@@ -31,15 +31,12 @@
                             </div>
                         </div>
                     </div>
-                    <img data-bind="attr:{'alt':Title}" src="http://placehold.it/700x400" class="img-responsive img-rounded">
+                    <img data-bind="attr:{'src':ThumbnailUrl}" class="img-responsive img-rounded">
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- /.container -->
-<!-- Small modal -->
-
 
 <div class="modal fade" tabindex="-1" id='Dialog' aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm">

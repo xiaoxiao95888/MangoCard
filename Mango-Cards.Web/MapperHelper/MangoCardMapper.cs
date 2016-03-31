@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using AutoMapper;
@@ -12,13 +13,19 @@ namespace Mango_Cards.Web.MapperHelper
    
     public class MangoCardMapper : IMangoCardMapper
     {
+        private readonly string _cardThumbnailPath;
+        public MangoCardMapper()
+        {
+            _cardThumbnailPath = ConfigurationManager.AppSettings["CardThumbnailPath"];
+        }
         public void Create()
         {
             Mapper.CreateMap<Field, FieldModel>().ForMember(n => n.FieldType, opt => opt.MapFrom(src => src.FieldType));
             Mapper.CreateMap<MangoCard, MangoCardModel>()
                 .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
                 .ForMember(n => n.FieldModels, opt => opt.MapFrom(src => src.Fields))
-                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id));
+                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
+                .ForMember(n => n.ThumbnailUrl, opt => opt.MapFrom(src => _cardThumbnailPath + src.ThumbnailUrl));
         }
     }
 }
