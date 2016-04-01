@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Mango_Cards.Web.Models;
 using System.Configuration;
+using System.Web.Security;
 
 namespace Mango_Cards.Web.Controllers
 {
@@ -408,7 +409,8 @@ namespace Mango_Cards.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut();
+            //AuthenticationManager.SignOut();
+            FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
 

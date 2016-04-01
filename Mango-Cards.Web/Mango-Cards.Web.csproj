@@ -245,6 +245,7 @@
     <Compile Include="Controllers\API\MediaController.cs" />
     <Compile Include="Controllers\API\MyCardsController.cs" />
     <Compile Include="Controllers\API\PageValueController.cs" />
+    <Compile Include="Controllers\API\TestLoginController.cs" />
     <Compile Include="Controllers\API\UploadController.cs" />
     <Compile Include="Controllers\API\WeChatUserController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -254,8 +255,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\CustomIdentity.cs" />
+    <Compile Include="Infrastructure\CustomPrincipal.cs" />
     <Compile Include="Infrastructure\Filters\Extensions.cs" />
-    <Compile Include="Infrastructure\UserService.cs" />
     <Compile Include="MapperHelper\CardTypeMapper.cs" />
     <Compile Include="MapperHelper\IMapper.cs" />
     <Compile Include="MapperHelper\IMapperFactory.cs" />
@@ -725,6 +727,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\FieldUpdate\" />
+    <Folder Include="Views\TestLogin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

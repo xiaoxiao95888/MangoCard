@@ -12,7 +12,7 @@ namespace Mango_Cards.Web.Infrastructure.Filters
     {
         public static WeChatUserModel GetUser(this IIdentity identity)
         {
-            var userId = identity.GetUserId();
+            var userId = identity.GetUserName();
             try
             {
                 using (var weChatServie = DependencyResolver.Current.GetService<IWeChatUserService>())
