@@ -5029,6 +5029,15 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
             left: auto;
         }
 
+        .nav-tabs.nav-justified > li {
+            display: table-cell;
+            width: 1%;
+        }
+
+            .nav-tabs.nav-justified > li > a {
+                margin-bottom: 0;
+            }
+
 @media (min-width: 768px) {
     .nav-tabs.nav-justified > li {
         display: table-cell;
@@ -5071,6 +5080,26 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     .nav-tabs.nav-justified > .active > a:focus {
         border-bottom-color: #2196f3;
     }
+}
+
+nav-tabs.nav-justified > li > a {
+    border-bottom: 1px solid #ddd;
+    border-radius: 4px 4px 0 0;
+}
+
+.nav-tabs.nav-justified > li > a:hover {
+    border-bottom: 2px solid #2196f3;
+}
+
+.nav-tabs.nav-justified > li > .active {
+    border-bottom: 2px solid #2196f3;
+    color: #2196f3;
+}
+
+.nav-tabs.nav-justified > .active > a,
+.nav-tabs.nav-justified > .active > a:hover,
+.nav-tabs.nav-justified > .active > a:focus {
+    border-bottom-color: #2196f3;
 }
 
 .nav-pills > li {
@@ -5129,6 +5158,15 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
             margin-bottom: 0;
         }
 }
+
+.nav-justified > li {
+    display: table-cell;
+    width: 1%;
+}
+
+    .nav-justified > li > a {
+        margin-bottom: 0;
+    }
 
 .nav-tabs-justified {
     border-bottom: 0;

@@ -3,40 +3,50 @@
     src: url('../fonts/regencielight-webfont.eot');
     src: url('../fonts/regencielight-webfont.svg') format('svg'),url('../fonts/regencielight-webfont.woff') format('woff'),url('../fonts/regencielight-webfont.woff2') format('woff2'),url('../fonts/regencielight-webfont.ttf') format('truetype');
 }
+
 body {
-    padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */  
+    padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
 .portfolio-item {
     margin-bottom: 25px;
 }
+
 .align-middle {
-  margin-top: 10%;
-  margin-bottom: 10%;
+    margin-top: 10%;
+    margin-bottom: 10%;
 }
+
 .grid-item {
     background-size: cover !important;
-    height: 202px;
+    height: 400px;
     overflow: hidden;
-    width: 360px;
+    width: 225px;
 }
+
 .video-layout {
     border-radius: 4px;
     box-shadow: 0 0 10px #ccc;
-
 }
+
 .title {
     padding: 20px;
 }
-.grid-item >.caption {
-    height: 202px;
-    width: 360px;
+
+.grid-item > .caption {
+    height: 400px;
+    width: 225px;
     position: absolute;
     background: rgba(0, 0, 0, 0.75) none repeat scroll 0 0;
     display: none;
     text-align: center;
     color: #fff !important;
     z-index: 2;
+}
+
+.grid-item > img {
+    height: 400px;
+    width: 225px;
 }
 
 .item-container {
@@ -115,14 +125,16 @@ body {
 
 .text-white {
     color: #fff !important;
-    text-decoration:none !important;
+    text-decoration: none !important;
 }
+
 .text-gray {
     color: #333 !important;
-    text-decoration:none !important;
+    text-decoration: none !important;
 }
+
 .text-spacing-large {
-     letter-spacing: 10px;
+    letter-spacing: 10px;
 }
 /**** Isotope Filtering ****/
 

@@ -526,6 +526,8 @@
     <Content Include="Scripts\mode\markdown\test.js" />
     <Content Include="Scripts\mode\mathematica\index.html" />
     <Content Include="Scripts\mode\mathematica\mathematica.js" />
+    <Content Include="Scripts\mode\mbox\index.html" />
+    <Content Include="Scripts\mode\mbox\mbox.js" />
     <Content Include="Scripts\mode\meta.js" />
     <Content Include="Scripts\mode\mirc\index.html" />
     <Content Include="Scripts\mode\mirc\mirc.js" />
@@ -569,6 +571,7 @@
     <Content Include="Scripts\mode\puppet\puppet.js" />
     <Content Include="Scripts\mode\python\index.html" />
     <Content Include="Scripts\mode\python\python.js" />
+    <Content Include="Scripts\mode\python\test.js" />
     <Content Include="Scripts\mode\q\index.html" />
     <Content Include="Scripts\mode\q\q.js" />
     <Content Include="Scripts\mode\rpm\changes\index.html" />
@@ -726,8 +729,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\FieldUpdate\" />
-    <Folder Include="Views\TestLogin\" />
+    <Folder Include="Scripts\mode\powershell\" />
+    <Folder Include="Scripts\mode\sas\" />
+    <Folder Include="Scripts\mode\webidl\" />
+    <Folder Include="Scripts\mode\yacas\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

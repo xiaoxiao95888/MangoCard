@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Mango_Cards.Web.Infrastructure.Filters;
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -8,7 +9,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li>
                 @*@Html.ActionLink("Hi，" + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
-                @Html.ActionLink(User.Identity.GetUserName()+"的 Mango Card", "Index", "Cards")
+                @Html.ActionLink(HttpContext.Current.User.Identity.GetUser().NickName + "的 Mango Card", "Index", "Cards")
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">注销</a></li>
         </ul>
