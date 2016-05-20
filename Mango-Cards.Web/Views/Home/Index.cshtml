@@ -17,18 +17,17 @@
 <!-- Page Content -->
 
 <div id="cardtypes">
-    <div class="container" style="width: 970px !important;">
-        <div class="row" data-bind="foreach:viewModel.cardTypes">
-            <h2 class="text-center" data-bind="text:Name"></h2>
-            <ul class="nav nav-tabs nav-justified">
-                <li><a href="#" data-bind="click:Home.viewModel.filters,css:(Home.viewModel.typetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
-                <!-- ko foreach:SubCardTypeModels -->
-                <li>
-                    <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Home.viewModel.filters,css:(Home.viewModel.typetoshow()==('.'+Id())?'active':'')"></a>
-                </li>
-                <!-- /ko -->
-            </ul>
-        </div>
+    <div class="container" style="width: 1140px !important;">
+        <h2 class="text-center">Mango Cards</h2>
+        <ul class="nav nav-tabs nav-justified" >
+            <li><a href="#" data-bind="click:Home.viewModel.filters,css:(Home.viewModel.typetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
+            <!-- ko foreach:viewModel.cardTypes -->
+            <li>
+                <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Home.viewModel.filters,css:(Home.viewModel.typetoshow()==('.'+Id())?'active':'')"></a>
+            </li>
+            <!-- /ko -->
+        </ul>
+
         <div class="row" style="margin-top:25px" data-bind="foreach:viewModel.carddemos" id="container">
             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 portfolio-item" data-bind="css:CardTypeId,isotope: {container: '#container', itemSelector: '.portfolio-item'}">
                 <div class="grid-item video-layout">

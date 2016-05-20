@@ -291,6 +291,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\card.css" />
     <Content Include="Content\codemirror.css" />
     <Content Include="Content\coverr.css" />
     <Content Include="Content\font-awesome.css" />

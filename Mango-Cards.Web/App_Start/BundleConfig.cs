@@ -81,7 +81,8 @@ namespace Mango_Cards.Web
             //Cards
             bundles.Add(new StyleBundle("~/Content/Cards").Include(
                 "~/Content/codemirror.css",
-                "~/Content/theme/ambiance.css"
+                "~/Content/theme/ambiance.css",
+                 "~/Content/card.css"
                 ));
 
         }

@@ -5,7 +5,7 @@
 @Scripts.Render("~/bundles/Cards")
 @Styles.Render("~/Content/Cards")
 
-<div class="container">
+<div class="container" style="width: 1140px !important;">
 
     <h2 class="text-center title">我的卡片 </h2>
     <div class="well text-center" data-bind="visible:viewModel.mycards().length==0">
@@ -22,7 +22,7 @@
         <!-- /ko -->
     </ul>
     <div class="row" style="margin-top: 25px;" data-bind="foreach: viewModel.mycards" id="container">
-        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 card-item" data-bind="css:CardTypeId,isotopetype: {container: '#container', itemSelector: '.card-item'}">
+        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 card-item" data-bind="css:CardTypeId,isotopetype: {container: '#container', itemSelector: '.card-item'}">
             <div class="grid-item video-layout">
                 <div class="caption img-rounded">
                     <div class="item-container">
@@ -37,19 +37,19 @@
             </div>
         </div>
         @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 card-item" data-bind="css:CardTypeId,isotopetype: {container: '#container', itemSelector: '.card-item'}">
-            <div class="grid-item">
-                <div class="caption img-rounded">
-                    <div class="item-container">
-                        <div class="item-inner-container">
-                            <h4 data-bind="text:Title" style="padding: 10px"></h4>
-                            <h5 style="padding: 5px"><a class="text-white" href="#">预览</a><a class="text-white" href="#" data-bind="click:Cards.viewModel.edit">编辑</a><a class="text-white" href="#" data-bind="click:Cards.viewModel.data">数据</a></h5>
-                            <h5 style="padding: 5px" data-bind="date:UpdateTime"></h5>
+                <div class="grid-item">
+                    <div class="caption img-rounded">
+                        <div class="item-container">
+                            <div class="item-inner-container">
+                                <h4 data-bind="text:Title" style="padding: 10px"></h4>
+                                <h5 style="padding: 5px"><a class="text-white" href="#">预览</a><a class="text-white" href="#" data-bind="click:Cards.viewModel.edit">编辑</a><a class="text-white" href="#" data-bind="click:Cards.viewModel.data">数据</a></h5>
+                                <h5 style="padding: 5px" data-bind="date:UpdateTime"></h5>
+                            </div>
                         </div>
                     </div>
+                    <img data-bind="attr:{'src':ThumbnailUrl}" class="img-responsive img-rounded">
                 </div>
-                <img data-bind="attr:{'src':ThumbnailUrl}" class="img-responsive img-rounded">
-            </div>
-        </div>*@
+            </div>*@
     </div>
     <hr data-bind="visible:viewModel.mycards().length!=0" />
 </div>
@@ -66,11 +66,12 @@
                 <a href="#" data-bind="click:Cards.viewModel.tab" id="advancedlink">高级模式</a>
             </li>
         </ul>
-        <div class="tab-content" style="border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd;" id="editnormal">
+        <!--普通编辑模式 -->
+        <div class="tab-content" style="border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; padding:10px;" id="editnormal">
             <div class="text-center" style="height: 200px; line-height: 200px" data-bind="visible:viewModel.selectedcard.FieldModels().length==0">
                 没有需要自定义的属性
             </div>
-            <div class="form-horizontal" data-bind="visible:viewModel.selectedcard.FieldModels().length!=0" style="padding: 10px;width: 600px; margin: auto">
+            <div class="form-horizontal col-md-6 scrollspy-example" data-bind="visible:viewModel.selectedcard.FieldModels().length!=0">
                 <!-- ko foreach:viewModel.selectedcard.FieldModels -->
                 <div class="form-group">
                     <label class="col-sm-3 control-label">
@@ -81,7 +82,7 @@
                             </a>
                         </span>
                     </label>
-                    <div class="col-sm-9">
+                    <div class="col-sm-9" style="max-width:250px">
                         <div class="input-group">
                             <input type="text" class="form-control" data-bind="value:FieldValue">
                             <span class="input-group-addon" data-bind="text:FieldTypeName"></span>
@@ -89,18 +90,42 @@
                     </div>
                 </div>
                 <!-- /ko -->
-                <div class="form-group">
-                    <div class="col-sm-offset-3 col-sm-9">
-                        <a href="#" class="btn btn-default" data-bind="click:Cards.viewModel.normalsave">
-                            <span>保存</span>
-                            <i class="fa fa-spinner fa-pulse hide"></i>
-                        </a>
-                    </div>
-                </div>
             </div>
+            <div class="col-md-6 scrollspy-example">
+
+
+                fat
+
+                Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic. Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.
+                mdo
+
+                Veniam marfa mustache skateboard, adipisicing fugiat velit pitchfork beard. Freegan beard aliqua cupidatat mcsweeney's vero. Cupidatat four loko nisi, ea helvetica nulla carles. Tattooed cosby sweater food truck, mcsweeney's quis non freegan vinyl. Lo-fi wes anderson +1 sartorial. Carles non aesthetic exercitation quis gentrify. Brooklyn adipisicing craft beer vice keytar deserunt.
+                one
+
+                Occaecat commodo aliqua delectus. Fap craft beer deserunt skateboard ea. Lomo bicycle rights adipisicing banh mi, velit ea sunt next level locavore single-origin coffee in magna veniam. High life id vinyl, echo park consequat quis aliquip banh mi pitchfork. Vero VHS est adipisicing. Consectetur nisi DIY minim messenger bag. Cred ex in, sustainable delectus consectetur fanny pack iphone.
+                two
+
+                In incididunt echo park, officia deserunt mcsweeney's proident master cleanse thundercats sapiente veniam. Excepteur VHS elit, proident shoreditch +1 biodiesel laborum craft beer. Single-origin coffee wayfarers irure four loko, cupidatat terry richardson master cleanse. Assumenda you probably haven't heard of them art party fanny pack, tattooed nulla cardigan tempor ad. Proident wolf nesciunt sartorial keffiyeh eu banh mi sustainable. Elit wolf voluptate, lo-fi ea portland before they sold out four loko. Locavore enim nostrud mlkshk brooklyn nesciunt.
+                three
+
+                Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic. Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.
+
+                Keytar twee blog, culpa messenger bag marfa whatever delectus food truck. Sapiente synth id assumenda. Locavore sed helvetica cliche irony, thundercats you probably haven't heard of them consequat hoodie gluten-free lo-fi fap aliquip. Labore elit placeat before they sold out, terry richardson proident brunch nesciunt quis cosby sweater pariatur keffiyeh ut helvetica artisan. Cardigan craft beer seitan readymade velit. VHS chambray laboris tempor veniam. Anim mollit minim commodo ullamco thundercats.
+
+
+            </div>
+            <div class="clearfix"></div>
+            <hr />
+            <p class="text-center">
+                <a href="#" class="btn btn-default" data-bind="click:Cards.viewModel.normalsave">
+                    <span>保存</span>
+                    <i class="fa fa-spinner fa-pulse hide"></i>
+                </a>
+            </p>
         </div>
-        <div class="tab-content" id="editadvanced" style="border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd;">
-            <div id="editadvancedarea" style="padding: 5px">
+        <!--高级编辑模式 -->
+        <div class="tab-content" id="editadvanced" style="border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; padding:10px">
+            <div id="editadvancedarea">
             </div>
             <p class="text-center" style="padding-top: 15px;">
                 <a href="#" class="btn btn-default" data-bind="click:Cards.viewModel.advancedsave">
