@@ -617,8 +617,6 @@
     <Content Include="Scripts\mode\sparql\sparql.js" />
     <Content Include="Scripts\mode\spreadsheet\index.html" />
     <Content Include="Scripts\mode\spreadsheet\spreadsheet.js" />
-    <Content Include="Scripts\mode\sql\index.html" />
-    <Content Include="Scripts\mode\sql\sql.js" />
     <Content Include="Scripts\mode\stex\index.html" />
     <Content Include="Scripts\mode\stex\stex.js" />
     <Content Include="Scripts\mode\stex\test.js" />
