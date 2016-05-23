@@ -47,7 +47,7 @@ namespace Mango_Cards.Web.Controllers.API
                 var model = Mapper.Map<MangoCard, MangoCardModel>(card);
                 model.PageHtmlCode = card.HtmlCode;
                 model.Instructions = card.CardTemplate.Instructions;
-                model.Url = "http://" + HttpContext.Current.Request.Url.Host + "/Cards/View/" + model.Id;
+                model.Url = "http://" + HttpContext.Current.Request.Url.Host + "/Cards/RedirectCardView/" + model.Id;
                 return model;
             }
             return null;

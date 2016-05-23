@@ -6,6 +6,7 @@ using Mango_Cards.Library.Models;
 using Mango_Cards.Library.Services;
 using Mango_Cards.Web.MapperHelper;
 using Mango_Cards.Web.Models;
+using Mango_Cards.Web.Infrastructure;
 
 namespace Mango_Cards.Web.Controllers
 {
@@ -43,16 +44,16 @@ namespace Mango_Cards.Web.Controllers
             var model = Mapper.Map<CardTemplate, CardTemplateDetailModel>(_cardTemplateService.GetCardTemplate(id));
             return View(model);
         }
-
-        public ActionResult RedirectView()
-        {
-            var backUrl = "http://romaingauthier.mangoeasy.com/home/filedownload/";
-            var state = Guid.NewGuid();
-            var fileDownloadloginUrl =
+        //用来缩短预览二维码长度并且跳转到正常的微信网址
+        public ActionResult RedirectCardView(Guid id)
+        {           
+            var state = Helper.GenerateId();
+            var backUrl = "http://" + HttpContext.Request.Url.Host + Url.Action("View", "Cards", new { id = id });
+            var url =
                 string.Format(
                     "https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope=snsapi_userinfo&state={2}#wechat_redirect",
                     ConfigurationManager.AppSettings["AppId"], backUrl, state);
-            return Redirect(fileDownloadloginUrl);
+            return Redirect(url);
         }
     }
 }

@@ -259,6 +259,7 @@
     <Compile Include="Infrastructure\CustomIdentity.cs" />
     <Compile Include="Infrastructure\CustomPrincipal.cs" />
     <Compile Include="Infrastructure\Filters\Extensions.cs" />
+    <Compile Include="Infrastructure\Helper.cs" />
     <Compile Include="MapperHelper\CardTemplateMapper.cs" />
     <Compile Include="MapperHelper\CardTypeMapper.cs" />
     <Compile Include="MapperHelper\IMapper.cs" />
@@ -739,7 +740,6 @@
     <Content Include="Views\Cards\View.cshtml" />
     <Content Include="Views\Shared\MessageDialog.cshtml" />
     <Content Include="Views\Cards\CardTemplateView.cshtml" />
-    <Content Include="Views\Cards\RedirectView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
