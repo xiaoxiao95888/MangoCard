@@ -4254,6 +4254,98 @@ fieldset[disabled] a.btn {
         background-color: #fff;
     }
 
+
+
+
+
+    .btn-black {
+    color: #fff;
+    background-color: #333333;
+    border-color: #222222;
+}
+
+    .btn-black:focus,
+    .btn-black.focus {
+        color: #fff;
+        background-color: #444444;
+        border-color: #111111;
+    }
+
+    .btn-black:hover {
+        color: #fff;
+        background-color: #444444;
+        border-color: #222222;
+    }
+
+    .btn-black:active,
+    .btn-black.active,
+    .open > .dropdown-toggle.btn-black {
+        color: #fff;
+        background-color: #444444;
+        border-color: #222222;
+    }
+
+        .btn-black:active:hover,
+        .btn-black.active:hover,
+        .open > .dropdown-toggle.btn-black:hover,
+        .btn-black:active:focus,
+        .btn-black.active:focus,
+        .open > .dropdown-toggle.btn-black:focus,
+        .btn-black:active.focus,
+        .btn-black.active.focus,
+        .open > .dropdown-toggle.btn-black.focus {
+            color: #fff;
+            background-color: #222222;
+            border-color: #111111;
+        }
+
+    .btn-black:active,
+    .btn-black.active,
+    .open > .dropdown-toggle.btn-black {
+        background-image: none;
+    }
+
+    .btn-black.disabled,
+    .btn-black[disabled],
+    fieldset[disabled] .btn-black,
+    .btn-black.disabled:hover,
+    .btn-black[disabled]:hover,
+    fieldset[disabled] .btn-black:hover,
+    .btn-black.disabled:focus,
+    .btn-black[disabled]:focus,
+    fieldset[disabled] .btn-black:focus,
+    .btn-black.disabled.focus,
+    .btn-black[disabled].focus,
+    fieldset[disabled] .btn-black.focus,
+    .btn-black.disabled:active,
+    .btn-black[disabled]:active,
+    fieldset[disabled] .btn-black:active,
+    .btn-black.disabled.active,
+    .btn-black[disabled].active,
+    fieldset[disabled] .btn-black.active {
+        background-color: #333333;
+        border-color: #222222;
+    }
+
+    .btn-black .badge {
+        color: #333333;
+        background-color: #fff;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .btn-link {
     font-weight: normal;
     color: #337ab7;

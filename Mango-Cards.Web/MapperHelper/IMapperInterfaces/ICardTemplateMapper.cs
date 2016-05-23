@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Mango_Cards.Web.MapperHelper.IMapperInterfaces
 {
-    public interface ICardTypeMapper : IMapper
+    public interface ICardTemplateMapper
     {
-        
+        void Detail();
+        void Normal();
     }
 }

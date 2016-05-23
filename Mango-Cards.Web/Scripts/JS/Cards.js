@@ -8,10 +8,16 @@
             Id: ko.observable(),
             Title: ko.observable(),
             PageHtmlCode: ko.observable(),
+            Instructions: ko.observable(),
+            Url: ko.observable(),
             FieldModels: ko.observableArray(),
             //PvCount: ko.observable(),
             //ShareTimeCount: ko.observable(),
             IsPublish: ko.observable()
+        },
+        selectedcardUrl: {
+            Title: ko.observable(),
+            Url: ko.observable()
         },
         wechatuser: {
             Id: ko.observable(),
@@ -161,19 +167,43 @@ Cards.viewModel.advancedsave = function (data, event) {
         type: "put",
         url: "/api/MyCards/" + Cards.viewModel.selectedcard.Id(),
         contentType: "application/json",
-        data:JSON.stringify(model),
+        data: JSON.stringify(model),
         dataType: "json",
         success: function (result) {
             if (result.Error) {
                 Helper.ShowErrorDialog(result.Message);
             } else {
-                Helper.ShowSuccessDialog(Messages.Success);
+                //弹出预览二维码
+                var selectedcard = ko.mapping.toJS(Cards.viewModel.selectedcard);
+                ko.mapping.fromJS(selectedcard, {}, Cards.viewModel.selectedcardUrl);
+                var dialog = $("#preview-dialog");
+                dialog.modal({
+                    keyboard: false,
+                    show: true,
+                    backdrop: "static"
+                });
                 dom.find("span").show();
                 dom.find("i").addClass("hide");
             }
         }
     });
 };
+//预览二维码
+Cards.viewModel.preview = function () {
+    var model = ko.toJS(this);
+    $.get("/api/MyCards/" + model.Id, function (card) {
+        if (card != null) {
+            ko.mapping.fromJS(card, {}, Cards.viewModel.selectedcardUrl);
+        }
+        var dialog = $("#preview-dialog");
+        dialog.modal({
+            keyboard: false,
+            show: true,
+            backdrop: "static"
+        });
+       
+    });
+}
 //普通编辑保存
 Cards.viewModel.normalsave = function (data, event) {
     var dom = $(event.target);
@@ -190,7 +220,15 @@ Cards.viewModel.normalsave = function (data, event) {
             if (result.Error) {
                 Helper.ShowErrorDialog(result.Message);
             } else {
-                Helper.ShowSuccessDialog(Messages.Success);
+                //弹出预览二维码
+                var selectedcard = ko.mapping.toJS(Cards.viewModel.selectedcard);
+                ko.mapping.fromJS(selectedcard, {}, Cards.viewModel.selectedcardUrl);
+                var dialog = $("#preview-dialog");
+                dialog.modal({
+                    keyboard: false,
+                    show: true,
+                    backdrop: "static"
+                });
                 dom.find("span").show();
                 dom.find("i").addClass("hide");
             }
@@ -287,6 +325,20 @@ Cards.viewModel.mediafiltersshow = function () {
         });
     }
 };
+ko.bindingHandlers.qrbind = {
+    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        // This will be called when the binding is first applied to an element
+        // Set up any initial state, event handlers, etc. here
+    },
+    update: function (element, valueAccessor) {
+        $(element).empty();
+        var data = ko.toJS(Cards.viewModel.selectedcardUrl);
+        if (data != null&& data.Url!=null) {
+            $(element).qrcode(data.Url);
+        }
+
+    }
+};
 Cards.viewModel.mediademos = ko.computed(function () {
     var demos = [];
     var all = ko.toJS(Cards.viewModel.mymediaetypes);
@@ -379,7 +431,7 @@ Cards.viewModel.tab = function (data, event) {
                     Cards.viewModel.codeMirror().cardId = Cards.viewModel.selectedcard.Id();
                 }
             });
-            
+
         });
     } else {
         $("#editadvanced").hide();

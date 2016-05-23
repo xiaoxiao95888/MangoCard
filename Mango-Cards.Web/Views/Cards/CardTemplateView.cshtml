@@ -1,0 +1,18 @@
+﻿@{
+    Layout = null;
+}
+@using RazorEngine;
+@using RazorEngine.Templating;
+@model Mango_Cards.Web.Models.CardTemplateDetailModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Model.Title</title>
+</head>
+<body>
+    @Html.Raw(Model.HtmlCode)
+    @*@Html.Raw(Engine.Razor.RunCompile(Model.PageHtmlCode, Model.PageHtmlCode, Model.GetType(), Model))*@
+</body>
+</html>

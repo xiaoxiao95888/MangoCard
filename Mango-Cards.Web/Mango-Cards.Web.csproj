@@ -233,6 +233,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\BaseApiController.cs" />
     <Compile Include="Controllers\API\BasicAccessDataController.cs" />
+    <Compile Include="Controllers\API\CardTemplateController.cs" />
     <Compile Include="Controllers\API\CardTypeController.cs" />
     <Compile Include="Controllers\API\EmployeeController.cs" />
     <Compile Include="Controllers\API\CometController.cs" />
@@ -258,14 +259,17 @@
     <Compile Include="Infrastructure\CustomIdentity.cs" />
     <Compile Include="Infrastructure\CustomPrincipal.cs" />
     <Compile Include="Infrastructure\Filters\Extensions.cs" />
+    <Compile Include="MapperHelper\CardTemplateMapper.cs" />
     <Compile Include="MapperHelper\CardTypeMapper.cs" />
     <Compile Include="MapperHelper\IMapper.cs" />
     <Compile Include="MapperHelper\IMapperFactory.cs" />
     <Compile Include="MapperHelper\IMapperInterfaces\ICardTypeMapper.cs" />
     <Compile Include="MapperHelper\IMapperInterfaces\IMangoCardMapper.cs" />
+    <Compile Include="MapperHelper\IMapperInterfaces\ICardTemplateMapper.cs" />
     <Compile Include="MapperHelper\MangoCardMapper.cs" />
     <Compile Include="MapperHelper\MapperFactory.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CardTemplateModel.cs" />
     <Compile Include="Models\CardTypeModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
@@ -734,6 +738,8 @@
     <Content Include="Views\Account\LoginUrl.cshtml" />
     <Content Include="Views\Cards\View.cshtml" />
     <Content Include="Views\Shared\MessageDialog.cshtml" />
+    <Content Include="Views\Cards\CardTemplateView.cshtml" />
+    <Content Include="Views\Cards\RedirectView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

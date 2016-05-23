@@ -18,7 +18,7 @@ namespace Mango_Cards.Library.Models
         public Gender Gender { get; set; }
         public string Name { get; set; }
         public string ThumbnailUrl { get; set; }
-        public ICollection<MangoCard> MangoCards { get; set; }
+        public ICollection<CardTemplate> CardTemplates { get; set; }
         public ICollection<Order> Orders { get; set; }
     }
 }

@@ -9,7 +9,6 @@ namespace Mango_Cards.Web.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<CardTypeModel> SubCardTypeModels { get; set; }
-        public List<MangoCardModel> MangoCardModels { get; set; }
+        public CardTemplateModel[] CardTemplateModels { get; set; }
     }
 }

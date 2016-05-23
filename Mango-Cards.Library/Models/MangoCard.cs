@@ -11,23 +11,19 @@ namespace Mango_Cards.Library.Models
         public Guid Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public Guid? FromMangoCardId { get; set; }
-        [ForeignKey("FromMangoCardId")]
-        public virtual MangoCard FromMangoCard { get; set; }
+        public Guid? CardTemplateId { get; set; }
+        [ForeignKey("CardTemplateId")]
+        public virtual CardTemplate CardTemplate { get; set; }
         public virtual ICollection<Field> Fields { get; set; }
         /// <summary>
         /// 页面收集到的数据
         /// </summary>
-        public virtual ICollection<PageValue> PageValues { get; set; } 
-        /// <summary>
-        /// 页面类型
-        /// </summary>
-        public virtual PageType PageType { get; set; }
+        public virtual ICollection<PageValue> PageValues { get; set; }
         /// <summary>
         /// share出去的缩略图
         /// </summary>
         public string ThumbnailUrl { get; set; }
-        public virtual CardType CardType { get; set; }
+        
         /// <summary>
         /// 持有人
         /// </summary>
@@ -45,8 +41,6 @@ namespace Mango_Cards.Library.Models
         /// 分享次数
         /// </summary>
         public virtual ICollection<ShareTime> ShareTimes { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
-
         public DateTime? UpdateTime { get; set; }
         public DateTime CreatedTime { get; set; }
         public bool IsDeleted { get; set; }

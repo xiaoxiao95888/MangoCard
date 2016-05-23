@@ -37,7 +37,7 @@ namespace Mango_Cards.Web.Controllers.API
                 return new
                 {
                     CardTitle = card.Title,
-                    CardType = card.CardType.Name,
+                    CardType = card.CardTemplate.CardType.Name,
                     PvDataCount = card.PvDatas.Count == 0 ? "-" : card.PvDatas.Count.ToString(),
                     ShareTimeCount = card.ShareTimes.Count == 0 ? "-" : card.ShareTimes.Count.ToString()
                 };

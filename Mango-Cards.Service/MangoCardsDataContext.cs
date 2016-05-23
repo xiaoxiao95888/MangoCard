@@ -8,6 +8,7 @@ namespace Mango_Cards.Service
 {
     public class MangoCardsDataContext : DbContext, IDataContext
     {
+        public IDbSet<CardTemplate> CardTemplates { get; set; }
         public IDbSet<MediaType> MediaTypes { get; set; }
         public IDbSet<Media> Mediae { get; set; }
         public IDbSet<Company> Companies { get; set; }

@@ -22,10 +22,11 @@ namespace Mango_Cards.Web.MapperHelper
         {
             Mapper.CreateMap<Field, FieldModel>().ForMember(n => n.FieldType, opt => opt.MapFrom(src => src.FieldType));
             Mapper.CreateMap<MangoCard, MangoCardModel>()
-                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
+                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardTemplate.CardType.Id))
                 .ForMember(n => n.FieldModels, opt => opt.MapFrom(src => src.Fields))
-                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
+                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardTemplate.CardType.Id))
                 .ForMember(n => n.ThumbnailUrl, opt => opt.MapFrom(src => _cardThumbnailPath + src.ThumbnailUrl));
+
         }
     }
 }

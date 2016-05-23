@@ -6,5 +6,6 @@ namespace Mango_Cards.Web.MapperHelper
     {
         IMangoCardMapper GetMangoCardMapper();
         ICardTypeMapper GetCardTypeMapper();
+        ICardTemplateMapper GetCardTemplateMapper();
     }
 }

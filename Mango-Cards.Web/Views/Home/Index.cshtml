@@ -23,7 +23,7 @@
             <li><a href="#" data-bind="click:Home.viewModel.filters,css:(Home.viewModel.typetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
             <!-- ko foreach:viewModel.cardTypes -->
             <li>
-                <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Home.viewModel.filters,css:(Home.viewModel.typetoshow()==('.'+Id())?'active':'')"></a>
+                <a href="#" data-bind="text:Name,attr:{'data-filter':Id()},click:Home.viewModel.filters,css:(Home.viewModel.typetoshow()==(Id())?'active':'')"></a>
             </li>
             <!-- /ko -->
         </ul>

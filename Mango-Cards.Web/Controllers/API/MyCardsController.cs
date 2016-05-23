@@ -27,10 +27,9 @@ namespace Mango_Cards.Web.Controllers.API
         public object Get()
         {
             var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
-            
             return
                 wechatuser.MangoCards.Where(n => !n.IsDeleted)
-                    .GroupBy(n => n.CardType)
+                    .GroupBy(n => n.CardTemplate.CardType)
                     .Select(n => new MangoCardTypeModel
                     {
                         Id = n.Key.Id,
@@ -47,6 +46,8 @@ namespace Mango_Cards.Web.Controllers.API
             {
                 var model = Mapper.Map<MangoCard, MangoCardModel>(card);
                 model.PageHtmlCode = card.HtmlCode;
+                model.Instructions = card.CardTemplate.Instructions;
+                model.Url = "http://" + HttpContext.Current.Request.Url.Host + "/Cards/View/" + model.Id;
                 return model;
             }
             return null;

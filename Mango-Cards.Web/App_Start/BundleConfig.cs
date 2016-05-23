@@ -77,12 +77,14 @@ namespace Mango_Cards.Web
                 "~/Scripts/mode/css/css.js",
                 "~/Scripts/mode/xml/xml.js",
                 "~/Scripts/mode/htmlmixed/htmlmixed.js",
-                "~/Scripts/JS/Cards.js"));
+                "~/Scripts/JS/Cards.js",
+                "~/Scripts/jquery.qrcode.js",
+                "~/Scripts/qrcode.js"));
             //Cards
             bundles.Add(new StyleBundle("~/Content/Cards").Include(
                 "~/Content/codemirror.css",
                 "~/Content/theme/ambiance.css",
-                 "~/Content/card.css"
+                "~/Content/card.css"
                 ));
 
         }

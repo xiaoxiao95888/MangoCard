@@ -33,6 +33,7 @@ namespace Mango_Cards.Web
             container.RegisterType<IMangoCardService, MangoCardService>();
             container.RegisterType<IMediaService, MediaService>();
             container.RegisterType<IMediaTypeService, MediaTypeService>();
+            container.RegisterType<ICardTemplateService, CardTemplateService>();
             #region mapper inject
             container.RegisterType<IMapperFactory, MapperFactory>();
             #endregion

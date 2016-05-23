@@ -39,7 +39,7 @@ namespace Mango_Cards.Web.Controllers.API
                         field.FieldValue = fieldmodel.FieldValue;
                     }
                 }
-                var html = Engine.Razor.RunCompile(card.FromMangoCard.HtmlCode, card.Id.ToString(),
+                var html = Engine.Razor.RunCompile(card.CardTemplate.HtmlCode, card.Id.ToString(),
                     model.GetType(), model);
                 try
                 {

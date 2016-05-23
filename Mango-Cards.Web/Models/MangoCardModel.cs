@@ -50,9 +50,17 @@ namespace Mango_Cards.Web.Models
 
         public string PageHtmlCode { get; set; }
         /// <summary>
+        /// 说明文档
+        /// </summary>
+        public string Instructions { get; set; }
+        /// <summary>
         /// 是否发布
         /// </summary>
         public bool IsPublish { get; set; }
+        /// <summary>
+        /// 浏览的URL
+        /// </summary>
+        public string Url { get; set; }
         /// <summary>
         /// 浏览量
         /// </summary>

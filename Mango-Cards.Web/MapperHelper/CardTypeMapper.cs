@@ -15,8 +15,7 @@ namespace Mango_Cards.Web.MapperHelper
         public void Create()
         {
             Mapper.CreateMap<CardType, CardTypeModel>()
-                .ForMember(n => n.MangoCardModels,
-                    opt => opt.MapFrom(src => src.MangoCards.Where(m => m.PageType == PageType.Demo)));
+                .ForMember(n => n.CardTemplateModels, opt => opt.MapFrom(src => src.CardTemplates));
         }
     }
 }
