@@ -10,6 +10,7 @@
             PageHtmlCode: ko.observable(),
             Instructions: ko.observable(),
             Url: ko.observable(),
+            PayUrl: ko.observable(),
             FieldModels: ko.observableArray(),
             //PvCount: ko.observable(),
             //ShareTimeCount: ko.observable(),
@@ -235,6 +236,10 @@ Cards.viewModel.normalsave = function (data, event) {
         }
     });
 };
+//发布
+Cards.viewModel.submitaudit=function() {
+    
+}
 //点击显示数据
 Cards.viewModel.data = function () {
     var model = ko.toJS(this);
@@ -291,7 +296,6 @@ Cards.viewModel.mycards = ko.computed(function () {
     });
     return demos;
 });
-
 Cards.viewModel.filters = function (data, event) {
     var dom = $(event.target);
     var filterValue = dom.attr("data-filter");
@@ -491,7 +495,6 @@ function uploadComplete(evt) {
     }
 
 }
-
 function uploadFailed(evt) {
     alert("There was an error attempting to upload the file.");
 }

@@ -62,6 +62,10 @@ namespace Mango_Cards.Web.Models
         /// </summary>
         public string Url { get; set; }
         /// <summary>
+        /// 支付URL
+        /// </summary>
+        public string PayUrl { get; set; }
+        /// <summary>
         /// 浏览量
         /// </summary>
         public PvDataModel[] PvDataModels { get; set; }
