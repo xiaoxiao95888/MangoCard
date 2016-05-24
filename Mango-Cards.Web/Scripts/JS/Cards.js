@@ -237,8 +237,13 @@ Cards.viewModel.normalsave = function (data, event) {
     });
 };
 //发布
-Cards.viewModel.submitaudit=function() {
-    
+Cards.viewModel.submitaudit=function() {   
+    var dialog = $("#publish-dialog");
+    dialog.modal({
+        keyboard: false,
+        show: true,
+        backdrop: "static"
+    });
 }
 //点击显示数据
 Cards.viewModel.data = function () {
@@ -339,6 +344,20 @@ ko.bindingHandlers.qrbind = {
         var data = ko.toJS(Cards.viewModel.selectedcardUrl);
         if (data != null&& data.Url!=null) {
             $(element).qrcode(data.Url);
+        }
+
+    }
+};
+ko.bindingHandlers.payqrbind = {
+    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        // This will be called when the binding is first applied to an element
+        // Set up any initial state, event handlers, etc. here
+    },
+    update: function (element, valueAccessor) {
+        $(element).empty();
+        var data = ko.toJS(Cards.viewModel.selectedcard);
+        if (data != null && data.PayUrl != null) {
+            $(element).qrcode(data.PayUrl);
         }
 
     }

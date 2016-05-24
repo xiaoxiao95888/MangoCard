@@ -83,5 +83,18 @@ namespace Mango_Cards.Web.Infrastructure
             var sign = GetMd5(signkey, "utf-8");
             return sign;
         }
+        // <summary>
+        /// post数据到指定接口并返回数据
+        /// </summary>
+        public static string PostXmlToUrl(string url, string postData)
+        {
+            string returnmsg = "";
+            using (System.Net.WebClient wc = new System.Net.WebClient())
+            {
+                wc.Encoding = System.Text.Encoding.UTF8;
+                returnmsg = wc.UploadString(url, "POST", postData);
+            }
+            return returnmsg;
+        }
     }
 }
