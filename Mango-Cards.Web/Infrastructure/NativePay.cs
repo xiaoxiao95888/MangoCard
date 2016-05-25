@@ -48,7 +48,7 @@ namespace Mango_Cards.Web.Infrastructure
             data.SetValue("time_start", DateTime.Now.ToString("yyyyMMddHHmmss"));//交易起始时间
             data.SetValue("time_expire", DateTime.Now.AddMinutes(10).ToString("yyyyMMddHHmmss"));//交易结束时间
             data.SetValue("goods_tag", "jjj");//商品标记
-            data.SetValue("trade_type", "native");//交易类型
+            data.SetValue("trade_type", "NATIVE");//交易类型
             data.SetValue("product_id", productId);//商品ID
 
             var result = WxPayApi.UnifiedOrder(data);//调用统一下单接口
