@@ -43,58 +43,5 @@ namespace Mango_Cards.Web.Infrastructure
             }
             return str;
         }
-
-        /** 获取大写的MD5签名结果 */
-        public static string GetMd5(string encypStr, string charset)
-        {
-            var m5 = new MD5CryptoServiceProvider();
-            //创建md5对象
-            byte[] inputBye;
-            //使用GB2312编码方式把字符串转化为字节数组．
-            try
-            {
-                inputBye = Encoding.GetEncoding(charset).GetBytes(encypStr);
-            }
-            catch (Exception)
-            {
-                inputBye = Encoding.GetEncoding("GB2312").GetBytes(encypStr);
-            }
-            var outputBye = m5.ComputeHash(inputBye);
-            var retStr = BitConverter.ToString(outputBye);
-            retStr = retStr.Replace("-", "").ToUpper();
-            return retStr;
-        }
-
-        /// <summary>
-        /// 获取微信签名
-        /// </summary>
-        /// <param name="sParams"></param>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public static string Getsign(SortedDictionary<string, string> sParams, string key)
-        {
-            var sb = new StringBuilder();
-            foreach (var temp in sParams.Where(temp => !string.IsNullOrEmpty(temp.Value) && temp.Key.ToLower() != "sign"))
-            {
-                sb.Append(temp.Key.Trim() + "=" + temp.Value.Trim() + "&");
-            }
-            sb.Append("key=" + key.Trim() + "");
-            var signkey = sb.ToString();
-            var sign = GetMd5(signkey, "utf-8");
-            return sign;
-        }
-        // <summary>
-        /// post数据到指定接口并返回数据
-        /// </summary>
-        public static string PostXmlToUrl(string url, string postData)
-        {
-            string returnmsg = "";
-            using (System.Net.WebClient wc = new System.Net.WebClient())
-            {
-                wc.Encoding = System.Text.Encoding.UTF8;
-                returnmsg = wc.UploadString(url, "POST", postData);
-            }
-            return returnmsg;
-        }
     }
 }
