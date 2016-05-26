@@ -18,7 +18,7 @@ namespace Mango_Cards.Web.Infrastructure
         */
         public const string Appid = "wx990c1d301ce34a46";
         public const string Mchid = "1259992201";
-        public const string Key = "U1WD49KOM26TB7HPF3R8LZQXSAEVIY5J0CNG";
+        public const string Key = "JAN5I2BP4TSMUFL91ZROE7C3VXQG8DH0";
         public const string Appsecret = "b8bf5fc74c548a1e13d178baaf0071df";
 
         //=======【证书路径设置】===================================== 

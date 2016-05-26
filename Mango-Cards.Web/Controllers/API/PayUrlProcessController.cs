@@ -19,7 +19,7 @@ namespace Mango_Cards.Web.Controllers.API
         /// <returns></returns>
         public object Get(Guid id)
         {
-            var apikey = "U1WD49KOM26TB7HPF3R8LZQXSAEVIY5J0CNG";
+            var apikey = "JAN5I2BP4TSMUFL91ZROE7C3VXQG8DH0";
             var nativePay = new NativePay();
             //生成扫码支付模式二url
             var codeUrl = nativePay.GetPayUrl("123456789");

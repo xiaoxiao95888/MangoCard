@@ -47,7 +47,7 @@ namespace Mango_Cards.Web.Infrastructure
             data.SetValue("total_fee", 1);//总金额
             data.SetValue("time_start", DateTime.Now.ToString("yyyyMMddHHmmss"));//交易起始时间
             data.SetValue("time_expire", DateTime.Now.AddMinutes(10).ToString("yyyyMMddHHmmss"));//交易结束时间
-            data.SetValue("goods_tag", "jjj");//商品标记
+            //data.SetValue("goods_tag", "jjj");//商品标记
             data.SetValue("trade_type", "NATIVE");//交易类型
             data.SetValue("product_id", productId);//商品ID
 
