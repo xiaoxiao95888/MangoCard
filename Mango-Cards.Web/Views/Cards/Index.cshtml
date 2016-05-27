@@ -60,10 +60,10 @@
         </div>
         <ul class="nav nav-tabs">
             <li class="active" role="presentation">
-                <a href="#" data-bind="click:Cards.viewModel.tab" id="normallink">简单模式</a>
+                <a href="#" data-bind="click:Cards.viewModel.tab" id="normallink">普通模式</a>
             </li>
             <li role="presentation">
-                <a href="#" data-bind="click:Cards.viewModel.tab" id="advancedlink">高级模式</a>
+                <a href="#" data-bind="click:Cards.viewModel.tab" id="advancedlink">代码模式</a>
             </li>
         </ul>
         <!--普通编辑模式 -->
@@ -71,7 +71,7 @@
             <div class="text-center" style="height: 200px; line-height: 200px" data-bind="visible:viewModel.selectedcard.FieldModels().length==0">
                 没有需要自定义的属性
             </div>
-            <div class="form-horizontal col-md-6 scrollspy-example" data-bind="visible:viewModel.selectedcard.FieldModels().length!=0">
+            <div class="form-horizontal col-md-6 scrollspy-example" data-bind="if:viewModel.selectedcard.FieldModels().length!=0">
                 <!-- ko foreach:viewModel.selectedcard.FieldModels -->
                 <div class="form-group">
                     <label class="col-sm-3 control-label">
@@ -84,9 +84,11 @@
                     </label>
                     <div class="col-sm-9" style="max-width:250px">
                         <div class="input-group">
-                            <input type="text" class="form-control" data-bind="value:FieldValue">
-                            <span class="input-group-addon" data-bind="text:FieldTypeName"></span>
+                            <input type="text" class="form-control" data-bind="value:FieldValue,visible:(FieldType()==0 ||FieldType()==1) " />
+                            <span class="input-group-addon" data-bind="text:FieldTypeName,visible:(FieldType()==0||FieldType()==1||FieldType()==4)"></span>
                         </div>
+                        <input type="file" data-bind="visible:FieldType()==3" />
+                        <textarea class="form-control" rows="3" data-bind="value:FieldValue,visible:FieldType()==2"></textarea>
                     </div>
                 </div>
                 <!-- /ko -->

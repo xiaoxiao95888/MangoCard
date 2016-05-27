@@ -62,7 +62,7 @@ namespace Mango_Cards.Web.Controllers.API
                 //var identity = new CustomIdentity(wechartuser);
                 //var principal = new CustomPrincipal(identity);
                 //HttpContext.Current.User = principal;
-                FormsAuthentication.SetAuthCookie(log.WeChatUser.Id.ToString(), false);}
+                FormsAuthentication.SetAuthCookie(log.WeChatUser.Id.ToString(), true);}
             return Json(model, JsonRequestBehavior.AllowGet);
         }
     }

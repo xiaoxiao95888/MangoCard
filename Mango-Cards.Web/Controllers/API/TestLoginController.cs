@@ -28,7 +28,7 @@ namespace Mango_Cards.Web.Controllers.API
             //var identity = new CustomIdentity(wechartuser);
             //var principal = new CustomPrincipal(identity);
             //HttpContext.Current.User = principal;
-            FormsAuthentication.SetAuthCookie(wechartuser.Id.ToString(), false);
+            FormsAuthentication.SetAuthCookie(wechartuser.Id.ToString(), true);
             return Success();
         }
     }
