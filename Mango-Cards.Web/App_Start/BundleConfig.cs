@@ -79,7 +79,8 @@ namespace Mango_Cards.Web
                 "~/Scripts/mode/htmlmixed/htmlmixed.js",
                 "~/Scripts/JS/Cards.js",
                 "~/Scripts/jquery.qrcode.js",
-                "~/Scripts/qrcode.js"));
+                "~/Scripts/qrcode.js",
+                "~/Scripts/JS/UploadPlug.js"));
             //Cards
             bundles.Add(new StyleBundle("~/Content/Cards").Include(
                 "~/Content/codemirror.css",

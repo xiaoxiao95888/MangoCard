@@ -461,11 +461,12 @@ Cards.viewModel.tab = function (data, event) {
         $("#editnormal").show();
     }
 };
+//HTML5上传
 Cards.viewModel.fileselected = function () {
     var file = document.getElementById("file").files[0];
     if (file != null) {
         Cards.viewModel.file.Name(file.name);
-        if (file.size > 5120000) {
+        if (file.size > 5242880) {
             Cards.viewModel.file.Verify(false);
             Cards.viewModel.file.UploadProgress(false);
         } else {
@@ -522,7 +523,7 @@ function uploadCanceled(evt) {
 }
 $(function () {
     ko.applyBindings(Cards);
-
+    //UploadPlug.age = "dsadsa";
     $.get("/api/WeChatUser/", function (wechatuser) {
         if (wechatuser != null) {
             ko.mapping.fromJS(wechatuser, {}, Cards.viewModel.wechatuser);

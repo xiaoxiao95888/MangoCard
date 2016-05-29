@@ -82,12 +82,26 @@
                             </a>
                         </span>
                     </label>
-                    <div class="col-sm-9" style="max-width:250px">
+                    <div class="col-sm-9" style="max-width:350px">
                         <div class="input-group">
                             <input type="text" class="form-control" data-bind="value:FieldValue,visible:(FieldType()==0 ||FieldType()==1) " />
                             <span class="input-group-addon" data-bind="text:FieldTypeName,visible:(FieldType()==0||FieldType()==1||FieldType()==4)"></span>
                         </div>
-                        <input type="file" data-bind="visible:FieldType()==3" />
+                        <div data-bind="visible:FieldType()==3">
+                            <p class="text-muted">
+                                大小不超过5M <span>
+                                    <a href="#" class="">
+                                        删除
+                                    </a>
+                                </span>
+                            </p>
+                            <div>
+                                <a href="#" class="btn btn-success">本地上传</a>
+                                <a href="#" class="btn btn-success">从素材库选择</a>
+                            </div>
+                        </div>
+
+                        @*<input type="file" data-bind="visible:FieldType()==3,event:{change:UploadPlug.uploadprocess}" />*@
                         <textarea class="form-control" rows="3" data-bind="value:FieldValue,visible:FieldType()==2"></textarea>
                     </div>
                 </div>

@@ -418,6 +418,7 @@
     <Content Include="Scripts\JS\login.js" />
     <Content Include="Scripts\JS\LoginConfirmation.js" />
     <Content Include="Scripts\JS\Main.js" />
+    <Content Include="Scripts\JS\UploadPlug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
