@@ -10,6 +10,7 @@ using System.Web.Http;
 using Mango_Cards.Library.Models;
 using Mango_Cards.Library.Services;
 using Mango_Cards.Web.Infrastructure.Filters;
+using Mango_Cards.Web.Models;
 
 namespace Mango_Cards.Web.Controllers.API
 {
@@ -36,6 +37,7 @@ namespace Mango_Cards.Web.Controllers.API
                     Directory.CreateDirectory(uploadFilePath);
                 }
                 var fileNamePrefix = Guid.NewGuid().ToString();
+                var id = Guid.NewGuid();
                 if (file.ContentLength > 0)
                 {
                   
@@ -57,9 +59,10 @@ namespace Mango_Cards.Web.Controllers.API
                     var newFileName = fileNamePrefix + fileExtension;
                     fileFullPath = uploadFilePath + newFileName;
                     file.SaveAs(uploadFilePath + newFileName);
+                    
                     var media = new Media
                     {
-                        Id = Guid.NewGuid(),
+                        Id = id,
                         FileName = fileName,
                         ExtensionName = extension,
                         MediaTypeId = typeId,
@@ -68,7 +71,14 @@ namespace Mango_Cards.Web.Controllers.API
                     };
                     _mediaService.Insert(media);
                 }
-                return Success();
+                return new UploadResponseModel
+                {
+                    ErrorCode = 0,
+                    Message = "success",
+                    Error = false,
+                    FileId = id,
+                    OriginalFileName = file.FileName
+                };
             }
             catch (Exception ex)
             {

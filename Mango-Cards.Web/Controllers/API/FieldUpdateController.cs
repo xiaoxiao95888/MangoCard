@@ -36,7 +36,16 @@ namespace Mango_Cards.Web.Controllers.API
                 {
                     foreach (var fieldmodel in model.FieldModels.Where(fieldmodel => field.Id == fieldmodel.Id))
                     {
-                        field.FieldValue = fieldmodel.FieldValue;
+                        if (fieldmodel.MediaModel != null)
+                        {
+                            field.FieldValue = null;
+                            field.MediaId = fieldmodel.MediaModel.Id;
+                        }
+                        else
+                        {
+                            field.FieldValue = fieldmodel.FieldValue;
+                        }
+
                     }
                 }
                 var html = Engine.Razor.RunCompile(card.CardTemplate.HtmlCode, card.Id.ToString(),

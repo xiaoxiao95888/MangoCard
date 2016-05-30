@@ -202,7 +202,7 @@ Cards.viewModel.preview = function () {
             show: true,
             backdrop: "static"
         });
-       
+
     });
 }
 //普通编辑保存
@@ -237,7 +237,7 @@ Cards.viewModel.normalsave = function (data, event) {
     });
 };
 //发布
-Cards.viewModel.submitaudit=function() {   
+Cards.viewModel.submitaudit = function () {
     var dialog = $("#publish-dialog");
     dialog.modal({
         keyboard: false,
@@ -342,7 +342,7 @@ ko.bindingHandlers.qrbind = {
     update: function (element, valueAccessor) {
         $(element).empty();
         var data = ko.toJS(Cards.viewModel.selectedcardUrl);
-        if (data != null&& data.Url!=null) {
+        if (data != null && data.Url != null) {
             $(element).qrcode(data.Url);
         }
 
@@ -485,6 +485,33 @@ Cards.viewModel.fileselected = function () {
 
     }
 };
+Cards.viewModel.UploadMaterial = function (data, event) {
+    var dom = $(event.target);
+    dom.next().click();
+}
+//删除上传
+Cards.viewModel.RemoveUpload = function () {
+    var kodata = this;
+    var selectedmedia = ko.mapping.toJS(this);
+    Helper.ShowConfirmationDialog({
+        message: "是否确认删除?",
+        confirmFunction: function () {
+            $.ajax({
+                type: "delete",
+                url: "/api/Media/" + selectedmedia.MediaModel.Id,
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    if (data.Error) {
+                        Helper.ShowErrorDialog(data.Message);
+                    } else {
+                        kodata.MediaModel.Id(null);
+                    }
+                }
+            });
+        }
+    });
+}
 function uploadProgress(evt) {
     if (evt.lengthComputable) {
         var percentComplete = Math.round(evt.loaded * 100 / evt.total);

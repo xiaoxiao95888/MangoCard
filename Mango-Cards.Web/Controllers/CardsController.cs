@@ -31,7 +31,12 @@ namespace Mango_Cards.Web.Controllers
         public ActionResult View(Guid id)
         {
             var card = _mangoCardService.GetMangoCard(id);
-            Mapper.CreateMap<Field, FieldModel>().ForMember(n => n.FieldType, opt => opt.MapFrom(src => src.FieldType));
+            var uploadFileUrl = ConfigurationManager.AppSettings["UploadFileUrl"] + card.WeChatUser.Id + "/";
+            Mapper.CreateMap<Media, MediaModel>()
+                .ForMember(n => n.Url, opt => opt.MapFrom(src => uploadFileUrl + src.Name));
+            Mapper.CreateMap<Field, FieldModel>()
+                .ForMember(n => n.FieldType, opt => opt.MapFrom(src => src.FieldType))
+                .ForMember(n => n.MediaModel, opt => opt.MapFrom(src => src.Media));
             Mapper.CreateMap<MangoCard, MangoCardModel>()
                 .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardTemplate.Id))
                 .ForMember(n => n.FieldModels, opt => opt.MapFrom(src => src.Fields));
@@ -46,7 +51,7 @@ namespace Mango_Cards.Web.Controllers
         }
         //用来缩短预览二维码长度并且跳转到正常的微信网址
         public ActionResult RedirectCardView(Guid id)
-        {           
+        {
             var state = Helper.GenerateId();
             var backUrl = "http://" + HttpContext.Request.Url.Host + Url.Action("View", "Cards", new { id = id });
             var url =

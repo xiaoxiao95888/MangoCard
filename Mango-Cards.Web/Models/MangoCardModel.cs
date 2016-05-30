@@ -40,7 +40,7 @@ namespace Mango_Cards.Web.Models
                     var dict = (System.Collections.Generic.IDictionary<String, Object>)customer;
                     foreach (var item in FieldModels)
                     {
-                        dict.Add(item.Name, item.FieldValue);
+                        dict.Add(item.Name, item.MediaModel != null ? item.MediaModel.Url : item.FieldValue);
                     }
                     return customer;
                 }

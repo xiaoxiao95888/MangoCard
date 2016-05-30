@@ -88,20 +88,24 @@
                             <span class="input-group-addon" data-bind="text:FieldTypeName,visible:(FieldType()==0||FieldType()==1||FieldType()==4)"></span>
                         </div>
                         <div data-bind="visible:FieldType()==3">
-                            <p class="text-muted">
-                                大小不超过5M <span>
-                                    <a href="#" class="">
+                            <p class="text-muted" data-bind="visible:FieldValue()!=null">
+                                <span>大小不超过5M</span>
+                                <span></span>
+                                <span style="display: none">
+                                    <a href="#" data-bind="click:Cards.viewModel.RemoveUpload">
                                         删除
                                     </a>
                                 </span>
                             </p>
-                            <div>
-                                <a href="#" class="btn btn-success">本地上传</a>
-                                <a href="#" class="btn btn-success">从素材库选择</a>
+                            <div class="progress" style="display: none">
+                                <div class="progress-bar progress-bar-striped active" role="progressbar" style="min-width: 2em;width: 0%;">
+                                    <span></span>
+                                </div>
                             </div>
+                            <a href="#" class="btn btn-success" data-bind="click:Cards.viewModel.UploadMaterial">本地上传</a>
+                            <input style="display: none" type="file" data-bind="event:{change:UploadPlug.uploadprocess}" />
+                            <a href="#" class="btn btn-success">从素材库选择</a>
                         </div>
-
-                        @*<input type="file" data-bind="visible:FieldType()==3,event:{change:UploadPlug.uploadprocess}" />*@
                         <textarea class="form-control" rows="3" data-bind="value:FieldValue,visible:FieldType()==2"></textarea>
                     </div>
                 </div>
