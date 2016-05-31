@@ -24,6 +24,27 @@ body {
     width: 225px;
 }
 
+.menu_item {
+    line-height: 34px;
+}
+
+    .menu_item a {
+        text-decoration: none !important;
+        color: #666;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: auto;
+        word-wrap: normal;
+    }
+     .menu_item a:hover {
+        background-color:#e5e5e5;
+    }
+     .menu_item_selected {
+         background-color:#e5e5e5;
+     }
+
 .video-layout {
     border-radius: 4px;
     box-shadow: 0 0 10px #ccc;

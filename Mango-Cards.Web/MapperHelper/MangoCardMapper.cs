@@ -23,8 +23,21 @@ namespace Mango_Cards.Web.MapperHelper
         {
             var userId = HttpContext.Current.User.Identity.GetUser().Id;
             var uploadFileUrl = ConfigurationManager.AppSettings["UploadFileUrl"] + userId + "/";
+            var cssThumbnailUrl = "/images/css.png";
+            var jsThumbnailUrl = "/images/js.png";
+            var fileThumbnailUrl = "/images/file.png";
             Mapper.CreateMap<Media, MediaModel>()
-                .ForMember(n => n.Url, opt => opt.MapFrom(src => uploadFileUrl + src.Name));
+                .ForMember(n => n.Url, opt => opt.MapFrom(src => uploadFileUrl + src.Name))
+                .ForMember(n => n.ThumbnailUrl,
+                    opt =>
+                        opt.MapFrom(
+                            src =>
+                                src.MediaType.Name == "图片"
+                                    ? (uploadFileUrl + src.Name)
+                                    : (src.MediaType.Name == "CSS"
+                                        ? cssThumbnailUrl
+                                        : (src.MediaType.Name == "JS" ? jsThumbnailUrl : fileThumbnailUrl))));
+            ;
             Mapper.CreateMap<Field, FieldModel>()
                 .ForMember(n => n.FieldType, opt => opt.MapFrom(src => src.FieldType))
                 .ForMember(n => n.MediaModel, opt => opt.MapFrom(src => src.Media));

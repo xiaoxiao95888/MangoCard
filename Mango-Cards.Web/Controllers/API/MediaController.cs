@@ -51,28 +51,6 @@ namespace Mango_Cards.Web.Controllers.API
             });
             return model;
         }
-
-        public object Get(string name)
-        {
-            var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
-            var uploadFileUrl = ConfigurationManager.AppSettings["UploadFileUrl"] + wechatuser.Id + "/";
-            var cssThumbnailUrl = "/images/css.png";
-            var jsThumbnailUrl = "/images/js.png";
-            var fileThumbnailUrl = "/images/file.png";
-            Mapper.CreateMap<Media, MediaModel>()
-                .ForMember(n => n.Url, opt => opt.MapFrom(src => uploadFileUrl + src.Name))
-                .ForMember(n => n.ThumbnailUrl,
-                    opt =>
-                        opt.MapFrom(
-                            src =>
-                                src.MediaType.Name == "图片"
-                                    ? (uploadFileUrl + src.Name)
-                                    : (src.MediaType.Name == "CSS"
-                                        ? cssThumbnailUrl
-                                        : (src.MediaType.Name == "JS" ? jsThumbnailUrl : fileThumbnailUrl))));
-            var model = wechatuser.Mediae.FirstOrDefault(n => n.IsDeleted == false && n.Name == name);
-            return Mapper.Map<Media, MediaModel>(model);
-        }
         public object Delete(Guid id)
         {
             var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);

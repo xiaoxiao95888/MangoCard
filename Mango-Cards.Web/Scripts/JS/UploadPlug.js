@@ -17,12 +17,14 @@
                 var fd = new FormData();
                 fd.append("file", file);
                 var xhr = new XMLHttpRequest();
-                xhr.addEventListener("progress", uploadProgress, false);
+                xhr.upload.addEventListener("progress", uploadProgress, false);
                 xhr.addEventListener("load", uploadComplete, false);
                 xhr.addEventListener("error", uploadFailed, false);
                 xhr.addEventListener("abort", uploadCanceled, false);
                 xhr.open("POST", "/Api/Upload");
                 xhr.send(fd);
+            } else {
+                Helper.ShowErrorDialog("文件大小超出限制");
             }
         }
     }
@@ -49,7 +51,8 @@ function uploadComplete(evt) {
         $(UploadPlug.p.children("span")[0]).hide();
         $(UploadPlug.p.children("span")[1]).text(result.OriginalFileName);
         $(UploadPlug.p.children("span")[2]).show();
-        UploadPlug.obj.MediaModel.Id(result.FileId);
+       
+        UploadPlug.obj.MediaModel = { Id: result.FileId };
     } else {
 
     }

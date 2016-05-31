@@ -156,6 +156,10 @@ Cards.viewModel.edit = function () {
         }, 600);
     });
 };
+//显示素材库
+Cards.viewModel.showlibrary = function() {
+    $("#library-dialog").modal({ show: true, backdrop:"static" });
+};
 //高级编辑保存
 Cards.viewModel.advancedsave = function (data, event) {
     var dom = $(event.target);
@@ -490,8 +494,9 @@ Cards.viewModel.UploadMaterial = function (data, event) {
     dom.next().click();
 }
 //删除上传
-Cards.viewModel.RemoveUpload = function () {
-    var kodata = this;
+Cards.viewModel.RemoveUpload = function (data, event) {
+    var dom = $(event.target);
+    var kodata = data;
     var selectedmedia = ko.mapping.toJS(this);
     Helper.ShowConfirmationDialog({
         message: "是否确认删除?",
@@ -505,7 +510,10 @@ Cards.viewModel.RemoveUpload = function () {
                     if (data.Error) {
                         Helper.ShowErrorDialog(data.Message);
                     } else {
-                        kodata.MediaModel.Id(null);
+                        kodata.MediaModel = null;
+                        dom.parent().prev().prev().show();
+                        dom.parent().prev().text("");
+                        dom.parent().hide();
                     }
                 }
             });
@@ -550,7 +558,6 @@ function uploadCanceled(evt) {
 }
 $(function () {
     ko.applyBindings(Cards);
-    //UploadPlug.age = "dsadsa";
     $.get("/api/WeChatUser/", function (wechatuser) {
         if (wechatuser != null) {
             ko.mapping.fromJS(wechatuser, {}, Cards.viewModel.wechatuser);
