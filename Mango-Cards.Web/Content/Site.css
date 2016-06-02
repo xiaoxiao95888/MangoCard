@@ -38,12 +38,20 @@ body {
         width: auto;
         word-wrap: normal;
     }
-     .menu_item a:hover {
-        background-color:#e5e5e5;
+
+        .menu_item a:hover {
+            background-color: #e5e5e5;
+        }
+
+.menu_item_active {
+    background-color: #333333;
+    color: #fff !important;
+}
+
+    .menu_item_active:hover {
+        background-color: #333333 !important;
+        color: #fff !important;
     }
-     .menu_item_selected {
-         background-color:#e5e5e5;
-     }
 
 .video-layout {
     border-radius: 4px;

@@ -32,6 +32,7 @@ namespace Mango_Cards.Library.Models
         public string ExtensionName { get; set; }
         [ForeignKey("MediaTypeId")]
         public virtual MediaType MediaType { get; set; }
+        public virtual ICollection<Field> Fields { get; set; }
         public DateTime? UpdateTime { get; set; }
         public DateTime CreatedTime { get; set; }
         public bool IsDeleted { get; set; }

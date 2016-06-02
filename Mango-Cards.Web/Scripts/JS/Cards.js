@@ -13,6 +13,7 @@
             Instructions: ko.observable(),
             FieldModels: ko.observableArray()
         },
+        MediaeType: ko.observable(),
         wechatuser: {
             Id: ko.observable(),
             NickName: ko.observable(),
@@ -151,6 +152,7 @@ Cards.viewModel.edit = function () {
 };
 //显示素材库
 Cards.viewModel.showlibrary = function () {
+    Cards.viewModel.MediaeType(null);
     $("#library-dialog").modal({ show: true, backdrop: "static" });
     $.get("/api/Media/", function (data) {
         ko.mapping.fromJS(data, {}, Cards.viewModel.medias);
@@ -164,11 +166,12 @@ Cards.viewModel.showlibrary = function () {
 //过滤素材
 Cards.viewModel.libraryFilter = function () {
     var model = ko.mapping.toJS(this);
-    var url = "/api/Media";
-    if (model != null) {
-        url = url +"?MediaTypeId="+ model.Id;
-    }
-    $.get(url, function (data) {
+    if (model.Id == null) {
+        Cards.viewModel.MediaeType(null);
+    } else {
+        Cards.viewModel.MediaeType(model);
+    }   
+    $.get("/api/Media", { MediaTypeId: model.Id }, function (data) {
         ko.mapping.fromJS(data, {}, Cards.viewModel.medias);
 
     });

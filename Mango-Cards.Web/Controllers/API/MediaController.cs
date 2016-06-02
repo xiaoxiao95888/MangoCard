@@ -46,9 +46,17 @@ namespace Mango_Cards.Web.Controllers.API
             var medid = wechatuser.Mediae.FirstOrDefault(n => n.IsDeleted == false && n.Id == id);
             if (medid != null)
             {
+                medid.Fields.Clear();               
                 _mediaService.Delete(id);
                 var fileFullPath = ConfigurationManager.AppSettings["UploadFilePath"] + wechatuser.Id + @"\" + medid.Name;
-                System.IO.File.Delete(fileFullPath);
+                try
+                {
+                    System.IO.File.Delete(fileFullPath);
+                }
+                catch
+                {
+
+                }
                 return Success();
             }
             return Failed("删除失败");

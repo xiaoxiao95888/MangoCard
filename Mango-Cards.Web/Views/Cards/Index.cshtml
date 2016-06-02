@@ -321,9 +321,9 @@
                 <div class="row">
                     <div style="position: relative; width: 16%; max-width: 240px; float: left; height: 450px; border-right: 1px solid #e5e5e5;">
                         <dl>
-                            <dd class="menu_item"><a href="#" data-bind="click:Cards.viewModel.libraryFilter">全部</a></dd>
+                            <dd class="menu_item"><a href="#" data-bind="click:Cards.viewModel.libraryFilter,css:{ menu_item_active: Cards.viewModel.MediaeType()== null}">全部</a></dd>
                             <!-- ko foreach:viewModel.mediaetypes -->
-                            <dd class="menu_item"><a href="#" data-bind="text:Name,click:Cards.viewModel.libraryFilter"></a></dd>
+                            <dd class="menu_item"><a href="#" data-bind="text:Name,click:Cards.viewModel.libraryFilter,css:{ menu_item_active: Cards.viewModel.MediaeType()!= null && Cards.viewModel.MediaeType().Id==Id()}"></a></dd>
                             <!-- /ko -->
                            
                         </dl>
@@ -332,7 +332,7 @@
                         <!-- ko foreach:viewModel.medias -->
                             <div class="thumbnail" style="width: 165px; float: left;  margin-left: 5px;margin-right: 5px;">
                                 <img style="width: 115px; height: 116px" data-bind="nailthumb:{url:ThumbnailUrl()}" />
-                                <div class="caption ">
+                                <div class="caption">
                                     <div class="text-center">
                                         <input class="text-center" style="width: 130px; border: 0; margin-bottom: 10px" data-bind="value:FileName" />
                                     </div>
