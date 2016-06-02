@@ -225,8 +225,8 @@ Cards.viewModel.preview = function () {
 //普通编辑保存
 Cards.viewModel.normalsave = function (data, event) {
     var dom = $(event.target);
-    dom.find("span").hide();
-    dom.find("i").removeClass("hide");
+    dom.hide();
+    dom.next().removeClass("hide");
     var model = ko.mapping.toJS(Cards.viewModel.MangoCardAttribute);
     $.ajax({
         type: "put",
@@ -245,8 +245,8 @@ Cards.viewModel.normalsave = function (data, event) {
                     show: true,
                     backdrop: "static"
                 });
-                dom.find("span").show();
-                dom.find("i").addClass("hide");
+                dom.show();
+                dom.next().addClass("hide");
             }
         }
     });
