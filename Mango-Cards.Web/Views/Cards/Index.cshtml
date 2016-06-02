@@ -321,10 +321,11 @@
                 <div class="row">
                     <div style="position: relative; width: 16%; max-width: 240px; float: left; height: 450px; border-right: 1px solid #e5e5e5;">
                         <dl>
-                            <dd class="menu_item"><a href="#">dasdas</a></dd>
-                            <dd class="menu_item"><a href="#">dasdas</a></dd>
-                            <dd class="menu_item"><a href="#">dasdas</a></dd>
-                            <dd class="menu_item"><a href="#">dasdas</a></dd>
+                            <dd class="menu_item"><a href="#" data-bind="click:Cards.viewModel.libraryFilter">全部</a></dd>
+                            <!-- ko foreach:viewModel.mediaetypes -->
+                            <dd class="menu_item"><a href="#" data-bind="text:Name,click:Cards.viewModel.libraryFilter"></a></dd>
+                            <!-- /ko -->
+                           
                         </dl>
                     </div>
                     <div style="position: relative; width: 84%; float: left; height: 450px;overflow: auto;position: relative;">
@@ -339,7 +340,7 @@
                                         <small data-bind="date:UpdateTime"></small>
                                         <span style="float: right">
                                             <span class="btn-group btn-group-xs" role="group">
-                                                <a class="btn btn-default" data-bind="click:Cards.viewModel.copylink"><i class="fa fa-link"></i></a>
+                                                <a class="btn btn-default" data-bind="click:Cards.viewModel.copylink"  title="复制Url"><i class="fa fa-link"></i></a>
                                                 <button type="button" class="hide" data-bind="attr:{'data-clipboard-text':Url}"></button>
                                                 <button type="button" class="btn btn-default" data-bind="click:Cards.viewModel.delete" title="删除"><i class="fa fa-trash"></i></button>
                                             </span>

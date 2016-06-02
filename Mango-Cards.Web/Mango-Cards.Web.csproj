@@ -247,6 +247,7 @@
     <Compile Include="Controllers\API\LogOffController.cs" />
     <Compile Include="Controllers\API\MangoCardAttributeController.cs" />
     <Compile Include="Controllers\API\MediaController.cs" />
+    <Compile Include="Controllers\API\MediaeTypeController.cs" />
     <Compile Include="Controllers\API\MyCardsController.cs" />
     <Compile Include="Controllers\API\PageValueController.cs" />
     <Compile Include="Controllers\API\PayUrlProcessController.cs" />

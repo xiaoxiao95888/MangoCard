@@ -1,7 +1,7 @@
 ﻿var Cards = {
     viewModel: {
         mycardtypes: ko.observableArray(),
-        mymediaetypes: ko.observableArray(),
+        mediaetypes: ko.observableArray(),
         medias: ko.observableArray(),
         mediatypetoshow: ko.observable("*"),
         typetoshow: ko.observable("*"),
@@ -156,7 +156,23 @@ Cards.viewModel.showlibrary = function () {
         ko.mapping.fromJS(data, {}, Cards.viewModel.medias);
 
     });
+    $.get("/api/MediaeType/", function (data) {
+        ko.mapping.fromJS(data, {}, Cards.viewModel.mediaetypes);
+
+    });
 };
+//过滤素材
+Cards.viewModel.libraryFilter = function () {
+    var model = ko.mapping.toJS(this);
+    var url = "/api/Media";
+    if (model != null) {
+        url = url +"?MediaTypeId="+ model.Id;
+    }
+    $.get(url, function (data) {
+        ko.mapping.fromJS(data, {}, Cards.viewModel.medias);
+
+    });
+}
 //高级编辑保存
 Cards.viewModel.advancedsave = function (data, event) {
     var dom = $(event.target);

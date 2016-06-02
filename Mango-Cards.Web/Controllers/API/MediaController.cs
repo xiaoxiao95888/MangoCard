@@ -24,7 +24,7 @@ namespace Mango_Cards.Web.Controllers.API
         {
             _mediaService = mediaService;
             _weChatUserService = weChatUserService;
-            mapperFactory.GetMediaTypeMapper().Create();
+            mapperFactory.GetMediaMapper().Create();
         }
 
         public object Get()
