@@ -54,9 +54,9 @@
     <hr data-bind="visible:viewModel.mycards().length!=0" />
 </div>
 <div id="dataedit">
-    <div class="container" data-bind="visible:Cards.viewModel.selectedcard.Id()!=null">
+    <div class="container" data-bind="visible:Cards.viewModel.MangoCardAttribute.MangoCardId()!=null">
         <div class="row">
-            <h2 class="text-center title" data-bind="text:viewModel.selectedcard.Title">编辑</h2>
+            <h2 class="text-center title" data-bind="text:viewModel.MangoCardAttribute.MangoCardTitle">编辑</h2>
         </div>
         <ul class="nav nav-tabs">
             <li class="active" role="presentation">
@@ -68,11 +68,11 @@
         </ul>
         <!--普通编辑模式 -->
         <div class="tab-content" style="border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; padding:10px;" id="editnormal">
-            <div class="text-center" style="height: 200px; line-height: 200px" data-bind="visible:viewModel.selectedcard.FieldModels().length==0">
+            <div class="text-center" style="height: 200px; line-height: 200px" data-bind="visible:viewModel.MangoCardAttribute.FieldModels().length==0">
                 没有需要自定义的属性
             </div>
-            <div class="form-horizontal col-md-6 scrollspy-example" data-bind="if:viewModel.selectedcard.FieldModels().length!=0">
-                <!-- ko foreach:viewModel.selectedcard.FieldModels -->
+            <div class="form-horizontal col-md-6 scrollspy-example" data-bind="if:viewModel.MangoCardAttribute.FieldModels().length!=0">
+                <!-- ko foreach:viewModel.MangoCardAttribute.FieldModels -->
                 <div class="form-group">
                     <label class="col-sm-3 control-label">
                         <span data-bind="text:Name"></span>
@@ -111,7 +111,7 @@
                 </div>
                 <!-- /ko -->
             </div>
-            <div class="col-md-6 scrollspy-example" data-bind="html:viewModel.selectedcard.Instructions,visible:viewModel.selectedcard.Instructions()!=null">
+            <div class="col-md-6 scrollspy-example" data-bind="html:viewModel.MangoCardAttribute.Instructions,visible:viewModel.MangoCardAttribute.Instructions()!=null">
             </div>
             <div class="clearfix"></div>
             <hr />
@@ -208,7 +208,7 @@
         </div>
     </div>
 </div>
-<div class="container">
+@*<div class="container">
     <h2 class="text-center title">我的素材 </h2>
     <div class="well text-center" data-bind="visible:viewModel.mymediaetypes().length==0">
         <div class="align-middle">
@@ -233,16 +233,6 @@
             <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Cards.viewModel.mediafilters,css:(Cards.viewModel.mediatypetoshow()==('.'+Id())?'active':'')"></a>
         </li>
         <!-- /ko -->
-        @*<li>
-                <a href="#" data-bind="click:viewModel.openfileselect,visible:viewModel.file.UploadProgress()==false">
-                    上传本地素材
-                </a>
-                <div class="progress" style="margin-bottom: 0;" data-bind="visible:viewModel.file.UploadProgress">
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" style="min-width: 2em;" data-bind="style:{'width':viewModel.uploadprogress.Valuenow()}">
-                        <span data-bind="text:viewModel.uploadprogress.Valuenow"></span>
-                    </div>
-                </div>
-            </li>*@
     </ul>
     <div class="row" style="margin-top: 25px;">
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 imggrid">
@@ -278,16 +268,16 @@
         </div>
         <!-- /ko -->
     </div>
-</div>
+</div>*@
 <div class="modal fade" id="preview-dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content text-center">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" data-bind="text:viewModel.selectedcardUrl.Title"></h4>
+                <h4 class="modal-title" data-bind="text:viewModel.MangoCardAttribute.MangoCardTitle"></h4>
             </div>
             <div class="modal-body">
-                <p class="thumbnail" data-bind="qrbind:Cards.viewModel.selectedcardUrl.Url"></p>
+                <p class="thumbnail" data-bind="qrbind:Cards.viewModel.MangoCardAttribute.MangoCardUrl"></p>
             </div>
             <div class="modal-footer">
                 <p class="text-center">
@@ -306,7 +296,7 @@
                 <h4 class="modal-title"></h4>
             </div>
             <div class="modal-body">
-                <p class="thumbnail" data-bind="payqrbind:Cards.viewModel.selectedcard.PayUrl"></p>
+                @*<p class="thumbnail" data-bind="qrbind:Cards.viewModel.selectedcard.PayUrl"></p>*@
             </div>
             <div class="modal-footer">
                 <p class="text-center">
@@ -338,9 +328,9 @@
                         </dl>
                     </div>
                     <div style="position: relative; width: 84%; float: left; height: 450px;overflow: auto;position: relative;">
-                        <!-- ko foreach:viewModel.mediademos -->
+                        <!-- ko foreach:viewModel.medias -->
                             <div class="thumbnail" style="width: 165px; float: left;  margin-left: 5px;margin-right: 5px;">
-                                <img style="width: 115px; height: 116px" data-bind="nailthumb:{url:ThumbnailUrl}" />
+                                <img style="width: 115px; height: 116px" data-bind="nailthumb:{url:ThumbnailUrl()}" />
                                 <div class="caption ">
                                     <div class="text-center">
                                         <input class="text-center" style="width: 130px; border: 0; margin-bottom: 10px" data-bind="value:FileName" />

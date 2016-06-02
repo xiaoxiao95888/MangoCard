@@ -46,32 +46,19 @@ namespace Mango_Cards.Web.Controllers.API
             if (card != null)
             {
                 var model = Mapper.Map<MangoCard, MangoCardModel>(card);
-                model.PageHtmlCode = card.HtmlCode;
-                model.Instructions = card.CardTemplate.Instructions;
-                model.Url = "http://" + HttpContext.Current.Request.Url.Host + "/Cards/RedirectCardView/" + model.Id;
-
-
-                
-
-
-                //model.PayUrl =
-                //    string.Format(
-                //        "weixin：//wxpay/bizpayurl?sign={0}&appid={1}&mch_id={2}&product_id={3}&time_stamp={4}&nonce_str={5}",
-                //        sign, appId, mchId, productId, timestamp, nonceStr);
-               
                 return model;
             }
             return null;
 
         }
 
-        public object Put(Guid id, MangoCardModel model)
+        public object Put(Guid id, MangoCardAttributeModel model)
         {
             var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
             var card = wechatuser.MangoCards.FirstOrDefault(n => n.IsDeleted == false && n.Id == id);
             if (card != null)
             {
-                card.HtmlCode = model.PageHtmlCode;
+                card.HtmlCode = model.HtmlCode;
                 try
                 {
                     _weChatUserService.Update();

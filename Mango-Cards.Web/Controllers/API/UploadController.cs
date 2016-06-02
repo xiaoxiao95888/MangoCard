@@ -27,9 +27,11 @@ namespace Mango_Cards.Web.Controllers.API
         public object Post()
         {
             var fileFullPath = string.Empty;
+            var weChatUserId = HttpContext.Current.User.Identity.GetUser().Id;
+            var newFileName = string.Empty;
             try
             {
-                var weChatUserId = HttpContext.Current.User.Identity.GetUser().Id;
+               
                 var file = HttpContext.Current.Request.Files[0];
                 var uploadFilePath = ConfigurationManager.AppSettings["UploadFilePath"] + weChatUserId + @"\";
                 if (!Directory.Exists(uploadFilePath))
@@ -56,7 +58,7 @@ namespace Mango_Cards.Web.Controllers.API
                         typeId = _mediaTypeService.GetMediaTypes().Where(n => n.Extension == null).Select(n => n.Id)
                             .FirstOrDefault();
                     }
-                    var newFileName = fileNamePrefix + fileExtension;
+                    newFileName = fileNamePrefix + fileExtension;
                     fileFullPath = uploadFilePath + newFileName;
                     file.SaveAs(uploadFilePath + newFileName);
                     
@@ -71,13 +73,16 @@ namespace Mango_Cards.Web.Controllers.API
                     };
                     _mediaService.Insert(media);
                 }
+              
+                var uploadFileUrl = ConfigurationManager.AppSettings["UploadFileUrl"] + weChatUserId + "/";
                 return new UploadResponseModel
                 {
                     ErrorCode = 0,
                     Message = "success",
                     Error = false,
                     FileId = id,
-                    OriginalFileName = file.FileName
+                    OriginalFileName = file.FileName,
+                    Url = uploadFileUrl + newFileName
                 };
             }
             catch (Exception ex)

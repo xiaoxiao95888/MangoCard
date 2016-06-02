@@ -12,7 +12,8 @@
     <title>@Model.Title</title>
 </head>
 <body>
-    @Html.Raw(Model.PageHtmlCode)
+    
+    @*@Html.Raw(Model.PageHtmlCode)*@
     @*@Html.Raw(Engine.Razor.RunCompile(Model.PageHtmlCode, Model.PageHtmlCode, Model.GetType(), Model))*@
 </body>
 </html>

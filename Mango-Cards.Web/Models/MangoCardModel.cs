@@ -13,23 +13,19 @@ namespace Mango_Cards.Web.Models
         public string Description { get; set; }
         public string ThumbnailUrl { get; set; }
         public Guid CardTypeId { get; set; }
-        public PageType PageType { get; set; }
+        public string Url { get; set; }
+        public DateTime UpdateTime { get; set; }
+    }
+
+    public class MangoCardAttributeModel
+    {
+        public Guid MangoCardId { get; set; }
+        public string MangoCardTitle { get; set; }
+        public string MangoCardUrl { get; set; }
         /// <summary>
         /// 页面所需的field
         /// </summary>
         public FieldModel[] FieldModels { get; set; }
-        ///// <summary>
-        ///// 页面收集到的数据
-        ///// </summary>
-        //public PageValueModel[] PageValueModels { get; set; }
-        //public dynamic PageValues
-        //{
-        //    get
-        //    {
-        //        return (PageValueModels != null && PageValueModels.Any()) ? PageValueModels.Select(item => Json.Decode(item.Value)).ToList() : null;
-        //    }
-        //}
-
         public dynamic Field
         {
             get
@@ -47,37 +43,7 @@ namespace Mango_Cards.Web.Models
                 return "";
             }
         }
-
-        public string PageHtmlCode { get; set; }
-        /// <summary>
-        /// 说明文档
-        /// </summary>
+        public string HtmlCode { get; set; }
         public string Instructions { get; set; }
-        /// <summary>
-        /// 是否发布
-        /// </summary>
-        public bool IsPublish { get; set; }
-        /// <summary>
-        /// 浏览的URL
-        /// </summary>
-        public string Url { get; set; }
-        /// <summary>
-        /// 支付URL
-        /// </summary>
-        public string PayUrl { get; set; }
-        /// <summary>
-        /// 浏览量
-        /// </summary>
-        public PvDataModel[] PvDataModels { get; set; }
-        public int PvCount { get; set; }
-        /// <summary>
-        /// 分享次数
-        /// </summary>
-        public ShareTimeModel[] ShareTimeModels { get; set; }
-        public int ShareTimeCount { get; set; }
-        public OrderModel[] OrderModels { get; set; }
-        public DateTime? UpdateTime { get; set; }
-        public DateTime CreatedTime { get; set; }
-        public bool IsDeleted { get; set; }
     }
 }

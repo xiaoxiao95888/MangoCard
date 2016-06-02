@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using AutoMapper;
+﻿using AutoMapper;
 using Mango_Cards.Library.Models;
-using Mango_Cards.Library.Models.Enum;
 using Mango_Cards.Web.MapperHelper.IMapperInterfaces;
 using Mango_Cards.Web.Models;
 
-namespace Mango_Cards.Web.MapperHelper
+namespace Mango_Cards.Web.MapperHelper.Implementation
 {
     public class CardTypeMapper : ICardTypeMapper
     {

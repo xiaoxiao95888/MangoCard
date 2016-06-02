@@ -30,19 +30,20 @@ namespace Mango_Cards.Web.Controllers
 
         public ActionResult View(Guid id)
         {
-            var card = _mangoCardService.GetMangoCard(id);
-            var uploadFileUrl = ConfigurationManager.AppSettings["UploadFileUrl"] + card.WeChatUser.Id + "/";
-            Mapper.CreateMap<Media, MediaModel>()
-                .ForMember(n => n.Url, opt => opt.MapFrom(src => uploadFileUrl + src.Name));
-            Mapper.CreateMap<Field, FieldModel>()
-                .ForMember(n => n.FieldType, opt => opt.MapFrom(src => src.FieldType))
-                .ForMember(n => n.MediaModel, opt => opt.MapFrom(src => src.Media));
-            Mapper.CreateMap<MangoCard, MangoCardModel>()
-                .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardTemplate.Id))
-                .ForMember(n => n.FieldModels, opt => opt.MapFrom(src => src.Fields));
-            var model = Mapper.Map<MangoCard, MangoCardModel>(card);
-            model.PageHtmlCode = card.HtmlCode;
-            return View(model);
+            //var card = _mangoCardService.GetMangoCard(id);
+            //var uploadFileUrl = ConfigurationManager.AppSettings["UploadFileUrl"] + card.WeChatUser.Id + "/";
+            //Mapper.CreateMap<Media, MediaModel>()
+            //    .ForMember(n => n.Url, opt => opt.MapFrom(src => uploadFileUrl + src.Name));
+            //Mapper.CreateMap<Field, FieldModel>()
+            //    .ForMember(n => n.FieldType, opt => opt.MapFrom(src => src.FieldType))
+            //    .ForMember(n => n.MediaModel, opt => opt.MapFrom(src => src.Media));
+            //Mapper.CreateMap<MangoCard, MangoCardModel>()
+            //    .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardTemplate.Id))
+            //    .ForMember(n => n.FieldModels, opt => opt.MapFrom(src => src.Fields));
+            //var model = Mapper.Map<MangoCard, MangoCardModel>(card);
+            //model.PageHtmlCode = card.HtmlCode;
+            //return View(model);
+            return null;
         }
         public ActionResult CardTemplateView(Guid id)
         {

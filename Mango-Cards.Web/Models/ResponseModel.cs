@@ -23,5 +23,6 @@ namespace Mango_Cards.Web.Models
         public string DebugMessage { get; set; }
         public string OriginalFileName { get; set; }
         public Guid FileId { get; set; }
+        public string Url { get; set; }
     }
 }

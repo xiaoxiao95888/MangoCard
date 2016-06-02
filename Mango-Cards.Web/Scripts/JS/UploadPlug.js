@@ -52,7 +52,7 @@ function uploadComplete(evt) {
         $(UploadPlug.p.children("span")[1]).text(result.OriginalFileName);
         $(UploadPlug.p.children("span")[2]).show();
        
-        UploadPlug.obj.MediaModel = { Id: result.FileId };
+        UploadPlug.obj.MediaModel = { Id: result.FileId, Url: result.Url };
     } else {
 
     }

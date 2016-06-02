@@ -2,23 +2,16 @@
     viewModel: {
         mycardtypes: ko.observableArray(),
         mymediaetypes: ko.observableArray(),
+        medias: ko.observableArray(),
         mediatypetoshow: ko.observable("*"),
         typetoshow: ko.observable("*"),
-        selectedcard: {
-            Id: ko.observable(),
-            Title: ko.observable(),
-            PageHtmlCode: ko.observable(),
+        MangoCardAttribute: {
+            MangoCardId: ko.observable(),
+            MangoCardTitle: ko.observable(),
+            MangoCardUrl: ko.observable(),
+            HtmlCode: ko.observable(),
             Instructions: ko.observable(),
-            Url: ko.observable(),
-            PayUrl: ko.observable(),
-            FieldModels: ko.observableArray(),
-            //PvCount: ko.observable(),
-            //ShareTimeCount: ko.observable(),
-            IsPublish: ko.observable()
-        },
-        selectedcardUrl: {
-            Title: ko.observable(),
-            Url: ko.observable()
+            FieldModels: ko.observableArray()
         },
         wechatuser: {
             Id: ko.observable(),
@@ -148,8 +141,8 @@ function addAllColumnHeaders(myList) {
 Cards.viewModel.edit = function () {
     $("#normallink").click();
     var model = ko.toJS(this);
-    $.get("/api/MyCards/" + model.Id, function (card) {
-        ko.mapping.fromJS(card, {}, Cards.viewModel.selectedcard);
+    $.get("/api/MangoCardAttribute/" + model.Id, function (card) {
+        ko.mapping.fromJS(card, {}, Cards.viewModel.MangoCardAttribute);
         //定位
         $("html, body").stop().animate({
             scrollTop: $("#dataedit").offset().top - 25
@@ -157,20 +150,23 @@ Cards.viewModel.edit = function () {
     });
 };
 //显示素材库
-Cards.viewModel.showlibrary = function() {
-    $("#library-dialog").modal({ show: true, backdrop:"static" });
+Cards.viewModel.showlibrary = function () {
+    $("#library-dialog").modal({ show: true, backdrop: "static" });
+    $.get("/api/Media/", function (data) {
+        ko.mapping.fromJS(data, {}, Cards.viewModel.medias);
+
+    });
 };
 //高级编辑保存
 Cards.viewModel.advancedsave = function (data, event) {
     var dom = $(event.target);
     dom.find("span").hide();
     dom.find("i").removeClass("hide");
-    var model = {
-        PageHtmlCode: Cards.viewModel.codeMirror().codemirror.doc.cm.getValue()
-    }
+    var model = ko.mapping.toJS(Cards.viewModel.MangoCardAttribute);
+    model.HtmlCode = Cards.viewModel.codeMirror().codemirror.doc.cm.getValue();
     $.ajax({
         type: "put",
-        url: "/api/MyCards/" + Cards.viewModel.selectedcard.Id(),
+        url: "/api/MyCards/" + model.MangoCardId,
         contentType: "application/json",
         data: JSON.stringify(model),
         dataType: "json",
@@ -179,8 +175,6 @@ Cards.viewModel.advancedsave = function (data, event) {
                 Helper.ShowErrorDialog(result.Message);
             } else {
                 //弹出预览二维码
-                var selectedcard = ko.mapping.toJS(Cards.viewModel.selectedcard);
-                ko.mapping.fromJS(selectedcard, {}, Cards.viewModel.selectedcardUrl);
                 var dialog = $("#preview-dialog");
                 dialog.modal({
                     keyboard: false,
@@ -214,10 +208,10 @@ Cards.viewModel.normalsave = function (data, event) {
     var dom = $(event.target);
     dom.find("span").hide();
     dom.find("i").removeClass("hide");
-    var model = ko.mapping.toJS(Cards.viewModel.selectedcard);
+    var model = ko.mapping.toJS(Cards.viewModel.MangoCardAttribute);
     $.ajax({
         type: "put",
-        url: "/api/FieldUpdate/" + model.Id,
+        url: "/api/MangoCardAttribute/" + model.MangoCardId,
         contentType: "application/json",
         data: JSON.stringify(model),
         dataType: "json",
@@ -226,8 +220,6 @@ Cards.viewModel.normalsave = function (data, event) {
                 Helper.ShowErrorDialog(result.Message);
             } else {
                 //弹出预览二维码
-                var selectedcard = ko.mapping.toJS(Cards.viewModel.selectedcard);
-                ko.mapping.fromJS(selectedcard, {}, Cards.viewModel.selectedcardUrl);
                 var dialog = $("#preview-dialog");
                 dialog.modal({
                     keyboard: false,
@@ -345,37 +337,15 @@ ko.bindingHandlers.qrbind = {
     },
     update: function (element, valueAccessor) {
         $(element).empty();
-        var data = ko.toJS(Cards.viewModel.selectedcardUrl);
-        if (data != null && data.Url != null) {
-            $(element).qrcode(data.Url);
+        var value = valueAccessor();
+        var valueUnwrapped = ko.utils.unwrapObservable(value);
+        if (valueUnwrapped != null) {
+            $(element).qrcode(valueUnwrapped);
         }
 
     }
 };
-ko.bindingHandlers.payqrbind = {
-    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-        // This will be called when the binding is first applied to an element
-        // Set up any initial state, event handlers, etc. here
-    },
-    update: function (element, valueAccessor) {
-        $(element).empty();
-        var data = ko.toJS(Cards.viewModel.selectedcard);
-        if (data != null && data.PayUrl != null) {
-            $(element).qrcode(data.PayUrl);
-        }
 
-    }
-};
-Cards.viewModel.mediademos = ko.computed(function () {
-    var demos = [];
-    var all = ko.toJS(Cards.viewModel.mymediaetypes);
-    ko.utils.arrayForEach(all, function (type) {
-        ko.utils.arrayForEach(type.MediaModels, function (demo) {
-            demos.push(demo);
-        });
-    });
-    return demos;
-});
 //上传素材
 Cards.viewModel.openfileselect = function () {
     $("#file").click();
@@ -437,27 +407,29 @@ Cards.viewModel.tab = function (data, event) {
         $("#editnormal").hide();
         $("#editadvanced").show(function () {
             var area = document.getElementById('editadvancedarea');
-            $.get("/api/MyCards/" + Cards.viewModel.selectedcard.Id(), function (card) {
-                ko.mapping.fromJS(card, {}, Cards.viewModel.selectedcard);
-                if (Cards.viewModel.codeMirror() == null) {
-                    var codemirror = CodeMirror(area, {
-                        value: Cards.viewModel.selectedcard.PageHtmlCode(),
-                        lineNumbers: true,
-                        lineWrapping: true,
-                        mode: "htmlmixed",
-                        theme: "ambiance"
-                    });
-                    var model = {
-                        codemirror: codemirror,
-                        cardId: Cards.viewModel.selectedcard.Id()
-                    }
-                    Cards.viewModel.codeMirror(model);
-                } else {
-                    Cards.viewModel.codeMirror().codemirror.doc.cm.clearHistory();
-                    Cards.viewModel.codeMirror().codemirror.doc.cm.setValue(Cards.viewModel.selectedcard.PageHtmlCode());
-                    Cards.viewModel.codeMirror().cardId = Cards.viewModel.selectedcard.Id();
+
+            if (Cards.viewModel.codeMirror() == null) {
+                var codemirror = CodeMirror(area, {
+                    value: Cards.viewModel.MangoCardAttribute.HtmlCode(),
+                    lineNumbers: true,
+                    lineWrapping: true,
+                    mode: "htmlmixed",
+                    theme: "ambiance"
+                });
+                var model = {
+                    codemirror: codemirror,
+                    cardId: Cards.viewModel.MangoCardAttribute.MangoCardId()
                 }
-            });
+                Cards.viewModel.codeMirror(model);
+            } else {
+                Cards.viewModel.codeMirror().codemirror.doc.cm.clearHistory();
+                Cards.viewModel.codeMirror().codemirror.doc.cm.setValue(Cards.viewModel.MangoCardAttribute.HtmlCode());
+                Cards.viewModel.codeMirror().cardId = Cards.viewModel.MangoCardAttribute.MangoCardId();
+            }
+            //定位
+            $("html, body").stop().animate({
+                scrollTop: $("#dataedit").offset().top - 25
+            }, 600);
 
         });
     } else {
@@ -537,7 +509,7 @@ function uploadComplete(evt) {
         Cards.viewModel.file.UploadProgress(false);
         //刷新素材列表
         $.get("/api/Media/", function (media) {
-            ko.mapping.fromJS(media, {}, Cards.viewModel.mymediaetypes);
+            ko.mapping.fromJS(media, {}, Cards.viewModel.medias);
             ko.mapping.fromJS({
                 Name: null,
                 Verify: false,
@@ -563,11 +535,7 @@ $(function () {
             ko.mapping.fromJS(wechatuser, {}, Cards.viewModel.wechatuser);
             $.get("/api/MyCards/", function (cards) {
                 ko.mapping.fromJS(cards, {}, Cards.viewModel.mycardtypes);
-                $.get("/api/Media/", function (media) {
-                    ko.mapping.fromJS(media, {}, Cards.viewModel.mymediaetypes);
-                });
             });
-
         }
     });
 });
