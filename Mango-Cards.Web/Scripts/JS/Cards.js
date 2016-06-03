@@ -14,6 +14,8 @@
             FieldModels: ko.observableArray()
         },
         MediaeType: ko.observable(),
+        Mediae: ko.observable(),
+        FieldModel: ko.observable(),
         wechatuser: {
             Id: ko.observable(),
             NickName: ko.observable(),
@@ -46,6 +48,7 @@
         codeMirror: ko.observable()
     }
 };
+
 ko.bindingHandlers.isotopetype = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 
@@ -152,15 +155,15 @@ Cards.viewModel.edit = function () {
 };
 //显示素材库
 Cards.viewModel.showlibrary = function () {
+    Cards.viewModel.FieldModel = this;
+    Cards.viewModel.Mediae(null);
     Cards.viewModel.MediaeType(null);
     $("#library-dialog").modal({ show: true, backdrop: "static" });
     $.get("/api/Media/", function (data) {
         ko.mapping.fromJS(data, {}, Cards.viewModel.medias);
-
     });
     $.get("/api/MediaeType/", function (data) {
         ko.mapping.fromJS(data, {}, Cards.viewModel.mediaetypes);
-
     });
 };
 //过滤素材
@@ -170,11 +173,28 @@ Cards.viewModel.libraryFilter = function () {
         Cards.viewModel.MediaeType(null);
     } else {
         Cards.viewModel.MediaeType(model);
-    }   
+    }
     $.get("/api/Media", { MediaTypeId: model.Id }, function (data) {
         ko.mapping.fromJS(data, {}, Cards.viewModel.medias);
 
     });
+}
+//选择素材
+Cards.viewModel.SelectedMediae = function () {
+    var mediae = ko.mapping.toJS(this);
+    var current = ko.mapping.toJS(Cards.viewModel.Mediae);
+    if (current != null && mediae.Id === current.Id) {
+        Cards.viewModel.Mediae(null);
+    } else {
+        Cards.viewModel.Mediae(mediae);
+    }
+
+}
+//确定选择的素材
+Cards.SelectMediaeDetermine = function () {
+    var mediae = ko.mapping.toJS(Cards.viewModel.Mediae);
+    ko.mapping.fromJS(mediae, {}, Cards.viewModel.FieldModel.MediaModel);
+    $("#library-dialog").modal("hide");
 }
 //高级编辑保存
 Cards.viewModel.advancedsave = function (data, event) {
@@ -225,7 +245,7 @@ Cards.viewModel.preview = function () {
 //普通编辑保存
 Cards.viewModel.normalsave = function (data, event) {
     var dom = $(event.target);
-    dom.button('loading');    
+    dom.button('loading');
     var model = ko.mapping.toJS(Cards.viewModel.MangoCardAttribute);
     $.ajax({
         type: "put",
@@ -243,7 +263,7 @@ Cards.viewModel.normalsave = function (data, event) {
                     keyboard: false,
                     show: true,
                     backdrop: "static"
-                });                            
+                });
             }
             dom.button('reset');
         }
@@ -484,28 +504,13 @@ Cards.viewModel.UploadMaterial = function (data, event) {
 }
 //删除上传
 Cards.viewModel.RemoveUpload = function (data, event) {
-    var dom = $(event.target);
-    var kodata = data;
-    var selectedmedia = ko.mapping.toJS(this);
+
     Helper.ShowConfirmationDialog({
         message: "是否确认删除?",
         confirmFunction: function () {
-            $.ajax({
-                type: "delete",
-                url: "/api/Media/" + selectedmedia.MediaModel.Id,
-                contentType: "application/json",
-                dataType: "json",
-                success: function (data) {
-                    if (data.Error) {
-                        Helper.ShowErrorDialog(data.Message);
-                    } else {
-                        kodata.MediaModel = null;
-                        dom.parent().prev().prev().show();
-                        dom.parent().prev().text("");
-                        dom.parent().hide();
-                    }
-                }
-            });
+            var mediaModel = { Id: "", Url: "", FileName: "" };
+            //data.MediaModel(null);
+            ko.mapping.fromJS(mediaModel, {}, data);
         }
     });
 }

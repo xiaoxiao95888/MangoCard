@@ -43,14 +43,17 @@ namespace Mango_Cards.Web.Controllers.API
         public object Delete(Guid id)
         {
             var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
-            var medid = wechatuser.Mediae.FirstOrDefault(n => n.IsDeleted == false && n.Id == id);
-            if (medid != null)
+            var media = wechatuser.Mediae.FirstOrDefault(n => n.IsDeleted == false && n.Id == id);
+            if (media != null)
             {
-                medid.Fields.Clear();               
-                _mediaService.Delete(id);
-                var fileFullPath = ConfigurationManager.AppSettings["UploadFilePath"] + wechatuser.Id + @"\" + medid.Name;
+                var fileFullPath = ConfigurationManager.AppSettings["UploadFilePath"] + wechatuser.Id + @"\" + media.Name;
+                if (media.Fields != null && media.Fields.Any())
+                {
+                    return Failed("有其他的MangoCard使用了该文件,删除失败。");
+                }
                 try
                 {
+                    _mediaService.Delete(id);
                     System.IO.File.Delete(fileFullPath);
                 }
                 catch
@@ -59,7 +62,7 @@ namespace Mango_Cards.Web.Controllers.API
                 }
                 return Success();
             }
-            return Failed("删除失败");
+            return Failed("找不到该文件，删除失败。");
         }
     }
 

@@ -55,7 +55,7 @@ namespace Mango_Cards.Web.Controllers.API
                 {
                     foreach (var fieldmodel in model.FieldModels.Where(fieldmodel => field.Id == fieldmodel.Id))
                     {
-                        if (fieldmodel.MediaModel != null)
+                        if (fieldmodel.MediaModel != null && fieldmodel.MediaModel.Id != Guid.Empty)
                         {
                             field.FieldValue = null;
                             field.MediaId = fieldmodel.MediaModel.Id;
@@ -64,11 +64,12 @@ namespace Mango_Cards.Web.Controllers.API
                         else
                         {
                             field.FieldValue = fieldmodel.FieldValue;
+                            field.MediaId = null;
                         }
 
                     }
                 }
-                var html = Engine.Razor.RunCompile(card.CardTemplate.HtmlCode, Guid.NewGuid().ToString(),model.GetType(), model);
+                var html = Engine.Razor.RunCompile(card.CardTemplate.HtmlCode, Guid.NewGuid().ToString(), model.GetType(), model);
                 try
                 {
                     card.HtmlCode = html;

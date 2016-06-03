@@ -2,7 +2,7 @@
     dom: "",
     progressbar: "",
     p: "",
-    obj:"",
+    obj: "",
     uploadprocess: function (data, event) {
         UploadPlug.obj = data;
         var target = $(event.target).get(0);
@@ -48,11 +48,13 @@ function uploadComplete(evt) {
     if (!result.Error) {
         UploadPlug.p.show();
         UploadPlug.progressbar.hide();
-        $(UploadPlug.p.children("span")[0]).hide();
-        $(UploadPlug.p.children("span")[1]).text(result.OriginalFileName);
-        $(UploadPlug.p.children("span")[2]).show();
-       
-        UploadPlug.obj.MediaModel = { Id: result.FileId, Url: result.Url };
+        //$(UploadPlug.p.children("span")[0]).hide();
+        //$(UploadPlug.p.children("span")[1]).text(result.OriginalFileName);
+        //$(UploadPlug.p.children("span")[2]).show();
+        var mediaModel = { Id: result.FileId, Url: result.Url, FileName: result.OriginalFileName };
+        ko.mapping.fromJS(mediaModel, {}, UploadPlug.obj.MediaModel);
+        //UploadPlug.obj.MediaModel(mediaModel);
+
     } else {
 
     }

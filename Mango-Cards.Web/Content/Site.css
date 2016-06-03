@@ -53,6 +53,32 @@ body {
         color: #fff !important;
     }
 
+.mediae_selected .selected_mask {
+    height: 116px;
+    width: 155px;
+    position: absolute;
+    z-index: 1;
+    cursor: pointer;
+}
+
+    .mediae_selected .selected_mask .selected_mask_inner {
+        background-color: #000;
+        height: 116px;
+        opacity: 0.6;
+        width: 155px;
+    }
+
+    .mediae_selected .selected_mask .selected_mask_icon {
+        background: transparent url("/images/icon_card_selected218877.png") no-repeat scroll 50% 50%;
+        display: inline-block;
+        height: 116px;
+        left: 0;
+        position: absolute;
+        top: 0;
+        vertical-align: middle;
+        width: 155px;
+    }
+
 .video-layout {
     border-radius: 4px;
     box-shadow: 0 0 10px #ccc;

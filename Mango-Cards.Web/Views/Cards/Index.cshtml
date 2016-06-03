@@ -87,15 +87,22 @@
                             <input type="text" class="form-control" data-bind="value:FieldValue,visible:(FieldType()==0 ||FieldType()==1) " />
                             <span class="input-group-addon" data-bind="text:FieldTypeName,visible:(FieldType()==0||FieldType()==1||FieldType()==4)"></span>
                         </div>
-                        <div data-bind="visible:FieldType()==3">
+                        <div data-bind="if:FieldType()==3">
                             <p class="text-muted uploadprogress">
-                                <span>大小不超过5M</span>
-                                <span></span>
-                                <span style="display: none">
-                                    <a href="#" data-bind="click:Cards.viewModel.RemoveUpload">
-                                        删除
-                                    </a>
+                                @*<span data-bind="">大小不超过5M</span>*@
+                                <span data-bind="template: { name: 'editorTmpl', data: MediaModel }">
+
                                 </span>
+                                <script id="editorTmpl" type="text/html">
+                                    <span data-bind="visible:Id()==''">大小不超过5M</span>
+                                    <span data-bind="text:FileName"></span>
+                                    <span data-bind="visible:Id()!=''">
+                                        <a href="#" data-bind="click:Cards.viewModel.RemoveUpload">
+                                            取消
+                                        </a>
+                                    </span>
+                                </script>
+
                             </p>
                             <div class="progress" style="display: none">
                                 <div class="progress-bar progress-bar-striped active" role="progressbar" style="min-width: 2em;width: 0%;">
@@ -208,66 +215,66 @@
     </div>
 </div>
 @*<div class="container">
-    <h2 class="text-center title">我的素材 </h2>
-    <div class="well text-center" data-bind="visible:viewModel.mymediaetypes().length==0">
-        <div class="align-middle">
-            <p data-bind="text:viewModel.file.Name()==null?'您尚未上传任何素材':(viewModel.file.Verify()?viewModel.file.Name:'文件大小超出限制')"></p>
-            <div style="max-width: 200px; margin: auto" data-bind="visible:viewModel.file.Verify">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" style="min-width: 2em;" data-bind="style:{'width':viewModel.uploadprogress.Valuenow()}">
-                        <span data-bind="text:viewModel.uploadprogress.Valuenow"></span>
+        <h2 class="text-center title">我的素材 </h2>
+        <div class="well text-center" data-bind="visible:viewModel.mymediaetypes().length==0">
+            <div class="align-middle">
+                <p data-bind="text:viewModel.file.Name()==null?'您尚未上传任何素材':(viewModel.file.Verify()?viewModel.file.Name:'文件大小超出限制')"></p>
+                <div style="max-width: 200px; margin: auto" data-bind="visible:viewModel.file.Verify">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" style="min-width: 2em;" data-bind="style:{'width':viewModel.uploadprogress.Valuenow()}">
+                            <span data-bind="text:viewModel.uploadprogress.Valuenow"></span>
+                        </div>
+                    </div>
+                </div>
+                <form method="post" enctype="multipart/form-data" action="/API/Upload">
+                    <button type="button" class="btn btn-success" data-bind="click:viewModel.openfileselect">上传本地素材</button>
+                    <input type="file" id="file" name="file" style="display: none" data-bind="event:{change:viewModel.fileselected}" />
+                </form>
+            </div>
+        </div>
+        <ul class="nav nav-tabs nav-justified" data-bind="if:viewModel.mymediaetypes().length>0">
+            <li><a href="#" data-bind="click:Cards.viewModel.mediafilters,css:(Cards.viewModel.mediatypetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
+            <!-- ko foreach:viewModel.mymediaetypes -->
+            <li>
+                <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Cards.viewModel.mediafilters,css:(Cards.viewModel.mediatypetoshow()==('.'+Id())?'active':'')"></a>
+            </li>
+            <!-- /ko -->
+        </ul>
+        <div class="row" style="margin-top: 25px;">
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 imggrid">
+                <div class="thumbnail item-container" style="width: 165px; height: 196px; text-align: center;border-style:dashed">
+                    <div class="item-inner-container">
+                        <a href="#" data-bind="click:viewModel.openfileselect,visible:viewModel.file.UploadProgress()==false" style="text-decoration: none; color:#666;display: inline-block;">
+                            <i class="fa fa-plus fa-3x"></i>
+                            <span style="display: block;font-style: normal;font-weight: 400;">上传本地素材</span>
+                        </a>
                     </div>
                 </div>
             </div>
-            <form method="post" enctype="multipart/form-data" action="/API/Upload">
-                <button type="button" class="btn btn-success" data-bind="click:viewModel.openfileselect">上传本地素材</button>
-                <input type="file" id="file" name="file" style="display: none" data-bind="event:{change:viewModel.fileselected}" />
-            </form>
-        </div>
-    </div>
-    <ul class="nav nav-tabs nav-justified" data-bind="if:viewModel.mymediaetypes().length>0">
-        <li><a href="#" data-bind="click:Cards.viewModel.mediafilters,css:(Cards.viewModel.mediatypetoshow()=='*'?'active':'')" data-filter="*">全部</a></li>
-        <!-- ko foreach:viewModel.mymediaetypes -->
-        <li>
-            <a href="#" data-bind="text:Name,attr:{'data-filter':'.'+Id()},click:Cards.viewModel.mediafilters,css:(Cards.viewModel.mediatypetoshow()==('.'+Id())?'active':'')"></a>
-        </li>
-        <!-- /ko -->
-    </ul>
-    <div class="row" style="margin-top: 25px;">
-        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 imggrid">
-            <div class="thumbnail item-container" style="width: 165px; height: 196px; text-align: center;border-style:dashed">
-                <div class="item-inner-container">
-                    <a href="#" data-bind="click:viewModel.openfileselect,visible:viewModel.file.UploadProgress()==false" style="text-decoration: none; color:#666;display: inline-block;">
-                        <i class="fa fa-plus fa-3x"></i>
-                        <span style="display: block;font-style: normal;font-weight: 400;">上传本地素材</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!-- ko foreach:viewModel.mediademos -->
-        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 imggrid" data-bind="css:MediaTypeId">
-            <div class="thumbnail" style="width: 165px">
-                <img style="width: 115px; height: 116px" data-bind="nailthumb:{url:ThumbnailUrl}" />
-                <div class="caption ">
-                    <div class="text-center">
-                        <input class="text-center" style="width: 130px; border: 0; margin-bottom: 10px" data-bind="value:FileName" />
-                    </div>
-                    <p style="margin-bottom: 0">
-                        <small data-bind="date:UpdateTime"></small>
-                        <span style="float: right">
-                            <span class="btn-group btn-group-xs" role="group">
-                                <a class="btn btn-default" data-bind="click:Cards.viewModel.copylink"><i class="fa fa-link"></i></a>
-                                <button type="button" class="hide" data-bind="attr:{'data-clipboard-text':Url}"></button>
-                                <button type="button" class="btn btn-default" data-bind="click:Cards.viewModel.delete" title="删除"><i class="fa fa-trash"></i></button>
+            <!-- ko foreach:viewModel.mediademos -->
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 imggrid" data-bind="css:MediaTypeId">
+                <div class="thumbnail" style="width: 165px">
+                    <img style="width: 115px; height: 116px" data-bind="nailthumb:{url:ThumbnailUrl}" />
+                    <div class="caption ">
+                        <div class="text-center">
+                            <input class="text-center" style="width: 130px; border: 0; margin-bottom: 10px" data-bind="value:FileName" />
+                        </div>
+                        <p style="margin-bottom: 0">
+                            <small data-bind="date:UpdateTime"></small>
+                            <span style="float: right">
+                                <span class="btn-group btn-group-xs" role="group">
+                                    <a class="btn btn-default" data-bind="click:Cards.viewModel.copylink"><i class="fa fa-link"></i></a>
+                                    <button type="button" class="hide" data-bind="attr:{'data-clipboard-text':Url}"></button>
+                                    <button type="button" class="btn btn-default" data-bind="click:Cards.viewModel.delete" title="删除"><i class="fa fa-trash"></i></button>
+                                </span>
                             </span>
-                        </span>
-                    </p>
+                        </p>
+                    </div>
                 </div>
             </div>
+            <!-- /ko -->
         </div>
-        <!-- /ko -->
-    </div>
-</div>*@
+    </div>*@
 <div class="modal fade" id="preview-dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content text-center">
@@ -324,35 +331,39 @@
                             <!-- ko foreach:viewModel.mediaetypes -->
                             <dd class="menu_item"><a href="#" data-bind="text:Name,click:Cards.viewModel.libraryFilter,css:{ menu_item_active: Cards.viewModel.MediaeType()!= null && Cards.viewModel.MediaeType().Id==Id()}"></a></dd>
                             <!-- /ko -->
-                           
                         </dl>
                     </div>
                     <div style="position: relative; width: 84%; float: left; height: 450px;overflow: auto;position: relative;">
                         <!-- ko foreach:viewModel.medias -->
-                            <div class="thumbnail" style="width: 165px; float: left;  margin-left: 5px;margin-right: 5px;">
-                                <img style="width: 115px; height: 116px" data-bind="nailthumb:{url:ThumbnailUrl()}" />
-                                <div class="caption">
-                                    <div class="text-center">
-                                        <input class="text-center" style="width: 130px; border: 0; margin-bottom: 10px" data-bind="value:FileName" />
-                                    </div>
-                                    <p style="margin-bottom: 0">
-                                        <small data-bind="date:UpdateTime"></small>
-                                        <span style="float: right">
-                                            <span class="btn-group btn-group-xs" role="group">
-                                                <a class="btn btn-default" data-bind="click:Cards.viewModel.copylink"  title="复制Url"><i class="fa fa-link"></i></a>
-                                                <button type="button" class="hide" data-bind="attr:{'data-clipboard-text':Url}"></button>
-                                                <button type="button" class="btn btn-default" data-bind="click:Cards.viewModel.delete" title="删除"><i class="fa fa-trash"></i></button>
-                                            </span>
-                                        </span>
-                                    </p>
-                                </div>
+                        <div class="thumbnail" style="width: 165px; float: left;  margin-left: 5px;margin-right: 5px;" data-bind="click:Cards.viewModel.SelectedMediae,css:{ mediae_selected: Cards.viewModel.Mediae()!= null && Cards.viewModel.Mediae().Id==Id()}">
+                            <div class="selected_mask">
+                                <div class="selected_mask_inner"></div>
+                                <div class="selected_mask_icon"></div>
                             </div>
+                            <img style="width: 155px; height: 116px; cursor: pointer;" data-bind="nailthumb:{url:ThumbnailUrl()}" />
+                            <div class="caption">
+                                <div class="text-center">
+                                    <input class="text-center" style="width: 130px; border: 0; margin-bottom: 10px" data-bind="value:FileName" />
+                                </div>
+                                <p style="margin-bottom: 0">
+                                    <small data-bind="date:UpdateTime"></small>
+                                    <span style="float: right">
+                                        <span class="btn-group btn-group-xs" role="group">
+                                            <a class="btn btn-default" data-bind="click:Cards.viewModel.copylink" title="复制Url"><i class="fa fa-link"></i></a>
+                                            <button type="button" class="hide" data-bind="attr:{'data-clipboard-text':Url}"></button>
+                                            <button type="button" class="btn btn-default" data-bind="click:Cards.viewModel.delete" title="删除"><i class="fa fa-trash"></i></button>
+                                        </span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
                         <!-- /ko -->
                     </div>
                 </div>
             </div>
             <div class="modal-footer" style="background-color: #f4f5f9">
-                <button type="button" class="btn btn-black">确定</button>
+                <span class="pull-left" data-bind="text:Cards.viewModel.Mediae()!= null ? ('已选：'+Cards.viewModel.Mediae().FileName):''"></span>
+                <button type="button" class="btn btn-black" data-bind="attr:{disabled : Cards.viewModel.Mediae()== null},click:Cards.SelectMediaeDetermine">确定</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
             </div>
         </div>
