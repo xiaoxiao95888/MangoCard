@@ -49,7 +49,11 @@ namespace Mango_Cards.Web.Controllers.API
                 var fileFullPath = ConfigurationManager.AppSettings["UploadFilePath"] + wechatuser.Id + @"\" + media.Name;
                 if (media.Fields != null && media.Fields.Any())
                 {
-                    return Failed("有其他的MangoCard使用了该文件,删除失败。");
+                    if (media.Fields.Any(p => p.CardTemplateId != null))
+                    {
+                        return Failed("系统素材,禁止删除。");
+                    }
+                    return Failed("该素材正在被使用，禁止删除。");
                 }
                 try
                 {

@@ -44,8 +44,8 @@ namespace MangoCards.Test
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.Configurations.Add(new CategoryMapping());
-            //modelBuilder.Configurations.Add(new AvatarMapping());
+            modelBuilder.Configurations.Add(new CardTemplateMapping());
+            modelBuilder.Configurations.Add(new MangoCardMapping());
             //modelBuilder.Configurations.Add(new LetterMapping());
             //modelBuilder.Configurations.Add(new RetailerMapping());
             //modelBuilder.Configurations.Add(new SiteMapping());

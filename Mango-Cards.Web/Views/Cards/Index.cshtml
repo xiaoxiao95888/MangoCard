@@ -89,16 +89,15 @@
                         </div>
                         <div data-bind="if:FieldType()==3">
                             <p class="text-muted uploadprogress">
-                                @*<span data-bind="">大小不超过5M</span>*@
                                 <span data-bind="template: { name: 'editorTmpl', data: MediaModel }">
 
                                 </span>
                                 <script id="editorTmpl" type="text/html">
-                                    <span data-bind="visible:Id()==''">大小不超过5M</span>
+                                    @*<span data-bind="visible:$data !=null">大小不超过5M</span>*@
                                     <span data-bind="text:FileName"></span>
-                                    <span data-bind="visible:Id()!=''">
-                                        <a href="#" data-bind="click:Cards.viewModel.RemoveUpload">
-                                            取消
+                                    <span>
+                                        <a href="#" data-bind="click:Cards.viewModel.ViewUpload">
+                                            查看
                                         </a>
                                     </span>
                                 </script>
@@ -335,12 +334,12 @@
                     </div>
                     <div style="position: relative; width: 84%; float: left; height: 450px;overflow: auto;position: relative;">
                         <!-- ko foreach:viewModel.medias -->
-                        <div class="thumbnail" style="width: 165px; float: left;  margin-left: 5px;margin-right: 5px;" data-bind="click:Cards.viewModel.SelectedMediae,css:{ mediae_selected: Cards.viewModel.Mediae()!= null && Cards.viewModel.Mediae().Id==Id()}">
-                            <div class="selected_mask">
+                        <div class="thumbnail" style="width: 165px; float: left;  margin-left: 5px;margin-right: 5px;" data-bind="css:{ mediae_selected: Cards.viewModel.Mediae()!= null && Cards.viewModel.Mediae().Id==Id()}">
+                            <div class="selected_mask" data-bind="click:Cards.viewModel.SelectedMediae">
                                 <div class="selected_mask_inner"></div>
                                 <div class="selected_mask_icon"></div>
                             </div>
-                            <img style="width: 155px; height: 116px; cursor: pointer;" data-bind="nailthumb:{url:ThumbnailUrl()}" />
+                            <img style="width: 155px; height: 116px; cursor: pointer;" data-bind="nailthumb:{url:ThumbnailUrl()},click:Cards.viewModel.SelectedMediae" />
                             <div class="caption">
                                 <div class="text-center">
                                     <input class="text-center" style="width: 130px; border: 0; margin-bottom: 10px" data-bind="value:FileName" />
@@ -349,7 +348,7 @@
                                     <small data-bind="date:UpdateTime"></small>
                                     <span style="float: right">
                                         <span class="btn-group btn-group-xs" role="group">
-                                            <a class="btn btn-default" data-bind="click:Cards.viewModel.copylink" title="复制Url"><i class="fa fa-link"></i></a>
+                                            <a class="btn btn-default" data-bind="click:Cards.viewModel.copylink"><i class="fa fa-link"></i></a>
                                             <button type="button" class="hide" data-bind="attr:{'data-clipboard-text':Url}"></button>
                                             <button type="button" class="btn btn-default" data-bind="click:Cards.viewModel.delete" title="删除"><i class="fa fa-trash"></i></button>
                                         </span>
@@ -368,4 +367,21 @@
             </div>
         </div>
     </div>
-</div><!-- /.modal -->
+</div>
+<!--查看素材-->
+<div class="modal fade" id="img-dialog">
+    <div class="modal-dialog">
+        <div class="modal-content text-center">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-left" data-bind="text:Cards.viewModel.ViewMediae.FileName"></h4>
+            </div>
+            <div class="modal-body">
+                <img style="max-width: 100%;" data-bind="attr:{src:Cards.viewModel.ViewMediae.Url}" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>

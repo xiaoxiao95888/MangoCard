@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Mango_Cards.Library.Models.Enum;
 using Mango_Cards.Library.Models.Interfaces;
+using System.Data.Entity.ModelConfiguration;
 
 namespace Mango_Cards.Library.Models
 {
@@ -44,5 +45,15 @@ namespace Mango_Cards.Library.Models
         public DateTime? UpdateTime { get; set; }
         public DateTime CreatedTime { get; set; }
         public bool IsDeleted { get; set; }
+    }
+    public class MangoCardMapping : EntityTypeConfiguration<MangoCard>
+    {
+        public MangoCardMapping()
+        {
+            HasMany(c => c.Fields)
+                .WithOptional(p => p.MangoCard)
+                .HasForeignKey(p => p.MangoCardId);
+
+        }
     }
 }

@@ -18,6 +18,13 @@ namespace Mango_Cards.Library.Models
         public Guid? MediaId { get; set; }
         [ForeignKey("MediaId")]
         public virtual Media Media { get; set; }
-      
+
+        public Guid? CardTemplateId { get; set; }
+        [ForeignKey("CardTemplateId")]
+        public virtual CardTemplate CardTemplate { get; set; }
+
+        public Guid? MangoCardId { get; set; }
+        [ForeignKey("MangoCardId")]
+        public virtual MangoCard MangoCard { get; set; }
     }
 }

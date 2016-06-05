@@ -15,6 +15,16 @@
         },
         MediaeType: ko.observable(),
         Mediae: ko.observable(),
+        //查看的素材
+        ViewMediae: {
+            ExtensionName: ko.observable(),
+            FileName: ko.observable(),
+            Id: ko.observable(),
+            MediaTypeId: ko.observable(),
+            Name: ko.observable(),
+            ThumbnailUrl: ko.observable(),
+            Url: ko.observable(),
+        },
         FieldModel: ko.observable(),
         wechatuser: {
             Id: ko.observable(),
@@ -48,7 +58,18 @@
         codeMirror: ko.observable()
     }
 };
-
+Cards.viewModel.CurrentMediaIds = ko.computed({
+    read: function () {
+        var ids = []
+        ko.utils.arrayForEach(Cards.viewModel.MangoCardAttribute.FieldModels(), function (item) {
+            var model = ko.mapping.toJS(item.MediaModel);
+            if (model != null) {
+                ids.push(model.Id)
+            }
+        });
+        return ids;
+    }
+});
 ko.bindingHandlers.isotopetype = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 
@@ -390,29 +411,32 @@ Cards.viewModel.openfileselect = function () {
 //删除素材
 Cards.viewModel.delete = function () {
     var selectedmedia = ko.mapping.toJS(this);
-    Helper.ShowConfirmationDialog({
-        message: "是否确认删除?",
-        confirmFunction: function () {
-            $.ajax({
-                type: "delete",
-                url: "/api/Media/" + selectedmedia.Id,
-                contentType: "application/json",
-                dataType: "json",
-                success: function (result) {
-                    if (result.Error) {
-                        Helper.ShowErrorDialog(result.Message);
-                    } else {
-                        //Helper.ShowSuccessDialog(Messages.Success);
-                        //刷新素材列表
-                        $.get("/api/Media/", function (media) {
-                            ko.mapping.fromJS(media, {}, Cards.viewModel.mymediaetypes);
-                            Cards.viewModel.mediafiltersshow();
-                        });
+    var ids = Cards.viewModel.CurrentMediaIds();
+    if (ids.indexOf(selectedmedia.Id) != -1) {
+        Helper.ShowErrorDialog("素材正在使用，禁止删除。");
+    } else {
+        Helper.ShowConfirmationDialog({
+            message: "是否确认删除?",
+            confirmFunction: function () {
+                $.ajax({
+                    type: "delete",
+                    url: "/api/Media/" + selectedmedia.Id,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.Error) {
+                            Helper.ShowErrorDialog(result.Message);
+                        } else {
+                            //刷新素材列表
+                            $.get("/api/Media/", function (media) {
+                                ko.mapping.fromJS(media, {}, Cards.viewModel.medias);
+                            });
+                        }
                     }
-                }
-            });
-        }
-    });
+                });
+            }
+        });
+    }
 };
 //拷贝素材URL
 Cards.viewModel.copylink = function (data, event) {
@@ -420,10 +444,10 @@ Cards.viewModel.copylink = function (data, event) {
     var btn = dom.parents(".caption").find(".hide")[0];
     var clipboard = new Clipboard(btn);
     clipboard.on("success", function (e) {
-        console.log(e);
+        //console.log(e);
     });
     clipboard.on("error", function (e) {
-        console.log(e);
+        //console.log(e);
     });
     btn.click();
     dom.tooltip({
@@ -502,17 +526,13 @@ Cards.viewModel.UploadMaterial = function (data, event) {
     var dom = $(event.target);
     dom.next().click();
 }
-//删除上传
-Cards.viewModel.RemoveUpload = function (data, event) {
-
-    Helper.ShowConfirmationDialog({
-        message: "是否确认删除?",
-        confirmFunction: function () {
-            var mediaModel = { Id: "", Url: "", FileName: "" };
-            //data.MediaModel(null);
-            ko.mapping.fromJS(mediaModel, {}, data);
-        }
-    });
+//查看上传的素材
+Cards.viewModel.ViewUpload = function (data, event) {
+    var dom = $(event.target);
+    //img-dialog
+    var img= ko.mapping.toJS(data);
+    ko.mapping.fromJS(img, {}, Cards.viewModel.ViewMediae);
+    $("#img-dialog").modal({ show: true, backdrop: "static" });
 }
 function uploadProgress(evt) {
     if (evt.lengthComputable) {

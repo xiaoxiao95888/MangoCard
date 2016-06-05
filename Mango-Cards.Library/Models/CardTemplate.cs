@@ -1,6 +1,7 @@
 ﻿using Mango_Cards.Library.Models.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,5 +39,15 @@ namespace Mango_Cards.Library.Models
         public DateTime? UpdateTime { get; set; }
         public DateTime CreatedTime { get; set; }
         public bool IsDeleted { get; set; }
+    }
+    public class CardTemplateMapping : EntityTypeConfiguration<CardTemplate>
+    {
+        public CardTemplateMapping()
+        {
+            HasMany(c => c.Fields)
+                .WithOptional(p => p.CardTemplate)
+                .HasForeignKey(p => p.CardTemplateId);
+           
+        }
     }
 }
