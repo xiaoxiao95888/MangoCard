@@ -13,6 +13,11 @@
             Instructions: ko.observable(),
             FieldModels: ko.observableArray()
         },
+        //预览URL
+        PreviewCard: {
+            MangoCardUrl: ko.observable(),
+            MangoCardTitle: ko.observable(),
+        },
         MediaeType: ko.observable(),
         Mediae: ko.observable(),
         //查看的素材
@@ -168,6 +173,7 @@ Cards.viewModel.edit = function () {
     var model = ko.toJS(this);
     $.get("/api/MangoCardAttribute/" + model.Id, function (card) {
         ko.mapping.fromJS(card, {}, Cards.viewModel.MangoCardAttribute);
+        ko.mapping.fromJS(card, {}, Cards.viewModel.PreviewCard);
         //定位
         $("html, body").stop().animate({
             scrollTop: $("#dataedit").offset().top - 25
@@ -250,17 +256,14 @@ Cards.viewModel.advancedsave = function (data, event) {
 //预览二维码
 Cards.viewModel.preview = function () {
     var model = ko.toJS(this);
-    $.get("/api/MyCards/" + model.Id, function (card) {
-        if (card != null) {
-            ko.mapping.fromJS(card, {}, Cards.viewModel.selectedcardUrl);
-        }
+    $.get("/api/MangoCardAttribute/" + model.Id, function (card) {
+        ko.mapping.fromJS(card, {}, Cards.viewModel.PreviewCard);
         var dialog = $("#preview-dialog");
         dialog.modal({
             keyboard: false,
             show: true,
             backdrop: "static"
         });
-
     });
 }
 //普通编辑保存
@@ -441,13 +444,14 @@ Cards.viewModel.delete = function () {
 //拷贝素材URL
 Cards.viewModel.copylink = function (data, event) {
     var dom = $(event.target);
-    var btn = dom.parents(".caption").find(".hide")[0];
+    var btn = dom.parents(".action-group").find(".hide")[0];
     var clipboard = new Clipboard(btn);
     clipboard.on("success", function (e) {
-        //console.log(e);
+        console.log("copy success");
     });
     clipboard.on("error", function (e) {
         //console.log(e);
+        console.log("copy error");
     });
     btn.click();
     dom.tooltip({
@@ -457,7 +461,7 @@ Cards.viewModel.copylink = function (data, event) {
     dom.on("hidden.bs.tooltip", function () {
         dom.tooltip("destroy");
     });
-
+    clipboard.destroy();
 };
 //tab
 Cards.viewModel.tab = function (data, event) {
@@ -530,7 +534,7 @@ Cards.viewModel.UploadMaterial = function (data, event) {
 Cards.viewModel.ViewUpload = function (data, event) {
     var dom = $(event.target);
     //img-dialog
-    var img= ko.mapping.toJS(data);
+    var img = ko.mapping.toJS(data);
     ko.mapping.fromJS(img, {}, Cards.viewModel.ViewMediae);
     $("#img-dialog").modal({ show: true, backdrop: "static" });
 }

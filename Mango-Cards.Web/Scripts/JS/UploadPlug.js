@@ -24,7 +24,7 @@
                 xhr.open("POST", "/Api/Upload");
                 xhr.send(fd);
             } else {
-                Helper.ShowErrorDialog("文件大小超出限制");
+                Helper.ShowErrorDialog("文件大小超出5M的限制");
             }
         }
     }

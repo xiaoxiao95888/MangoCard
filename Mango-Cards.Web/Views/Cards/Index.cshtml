@@ -56,7 +56,7 @@
 <div id="dataedit">
     <div class="container" data-bind="visible:Cards.viewModel.MangoCardAttribute.MangoCardId()!=null">
         <div class="row">
-            <h2 class="text-center title" data-bind="text:viewModel.MangoCardAttribute.MangoCardTitle">编辑</h2>
+            <h2 class="text-center title" data-bind="text:viewModel.MangoCardAttribute.MangoCardTitle"></h2>
         </div>
         <ul class="nav nav-tabs">
             <li class="active" role="presentation">
@@ -279,10 +279,10 @@
         <div class="modal-content text-center">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" data-bind="text:viewModel.MangoCardAttribute.MangoCardTitle"></h4>
+                <h4 class="modal-title" data-bind="text:Cards.viewModel.PreviewCard.MangoCardTitle"></h4>
             </div>
             <div class="modal-body">
-                <p class="thumbnail" data-bind="qrbind:Cards.viewModel.MangoCardAttribute.MangoCardUrl"></p>
+                <p class="thumbnail" data-bind="qrbind:Cards.viewModel.PreviewCard.MangoCardUrl"></p>
             </div>
             <div class="modal-footer">
                 <p class="text-center">
@@ -347,7 +347,7 @@
                                 <p style="margin-bottom: 0">
                                     <small data-bind="date:UpdateTime"></small>
                                     <span style="float: right">
-                                        <span class="btn-group btn-group-xs" role="group">
+                                        <span class="btn-group btn-group-xs action-group" role="group">
                                             <a class="btn btn-default" data-bind="click:Cards.viewModel.copylink"><i class="fa fa-link"></i></a>
                                             <button type="button" class="hide" data-bind="attr:{'data-clipboard-text':Url}"></button>
                                             <button type="button" class="btn btn-default" data-bind="click:Cards.viewModel.delete" title="删除"><i class="fa fa-trash"></i></button>
