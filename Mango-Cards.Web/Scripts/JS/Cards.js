@@ -16,8 +16,9 @@
         //预览URL
         PreviewCard: {
             MangoCardUrl: ko.observable(),
-            MangoCardTitle: ko.observable(),
+            MangoCardTitle: ko.observable()
         },
+        SaveAndPreview: ko.observable(false),
         MediaeType: ko.observable(),
         Mediae: ko.observable(),
         //查看的素材
@@ -226,8 +227,7 @@ Cards.SelectMediaeDetermine = function () {
 //高级编辑保存
 Cards.viewModel.advancedsave = function (data, event) {
     var dom = $(event.target);
-    dom.find("span").hide();
-    dom.find("i").removeClass("hide");
+    dom.button("loading");
     var model = ko.mapping.toJS(Cards.viewModel.MangoCardAttribute);
     model.HtmlCode = Cards.viewModel.codeMirror().codemirror.doc.cm.getValue();
     $.ajax({
@@ -240,16 +240,17 @@ Cards.viewModel.advancedsave = function (data, event) {
             if (result.Error) {
                 Helper.ShowErrorDialog(result.Message);
             } else {
-                //弹出预览二维码
-                var dialog = $("#preview-dialog");
-                dialog.modal({
-                    keyboard: false,
-                    show: true,
-                    backdrop: "static"
-                });
-                dom.find("span").show();
-                dom.find("i").addClass("hide");
+                if (Cards.viewModel.SaveAndPreview()) {
+                    //弹出预览二维码
+                    var dialog = $("#preview-dialog");
+                    dialog.modal({
+                        keyboard: false,
+                        show: true,
+                        backdrop: "static"
+                    });
+                }
             }
+            dom.button("reset");
         }
     });
 };
@@ -281,15 +282,23 @@ Cards.viewModel.normalsave = function (data, event) {
             if (result.Error) {
                 Helper.ShowErrorDialog(result.Message);
             } else {
-                //弹出预览二维码
-                var dialog = $("#preview-dialog");
-                dialog.modal({
-                    keyboard: false,
-                    show: true,
-                    backdrop: "static"
-                });
+                if (Cards.viewModel.SaveAndPreview()) {
+                    //弹出预览二维码
+                    var dialog = $("#preview-dialog");
+                    dialog.modal({
+                        keyboard: false,
+                        show: true,
+                        backdrop: "static"
+                    });
+                } else {
+                    dom.button('success');
+                    //$(".OperationTips").addClass("alert-success");
+                    //$(".OperationTips h4").text("success");
+                    //$(".OperationTips").show();
+                }
+
             }
-            dom.button('reset');
+            dom.button("reset");
         }
     });
 };
@@ -470,33 +479,39 @@ Cards.viewModel.tab = function (data, event) {
     dom.tab('show');
     if (dom.attr("id") === "advancedlink") {
         $("#editnormal").hide();
-        $("#editadvanced").show(function () {
-            var area = document.getElementById('editadvancedarea');
+        $.get("/api/MangoCardAttribute/" + Cards.viewModel.MangoCardAttribute.MangoCardId(), function (card) {
+            ko.mapping.fromJS(card, {}, Cards.viewModel.MangoCardAttribute);
+            $("#editadvanced").show(function () {
+                var area = document.getElementById("editadvancedarea");
 
-            if (Cards.viewModel.codeMirror() == null) {
-                var codemirror = CodeMirror(area, {
-                    value: Cards.viewModel.MangoCardAttribute.HtmlCode(),
-                    lineNumbers: true,
-                    lineWrapping: true,
-                    mode: "htmlmixed",
-                    theme: "ambiance"
-                });
-                var model = {
-                    codemirror: codemirror,
-                    cardId: Cards.viewModel.MangoCardAttribute.MangoCardId()
+                if (Cards.viewModel.codeMirror() == null) {
+                    var codemirror = CodeMirror(area, {
+                        value: Cards.viewModel.MangoCardAttribute.HtmlCode(),
+                        lineNumbers: true,
+                        lineWrapping: true,
+                        mode: "htmlmixed",
+                        theme: "ambiance"
+                    });
+                    var model = {
+                        codemirror: codemirror,
+                        cardId: Cards.viewModel.MangoCardAttribute.MangoCardId()
+                    }
+                    Cards.viewModel.codeMirror(model);
+                } else {
+                    Cards.viewModel.codeMirror().codemirror.doc.cm.clearHistory();
+                    Cards.viewModel.codeMirror().codemirror.doc.cm.setValue(Cards.viewModel.MangoCardAttribute.HtmlCode());
+                    Cards.viewModel.codeMirror().cardId = Cards.viewModel.MangoCardAttribute.MangoCardId();
                 }
-                Cards.viewModel.codeMirror(model);
-            } else {
-                Cards.viewModel.codeMirror().codemirror.doc.cm.clearHistory();
-                Cards.viewModel.codeMirror().codemirror.doc.cm.setValue(Cards.viewModel.MangoCardAttribute.HtmlCode());
-                Cards.viewModel.codeMirror().cardId = Cards.viewModel.MangoCardAttribute.MangoCardId();
-            }
-            //定位
-            $("html, body").stop().animate({
-                scrollTop: $("#dataedit").offset().top - 25
-            }, 600);
+
+                //定位
+                $("html, body").stop().animate({
+                    scrollTop: $("#dataedit").offset().top - 25
+                }, 600);
+
+            });
 
         });
+
     } else {
         $("#editadvanced").hide();
         $("#editnormal").show();
