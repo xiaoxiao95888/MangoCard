@@ -66,11 +66,11 @@
 };
 Cards.viewModel.CurrentMediaIds = ko.computed({
     read: function () {
-        var ids = []
+        var ids = [];
         ko.utils.arrayForEach(Cards.viewModel.MangoCardAttribute.FieldModels(), function (item) {
             var model = ko.mapping.toJS(item.MediaModel);
             if (model != null) {
-                ids.push(model.Id)
+                ids.push(model.Id);
             }
         });
         return ids;
@@ -238,7 +238,7 @@ Cards.viewModel.advancedsave = function (data, event) {
         dataType: "json",
         success: function (result) {
             if (result.Error) {
-                Helper.ShowErrorDialog(result.Message);
+                Cards.viewModel.SaveTipsError(result.Message);
             } else {
                 if (Cards.viewModel.SaveAndPreview()) {
                     //弹出预览二维码
@@ -249,11 +249,27 @@ Cards.viewModel.advancedsave = function (data, event) {
                         backdrop: "static"
                     });
                 }
+                Cards.viewModel.SaveTipsSuccess();
             }
             dom.button("reset");
         }
     });
 };
+//保存提示
+Cards.viewModel.SaveTipsError = function (message) {
+    $(".operation-tips").removeClass("operation-tips-danger").removeClass("operation-tips-success");
+    $(".operation-tips").text(message);
+    $(".operation-tips").addClass("operation-tips-danger");
+    $(".operation-tips").fadeIn();
+    setTimeout(function() {$(".operation-tips").fadeOut()} , 1000);
+}
+Cards.viewModel.SaveTipsSuccess = function () {
+    $(".operation-tips").removeClass("operation-tips-danger").removeClass("operation-tips-success");
+    $(".operation-tips").text("操作成功");
+    $(".operation-tips").addClass("operation-tips-success");
+    $(".operation-tips").fadeIn();
+    setTimeout(function () { $(".operation-tips").fadeOut() }, 1000);
+}
 //预览二维码
 Cards.viewModel.preview = function () {
     var model = ko.toJS(this);
@@ -280,7 +296,7 @@ Cards.viewModel.normalsave = function (data, event) {
         dataType: "json",
         success: function (result) {
             if (result.Error) {
-                Helper.ShowErrorDialog(result.Message);
+                Cards.viewModel.SaveTipsError(result.Message);
             } else {
                 if (Cards.viewModel.SaveAndPreview()) {
                     //弹出预览二维码
@@ -290,12 +306,8 @@ Cards.viewModel.normalsave = function (data, event) {
                         show: true,
                         backdrop: "static"
                     });
-                } else {
-                    dom.button('success');
-                    //$(".OperationTips").addClass("alert-success");
-                    //$(".OperationTips h4").text("success");
-                    //$(".OperationTips").show();
                 }
+                Cards.viewModel.SaveTipsSuccess();
 
             }
             dom.button("reset");

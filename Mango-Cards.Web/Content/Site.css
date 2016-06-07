@@ -12,6 +12,26 @@ body {
     margin-bottom: 25px;
 }
 
+.operation-tips-success {
+    text-align: center;
+    background-color: #5cb85c;
+    color: #fff;
+    position: absolute;
+    top: 555px;
+    z-index: 1;
+    width: 100%;
+    line-height: 30px;
+}
+.operation-tips-danger {
+    text-align: center;
+    background-color: #d9534f;
+    color: #fff;
+    position: absolute;
+    top: 555px;
+    z-index: 1;
+    width: 100%;
+    line-height: 30px;
+}
 .align-middle {
     margin-top: 10%;
     margin-bottom: 10%;

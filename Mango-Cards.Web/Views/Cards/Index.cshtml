@@ -53,8 +53,8 @@
     <hr data-bind="visible:viewModel.mycards().length!=0" />
 </div>
 <div id="dataedit">
-    <div class="container" data-bind="visible:Cards.viewModel.MangoCardAttribute.MangoCardId()!=null">
-        <div class="row">
+    <div class="container" style="position: relative;padding-left: 0px; padding-right: 0px;" data-bind="visible:Cards.viewModel.MangoCardAttribute.MangoCardId()!=null">
+        <div>
             <h2 class="text-center title" data-bind="text:viewModel.MangoCardAttribute.MangoCardTitle"></h2>
         </div>
         <ul class="nav nav-tabs">
@@ -65,10 +65,11 @@
                 <a href="#" data-bind="click:Cards.viewModel.tab" id="advancedlink">代码模式</a>
             </li>
             @*<li class="pull-right">
-                <span class="text-success" style="display: block; padding: 10px 15px; position: relative;"></span>
-               
-            </li>*@
+                    <span class="text-success" style="display: block; padding: 10px 15px; position: relative;"></span>
+
+                </li>*@
         </ul>
+        <p class="operation-tips" style="display: none"></p>
         <!--普通编辑模式 -->
         <div class="tab-content" style="border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; padding:10px;" id="editnormal">
             <div class="text-center" style="height: 200px; line-height: 200px" data-bind="visible:viewModel.MangoCardAttribute.FieldModels().length==0">
@@ -139,7 +140,7 @@
             </p>
         </div>
         <!--高级编辑模式 -->
-        <div class="tab-content" id="editadvanced" style="border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; padding:10px">
+        <div class="tab-content" id="editadvanced" style="border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; padding: 10px">
             <div id="editadvancedarea">
             </div>
             <hr />
@@ -158,6 +159,7 @@
                 </span>
             </p>
         </div>
+
     </div>
 </div>
 <div id="dataview">
