@@ -17,7 +17,7 @@ using RazorEngine.Templating;
 
 namespace Mango_Cards.Web.Controllers.API
 {
-    [Authorize]
+    [UserLogin]
     public class MangoCardAttributeController : BaseApiController
     {
 

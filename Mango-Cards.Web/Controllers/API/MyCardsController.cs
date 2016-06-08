@@ -15,7 +15,7 @@ using Mango_Cards.Web.Models;
 
 namespace Mango_Cards.Web.Controllers.API
 {
-    [Authorize]
+    [UserLogin]
     public class MyCardsController : BaseApiController
     {
         private readonly IWeChatUserService _weChatUserService;

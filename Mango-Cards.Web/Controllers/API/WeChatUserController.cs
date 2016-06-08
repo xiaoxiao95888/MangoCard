@@ -5,7 +5,7 @@ using Mango_Cards.Web.Infrastructure.Filters;
 
 namespace Mango_Cards.Web.Controllers.API
 {
-    [Authorize]
+    [UserLogin]
     public class WeChatUserController : BaseApiController
     {
         public object Get()

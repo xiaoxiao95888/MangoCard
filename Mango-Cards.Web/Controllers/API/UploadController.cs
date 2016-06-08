@@ -14,7 +14,7 @@ using Mango_Cards.Web.Models;
 
 namespace Mango_Cards.Web.Controllers.API
 {
-    [Authorize]
+    [UserLogin]
     public class UploadController : BaseApiController
     {
         private readonly IMediaService _mediaService;
