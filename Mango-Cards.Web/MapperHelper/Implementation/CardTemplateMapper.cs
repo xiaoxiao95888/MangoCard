@@ -22,7 +22,10 @@ namespace Mango_Cards.Web.MapperHelper.Implementation
 
         public void Detail()
         {
-            Mapper.CreateMap<Field, FieldModel>().ForMember(n => n.FieldType, opt => opt.MapFrom(src => src.FieldType));
+            var mediaMapper = new MediaMapper();
+            mediaMapper.Create();
+            Mapper.CreateMap<Field, FieldModel>().ForMember(n => n.FieldType, opt => opt.MapFrom(src => src.FieldType))
+                .ForMember(n => n.MediaModel, opt => opt.MapFrom(src => Mapper.Map<Media, MediaModel>(src.Media)));
             Mapper.CreateMap<CardTemplate, CardTemplateDetailModel>()
                 .ForMember(n => n.EmployeeId, opt => opt.MapFrom(src => src.Employee.Id))
                 .ForMember(n => n.EmployeeName, opt => opt.MapFrom(src => src.Employee.Name))
