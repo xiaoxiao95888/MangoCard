@@ -261,7 +261,7 @@ Cards.viewModel.SaveTipsError = function (message) {
     $(".operation-tips").text(message);
     $(".operation-tips").addClass("operation-tips-danger");
     $(".operation-tips").fadeIn();
-    setTimeout(function() {$(".operation-tips").fadeOut()} , 1000);
+    setTimeout(function () { $(".operation-tips").fadeOut() }, 1000);
 }
 Cards.viewModel.SaveTipsSuccess = function () {
     $(".operation-tips").removeClass("operation-tips-danger").removeClass("operation-tips-success");
@@ -603,12 +603,18 @@ function uploadCanceled(evt) {
 }
 $(function () {
     ko.applyBindings(Cards);
-    $.get("/api/WeChatUser/", function (wechatuser) {
-        if (wechatuser != null) {
-            ko.mapping.fromJS(wechatuser, {}, Cards.viewModel.wechatuser);
-            $.get("/api/MyCards/", function (cards) {
-                ko.mapping.fromJS(cards, {}, Cards.viewModel.mycardtypes);
-            });
-        }
+
+
+    $.get("/api/MyCards/", function (cards) {
+        ko.mapping.fromJS(cards, {}, Cards.viewModel.mycardtypes);
     });
+
+    //$.get("/api/WeChatUser/", function (wechatuser) {
+    //    if (wechatuser != null) {
+    //        ko.mapping.fromJS(wechatuser, {}, Cards.viewModel.wechatuser);
+    //        $.get("/api/MyCards/", function (cards) {
+    //            ko.mapping.fromJS(cards, {}, Cards.viewModel.mycardtypes);
+    //        });
+    //    }
+    //});
 });

@@ -8,6 +8,7 @@ using Mango_Cards.Library.Services;
 using Mango_Cards.Web.Infrastructure.Filters;
 using Mango_Cards.Web.Models;
 using System.Dynamic;
+using Microsoft.AspNet.Identity;
 
 
 namespace Mango_Cards.Web.Controllers.API
@@ -51,7 +52,7 @@ namespace Mango_Cards.Web.Controllers.API
         [Authorize]
         public object Get(Guid id)
         {
-            var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
+            var wechatuser = _weChatUserService.GetWeChatUser(User.Identity.GetUserId());
             var card = wechatuser.MangoCards.FirstOrDefault(n => n.Id == id);
             if (card != null)
             {

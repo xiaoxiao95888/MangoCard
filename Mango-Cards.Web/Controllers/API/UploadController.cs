@@ -11,6 +11,7 @@ using Mango_Cards.Library.Models;
 using Mango_Cards.Library.Services;
 using Mango_Cards.Web.Infrastructure.Filters;
 using Mango_Cards.Web.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Mango_Cards.Web.Controllers.API
 {
@@ -27,7 +28,7 @@ namespace Mango_Cards.Web.Controllers.API
         public object Post()
         {
             var fileFullPath = string.Empty;
-            var weChatUserId = HttpContext.Current.User.Identity.GetUser().Id;
+            var weChatUserId = User.Identity.GetUserId();
             var newFileName = string.Empty;
             try
             {
@@ -69,7 +70,7 @@ namespace Mango_Cards.Web.Controllers.API
                         ExtensionName = extension,
                         MediaTypeId = typeId,
                         Name = newFileName,
-                        WeChatUserId = weChatUserId
+                        WeChatUserId =new Guid(weChatUserId) 
                     };
                     _mediaService.Insert(media);
                 }

@@ -262,14 +262,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\CustomIdentity.cs" />
-    <Compile Include="Infrastructure\CustomPrincipal.cs" />
     <Compile Include="Infrastructure\Filters\CustomFilter.cs" />
     <Compile Include="Infrastructure\Filters\Extensions.cs" />
     <Compile Include="Infrastructure\Helper.cs" />
     <Compile Include="Infrastructure\HttpService.cs" />
     <Compile Include="Infrastructure\Log.cs" />
     <Compile Include="Infrastructure\NativePay.cs" />
+    <Compile Include="Infrastructure\UserService.cs" />
     <Compile Include="Infrastructure\WxPayApi.cs" />
     <Compile Include="Infrastructure\WxPayConfig.cs" />
     <Compile Include="Infrastructure\WxPayException.cs" />

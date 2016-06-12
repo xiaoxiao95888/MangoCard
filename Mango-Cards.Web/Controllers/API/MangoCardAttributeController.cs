@@ -12,6 +12,7 @@ using Mango_Cards.Library.Services;
 using Mango_Cards.Web.Infrastructure.Filters;
 using Mango_Cards.Web.MapperHelper;
 using Mango_Cards.Web.Models;
+using Microsoft.AspNet.Identity;
 using RazorEngine;
 using RazorEngine.Templating;
 
@@ -34,7 +35,7 @@ namespace Mango_Cards.Web.Controllers.API
         /// <returns></returns>
         public object Get(Guid id)
         {
-            var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
+            var wechatuser = _weChatUserService.GetWeChatUser(User.Identity.GetUserId());
             var card = wechatuser.MangoCards.Where(n => !n.IsDeleted).FirstOrDefault(n => n.Id == id);
             var model = Mapper.Map<MangoCard, MangoCardAttributeModel>(card);
             return model;
@@ -47,7 +48,7 @@ namespace Mango_Cards.Web.Controllers.API
         /// <returns></returns>
         public object Put(Guid id, MangoCardAttributeModel model)
         {
-            var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
+            var wechatuser = _weChatUserService.GetWeChatUser(User.Identity.GetUserId());
             var card = wechatuser.MangoCards.FirstOrDefault(n => n.IsDeleted == false && n.Id == id);
             if (card != null)
             {

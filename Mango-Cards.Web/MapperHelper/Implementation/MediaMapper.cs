@@ -6,6 +6,7 @@ using AutoMapper;
 using Mango_Cards.Library.Models;
 using Mango_Cards.Web.Infrastructure.Filters;
 using Mango_Cards.Web.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Mango_Cards.Web.MapperHelper.Implementation
 {
@@ -13,7 +14,7 @@ namespace Mango_Cards.Web.MapperHelper.Implementation
     {
         public void Create()
         {
-            var userId = HttpContext.Current.User.Identity.GetUser().Id;
+            var userId = HttpContext.Current.User.Identity.GetUserId();
             var uploadFileUrl = ConfigurationManager.AppSettings["UploadFileUrl"] + userId + "/";
             const string cssThumbnailUrl = "/images/css.png";
             const string jsThumbnailUrl = "/images/js.png";

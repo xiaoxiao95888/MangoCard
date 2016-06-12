@@ -10,7 +10,7 @@ namespace Mango_Cards.Web.Infrastructure.Filters
 {
     public static class Extensions
     {
-        public static WeChatUserModel GetUser(this IIdentity identity)
+        public static WeChatUserModel GetWeChatUserModel(this IIdentity identity)
         {
             var userId = identity.GetUserName();
             try

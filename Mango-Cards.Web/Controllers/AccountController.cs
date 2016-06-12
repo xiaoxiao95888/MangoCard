@@ -409,8 +409,8 @@ namespace Mango_Cards.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            //AuthenticationManager.SignOut();
-            FormsAuthentication.SignOut();
+            AuthenticationManager.SignOut();
+            //FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
 

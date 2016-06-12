@@ -42,7 +42,7 @@ namespace Mango_Cards.Web.Controllers
 
             return View();
         }
-        
+
         //[HttpPost]
         //public ActionResult Upload()
         //{
@@ -79,7 +79,7 @@ namespace Mango_Cards.Web.Controllers
         //            salesFile.SalesFlows = salesFlows;
         //            var salesDate = salesFile.SalesFlows.Select(n => n.SalesDate).Max().AddMonths(1);
         //            salesFile.ReportMonth = new DateTime(salesDate.Year, (salesDate.Month), 1);
-                   
+
         //        }
         //        catch (Exception ex)
         //        {

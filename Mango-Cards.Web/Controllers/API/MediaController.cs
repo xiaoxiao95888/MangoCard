@@ -12,6 +12,7 @@ using Mango_Cards.Library.Models;
 using Mango_Cards.Web.Infrastructure.Filters;
 using Mango_Cards.Web.MapperHelper;
 using Mango_Cards.Web.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Mango_Cards.Web.Controllers.API
 {
@@ -30,7 +31,7 @@ namespace Mango_Cards.Web.Controllers.API
         public object Get()
         {
             var mediaTypeId = HttpContext.Current.Request["MediaTypeId"];
-            var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
+            var wechatuser = _weChatUserService.GetWeChatUser(User.Identity.GetUserId());
             var source = wechatuser.Mediae.Where(n => !n.IsDeleted);
             if (!string.IsNullOrEmpty(mediaTypeId))
             {
@@ -42,7 +43,7 @@ namespace Mango_Cards.Web.Controllers.API
         }
         public object Delete(Guid id)
         {
-            var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
+            var wechatuser = _weChatUserService.GetWeChatUser(User.Identity.GetUserId());
             var media = wechatuser.Mediae.FirstOrDefault(n => n.IsDeleted == false && n.Id == id);
             if (media != null)
             {

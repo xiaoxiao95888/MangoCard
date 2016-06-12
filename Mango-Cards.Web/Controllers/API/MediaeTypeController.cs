@@ -9,6 +9,7 @@ using Mango_Cards.Library.Services;
 using Mango_Cards.Web.Infrastructure.Filters;
 using Mango_Cards.Web.MapperHelper;
 using Mango_Cards.Web.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Mango_Cards.Web.Controllers.API
 {
@@ -23,7 +24,7 @@ namespace Mango_Cards.Web.Controllers.API
 
         public object Get()
         {
-            var wechatuser = _weChatUserService.GetWeChatUser(HttpContext.Current.User.Identity.GetUser().Id);
+            var wechatuser = _weChatUserService.GetWeChatUser(User.Identity.GetUserId());
             return
                 wechatuser?.Mediae.GroupBy(n => n.MediaType)
                     .Select(n => new MediaTypeModel {Id = n.Key.Id, Name = n.Key.Name})

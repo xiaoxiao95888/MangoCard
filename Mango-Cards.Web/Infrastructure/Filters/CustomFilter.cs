@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Http.Controllers;
 using System.Web.Mvc;
 using Mango_Cards.Web.Models;
+using Microsoft.AspNet.Identity;
 using ActionFilterAttribute = System.Web.Http.Filters.ActionFilterAttribute;
 
 namespace Mango_Cards.Web.Infrastructure.Filters
@@ -15,7 +16,7 @@ namespace Mango_Cards.Web.Infrastructure.Filters
     {
         public override void OnActionExecuting(HttpActionContext filterContext)
         {
-            if (HttpContext.Current.User.Identity.GetUser() == null)
+            if (HttpContext.Current.User.Identity.GetUserId() == null)
             {
                 var response = new ResponseModel
                 {

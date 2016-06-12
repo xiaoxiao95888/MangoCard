@@ -1,7 +1,9 @@
-﻿using System.Web.Http;
+﻿using System.Data.Entity;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Mango_Cards.Service;
 
 namespace Mango_Cards.Web
 {
@@ -11,6 +13,8 @@ namespace Mango_Cards.Web
         {
             UnityConfig.RegisterComponents();
             AreaRegistration.RegisterAllAreas();
+            Database.SetInitializer<MangoCardsDataContext>(null);
+
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

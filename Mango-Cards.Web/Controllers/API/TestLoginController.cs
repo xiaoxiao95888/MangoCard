@@ -19,16 +19,14 @@ namespace Mango_Cards.Web.Controllers.API
         public TestLoginController(IWeChatUserService weChatUserService)
         {
             _weChatUserService = weChatUserService;
-          
+
         }
-        
+
         public object Get()
         {
             var wechartuser = _weChatUserService.GetWeChatUsers().FirstOrDefault();
-            //var identity = new CustomIdentity(wechartuser);
-            //var principal = new CustomPrincipal(identity);
-            //HttpContext.Current.User = principal;
-            FormsAuthentication.SetAuthCookie(wechartuser.Id.ToString(), true);
+            var identity = UserService.CreateIdentity(wechartuser, DefaultAuthenticationTypes.ApplicationCookie);
+            HttpContext.Current.GetOwinContext().Authentication.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
             return Success();
         }
     }

@@ -15,9 +15,9 @@ namespace Mango_Cards.Service.Services
         {
         }
 
-        public WeChatUser GetWeChatUser(string openId)
+        public WeChatUser GetWeChatUser(string id)
         {
-            return DbContext.WeChatUsers.FirstOrDefault(n => n.OpenId == openId);
+            return GetWeChatUser(new Guid(id));
         }
 
         public WeChatUser GetWeChatUser(Guid id)

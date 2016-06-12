@@ -5,13 +5,13 @@ using Mango_Cards.Web.Infrastructure.Filters;
 
 namespace Mango_Cards.Web.Controllers.API
 {
-    [UserLogin]
+    //[UserLogin]
     public class WeChatUserController : BaseApiController
     {
         public object Get()
         {
-
-            return HttpContext.Current.User.Identity.GetUser();
+            return null;
+            //return HttpContext.Current.User.Identity.GetUser();
         }
     }
 }
