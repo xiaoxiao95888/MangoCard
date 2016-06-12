@@ -46,16 +46,30 @@ Home.viewModel.filters = function (data, event) {
           });
 };
 Home.viewModel.showqrcode = function () {
-
     Home.viewModel.selectdemo(ko.toJS(this));
     $("#Dialog").modal({
         show: true,
         backdrop: "static"
     });
 };
-Home.viewModel.closedialog = function () {
-    $("#Dialog").modal("hide");
-
+Home.viewModel.ChooseCard = function () {
+    var model = ko.toJS(this);
+    $.ajax({
+        type: "post",
+        url: "/api/MyCards/" + model.Id,
+        contentType: "application/json",        
+        dataType: "json",
+        success: function (result) {
+            if (result.Error) {
+                if (result.ErrorCode == 2000) {
+                    location.href = "../account/login";
+                }
+            } else {
+                console.log("susscs");
+            }
+           
+        }
+    });
 };
 ko.bindingHandlers.qrbind = {
     init: function (element, valueAccessor, allBindingsAccessor, viewModel) {

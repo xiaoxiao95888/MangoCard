@@ -9,9 +9,8 @@ namespace Mango_Cards.Web.Controllers.API
     public class WeChatUserController : BaseApiController
     {
         public object Get()
-        {
-            return null;
-            //return HttpContext.Current.User.Identity.GetUser();
+        {            
+            return HttpContext.Current.User.Identity.GetWeChatUserModel();
         }
     }
 }

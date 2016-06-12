@@ -25,6 +25,11 @@ namespace Mango_Cards.Service.Services
             return DbContext.WeChatUsers.FirstOrDefault(n => n.Id == id);
         }
 
+        public WeChatUser GetWeChatUserByOpenId(string openId)
+        {
+            return DbContext.WeChatUsers.FirstOrDefault(n => n.OpenId == openId);
+        }
+
         public IQueryable<WeChatUser> GetWeChatUsers()
         {
             return DbContext.WeChatUsers.Where(n=>!n.IsDeleted);

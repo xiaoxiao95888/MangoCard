@@ -19,12 +19,14 @@ namespace Mango_Cards.Library.Models
         /// <summary>
         /// 页面收集到的数据
         /// </summary>
-        public virtual ICollection<PageValue> PageValues { get; set; }
+        public virtual ICollection<PageValue> PageValues { get; set; }        
+        public string ThumbnailUrl { get; set; }
         /// <summary>
         /// share出去的缩略图
         /// </summary>
-        public string ThumbnailUrl { get; set; }
-        
+        public string ShareThumbnailUrl { get; set; }
+        public Guid? WeChatUserId { get; set; }
+        [ForeignKey("WeChatUserId")]
         /// <summary>
         /// 持有人
         /// </summary>

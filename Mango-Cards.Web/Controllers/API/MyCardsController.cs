@@ -13,6 +13,8 @@ using Mango_Cards.Web.Infrastructure.Filters;
 using Mango_Cards.Web.MapperHelper;
 using Mango_Cards.Web.Models;
 using Microsoft.AspNet.Identity;
+using RazorEngine;
+using RazorEngine.Templating;
 
 namespace Mango_Cards.Web.Controllers.API
 {
@@ -20,11 +22,14 @@ namespace Mango_Cards.Web.Controllers.API
     public class MyCardsController : BaseApiController
     {
         private readonly IWeChatUserService _weChatUserService;
+        private readonly ICardTemplateService _cardTemplateService;
 
-        public MyCardsController(IWeChatUserService weChatUserService, IMapperFactory mapperFactory)
+        public MyCardsController(IWeChatUserService weChatUserService, ICardTemplateService cardTemplateService, IMapperFactory mapperFactory)
         {
             _weChatUserService = weChatUserService;
+            _cardTemplateService = cardTemplateService;
             mapperFactory.GetMangoCardMapper().Create();
+            mapperFactory.GetCardTemplateMapper().Detail();
         }
         public object Get()
         {
@@ -52,7 +57,6 @@ namespace Mango_Cards.Web.Controllers.API
             return null;
 
         }
-
         public object Put(Guid id, MangoCardAttributeModel model)
         {
             var wechatuser = _weChatUserService.GetWeChatUser(User.Identity.GetUserId());
@@ -72,6 +76,39 @@ namespace Mango_Cards.Web.Controllers.API
 
             }
             return Failed("Can't find card!");
+        }
+        /// <summary>
+        /// 选择card
+        /// </summary>
+        /// <returns></returns>
+        public object Post(Guid id)
+        {
+            var card = _cardTemplateService.GetCardTemplate(id);
+            if (card != null)
+            {
+                var model = Mapper.Map<CardTemplate, CardTemplateDetailModel>(card);
+                var html = Engine.Razor.RunCompile(model.HtmlCode, Guid.NewGuid().ToString(), model.GetType(), model);
+                var mangocard = new MangoCard
+                {
+                    Id = Guid.NewGuid(),
+                    Fields = card.Fields.Select(p => new Field
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = p.Name,
+                        FieldValue = p.FieldValue,
+                        FieldType = p.FieldType,
+                        MediaId = p.MediaId
+                    }).ToArray(),
+                    WeChatUserId = new Guid(User.Identity.GetUserId()),
+                    ThumbnailUrl = card.ThumbnailUrl,
+                    Title = card.Title,
+                    HtmlCode = html
+                };
+                card.MangoCards.Add(mangocard);
+                _cardTemplateService.Update();
+                return Success();
+            }
+            return Failed();
         }
     }
 }

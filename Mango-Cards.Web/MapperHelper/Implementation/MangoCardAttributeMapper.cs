@@ -17,7 +17,7 @@ namespace Mango_Cards.Web.MapperHelper.Implementation
             mediaMapper.Create();
             Mapper.CreateMap<Field, FieldModel>()
                 .ForMember(n => n.FieldType, opt => opt.MapFrom(src => src.FieldType))
-                .ForMember(n => n.MediaModel, opt => opt.MapFrom(src => src.Media));
+                .ForMember(n => n.MediaModel, opt => opt.MapFrom(src => Mapper.Map<Media, MediaModel>(src.Media)));
             Mapper.CreateMap<MangoCard, MangoCardAttributeModel>()
                 .ForMember(n => n.MangoCardId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(n => n.MangoCardTitle, opt => opt.MapFrom(src => src.Title))

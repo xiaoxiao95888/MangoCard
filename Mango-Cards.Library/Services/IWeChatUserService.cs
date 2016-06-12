@@ -13,6 +13,7 @@ namespace Mango_Cards.Library.Services
         void Update();
         WeChatUser GetWeChatUser(Guid id);
         WeChatUser GetWeChatUser(string id);
+        WeChatUser GetWeChatUserByOpenId(string openId); 
         IQueryable<WeChatUser> GetWeChatUsers();
     }
 }

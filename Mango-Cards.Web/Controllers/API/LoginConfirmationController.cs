@@ -24,7 +24,7 @@ namespace Mango_Cards.Web.Controllers.API
         {
             if (model.WeChatUserModel.OpenId != null)
             {
-                var wecharuser = _weChatUserService.GetWeChatUser(model.WeChatUserModel.OpenId);
+                var wecharuser = _weChatUserService.GetWeChatUserByOpenId(model.WeChatUserModel.OpenId);
                 if (wecharuser == null)
                 {
                     wecharuser = new WeChatUser

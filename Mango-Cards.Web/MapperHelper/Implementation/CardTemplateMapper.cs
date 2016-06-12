@@ -4,6 +4,7 @@ using AutoMapper;
 using Mango_Cards.Library.Models;
 using Mango_Cards.Web.MapperHelper.IMapperInterfaces;
 using Mango_Cards.Web.Models;
+using System.Web;
 
 namespace Mango_Cards.Web.MapperHelper.Implementation
 {
@@ -38,7 +39,11 @@ namespace Mango_Cards.Web.MapperHelper.Implementation
                 .ForMember(n => n.EmployeeName, opt => opt.MapFrom(src => src.Employee.Name))
                 .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
                 .ForMember(n => n.CardTypeName, opt => opt.MapFrom(src => src.CardType.Name))
-                .ForMember(n => n.ThumbnailUrl, opt => opt.MapFrom(src => _cardThumbnailPath + src.ThumbnailUrl));
+                .ForMember(n => n.ThumbnailUrl, opt => opt.MapFrom(src => _cardThumbnailPath + src.ThumbnailUrl))
+                 .ForMember(n => n.Url,
+                    opt =>
+                        opt.MapFrom(
+                            src => $"http://{HttpContext.Current.Request.Url.Host}/Cards/RedirectCardView/{src.Id}"));
         }
     }
 }

@@ -58,11 +58,15 @@ namespace Mango_Cards.Web.Controllers.API
             {
                 log.IsDeleted = true;
                 _loginLogService.Update();
-               
+
                 //var identity = new CustomIdentity(wechartuser);
                 //var principal = new CustomPrincipal(identity);
                 //HttpContext.Current.User = principal;
-                FormsAuthentication.SetAuthCookie(log.WeChatUser.Id.ToString(), true);}
+                //FormsAuthentication.SetAuthCookie(log.WeChatUser.Id.ToString(), true);
+                var wechartuser = log.WeChatUser;
+                var identity = UserService.CreateIdentity(wechartuser, DefaultAuthenticationTypes.ApplicationCookie);
+                System.Web.HttpContext.Current.GetOwinContext().Authentication.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
+            }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
     }

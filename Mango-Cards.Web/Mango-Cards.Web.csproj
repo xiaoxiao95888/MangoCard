@@ -288,7 +288,6 @@
     <Compile Include="MapperHelper\Implementation\MediaMapper.cs" />
     <Compile Include="MapperHelper\Implementation\MediaTypeMapper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\CardFieldsModel.cs" />
     <Compile Include="Models\CardTemplateModel.cs" />
     <Compile Include="Models\CardTypeModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
