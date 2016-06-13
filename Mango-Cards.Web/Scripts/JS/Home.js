@@ -65,7 +65,7 @@ Home.viewModel.ChooseCard = function () {
                     location.href = "../account/login";
                 }
             } else {
-                console.log("susscs");
+                location.href = "../cards";
             }
            
         }

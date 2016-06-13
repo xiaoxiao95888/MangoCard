@@ -35,7 +35,7 @@ namespace Mango_Cards.Web.Controllers.API
         {
             var wechatuser = _weChatUserService.GetWeChatUser(User.Identity.GetUserId());
             return
-                wechatuser.MangoCards.Where(n => !n.IsDeleted)
+                wechatuser.MangoCards.Where(n => !n.IsDeleted).OrderByDescending(n=>n.UpdateTime)
                     .GroupBy(n => n.CardTemplate.CardType)
                     .Select(n => new MangoCardTypeModel
                     {

@@ -39,9 +39,9 @@ body {
 
 .grid-item {
     background-size: cover !important;
-    height: 400px;
+    height: 445px;
     overflow: hidden;
-    width: 225px;
+    width: 250px;
 }
 
 .menu_item {
@@ -109,8 +109,8 @@ body {
 }
 
 .grid-item > .caption {
-    height: 400px;
-    width: 225px;
+    height: 445px;
+    width: 250px;
     position: absolute;
     background: rgba(0, 0, 0, 0.75) none repeat scroll 0 0;
     display: none;
@@ -120,8 +120,8 @@ body {
 }
 
 .grid-item > img {
-    height: 400px;
-    width: 225px;
+    height: 445px;
+    width: 250px;
 }
 
 .item-container {
