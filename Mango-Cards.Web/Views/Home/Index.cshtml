@@ -28,7 +28,7 @@
             <!-- /ko -->
         </ul>
 
-        <div class="row" style="margin-top:25px" data-bind="foreach:viewModel.carddemos" id="container">
+        <div class="row" style="margin-top:25px; margin-bottom:60px" data-bind="foreach:viewModel.carddemos" id="container">
             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 portfolio-item" data-bind="css:CardTypeId,isotope: {container: '#container', itemSelector: '.portfolio-item'}">
                 <div class="grid-item video-layout">
                     <div class="caption img-rounded">
@@ -36,8 +36,8 @@
                             <div class="item-inner-container">
                                 <div>
                                     @*<div style="width: 100%; margin-bottom: 15px;">
-                                        <div class="img-responsive img-rounded img-thumbnail" data-bind="qrbind:Url"></div>
-                                    </div>*@
+                                            <div class="img-responsive img-rounded img-thumbnail" data-bind="qrbind:Url"></div>
+                                        </div>*@
                                     <a class="text-white" data-bind="click:Home.viewModel.showqrcode" href="#">效果</a>
                                     <a class="text-white" data-bind="click:Home.viewModel.ChooseCard" href="#">选择</a>
                                 </div>
@@ -49,9 +49,54 @@
                 </div>
             </div>
         </div>
+        <hr />
+        <div class="row" style="margin-top:25px;margin-bottom:60px">
+            <h2 class="text-center title" style="margin-bottom:25px;">联系我们</h2>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <div class="team">
+                    <div class="caption">
+                        <div class="item-container">
+                            <div class="item-inner-container">
+                                <h4 style="text-transform: uppercase;letter-spacing: 0.2em;color:#777777"> Ben</h4>
+                                <p style="text-transform: uppercase;letter-spacing: 0.2em;color:#777777">后端攻城狮</p>
+                                <p style="text-transform: uppercase;letter-spacing: 0.2em;color:#aaa">Back-end developer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <img class="img-responsive" src="~/images/team-2.jpg">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <div class="team">
+                    <div class="caption">
+                        <div class="item-container">
+                            <div class="item-inner-container">
+                                <h4 style="text-transform: uppercase;letter-spacing: 0.2em;color:#777777"> Mike</h4>
+                                <p style="text-transform: uppercase;letter-spacing: 0.2em;color:#777777">前端攻城狮</p>
+                                <p style="text-transform: uppercase;letter-spacing: 0.2em;color:#aaa">Front-end developer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <img class="img-responsive" src="~/images/team-1.jpg">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <div class="team">
+                    <div class="caption">
+                        <div class="item-container">
+                            <div class="item-inner-container">
+                                <h4 style="text-transform: uppercase;letter-spacing: 0.2em;color:#777777"> William</h4>
+                                <p style="text-transform: uppercase;letter-spacing: 0.2em;color:#777777">项目经理</p>
+                                <p style="text-transform: uppercase;letter-spacing: 0.2em;color:#aaa">Project Manager</p>
+                            </div>
+                        </div>
+                    </div>
+                    <img class="img-responsive" src="~/images/team-3.jpg">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
 <div class="modal fade" tabindex="-1" id='Dialog' aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -59,7 +104,7 @@
                 @*<button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true" style="font-family: sans-serif">×</span></button>*@
                 <p class="modal-title text-center" data-bind="text:Home.viewModel.selectdemo()!=null?Home.viewModel.selectdemo().Title:''">Modal title</p>
             </div>
-            <div class="modal-body text-center" data-bind="qrbind:viewModel.demourl">
+            <div class="modal-body text-center" data-bind="qrbind:viewModel.selectdemo">
 
             </div>
             <div class="modal-footer modal-footer-center">
@@ -69,4 +114,4 @@
     </div>
 </div>
 
-<button id="testbtn">测试登录</button>
+

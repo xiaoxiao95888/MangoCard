@@ -381,8 +381,12 @@
     <Content Include="images\file.png" />
     <Content Include="images\icon_card_selected218877.png" />
     <Content Include="images\js.png" />
+    <Content Include="images\logo-footer.png" />
     <Content Include="images\logo.png" />
     <Content Include="images\logomobile.png" />
+    <Content Include="images\team-1.jpg" />
+    <Content Include="images\team-2.jpg" />
+    <Content Include="images\team-3.jpg" />
     <Content Include="OGV\We-Work-We-Wait.ogv" />
     <Content Include="fonts\regencielight-webfont.eot" />
     <Content Include="fonts\regencielight-webfont.ttf" />

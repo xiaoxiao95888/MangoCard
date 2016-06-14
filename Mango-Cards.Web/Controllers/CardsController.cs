@@ -10,7 +10,7 @@ using Mango_Cards.Web.Infrastructure;
 
 namespace Mango_Cards.Web.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class CardsController : Controller
     {
         private readonly ICardTemplateService _cardTemplateService;

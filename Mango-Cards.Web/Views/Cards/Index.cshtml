@@ -6,7 +6,7 @@
 @Styles.Render("~/Content/Cards")
 
 <div class="container" style="width: 1140px !important;">
-    <h2 class="text-center title">我的卡片 </h2>
+    <h2 class="text-center title">我的卡片</h2>
     <div class="well text-center" data-bind="visible:viewModel.mycards().length==0">
         <div class="align-middle">
             您尚未选择任何 Mango Card
@@ -50,10 +50,12 @@
                 </div>
             </div>*@
     </div>
-    <hr data-bind="visible:viewModel.mycards().length!=0" />
+
 </div>
 <div id="dataedit">
+
     <div class="container" style="position: relative;padding-left: 0px; padding-right: 0px;" data-bind="visible:Cards.viewModel.MangoCardAttribute.MangoCardId()!=null">
+        <hr />
         <div>
             <h2 class="text-center title" data-bind="text:viewModel.MangoCardAttribute.MangoCardTitle"></h2>
         </div>
