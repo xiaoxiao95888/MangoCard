@@ -35,10 +35,10 @@
                         <div class="item-container">
                             <div class="item-inner-container">
                                 <div>
-                                    <div style="width: 100%; margin-bottom: 15px;">
+                                    @*<div style="width: 100%; margin-bottom: 15px;">
                                         <div class="img-responsive img-rounded img-thumbnail" data-bind="qrbind:Url"></div>
-                                    </div>
-                                    @*<a class="text-white" data-bind="click:Home.viewModel.showqrcode" href="#">效果</a>*@
+                                    </div>*@
+                                    <a class="text-white" data-bind="click:Home.viewModel.showqrcode" href="#">效果</a>
                                     <a class="text-white" data-bind="click:Home.viewModel.ChooseCard" href="#">选择</a>
                                 </div>
                                 <i class="fa fa-spinner fa-pulse fa-2x" style="display: none"></i>
@@ -58,6 +58,9 @@
             <div class="modal-header">
                 @*<button aria-label="Close" data-dismiss="modal" class="close" type="button"><span aria-hidden="true" style="font-family: sans-serif">×</span></button>*@
                 <p class="modal-title text-center" data-bind="text:Home.viewModel.selectdemo()!=null?Home.viewModel.selectdemo().Title:''">Modal title</p>
+            </div>
+            <div class="modal-body text-center" data-bind="qrbind:viewModel.demourl">
+
             </div>
             <div class="modal-footer modal-footer-center">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

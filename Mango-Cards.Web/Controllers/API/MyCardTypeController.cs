@@ -13,7 +13,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Mango_Cards.Web.Controllers.API
 {
-    [Authorize]
+    [UserLogin]
     public class MyCardTypeController : BaseApiController
     {
         private readonly IWeChatUserService _weChatUserService;

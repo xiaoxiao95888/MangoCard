@@ -80,31 +80,28 @@ ko.bindingHandlers.qrbind = {
         // Set up any initial state, event handlers, etc. here
     },
     update: function (element, valueAccessor) {
-        var value = valueAccessor();
-        var valueUnwrapped = ko.utils.unwrapObservable(value);
-        if (valueUnwrapped != null) {
-            $(element).qrcode(
-                {
-                    width: 180,
-                    height: 180,
-                    text: valueUnwrapped
-                }
-            );
+        //var value = valueAccessor();
+        //var valueUnwrapped = ko.utils.unwrapObservable(value);
+        //if (valueUnwrapped != null) {
+        //    $(element).qrcode(
+        //        {
+        //            width: 180,
+        //            height: 180,
+        //            text: valueUnwrapped
+        //        }
+        //    );
+        //}
+        var data = ko.toJS(Home.viewModel.selectdemo);
+        if (data != null) {
+            $(element).empty();
+            $(element).qrcode(data.Url);
         }
-
     }
 };
 $(function () {
     ko.applyBindings(Home);
     $.get("/api/CardType/", function (data) {
-        ko.mapping.fromJS(data, {}, Home.viewModel.cardTypes);
-        $(".grid-item").hover(
-           function () {
-               $(this).find(".caption").fadeIn(250);
-           },
-           function () {
-               $(this).find(".caption").fadeOut(205);
-           });
+        ko.mapping.fromJS(data, {}, Home.viewModel.cardTypes);        
         $.get("/api/Employee/", function (employees) {
             ko.mapping.fromJS(employees, {}, Home.viewModel.employees);
             $.get("/api/WeChatUser/", function (wechatuser) {

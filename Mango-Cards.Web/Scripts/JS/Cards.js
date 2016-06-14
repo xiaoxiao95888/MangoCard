@@ -96,14 +96,7 @@ ko.bindingHandlers.isotopetype = {
                 $container.isotope('reloadItems');
                 $container.isotope({ filter: Cards.viewModel.typetoshow() });
             });
-        }
-        $('.grid-item').hover(
-               function () {
-                   $(this).find('.caption').fadeIn(250);
-               },
-               function () {
-                   $(this).find('.caption').fadeOut(205);
-               });
+        }        
     }
 };
 ko.bindingHandlers.nailthumb = {
