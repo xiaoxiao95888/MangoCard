@@ -4,7 +4,15 @@
     ViewBag.Title = "登录";
 }
 @Scripts.Render("~/bundles/login")
-
+<script>
+    $(function () {
+        $("#testbtn").click(function () {
+            $.get("/api/TestLogin", function (result) {
+                console.log(result.Message);
+            });
+        });
+    })
+</script>
 
 <div class="item-container">
     <div class="item-inner-container">

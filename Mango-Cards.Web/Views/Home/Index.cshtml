@@ -4,16 +4,6 @@
 
 @RenderPage("~/Views/Shared/header.cshtml")
 @Scripts.Render("~/bundles/Home")
-<script>
-    $(function () {
-        $("#testbtn").click(function () {
-            $.get("/api/TestLogin", function (result) {
-                console.log(result.Message);
-            });
-        });
-    })
-</script>
-
 <!-- Page Content -->
 
 <div id="cardtypes">
