@@ -1,6 +1,7 @@
 ﻿var Cards = {
     viewModel: {
         mycardtypes: ko.observableArray(),
+        mycards: ko.observableArray(),
         mediaetypes: ko.observableArray(),
         medias: ko.observableArray(),
         mediatypetoshow: ko.observable("*"),
@@ -369,16 +370,16 @@ Cards.viewModel.refreshbasepagevalue = function (data, event) {
     //    dom.addClass("fa-refresh");
     //});
 };
-Cards.viewModel.mycards = ko.computed(function () {
-    var demos = [];
-    var all = ko.toJS(Cards.viewModel.mycardtypes);
-    ko.utils.arrayForEach(all, function (type) {
-        ko.utils.arrayForEach(type.MangoCardModels, function (card) {
-            demos.push(card);
-        });
-    });
-    return demos;
-});
+//Cards.viewModel.mycards = ko.computed(function () {
+//    var demos = [];
+//    var all = ko.toJS(Cards.viewModel.mycardtypes);
+//    ko.utils.arrayForEach(all, function (type) {
+//        ko.utils.arrayForEach(type.MangoCardModels, function (card) {
+//            demos.push(card);
+//        });
+//    });
+//    return demos;
+//});
 Cards.viewModel.filters = function (data, event) {
     var dom = $(event.target);
     var filterValue = dom.attr("data-filter");
@@ -603,10 +604,11 @@ function uploadCanceled(evt) {
 }
 $(function () {
     ko.applyBindings(Cards);
-
-
-    $.get("/api/MyCards/", function (cards) {
-        ko.mapping.fromJS(cards, {}, Cards.viewModel.mycardtypes);
+    $.get("/api/MyCardType/", function (types) {
+        ko.mapping.fromJS(types, {}, Cards.viewModel.mycardtypes);
+        $.get("/api/MyCards/", function (cards) {
+            ko.mapping.fromJS(cards, {}, Cards.viewModel.mycards);
+        });
     });
 
     //$.get("/api/WeChatUser/", function (wechatuser) {

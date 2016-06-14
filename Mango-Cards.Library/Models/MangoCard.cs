@@ -10,6 +10,10 @@ namespace Mango_Cards.Library.Models
     public class MangoCard : IDtStamped
     {
         public Guid Id { get; set; }
+        /// <summary>
+        /// 编号
+        /// </summary>
+        public string Code { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public Guid? CardTemplateId { get; set; }
@@ -26,10 +30,10 @@ namespace Mango_Cards.Library.Models
         /// </summary>
         public string ShareThumbnailUrl { get; set; }
         public Guid? WeChatUserId { get; set; }
-        [ForeignKey("WeChatUserId")]
         /// <summary>
         /// 持有人
         /// </summary>
+        [ForeignKey("WeChatUserId")]
         public virtual WeChatUser WeChatUser { get; set; }
         public string HtmlCode { get; set; }
         /// <summary>

@@ -36,8 +36,10 @@ namespace Mango_Cards.Service.Services
         {
             return DbContext.MangoCards.Where(n => !n.IsDeleted);
         }
-
-
+        public IQueryable<MangoCard> GetAllMangoCards()
+        {
+            return DbContext.MangoCards;
+        }
         public MangoCard GetMangoCard(Guid id)
         {
             return DbContext.MangoCards.FirstOrDefault(n => n.Id == id);

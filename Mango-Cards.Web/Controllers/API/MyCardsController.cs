@@ -18,16 +18,17 @@ using RazorEngine.Templating;
 
 namespace Mango_Cards.Web.Controllers.API
 {
-    [UserLogin]
+    [Authorize]
     public class MyCardsController : BaseApiController
     {
         private readonly IWeChatUserService _weChatUserService;
         private readonly ICardTemplateService _cardTemplateService;
-
-        public MyCardsController(IWeChatUserService weChatUserService, ICardTemplateService cardTemplateService, IMapperFactory mapperFactory)
+        private readonly IMangoCardService _mangoCardService;
+        public MyCardsController(IWeChatUserService weChatUserService, ICardTemplateService cardTemplateService, IMapperFactory mapperFactory, IMangoCardService mangoCardService)
         {
             _weChatUserService = weChatUserService;
             _cardTemplateService = cardTemplateService;
+            _mangoCardService = mangoCardService;
             mapperFactory.GetMangoCardMapper().Create();
             mapperFactory.GetCardTemplateMapper().Detail();
         }
@@ -35,14 +36,8 @@ namespace Mango_Cards.Web.Controllers.API
         {
             var wechatuser = _weChatUserService.GetWeChatUser(User.Identity.GetUserId());
             return
-                wechatuser.MangoCards.Where(n => !n.IsDeleted).OrderByDescending(n=>n.UpdateTime)
-                    .GroupBy(n => n.CardTemplate.CardType)
-                    .Select(n => new MangoCardTypeModel
-                    {
-                        Id = n.Key.Id,
-                        Name = n.Key.Name,
-                        MangoCardModels = n.Select(Mapper.Map<MangoCard, MangoCardModel>).ToArray()
-                    });
+                wechatuser.MangoCards.Where(n => !n.IsDeleted).OrderByDescending(n => n.UpdateTime)
+                    .Select(Mapper.Map<MangoCard, MangoCardModel>);
         }
 
         public object Get(Guid id)
@@ -88,6 +83,7 @@ namespace Mango_Cards.Web.Controllers.API
             {
                 var model = Mapper.Map<CardTemplate, CardTemplateDetailModel>(card);
                 var html = Engine.Razor.RunCompile(model.HtmlCode, Guid.NewGuid().ToString(), model.GetType(), model);
+
                 var mangocard = new MangoCard
                 {
                     Id = Guid.NewGuid(),
@@ -104,6 +100,15 @@ namespace Mango_Cards.Web.Controllers.API
                     Title = card.Title,
                     HtmlCode = html
                 };
+                while (true)
+                {
+                    var code = Helper.CreateNonceCode();
+                    if (!_mangoCardService.GetAllMangoCards().Any(p => p.Code == code))
+                    {
+                        mangocard.Code = code;
+                        break;
+                    }
+                }
                 card.MangoCards.Add(mangocard);
                 _cardTemplateService.Update();
                 return Success();

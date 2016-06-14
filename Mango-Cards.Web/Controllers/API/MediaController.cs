@@ -16,7 +16,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Mango_Cards.Web.Controllers.API
 {
-    [UserLogin]
+    [Authorize]
     public class MediaController : BaseApiController
     {
         private readonly IMediaService _mediaService;

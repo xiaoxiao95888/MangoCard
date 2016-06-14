@@ -43,5 +43,23 @@ namespace Mango_Cards.Web.Infrastructure
             }
             return str;
         }
+        //创建随机字符串
+        public static string CreateNonceCode()
+        {
+            var letter = new[]
+            {
+                "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U",
+                "V", "W", "X", "Y", "Z"
+            };
+            var number = new[]
+            {
+                1, 2, 3, 4, 5, 6, 7, 8, 9
+            };
+       
+            var rand = new Random();
+            var str = letter[rand.Next(0, 24)] + letter[rand.Next(0, 24)] +
+                             letter[rand.Next(0, 24)] + number[rand.Next(0, 8)] + number[rand.Next(0, 8)] + number[rand.Next(0, 8)];
+            return str;
+        }
     }
 }

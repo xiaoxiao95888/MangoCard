@@ -28,7 +28,7 @@ Home.viewModel.carddemos = ko.computed(function () {
 
         });
     });
- 
+
     return demos;
 });
 
@@ -52,12 +52,15 @@ Home.viewModel.showqrcode = function () {
         backdrop: "static"
     });
 };
-Home.viewModel.ChooseCard = function () {
+Home.viewModel.ChooseCard = function (data, event) {
     var model = ko.toJS(this);
+    var dom = $(event.target);
+    dom.parent().hide();
+    dom.parent().next().show();
     $.ajax({
         type: "post",
         url: "/api/MyCards/" + model.Id,
-        contentType: "application/json",        
+        contentType: "application/json",
         dataType: "json",
         success: function (result) {
             if (result.Error) {
@@ -67,7 +70,7 @@ Home.viewModel.ChooseCard = function () {
             } else {
                 location.href = "../cards";
             }
-           
+
         }
     });
 };
@@ -77,10 +80,16 @@ ko.bindingHandlers.qrbind = {
         // Set up any initial state, event handlers, etc. here
     },
     update: function (element, valueAccessor) {
-        var data = ko.toJS(Home.viewModel.selectdemo);
-        if (data != null) {
-            $(element).empty();
-            $(element).qrcode(data.Url);
+        var value = valueAccessor();
+        var valueUnwrapped = ko.utils.unwrapObservable(value);
+        if (valueUnwrapped != null) {
+            $(element).qrcode(
+                {
+                    width: 180,
+                    height: 180,
+                    text: valueUnwrapped
+                }
+            );
         }
 
     }

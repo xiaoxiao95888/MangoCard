@@ -14,6 +14,10 @@ namespace Mango_Cards.Web.Models
         public string ThumbnailUrl { get; set; }
         public string ShareThumbnailUrl { get; set; }
         public Guid CardTypeId { get; set; }
+        /// <summary>
+        /// 编号
+        /// </summary>
+        public string Code { get; set; }
         public string Url { get; set; }
         public DateTime UpdateTime { get; set; }
     }

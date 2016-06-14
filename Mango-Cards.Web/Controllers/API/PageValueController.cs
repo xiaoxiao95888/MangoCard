@@ -27,7 +27,7 @@ namespace Mango_Cards.Web.Controllers.API
             if (HttpContext.Current.Request.UrlReferrer != null)
             {
                 var cardId = HttpContext.Current.Request.UrlReferrer.Segments.LastOrDefault();
-                if (cardId != null)
+                if (cardId != null && HttpContext.Current.Request.ServerVariables["Server_Name"] == HttpContext.Current.Request.UrlReferrer.Host)
                 {
                     var card = _mangoCardService.GetMangoCard(new Guid(cardId));
                     if (card != null)
@@ -58,7 +58,7 @@ namespace Mango_Cards.Web.Controllers.API
             {
                 Mapper.CreateMap<PageValue, PageValueModel>();
                 var pageValueModels =
-                    card.PageValues.Where(n=>!n.IsDeleted).Select(Mapper.Map<PageValue, PageValueModel>)
+                    card.PageValues.Where(n => !n.IsDeleted).Select(Mapper.Map<PageValue, PageValueModel>)
                         .ToArray()
                         .Select(item => System.Web.Helpers.Json.Decode(item.Value))
                         .ToList();

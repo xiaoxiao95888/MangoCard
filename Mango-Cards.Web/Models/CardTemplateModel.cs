@@ -10,6 +10,7 @@ namespace Mango_Cards.Web.Models
     {
         public Guid Id { get; set; }
         public string Code { get; set; }
+        public string Title { get; set; }
         public string Url { get; set; }
         /// <summary>
         /// 作者

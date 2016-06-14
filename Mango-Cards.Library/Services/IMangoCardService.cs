@@ -14,5 +14,6 @@ namespace Mango_Cards.Library.Services
         void Delete(Guid id);
         MangoCard GetMangoCard(Guid id);
         IQueryable<MangoCard> GetMangoCards();
+        IQueryable<MangoCard> GetAllMangoCards();
     }
 }
