@@ -20,6 +20,7 @@ namespace Mango_Cards.Web.MapperHelper.Implementation
             Mapper.CreateMap<MangoCard, MangoCardModel>()
                 .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardTemplate.CardType.Id))
                 .ForMember(n => n.ThumbnailUrl, opt => opt.MapFrom(src => _cardThumbnailPath + src.ThumbnailUrl))
+                .ForMember(n => n.UnitPrice, opt => opt.MapFrom(src => src.CardTemplate.UnitPrice))
                 .ForMember(n => n.Url,
                     opt =>
                         opt.MapFrom(

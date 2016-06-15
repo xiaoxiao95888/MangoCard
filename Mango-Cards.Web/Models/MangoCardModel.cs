@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlTypes;
 using System.Dynamic;
 using System.Linq;
 using System.Web.Helpers;
@@ -19,6 +20,7 @@ namespace Mango_Cards.Web.Models
         /// </summary>
         public string Code { get; set; }
         public string Url { get; set; }
+        public SqlMoney? UnitPrice { get; set; }
         public DateTime UpdateTime { get; set; }
     }
 
