@@ -20,7 +20,7 @@ namespace Mango_Cards.Web.MapperHelper.Implementation
                 .ForMember(n => n.MediaModel, opt => opt.MapFrom(src => Mapper.Map<Media, MediaModel>(src.Media)));
             Mapper.CreateMap<MangoCard, MangoCardAttributeModel>()
                 .ForMember(n => n.MangoCardId, opt => opt.MapFrom(src => src.Id))
-                .ForMember(n => n.MangoCardTitle, opt => opt.MapFrom(src => src.Title))
+                .ForMember(n => n.Title, opt => opt.MapFrom(src => src.Title))
                 .ForMember(n => n.MangoCardUrl,
                     opt =>
                         opt.MapFrom(

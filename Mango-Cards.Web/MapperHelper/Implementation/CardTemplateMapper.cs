@@ -46,7 +46,7 @@ namespace Mango_Cards.Web.MapperHelper.Implementation
                  .ForMember(n => n.Url,
                     opt =>
                         opt.MapFrom(
-                            src => $"http://{HttpContext.Current.Request.Url.Host}/Cards/RedirectCardView/{src.Id}"));
+                            src => $"http://{HttpContext.Current.Request.Url.Host}/Cards/RedirectCardTemplateView/{src.Id}"));
         }
     }
 }

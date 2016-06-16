@@ -1,6 +1,8 @@
 ﻿using Mango_Cards.Library.Models.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.SqlTypes;
 using System.Linq;
@@ -35,7 +37,8 @@ namespace Mango_Cards.Library.Models
         public string HtmlCode { get; set; }
         public string ThumbnailUrl { get; set; }
         public virtual CardType CardType { get; set; }
-        public SqlMoney? UnitPrice { get; set; }
+        [Column(TypeName = "Money")]
+        public decimal? UnitPrice { get; set; }
         public virtual ICollection<Field> Fields { get; set; }
         public virtual ICollection<MangoCard> MangoCards { get; set; }
         public DateTime? UpdateTime { get; set; }

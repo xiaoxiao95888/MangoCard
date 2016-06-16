@@ -20,14 +20,15 @@ namespace Mango_Cards.Web.Models
         /// </summary>
         public string Code { get; set; }
         public string Url { get; set; }
-        public SqlMoney? UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; }
         public DateTime UpdateTime { get; set; }
     }
 
     public class MangoCardAttributeModel
     {
         public Guid MangoCardId { get; set; }
-        public string MangoCardTitle { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
         public string MangoCardUrl { get; set; }
         /// <summary>
         /// 页面所需的field

@@ -6,7 +6,7 @@
 @Styles.Render("~/Content/Cards")
 
 <div class="container" style="width: 1140px !important;">
-    <h2 class="text-center title">我的卡片</h2>
+    <h2 class="text-center title" style="letter-spacing:0.8rem;">我的卡片</h2>
     <div class="well text-center" data-bind="visible:viewModel.mycards().length==0">
         <div class="align-middle">
             您尚未选择任何 Mango Card
@@ -56,7 +56,7 @@
     <div class="container" style="position: relative;padding-left: 0px; padding-right: 0px;" data-bind="visible:Cards.viewModel.MangoCardAttribute.MangoCardId()!=null">
         <hr />
         <div>
-            <h2 class="text-center title" data-bind="text:viewModel.MangoCardAttribute.MangoCardTitle"></h2>
+            <h2 class="text-center title" data-bind="text:viewModel.MangoCardAttribute.Title"></h2>
         </div>
         <ul class="nav nav-tabs">
             <li class="active" role="presentation">
@@ -76,69 +76,71 @@
             <div class="text-center" style="height: 200px; line-height: 200px" data-bind="visible:viewModel.MangoCardAttribute.FieldModels().length==0">
                 没有需要自定义的属性
             </div>
-            <div class="form-horizontal col-md-6 scrollspy-example" data-bind="if:viewModel.MangoCardAttribute.FieldModels().length!=0">
-                <!-- ko foreach:viewModel.MangoCardAttribute.FieldModels -->
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">
-                        <span data-bind="text:Name"></span>
-                        <span>
-                            <a class="text-gray" href="#">
-                                <i class="fa fa-question-circle"></i>
-                            </a>
-                        </span>
-                    </label>
-                    <div class="col-sm-9" style="max-width:350px">
-                        <div class="input-group">
-                            <input type="text" class="form-control" data-bind="value:FieldValue,visible:(FieldType()==0 ||FieldType()==1) " />
-                            <span class="input-group-addon" data-bind="text:FieldTypeName,visible:(FieldType()==0||FieldType()==1||FieldType()==4)"></span>
-                        </div>
-                        <div data-bind="if:FieldType()==3">
-                            <p class="text-muted uploadprogress">
-                                <span data-bind="template: { name: 'editorTmpl', data: MediaModel }">
-
-                                </span>
-                                <script id="editorTmpl" type="text/html">
-                                    @*<span data-bind="visible:$data !=null">大小不超过5M</span>*@
-                                    <span data-bind="text:FileName"></span>
-                                    <span>
-                                        <a href="#" data-bind="click:Cards.viewModel.ViewUpload">
-                                            查看
-                                        </a>
-                                    </span>
-                                </script>
-
-                            </p>
-                            <div class="progress" style="display: none">
-                                <div class="progress-bar progress-bar-striped active" role="progressbar" style="min-width: 2em;width: 0%;">
-                                    <span></span>
-                                </div>
+            <div data-bind="visible:viewModel.MangoCardAttribute.FieldModels().length!=0">
+                <div class="form-horizontal col-md-6 scrollspy-example">
+                    <!-- ko foreach:viewModel.MangoCardAttribute.FieldModels -->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">
+                            <span data-bind="text:Name"></span>
+                            <span>
+                                <a class="text-gray" href="#">
+                                    <i class="fa fa-question-circle"></i>
+                                </a>
+                            </span>
+                        </label>
+                        <div class="col-sm-9" style="max-width:350px">
+                            <div class="input-group">
+                                <input type="text" class="form-control" data-bind="value:FieldValue,visible:(FieldType()==0 ||FieldType()==1) " />
+                                <span class="input-group-addon" data-bind="text:FieldTypeName,visible:(FieldType()==0||FieldType()==1||FieldType()==4)"></span>
                             </div>
-                            <a href="#" class="btn btn-success" data-bind="click:Cards.viewModel.UploadMaterial">本地上传</a>
-                            <input style="display: none" type="file" data-bind="event:{change:UploadPlug.uploadprocess}" />
-                            <a href="#" class="btn btn-success" data-bind="click:Cards.viewModel.showlibrary">从素材库选择</a>
+                            <div data-bind="if:FieldType()==3">
+                                <p class="text-muted uploadprogress">
+                                    <span data-bind="template: { name: 'editorTmpl', data: MediaModel }">
+
+                                    </span>
+                                    <script id="editorTmpl" type="text/html">
+                                        @*<span data-bind="visible:$data !=null">大小不超过5M</span>*@
+                                        <span data-bind="text:FileName"></span>
+                                        <span>
+                                            <a href="#" data-bind="click:Cards.viewModel.ViewUpload">
+                                                查看
+                                            </a>
+                                        </span>
+                                    </script>
+
+                                </p>
+                                <div class="progress" style="display: none">
+                                    <div class="progress-bar progress-bar-striped active" role="progressbar" style="min-width: 2em;width: 0%;">
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-success" data-bind="click:Cards.viewModel.UploadMaterial">本地上传</a>
+                                <input style="display: none" type="file" data-bind="event:{change:UploadPlug.uploadprocess}" />
+                                <a href="#" class="btn btn-success" data-bind="click:Cards.viewModel.showlibrary">从素材库选择</a>
+                            </div>
+                            <textarea class="form-control" rows="3" data-bind="value:FieldValue,visible:FieldType()==2"></textarea>
                         </div>
-                        <textarea class="form-control" rows="3" data-bind="value:FieldValue,visible:FieldType()==2"></textarea>
                     </div>
+                    <!-- /ko -->
                 </div>
-                <!-- /ko -->
+                <div class="col-md-6 scrollspy-example" data-bind="html:viewModel.MangoCardAttribute.Instructions,visible:viewModel.MangoCardAttribute.Instructions()!=null">
+                </div>
+                <div class="clearfix"></div>
+                <hr />
+                <p class="text-center">
+                    <a href="#" class="btn btn-black" data-bind="click:Cards.viewModel.normalsave">
+                        保存
+                    </a>
+                    <a href="#" class="btn btn-black" data-bind="click:Cards.viewModel.submitaudit">
+                        发布
+                    </a>
+                </p>
+                <p class="text-center">
+                    <span>
+                        <input type="checkbox" data-bind="checked:Cards.viewModel.SaveAndPreview"> 保存并预览
+                    </span>
+                </p>
             </div>
-            <div class="col-md-6 scrollspy-example" data-bind="html:viewModel.MangoCardAttribute.Instructions,visible:viewModel.MangoCardAttribute.Instructions()!=null">
-            </div>
-            <div class="clearfix"></div>
-            <hr />
-            <p class="text-center">
-                <a href="#" class="btn btn-black" data-bind="click:Cards.viewModel.normalsave">
-                    保存
-                </a>
-                <a href="#" class="btn btn-black" data-bind="click:Cards.viewModel.submitaudit">
-                    发布
-                </a>
-            </p>
-            <p class="text-center">
-                <span>
-                    <input type="checkbox" data-bind="checked:Cards.viewModel.SaveAndPreview"> 保存并预览
-                </span>
-            </p>
         </div>
         <!--高级编辑模式 -->
         <div class="tab-content" id="editadvanced" style="border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; padding: 10px">
@@ -166,7 +168,7 @@
 <div id="dataview">
     <div class="container" data-bind="visible:Cards.viewModel.baseaccessdata.CardTitle()!=null">
         <div class="row">
-            <h2 class="text-center title">数据 </h2>
+            <h2 class="text-center title"  style="letter-spacing:0.8rem;">数据 </h2>
         </div>
         <p>
             <span data-bind="text:Cards.viewModel.baseaccessdata.CardTitle"></span>
@@ -294,7 +296,7 @@
         <div class="modal-content text-center">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" data-bind="text:Cards.viewModel.PreviewCard.MangoCardTitle"></h4>
+                <h4 class="modal-title" data-bind="text:Cards.viewModel.PreviewCard.Title"></h4>
             </div>
             <div class="modal-body" data-bind="qrbind:Cards.viewModel.PreviewCard.MangoCardUrl">
 

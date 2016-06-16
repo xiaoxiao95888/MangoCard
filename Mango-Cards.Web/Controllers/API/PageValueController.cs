@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Mango_Cards.Web.Controllers.API
 {
+    
     public class PageValueController : BaseApiController
     {
         private readonly IWeChatUserService _weChatUserService;
@@ -22,6 +23,7 @@ namespace Mango_Cards.Web.Controllers.API
             _mangoCardService = mangoCardService;
             _weChatUserService = weChatUserService;
         }
+        [UserLogin]
         public object Post(dynamic model)
         {
             if (HttpContext.Current.Request.UrlReferrer != null)

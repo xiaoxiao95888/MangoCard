@@ -12,7 +12,7 @@
     <title>@Model.Title</title>
 </head>
 <body>
-    @Html.Raw(Model.HtmlCode)
-    @*@Html.Raw(Engine.Razor.RunCompile(Model.PageHtmlCode, Model.PageHtmlCode, Model.GetType(), Model))*@
+    @*@Html.Raw(Model.HtmlCode)*@
+    @Html.Raw(Engine.Razor.RunCompile(Model.HtmlCode, Guid.NewGuid().ToString(), Model.GetType(), Model))
 </body>
 </html>

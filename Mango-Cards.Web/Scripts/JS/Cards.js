@@ -8,7 +8,7 @@
         typetoshow: ko.observable("*"),
         MangoCardAttribute: {
             MangoCardId: ko.observable(),
-            MangoCardTitle: ko.observable(),
+            Title: ko.observable(),
             MangoCardUrl: ko.observable(),
             HtmlCode: ko.observable(),
             Instructions: ko.observable(),
@@ -17,7 +17,7 @@
         //预览URL
         PreviewCard: {
             MangoCardUrl: ko.observable(),
-            MangoCardTitle: ko.observable()
+            Title: ko.observable()
         },
         SaveAndPreview: ko.observable(false),
         MediaeType: ko.observable(),
