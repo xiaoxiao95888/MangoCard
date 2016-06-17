@@ -14,13 +14,13 @@ namespace Mango_Cards.Web.MapperHelper.Implementation
     {
         public void Create()
         {
-            var userId = HttpContext.Current.User.Identity.GetUserId();
-            var uploadFileUrl = ConfigurationManager.AppSettings["UploadFileUrl"] + userId + "/";
+            //var userId = HttpContext.Current.User.Identity.GetUserId();
+            var uploadFileUrl = ConfigurationManager.AppSettings["UploadFileUrl"];
             const string cssThumbnailUrl = "/images/css.png";
             const string jsThumbnailUrl = "/images/js.png";
             const string fileThumbnailUrl = "/images/file.png";
             Mapper.CreateMap<Media, MediaModel>()
-                .ForMember(n => n.Url, opt => opt.MapFrom(src => uploadFileUrl + src.Name))
+                .ForMember(n => n.Url, opt => opt.MapFrom(src => uploadFileUrl + "/" + src.WeChatUserId + "/" + src.Name))
                 .ForMember(n => n.ThumbnailUrl,
                     opt =>
                         opt.MapFrom(
