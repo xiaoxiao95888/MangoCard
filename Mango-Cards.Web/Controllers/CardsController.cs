@@ -7,6 +7,8 @@ using Mango_Cards.Library.Services;
 using Mango_Cards.Web.MapperHelper;
 using Mango_Cards.Web.Models;
 using Mango_Cards.Web.Infrastructure;
+using RazorEngine;
+using RazorEngine.Templating;
 
 namespace Mango_Cards.Web.Controllers
 {
@@ -37,12 +39,14 @@ namespace Mango_Cards.Web.Controllers
                 Description = card.Description,
                 HtmlCode = card.HtmlCode
             };
+
             return View(model) ;
         }
         [AllowAnonymous]
         public ActionResult CardTemplateView(Guid id)
         {
             var model = Mapper.Map<CardTemplate, CardTemplateDetailModel>(_cardTemplateService.GetCardTemplate(id));
+           
             return View(model);
         }
         [AllowAnonymous]
