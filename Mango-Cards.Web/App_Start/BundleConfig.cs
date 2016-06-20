@@ -80,12 +80,16 @@ namespace Mango_Cards.Web
                 "~/Scripts/JS/Cards.js",
                 "~/Scripts/jquery.qrcode.js",
                 "~/Scripts/qrcode.js",
-                "~/Scripts/JS/UploadPlug.js"));
+                "~/Scripts/JS/UploadPlug.js",
+                "~/Scripts/wysihtml5-0.3.0.js",
+                "~/Scripts/bootstrap-wysihtml5.js"
+                ));
             //Cards
             bundles.Add(new StyleBundle("~/Content/Cards").Include(
                 "~/Content/codemirror.css",
                 "~/Content/theme/ambiance.css",
-                "~/Content/card.css"
+                "~/Content/card.css",
+                "~/Content/bootstrap-wysihtml5.css"
                 ));
 
         }

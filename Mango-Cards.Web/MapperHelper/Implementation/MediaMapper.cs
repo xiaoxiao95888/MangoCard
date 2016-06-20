@@ -20,13 +20,13 @@ namespace Mango_Cards.Web.MapperHelper.Implementation
             const string jsThumbnailUrl = "/images/js.png";
             const string fileThumbnailUrl = "/images/file.png";
             Mapper.CreateMap<Media, MediaModel>()
-                .ForMember(n => n.Url, opt => opt.MapFrom(src => uploadFileUrl + "/" + src.WeChatUserId + "/" + src.Name))
+                .ForMember(n => n.Url, opt => opt.MapFrom(src => uploadFileUrl + src.WeChatUserId + "/" + src.Name))
                 .ForMember(n => n.ThumbnailUrl,
                     opt =>
                         opt.MapFrom(
                             src =>
                                 src.MediaType.Name == "图片"
-                                    ? (uploadFileUrl + src.Name)
+                                    ? (uploadFileUrl + src.WeChatUserId + "/"+ src.Name)
                                     : (src.MediaType.Name == "CSS"
                                         ? cssThumbnailUrl
                                         : (src.MediaType.Name == "JS" ? jsThumbnailUrl : fileThumbnailUrl))));

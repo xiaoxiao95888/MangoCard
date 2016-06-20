@@ -315,6 +315,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-wysihtml5.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\card.css" />
     <Content Include="Content\codemirror.css" />
@@ -401,6 +402,7 @@
     <None Include="Properties\PublishProfiles\MangoCards.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="MP4\We-Work-We-Wait.mp4" />
+    <Content Include="Scripts\bootstrap-wysihtml5.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\clipboard.js" />
@@ -433,6 +435,7 @@
     <Content Include="Scripts\JS\UploadPlug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\knockout.wysihtml5.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\mode\apl\apl.js" />
     <Content Include="Scripts\mode\apl\index.html" />
@@ -717,6 +720,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\wysihtml5-0.3.0.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="snapshots\We-Work-We-Wait.jpg" />
     <Content Include="Web.config">

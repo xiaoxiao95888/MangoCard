@@ -96,7 +96,7 @@ ko.bindingHandlers.isotopetype = {
                 $container.isotope('reloadItems');
                 $container.isotope({ filter: Cards.viewModel.typetoshow() });
             });
-        }        
+        }
     }
 };
 ko.bindingHandlers.nailthumb = {
@@ -105,6 +105,56 @@ ko.bindingHandlers.nailthumb = {
         var value = ko.utils.unwrapObservable(valueAccessor());
         $el.attr("src", value.url).imagesLoaded($el, function () { $el.nailthumb({ width: 155, height: 116 }); });
         //$el.attr("src", value.url);
+    }
+};
+//html编辑器（普通模式）
+ko.bindingHandlers.wysihtml5 = {
+    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        var options = {
+            "font-styles": false,
+            "emphasis": false,
+            "lists": false,
+            "html": false,
+            "link": false,
+            "image": false,
+            "color": false 
+        };
+        var value = ko.utils.unwrapObservable(valueAccessor()) || {};
+        options.events = {
+            "change": function () {
+                var observable;
+                var content = ko.utils.unwrapObservable(valueAccessor()) || {};
+
+                if (content.data != undefined) {
+                    observable = valueAccessor().data;
+                } else {
+                    observable = valueAccessor();
+                }
+
+                observable(control.getValue());
+            }
+        };
+
+        if (value.options) {
+            ko.utils.extend(options, value.options);
+            delete value.options;
+        }
+        // if the textarea has no id, generate one to keep wysihtml5 happy
+        if ($(element).attr("id") == undefined || $(element).attr("id") === "")
+            $(element).attr("id", "id_" + Math.floor(new Date().valueOf()));
+
+        var control = $(element).wysihtml5(options).data("wysihtml5").editor;
+    },
+    update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        //
+        var control = $(element).data("wysihtml5").editor;
+        var content = ko.utils.unwrapObservable(valueAccessor()) || {};
+
+        if (content.data != undefined) {
+            control.setValue(valueAccessor().data());
+        } else {
+            control.setValue(valueAccessor()());
+        }
     }
 };
 ko.bindingHandlers.date = {
