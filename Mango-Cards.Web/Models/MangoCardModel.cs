@@ -42,7 +42,7 @@ namespace Mango_Cards.Web.Models
                 {
                     var customer = new ExpandoObject();
                     var dict = (System.Collections.Generic.IDictionary<String, Object>)customer;
-                    foreach (var item in FieldModels)
+                    foreach (var item in FieldModels.OrderByDescending(n=>n.Index))
                     {
                         dict.Add(item.Name, item.MediaModel != null ? item.MediaModel.Url : item.FieldValue);
                     }

@@ -8,13 +8,53 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" initial-scale="1.0"/>
+    <meta name="viewport" content="width=device-width" initial-scale="1.0" />
     <meta name="viewport" content="width=device-width" initial-scale="1.0">
     <meta name="description" content="@Model.Title">
     <title>@Model.Description</title>
 </head>
 <body>
-    
+    <script>
+        function getQueryStringByName(name) {
+            var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
+            if (result == null || result.length < 1) {
+                return "";
+            }
+            return result[1];
+        }
+        var xmlHttp, wcuser = null;
+        if (window.ActiveXObject) {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        } else if (window.XMLHttpRequest) {
+            xmlHttp = new XMLHttpRequest();
+        }
+        if (xmlHttp != null) {
+            xmlHttp.open("GET", "/api/HeaderSetting/", true);
+            xmlHttp.send(null);
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState === 4) {
+                    if (xmlHttp.status === 200) {
+                        var base64 = xmlHttp.response;
+                        if (base64 != null) {
+                            xmlHttp.open("GET", "http://WeChatService.mangoeasy.com:3000/api/WeChartUserInfo?code=" + getQueryStringByName("code") + "&state=" + getQueryStringByName("state"), true);
+                            xmlHttp.setRequestHeader("Authorization", base64);
+                            xmlHttp.send(null);
+                            xmlHttp.onreadystatechange = function () {
+                                if (xmlHttp.readyState === 4) {
+                                    if (xmlHttp.status === 200) {
+                                        wcuser = JSON.parse(xmlHttp.responseText);
+                                    }
+                                } else {
+                                    //location.href = "../RedirectCardView/" + getQueryStringByName("id");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    </script>
     @Html.Raw(Model.HtmlCode)
     @*@Html.Raw(Engine.Razor.RunCompile(Model.PageHtmlCode, Model.PageHtmlCode, Model.GetType(), Model))*@
 </body>

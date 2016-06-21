@@ -15,14 +15,16 @@ namespace Mango_Cards.Library.Models
         public string Description { get; set; }
         public string FieldValue { get; set; }
         public FieldType FieldType { get; set; }
+        /// <summary>
+        /// 页面字段根据Index排序显示
+        /// </summary>
+        public int? Index { get; set; }
         public Guid? MediaId { get; set; }
         [ForeignKey("MediaId")]
         public virtual Media Media { get; set; }
-
         public Guid? CardTemplateId { get; set; }
         [ForeignKey("CardTemplateId")]
         public virtual CardTemplate CardTemplate { get; set; }
-
         public Guid? MangoCardId { get; set; }
         [ForeignKey("MangoCardId")]
         public virtual MangoCard MangoCard { get; set; }

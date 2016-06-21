@@ -329,34 +329,38 @@ Cards.viewModel.preview = function () {
 }
 //普通编辑保存
 Cards.viewModel.normalsave = function (data, event) {
-    var dom = $(event.target);
-    dom.button('loading');
-    var model = ko.mapping.toJS(Cards.viewModel.MangoCardAttribute);
-    $.ajax({
-        type: "put",
-        url: "/api/MangoCardAttribute/" + model.MangoCardId,
-        contentType: "application/json",
-        data: JSON.stringify(model),
-        dataType: "json",
-        success: function (result) {
-            if (result.Error) {
-                Cards.viewModel.SaveTipsError(result.Message);
-            } else {
-                if (Cards.viewModel.SaveAndPreview()) {
-                    //弹出预览二维码
-                    var dialog = $("#preview-dialog");
-                    dialog.modal({
-                        keyboard: false,
-                        show: true,
-                        backdrop: "static"
-                    });
-                }
-                Cards.viewModel.SaveTipsSuccess();
+    var conf = confirm("保存将会覆盖代码模式的内容，是否确认？");
+    if (conf === true) {
+        var dom = $(event.target);
+        dom.button('loading');
+        var model = ko.mapping.toJS(Cards.viewModel.MangoCardAttribute);
+        $.ajax({
+            type: "put",
+            url: "/api/MangoCardAttribute/" + model.MangoCardId,
+            contentType: "application/json",
+            data: JSON.stringify(model),
+            dataType: "json",
+            success: function (result) {
+                if (result.Error) {
+                    Cards.viewModel.SaveTipsError(result.Message);
+                } else {
+                    if (Cards.viewModel.SaveAndPreview()) {
+                        //弹出预览二维码
+                        var dialog = $("#preview-dialog");
+                        dialog.modal({
+                            keyboard: false,
+                            show: true,
+                            backdrop: "static"
+                        });
+                    }
+                    Cards.viewModel.SaveTipsSuccess();
 
+                }
+                dom.button("reset");
             }
-            dom.button("reset");
-        }
-    });
+        });
+    }
+    
 };
 //发布
 Cards.viewModel.submitaudit = function () {
