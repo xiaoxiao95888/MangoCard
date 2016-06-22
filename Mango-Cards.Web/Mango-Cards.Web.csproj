@@ -318,6 +318,7 @@
     <Content Include="Content\bootstrap-wysihtml5.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\card.css" />
+    <Content Include="Content\CardView.css" />
     <Content Include="Content\codemirror.css" />
     <Content Include="Content\coverr.css" />
     <Content Include="Content\font-awesome.css" />
@@ -432,6 +433,7 @@
     <Content Include="Scripts\JS\login.js" />
     <Content Include="Scripts\JS\LoginConfirmation.js" />
     <Content Include="Scripts\JS\Main.js" />
+    <Content Include="Scripts\JS\mangocardlib.js" />
     <Content Include="Scripts\JS\UploadPlug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />

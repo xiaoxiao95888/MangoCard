@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Configuration;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using Mango_Cards.Library.Models;
@@ -37,9 +39,15 @@ namespace Mango_Cards.Web.Controllers
             {
                 Title = card.Title,
                 Description = card.Description,
-                HtmlCode = card.HtmlCode
+                HtmlCode = card.HtmlCode,
+                MangoCardId = card.Id
             };
-
+            var cardId = new HttpCookie("RedirecUrl")
+            {
+                Value = Url.Action("RedirectCardView", "Cards", new { id = id }),
+                Expires = DateTime.Now.AddDays(1)
+            };
+            Response.Cookies.Add(cardId);
             return View(model) ;
         }
         [AllowAnonymous]

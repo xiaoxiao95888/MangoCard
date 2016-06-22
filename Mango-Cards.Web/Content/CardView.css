@@ -1,0 +1,12 @@
+﻿html, body {
+    margin: 0;
+    height: 100%;
+}
+
+.startbox {
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

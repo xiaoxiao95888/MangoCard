@@ -91,6 +91,13 @@ namespace Mango_Cards.Web
                 "~/Content/card.css",
                 "~/Content/bootstrap-wysihtml5.css"
                 ));
+            //CardView
+            bundles.Add(new ScriptBundle("~/bundles/CardView").Include(
+                   "~/Scripts/JS/mangocardlib.js"));
+            //CardView
+            bundles.Add(new StyleBundle("~/Content/CardView").Include(
+               "~/Content/CardView.css"
+               ));
 
         }
     }
