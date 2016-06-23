@@ -1,8 +1,10 @@
 ﻿'use strict';
-var wechartuser = null;
+
+var mc = {};
 (function () {
     var signature;
-    var mc = {
+    var wechartuser;
+    var lib = {
         Tool: {
             getCookie: function (cName) {
                 if (document.cookie.length > 0) {
@@ -33,8 +35,7 @@ var wechartuser = null;
             return dtd.promise();
         },
         loadjssdk: function (dtd) {
-            var dtd = $.Deferred();
-            console.log("2");
+            var dtd = $.Deferred();           
             $.ajax({
                 type: "get",
                 url: "http://WeChatService.mangoeasy.com:3000/api/JsApiConfig/",
@@ -45,7 +46,7 @@ var wechartuser = null;
                 success: function (xmlDoc, textStatus, xhr) {
                     if (xhr.status === 200) {
                         wx.config({
-                            debug: true,
+                            debug: false,
                             appId: xhr.responseJSON.AppId,
                             timestamp: xhr.responseJSON.Timestamp,
                             nonceStr: xhr.responseJSON.NonceStr,
@@ -66,18 +67,19 @@ var wechartuser = null;
             var dtd = $.Deferred();
             $.ajax({
                 type: "get",
-                url: "http://WeChatService.mangoeasy.com:3000/api/WeChartUserInfo?code=" + mc.Tool.getQueryStringByName("code") + "&state=" + mc.Tool.getQueryStringByName("state"),
+                url: "http://WeChatService.mangoeasy.com:3000/api/WeChartUserInfo?code=" + lib.Tool.getQueryStringByName("code") + "&state=" + lib.Tool.getQueryStringByName("state"),
                 data: { url: location.href },
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", signature);
                 },
-                success: function (xmlDoc, textStatus, xhr) {
+                success: function (xmlDoc, textStatus, xhr) {                   
                     if (xhr.status === 200) {
                         wechartuser = xhr.responseJSON;
                         if (wechartuser.openid == undefined) {
                             dtd.reject();
 
                         } else {
+                            $(mc).trigger("ready", [wechartuser]);
                             dtd.resolve();
                         }
 
@@ -87,40 +89,16 @@ var wechartuser = null;
             return dtd.promise();
         },
         init: function () {
-
-            //mc.loadsignature().then(mc.loadwechartuser).done(mc.loadjssdk).fail(function() { location.href = mc.Tool.getCookie("RedirecUrl") });
-        },
-        Ready: function () {
-
+            lib.loadsignature()
+                .then(lib.loadwechartuser)
+                .done(lib.loadjssdk)
+                .fail(function () { location.href = lib.Tool.getCookie("RedirecUrl") });
         }
     };
+    lib.init();
 })(jQuery);
+//test
+//$(mc).on("ready", function (event, user) {
+//    alert(user.openid);
+//})
 
-
-var obj = {};
-
-$(obj).on("load", function (event, callback) {
-    setTimeout(function () {
-        //获取用户信息，防止重复调用
-        if (wechartuser == null) {
-            wechartuser = 123;
-            console.log("触发了load");
-        }
-        ///执行用户callback方法
-        if (typeof callback === "function") {
-            callback();
-        }
-
-
-    }, 1000);
-
-});
-
-var lib = {
-    ready: function (callback) {
-        $(obj).trigger("load", [callback]);
-
-    }
-}
-lib.ready();
-lib.ready(function () { console.log(wechartuser); });
