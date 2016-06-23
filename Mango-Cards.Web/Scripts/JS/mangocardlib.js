@@ -86,10 +86,41 @@ var wechartuser = null;
             });
             return dtd.promise();
         },
-        Ready: function (callback) {
-            mc.loadsignature().then(mc.loadwechartuser).done(mc.loadjssdk).fail(function () { location.href = mc.Tool.getCookie("RedirecUrl") }).then(callback);
+        init: function () {
+
+            //mc.loadsignature().then(mc.loadwechartuser).done(mc.loadjssdk).fail(function() { location.href = mc.Tool.getCookie("RedirecUrl") });
+        },
+        Ready: function () {
+
         }
     };
-    mc.Ready();
 })(jQuery);
 
+
+var obj = {};
+
+$(obj).on("load", function (event, callback) {
+    setTimeout(function () {
+        //获取用户信息，防止重复调用
+        if (wechartuser == null) {
+            wechartuser = 123;
+            console.log("触发了load");
+        }
+        ///执行用户callback方法
+        if (typeof callback === "function") {
+            callback();
+        }
+
+
+    }, 1000);
+
+});
+
+var lib = {
+    ready: function (callback) {
+        $(obj).trigger("load", [callback]);
+
+    }
+}
+lib.ready();
+lib.ready(function () { console.log(wechartuser); });
