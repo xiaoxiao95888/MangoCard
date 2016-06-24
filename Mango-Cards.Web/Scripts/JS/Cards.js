@@ -65,6 +65,7 @@
         codeMirror: ko.observable()
     }
 };
+
 Cards.viewModel.CurrentMediaIds = ko.computed({
     read: function () {
         var ids = [];
@@ -480,6 +481,12 @@ ko.bindingHandlers.qrbind = {
 Cards.viewModel.openfileselect = function () {
     $("#file").click();
 };
+//取消素材
+Cards.viewModel.RemoveImg = function () {
+    var mediaModel = { Id: "", Url: "", FileName: "" };
+    ko.mapping.fromJS(mediaModel, {}, this);
+
+}
 //删除素材
 Cards.viewModel.delete = function () {
     var selectedmedia = ko.mapping.toJS(this);

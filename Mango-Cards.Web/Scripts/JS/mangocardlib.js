@@ -79,7 +79,7 @@ var mc = {};
                             dtd.reject();
 
                         } else {
-                            $(mc).trigger("ready", [wechartuser]);
+                            $(mc).trigger("ready", [wechartuser,wx]);
                             dtd.resolve();
                         }
 

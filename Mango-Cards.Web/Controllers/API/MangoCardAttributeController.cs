@@ -62,6 +62,11 @@ namespace Mango_Cards.Web.Controllers.API
                             field.MediaId = fieldmodel.MediaModel.Id;
                             field.FieldValue = fieldmodel.MediaModel.Url;
                         }
+                        else if (fieldmodel.MediaModel != null && fieldmodel.MediaModel.Id == Guid.Empty)
+                        {
+                            field.FieldValue = null;
+                            field.MediaId = null;
+                        }
                         else
                         {
                             field.FieldValue = fieldmodel.FieldValue;
