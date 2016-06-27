@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Http;
 using AutoMapper;
 using Mango_Cards.Library.Models;
+using Mango_Cards.Library.Models.Enum;
 using Mango_Cards.Library.Services;
 using Mango_Cards.Web.Infrastructure.Filters;
 using Mango_Cards.Web.MapperHelper;
@@ -56,23 +57,24 @@ namespace Mango_Cards.Web.Controllers.API
                 {
                     foreach (var fieldmodel in model.FieldModels.Where(fieldmodel => field.Id == fieldmodel.Id))
                     {
-                        if (fieldmodel.MediaModel != null && fieldmodel.MediaModel.Id != Guid.Empty)
+                        if (field.FieldType == FieldType.图片)
                         {
-                            field.FieldValue = null;
-                            field.MediaId = fieldmodel.MediaModel.Id;
-                            field.FieldValue = fieldmodel.MediaModel.Url;
-                        }
-                        else if (fieldmodel.MediaModel != null && fieldmodel.MediaModel.Id == Guid.Empty)
-                        {
-                            field.FieldValue = null;
-                            field.MediaId = null;
+                            if (fieldmodel.MediaModel != null && fieldmodel.MediaModel.Id != Guid.Empty)
+                            {
+                                field.MediaId = fieldmodel.MediaModel.Id;
+                                field.FieldValue = fieldmodel.MediaModel.Url;
+                            }
+                            else
+                            {
+                                field.MediaId = null;
+                                field.FieldValue = null;
+                            }
                         }
                         else
                         {
                             field.FieldValue = fieldmodel.FieldValue;
                             field.MediaId = null;
                         }
-
                     }
                 }
                 var html = Engine.Razor.RunCompile(card.CardTemplate.HtmlCode, Guid.NewGuid().ToString(), model.GetType(), model);

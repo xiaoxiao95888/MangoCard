@@ -7,9 +7,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using AutoMapper;
 using Mango_Cards.Library.Models;
 using Mango_Cards.Library.Services;
 using Mango_Cards.Web.Infrastructure.Filters;
+using Mango_Cards.Web.MapperHelper;
 using Mango_Cards.Web.Models;
 using Microsoft.AspNet.Identity;
 
@@ -20,16 +22,18 @@ namespace Mango_Cards.Web.Controllers.API
     {
         private readonly IMediaService _mediaService;
         private readonly IMediaTypeService _mediaTypeService;
-        public UploadController(IMediaService mediaService, IMediaTypeService mediaTypeService)
+        public UploadController(IMediaService mediaService, IMediaTypeService mediaTypeService, IMapperFactory mapperFactory)
         {
             _mediaService = mediaService;
             _mediaTypeService = mediaTypeService;
+            mapperFactory.GetMediaMapper().Create();
         }
         public object Post()
         {
             var fileFullPath = string.Empty;
             var weChatUserId = User.Identity.GetUserId();
             var newFileName = string.Empty;
+            var media = new Media();
             try
             {
                
@@ -63,7 +67,7 @@ namespace Mango_Cards.Web.Controllers.API
                     fileFullPath = uploadFilePath + newFileName;
                     file.SaveAs(uploadFilePath + newFileName);
                     
-                    var media = new Media
+                    media = new Media
                     {
                         Id = id,
                         FileName = fileName,
@@ -74,16 +78,12 @@ namespace Mango_Cards.Web.Controllers.API
                     };
                     _mediaService.Insert(media);
                 }
-              
-                var uploadFileUrl = ConfigurationManager.AppSettings["UploadFileUrl"] + weChatUserId + "/";
                 return new UploadResponseModel
                 {
                     ErrorCode = 0,
                     Message = "success",
                     Error = false,
-                    FileId = id,
-                    OriginalFileName = file.FileName,
-                    Url = uploadFileUrl + newFileName
+                    MediaModel = Mapper.Map<Media, MediaModel>(media)
                 };
             }
             catch (Exception ex)

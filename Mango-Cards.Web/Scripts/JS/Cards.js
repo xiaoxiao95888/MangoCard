@@ -118,7 +118,7 @@ ko.bindingHandlers.wysihtml5 = {
             "html": false,
             "link": false,
             "image": false,
-            "color": false 
+            "color": false
         };
         var value = ko.utils.unwrapObservable(valueAccessor()) || {};
         options.events = {
@@ -266,7 +266,34 @@ Cards.viewModel.SelectedMediae = function () {
 //确定选择的素材
 Cards.SelectMediaeDetermine = function () {
     var mediae = ko.mapping.toJS(Cards.viewModel.Mediae);
-    ko.mapping.fromJS(mediae, {}, Cards.viewModel.FieldModel.MediaModel);
+    var currentfield = ko.mapping.toJS(Cards.viewModel.FieldModel);
+    //判断选择的FieldModel中的MediaModel是否为空,为空的话删除FieldModel再在MangoCardAttribute的FieldModels添加新的FieldModel
+    if (currentfield.MediaModel == null) {
+        Cards.viewModel.MangoCardAttribute.FieldModels.remove(Cards.viewModel.FieldModel);
+        var newfield = {
+            Description: ko.observable(currentfield.Description),
+            FieldType: ko.observable(currentfield.FieldType),
+            FieldTypeName: ko.observable(currentfield.FieldTypeName),
+            FieldValue: ko.observable(currentfield.FieldValue),
+            Id: ko.observable(currentfield.Id),
+            Index: ko.observable(currentfield.Index),
+            Name: ko.observable(currentfield.Name),
+            MediaModel: {
+                ExtensionName: ko.observable(mediae.ExtensionName),
+                FileName: ko.observable(mediae.FileName),
+                Id: ko.observable(mediae.Id),
+                MediaTypeId: ko.observable(mediae.MediaTypeId),
+                Name: ko.observable(mediae.Name),
+                ThumbnailUrl: ko.observable(mediae.ThumbnailUrl),
+                Url: ko.observable(mediae.Url),
+                UpdateTime: ko.observable(mediae.UpdateTime)
+            }
+        }
+        Cards.viewModel.MangoCardAttribute.FieldModels.splice(currentfield.Index, 0, newfield);
+    } else {
+        ko.mapping.fromJS(mediae, {}, Cards.viewModel.FieldModel.MediaModel);
+    }
+    //ko.mapping.fromJS(mediae, {}, Cards.viewModel.FieldModel.MediaModel);
     $("#library-dialog").modal("hide");
 }
 //高级编辑保存
@@ -361,7 +388,7 @@ Cards.viewModel.normalsave = function (data, event) {
             }
         });
     }
-    
+
 };
 //发布
 Cards.viewModel.submitaudit = function () {
@@ -482,10 +509,20 @@ Cards.viewModel.openfileselect = function () {
     $("#file").click();
 };
 //取消素材
-Cards.viewModel.RemoveImg = function () {
-    var mediaModel = { Id: "", Url: "", FileName: "" };
-    ko.mapping.fromJS(mediaModel, {}, this);
-
+Cards.viewModel.RemoveImg = function (data, event) {
+    var currentfield = ko.mapping.toJS(data);
+    Cards.viewModel.MangoCardAttribute.FieldModels.remove(data);
+    var newfield = {
+        Description: ko.observable(currentfield.Description),
+        FieldType: ko.observable(currentfield.FieldType),
+        FieldTypeName: ko.observable(currentfield.FieldTypeName),
+        FieldValue: ko.observable(currentfield.FieldValue),
+        Id: ko.observable(currentfield.Id),
+        Index: ko.observable(currentfield.Index),
+        Name: ko.observable(currentfield.Name),
+        MediaModel: ko.observable(null)
+    }
+    Cards.viewModel.MangoCardAttribute.FieldModels.splice(currentfield.Index, 0, newfield);
 }
 //删除素材
 Cards.viewModel.delete = function () {

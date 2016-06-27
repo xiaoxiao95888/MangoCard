@@ -21,8 +21,6 @@ namespace Mango_Cards.Web.Models
         public bool Error { get; set; }
         public string Message { get; set; }
         public string DebugMessage { get; set; }
-        public string OriginalFileName { get; set; }
-        public Guid FileId { get; set; }
-        public string Url { get; set; }
+        public MediaModel MediaModel { get; set; }
     }
 }

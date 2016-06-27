@@ -48,8 +48,28 @@ function uploadComplete(evt) {
     if (!result.Error) {
         UploadPlug.p.show();
         UploadPlug.progressbar.hide();
-        var mediaModel = { Id: result.FileId, Url: result.Url, FileName: result.OriginalFileName };
-        ko.mapping.fromJS(mediaModel, {}, UploadPlug.obj.MediaModel);
+        var currentfield = ko.mapping.toJS(UploadPlug.obj);
+        Cards.viewModel.MangoCardAttribute.FieldModels.remove(UploadPlug.obj);
+        var newfield = {
+            Description: ko.observable(currentfield.Description),
+            FieldType: ko.observable(currentfield.FieldType),
+            FieldTypeName: ko.observable(currentfield.FieldTypeName),
+            FieldValue: ko.observable(currentfield.FieldValue),
+            Id: ko.observable(currentfield.Id),
+            Index: ko.observable(currentfield.Index),
+            Name: ko.observable(currentfield.Name),
+            MediaModel: {
+                ExtensionName: ko.observable(result.MediaModel.ExtensionName),
+                FileName: ko.observable(result.MediaModel.FileName),
+                Id: ko.observable(result.MediaModel.Id),
+                MediaTypeId: ko.observable(result.MediaModel.MediaTypeId),
+                Name: ko.observable(result.MediaModel.Name),
+                ThumbnailUrl: ko.observable(result.MediaModel.ThumbnailUrl),
+                Url: ko.observable(result.MediaModel.Url),
+                UpdateTime: ko.observable(result.MediaModel.UpdateTime)
+            }
+        }
+        Cards.viewModel.MangoCardAttribute.FieldModels.splice(currentfield.Index, 0, newfield);
 
     } else {
 
