@@ -15,11 +15,11 @@ namespace Mango_Cards.Web.Models
         /// <summary>
         /// 作者
         /// </summary>
-        public string EmployeeName { get; set; }
+        public string UserName { get; set; }
         /// <summary>
         /// 作者Id
         /// </summary>
-        public Guid EmployeeId { get; set; }
+        public Guid UserId { get; set; }
         public string ThumbnailUrl { get; set; }
         public Guid CardTypeId { get; set; }
         public string CardTypeName { get; set; }
@@ -33,11 +33,11 @@ namespace Mango_Cards.Web.Models
         /// <summary>
         /// 作者
         /// </summary>
-        public string EmployeeName { get; set; }
+        public string UserName { get; set; }
         /// <summary>
         /// 作者Id
         /// </summary>
-        public Guid EmployeeId { get; set; }
+        public Guid UserId { get; set; }
         public string ThumbnailUrl { get; set; }
         public Guid CardTypeId { get; set; }
         public string CardTypeName { get; set; }

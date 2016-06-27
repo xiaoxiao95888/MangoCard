@@ -28,9 +28,9 @@ namespace Mango_Cards.Library.Models
         /// </summary>
         public string Instructions { get; set; }
         /// <summary>
-        /// 作者
+        /// 开发者
         /// </summary>
-        public virtual Employee Employee { get; set; }
+        public virtual WeChatUser WeChatUser { get; set; }
         /// <summary>
         /// 代码
         /// </summary>

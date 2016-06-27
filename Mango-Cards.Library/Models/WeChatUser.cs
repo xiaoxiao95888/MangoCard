@@ -23,8 +23,17 @@ namespace Mango_Cards.Library.Models
         /// </summary>
         public string PhoneNum { get; set; }
         public string Email { get; set; }
+        /// <summary>
+        /// 真实姓名
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// 是否是开发者
+        /// </summary>
+        public bool IsDeveloper { get; set; }
         public virtual ICollection<MangoCard> MangoCards { get; set; }
-        public virtual ICollection<Media> Mediae { get; set; } 
+        public virtual ICollection<CardTemplate> CardTemplates { get; set; }
+        public virtual ICollection<Media> Mediae { get; set; }
         public virtual Company Company { get; set; }
         public DateTime? UpdateTime { get; set; }
         public DateTime CreatedTime { get; set; }

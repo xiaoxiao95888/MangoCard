@@ -11,6 +11,9 @@
                 @*@Html.ActionLink("Hi，" + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
                 @Html.ActionLink(HttpContext.Current.User.Identity.GetWeChatUserModel().NickName + "的 Mango Card", "Index", "Cards")
             </li>
+            <li>
+                @Html.ActionLink("开发者", "Index", "Developer")
+            </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">注销</a></li>
         </ul>
     }

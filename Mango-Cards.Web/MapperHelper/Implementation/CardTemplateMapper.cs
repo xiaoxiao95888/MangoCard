@@ -27,8 +27,8 @@ namespace Mango_Cards.Web.MapperHelper.Implementation
             Mapper.CreateMap<Field, FieldModel>().ForMember(n => n.FieldType, opt => opt.MapFrom(src => src.FieldType))
                 .ForMember(n => n.MediaModel, opt => opt.MapFrom(src => Mapper.Map<Media, MediaModel>(src.Media)));
             Mapper.CreateMap<CardTemplate, CardTemplateDetailModel>()
-                .ForMember(n => n.EmployeeId, opt => opt.MapFrom(src => src.Employee.Id))
-                .ForMember(n => n.EmployeeName, opt => opt.MapFrom(src => src.Employee.Name))
+                .ForMember(n => n.UserId, opt => opt.MapFrom(src => src.WeChatUser.Id))
+                .ForMember(n => n.UserName, opt => opt.MapFrom(src => src.WeChatUser.Name))
                 .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
                 .ForMember(n => n.CardTypeName, opt => opt.MapFrom(src => src.CardType.Name))
                 .ForMember(n => n.ThumbnailUrl, opt => opt.MapFrom(src => _cardThumbnailPath + src.ThumbnailUrl))
@@ -38,8 +38,8 @@ namespace Mango_Cards.Web.MapperHelper.Implementation
         public void Normal()
         {
             Mapper.CreateMap<CardTemplate, CardTemplateModel>()
-                .ForMember(n => n.EmployeeId, opt => opt.MapFrom(src => src.Employee.Id))
-                .ForMember(n => n.EmployeeName, opt => opt.MapFrom(src => src.Employee.Name))
+                .ForMember(n => n.UserId, opt => opt.MapFrom(src => src.WeChatUser.Id))
+                .ForMember(n => n.UserName, opt => opt.MapFrom(src => src.WeChatUser.Name))
                 .ForMember(n => n.CardTypeId, opt => opt.MapFrom(src => src.CardType.Id))
                 .ForMember(n => n.CardTypeName, opt => opt.MapFrom(src => src.CardType.Name))
                 .ForMember(n => n.ThumbnailUrl, opt => opt.MapFrom(src => _cardThumbnailPath + src.ThumbnailUrl))
