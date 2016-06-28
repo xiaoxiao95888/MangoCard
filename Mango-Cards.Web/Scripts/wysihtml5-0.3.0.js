@@ -3028,8 +3028,8 @@ rangy.createModule("DomUtil", function(api, module) {
                 sel.addRange(ranges[i]);
             } else {
                 // According to the draft WHATWG Range spec, the same range may be added to the selection multiple
-                // times. removeRange should only remove the first instance, so the following ensures only the first
-                // instance is removed
+                // times. removeRange should only remove the first Instance, so the following ensures only the first
+                // Instance is removed
                 removed = true;
             }
         }
@@ -4357,7 +4357,7 @@ wysihtml5.dom.getAsDom = (function() {
   };
   
   /**
-   * Make sure IE supports HTML5 tags, which is accomplished by simply creating one instance of each element
+   * Make sure IE supports HTML5 tags, which is accomplished by simply creating one Instance of each element
    */
   var _ensureHTML5Compatibility = function(context) {
     if (context._wysihtml5_supportsHTML5Tags) {
@@ -8041,7 +8041,7 @@ wysihtml5.views.View = Base.extend(
       hiddenField.name   = "_wysihtml5_mode";
       hiddenField.value  = 1;
 
-      // Store reference to current wysihtml5 instance on the textarea element
+      // Store reference to current wysihtml5 Instance on the textarea element
       var textareaElement = this.textarea.element;
       dom.insert(this.iframe).after(textareaElement);
       dom.insert(hiddenField).after(textareaElement);
@@ -9048,7 +9048,7 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
 })(wysihtml5);/**
  * Toolbar
  *
- * @param {Object} parent Reference to instance of Editor instance
+ * @param {Object} parent Reference to Instance of Editor Instance
  * @param {Element} container Reference to the toolbar container element
  *
  * @example

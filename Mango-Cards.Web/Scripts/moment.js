@@ -2464,8 +2464,8 @@
         },
 
         // If passed a locale key, it will set the locale for this
-        // instance.  Otherwise, it will return the locale configuration
-        // variables for this instance.
+        // Instance.  Otherwise, it will return the locale configuration
+        // variables for this Instance.
         locale : function (key) {
             var newLocaleData;
 

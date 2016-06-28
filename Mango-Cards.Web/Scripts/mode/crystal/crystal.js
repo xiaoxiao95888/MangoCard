@@ -112,7 +112,7 @@
         return "variable";
       }
 
-      // Class variables and instance variables
+      // Class variables and Instance variables
       // or attributes
       if (stream.eat("@")) {
         if (stream.peek() == "[") {

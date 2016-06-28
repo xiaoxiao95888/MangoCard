@@ -86,7 +86,7 @@ function bridge( namespace, PluginClass ) {
           continue;
         }
         if ( !$.isFunction( instance[options] ) || options.charAt(0) === '_' ) {
-          logError( "no such method '" + options + "' for " + namespace + " instance" );
+          logError( "no such method '" + options + "' for " + namespace + " Instance" );
           continue;
         }
 
@@ -108,7 +108,7 @@ function bridge( namespace, PluginClass ) {
           instance.option( options );
           instance._init();
         } else {
-          // initialize new instance
+          // initialize new Instance
           instance = new PluginClass( this, options );
           $.data( this, namespace, instance );
         }
@@ -360,7 +360,7 @@ if ( typeof define === 'function' && define.amd ) {
      *
      * @param {String|RegExp} evt Name of the event to attach the listener to.
      * @param {Function} listener Method to be called when the event is emitted. If the function returns true then it will be removed after calling.
-     * @return {Object} Current instance of EventEmitter for chaining.
+     * @return {Object} Current Instance of EventEmitter for chaining.
      */
     proto.addListener = function addListener(evt, listener) {
         var listeners = this.getListenersAsObject(evt);
@@ -390,7 +390,7 @@ if ( typeof define === 'function' && define.amd ) {
      *
      * @param {String|RegExp} evt Name of the event to attach the listener to.
      * @param {Function} listener Method to be called when the event is emitted. If the function returns true then it will be removed after calling.
-     * @return {Object} Current instance of EventEmitter for chaining.
+     * @return {Object} Current Instance of EventEmitter for chaining.
      */
     proto.addOnceListener = function addOnceListener(evt, listener) {
         return this.addListener(evt, {
@@ -409,7 +409,7 @@ if ( typeof define === 'function' && define.amd ) {
      * You need to tell it what event names should be matched by a regex.
      *
      * @param {String} evt Name of the event to create.
-     * @return {Object} Current instance of EventEmitter for chaining.
+     * @return {Object} Current Instance of EventEmitter for chaining.
      */
     proto.defineEvent = function defineEvent(evt) {
         this.getListeners(evt);
@@ -420,7 +420,7 @@ if ( typeof define === 'function' && define.amd ) {
      * Uses defineEvent to define multiple events.
      *
      * @param {String[]} evts An array of event names to define.
-     * @return {Object} Current instance of EventEmitter for chaining.
+     * @return {Object} Current Instance of EventEmitter for chaining.
      */
     proto.defineEvents = function defineEvents(evts) {
         for (var i = 0; i < evts.length; i += 1) {
@@ -435,7 +435,7 @@ if ( typeof define === 'function' && define.amd ) {
      *
      * @param {String|RegExp} evt Name of the event to remove the listener from.
      * @param {Function} listener Method to remove from the event.
-     * @return {Object} Current instance of EventEmitter for chaining.
+     * @return {Object} Current Instance of EventEmitter for chaining.
      */
     proto.removeListener = function removeListener(evt, listener) {
         var listeners = this.getListenersAsObject(evt);
@@ -468,7 +468,7 @@ if ( typeof define === 'function' && define.amd ) {
      *
      * @param {String|Object|RegExp} evt An event name if you will pass an array of listeners next. An object if you wish to add to multiple events at once.
      * @param {Function[]} [listeners] An optional array of listener functions to add.
-     * @return {Object} Current instance of EventEmitter for chaining.
+     * @return {Object} Current Instance of EventEmitter for chaining.
      */
     proto.addListeners = function addListeners(evt, listeners) {
         // Pass through to manipulateListeners
@@ -483,7 +483,7 @@ if ( typeof define === 'function' && define.amd ) {
      *
      * @param {String|Object|RegExp} evt An event name if you will pass an array of listeners next. An object if you wish to remove from multiple events at once.
      * @param {Function[]} [listeners] An optional array of listener functions to remove.
-     * @return {Object} Current instance of EventEmitter for chaining.
+     * @return {Object} Current Instance of EventEmitter for chaining.
      */
     proto.removeListeners = function removeListeners(evt, listeners) {
         // Pass through to manipulateListeners
@@ -500,7 +500,7 @@ if ( typeof define === 'function' && define.amd ) {
      * @param {Boolean} remove True if you want to remove listeners, false if you want to add.
      * @param {String|Object|RegExp} evt An event name if you will pass an array of listeners next. An object if you wish to add/remove from multiple events at once.
      * @param {Function[]} [listeners] An optional array of listener functions to add/remove.
-     * @return {Object} Current instance of EventEmitter for chaining.
+     * @return {Object} Current Instance of EventEmitter for chaining.
      */
     proto.manipulateListeners = function manipulateListeners(remove, evt, listeners) {
         var i;
@@ -543,7 +543,7 @@ if ( typeof define === 'function' && define.amd ) {
      * You can also pass a regex to remove all events that match it.
      *
      * @param {String|RegExp} [evt] Optional name of the event to remove all listeners for. Will remove from every event if not passed.
-     * @return {Object} Current instance of EventEmitter for chaining.
+     * @return {Object} Current Instance of EventEmitter for chaining.
      */
     proto.removeEvent = function removeEvent(evt) {
         var type = typeof evt;
@@ -588,7 +588,7 @@ if ( typeof define === 'function' && define.amd ) {
      *
      * @param {String|RegExp} evt Name of the event to emit and execute listeners for.
      * @param {Array} [args] Optional array of arguments to be passed to each listener.
-     * @return {Object} Current instance of EventEmitter for chaining.
+     * @return {Object} Current Instance of EventEmitter for chaining.
      */
     proto.emitEvent = function emitEvent(evt, args) {
         var listeners = this.getListenersAsObject(evt);
@@ -633,7 +633,7 @@ if ( typeof define === 'function' && define.amd ) {
      *
      * @param {String|RegExp} evt Name of the event to emit and execute listeners for.
      * @param {...*} Optional additional arguments to be passed to each listener.
-     * @return {Object} Current instance of EventEmitter for chaining.
+     * @return {Object} Current Instance of EventEmitter for chaining.
      */
     proto.emit = function emit(evt) {
         var args = Array.prototype.slice.call(arguments, 1);
@@ -646,7 +646,7 @@ if ( typeof define === 'function' && define.amd ) {
      * after execution. This value defaults to true.
      *
      * @param {*} value The new value to check for when executing listeners.
-     * @return {Object} Current instance of EventEmitter for chaining.
+     * @return {Object} Current Instance of EventEmitter for chaining.
      */
     proto.setOnceReturnValue = function setOnceReturnValue(value) {
         this._onceReturnValue = value;
@@ -2728,7 +2728,7 @@ Outlayer.prototype.needsResizeLayout = function() {
 // -------------------------- methods -------------------------- //
 
 /**
- * add items to Outlayer instance
+ * add items to Outlayer Instance
  * @param {Array or NodeList or Element} elems
  * @returns {Array} items - Outlayer.Items
 **/
@@ -2860,7 +2860,7 @@ Outlayer.prototype.getItems = function( elems ) {
 };
 
 /**
- * remove element(s) from instance and DOM
+ * remove element(s) from Instance and DOM
  * @param {Array or NodeList or Element} elems
  */
 Outlayer.prototype.remove = function( elems ) {
@@ -2883,7 +2883,7 @@ Outlayer.prototype.remove = function( elems ) {
 
 // ----- destroy ----- //
 
-// remove and disable Outlayer instance
+// remove and disable Outlayer Instance
 Outlayer.prototype.destroy = function() {
   // clean up dynamic styles
   var style = this.element.style;
@@ -2899,7 +2899,7 @@ Outlayer.prototype.destroy = function() {
   this.unbindResize();
 
   var id = this.element.outlayerGUID;
-  delete instances[ id ]; // remove reference to instance by id
+  delete instances[ id ]; // remove reference to Instance by id
   delete this.element.outlayerGUID;
   // remove data for jQuery
   if ( jQuery ) {
@@ -2911,7 +2911,7 @@ Outlayer.prototype.destroy = function() {
 // -------------------------- data -------------------------- //
 
 /**
- * get Outlayer instance from element
+ * get Outlayer Instance from element
  * @param {Element} elem
  * @returns {Outlayer}
  */
@@ -3107,7 +3107,7 @@ return Item;
 
   /**
    * some methods should just defer to default Outlayer method
-   * and reference the Isotope instance as `this`
+   * and reference the Isotope Instance as `this`
   **/
   ( function() {
     var facadeMethods = [
@@ -3774,7 +3774,7 @@ var getText = docElem.textContent ?
     var initialOpts = this.options[ name ] || {};
     this.options[ name ] = Mode.options ?
       utils.extend( Mode.options, initialOpts ) : initialOpts;
-    // init layout mode instance
+    // init layout mode Instance
     this.modes[ name ] = new Mode( this );
   };
 

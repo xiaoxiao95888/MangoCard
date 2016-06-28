@@ -64,16 +64,16 @@
    *  A traversable class might or might not have two properties: strictness
    *  and orderedness. Neither is represented as a type.
    *  
-   *  The instances of a strict collection class have all their elements
-   *  computed before they can be used as values. By contrast, instances of
+   *  The Instances of a strict collection class have all their elements
+   *  computed before they can be used as values. By contrast, Instances of
    *  a non-strict collection class may defer computation of some of their
-   *  elements until after the instance is available as a value.
+   *  elements until after the Instance is available as a value.
    *  A typical example of a non-strict collection class is a
    *  <a href="../immutable/Stream.html" target="ContentFrame">
    *  `scala.collection.immutable.Stream`</a>.
    *  A more general class of examples are `TraversableViews`.
    *  
-   *  If a collection is an instance of an ordered collection class, traversing
+   *  If a collection is an Instance of an ordered collection class, traversing
    *  its elements with `foreach` will always visit elements in the
    *  same order, even for different runs of the program. If the class is not
    *  ordered, `foreach` can visit elements in different orders for
@@ -114,7 +114,7 @@
      */
     def repr: Repr = this.asInstanceOf[Repr]
 
-    /** The underlying collection seen as an instance of `$Coll`.
+    /** The underlying collection seen as an Instance of `$Coll`.
      *  By default this is implemented as the current collection object itself,
      *  but this can be overridden.
      */
@@ -669,7 +669,7 @@
     class WithFilter(p: A => Boolean) extends FilterMonadic[A, Repr] {
 
       /** Builds a new collection by applying a function to all elements of the
-       *  outer $coll containing this `WithFilter` instance that satisfy predicate `p`.
+       *  outer $coll containing this `WithFilter` Instance that satisfy predicate `p`.
        *
        *  @param f      the function to apply to each element.
        *  @tparam B     the element type of the returned collection.
@@ -693,7 +693,7 @@
       }
 
       /** Builds a new collection by applying a function to all elements of the
-       *  outer $coll containing this `WithFilter` instance that satisfy
+       *  outer $coll containing this `WithFilter` Instance that satisfy
        *  predicate `p` and concatenating the results. 
        *
        *  @param f      the function to apply to each element.
@@ -718,7 +718,7 @@
       }
 
       /** Applies a function `f` to all elements of the outer $coll containing
-       *  this `WithFilter` instance that satisfy predicate `p`.
+       *  this `WithFilter` Instance that satisfy predicate `p`.
        *
        *  @param  f   the function that is applied for its side-effect to every element.
        *              The result of function `f` is discarded.

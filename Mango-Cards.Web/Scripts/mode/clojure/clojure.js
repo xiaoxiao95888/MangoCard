@@ -60,7 +60,7 @@ CodeMirror.defineMode("clojure", function (options) {
         "find-ns find-protocol-impl find-protocol-method find-var first flatten float float-array float? floats flush fn fn? " +
         "fnext fnil for force format frequencies future future-call future-cancel future-cancelled? future-done? future? " +
         "gen-class gen-interface gensym get get-in get-method get-proxy-class get-thread-bindings get-validator group-by hash " +
-        "hash-combine hash-map hash-set identical? identity if-let if-not ifn? import in-ns inc inc' init-proxy instance? " +
+        "hash-combine hash-map hash-set identical? identity if-let if-not ifn? import in-ns inc inc' init-proxy Instance? " +
         "int int-array integer? interleave intern interpose into into-array ints io! isa? iterate iterator-seq juxt keep " +
         "keep-indexed key keys keyword keyword? last lazy-cat lazy-seq let letfn line-seq list list* list? load load-file " +
         "load-reader load-string loaded-libs locking long long-array longs loop macroexpand macroexpand-1 make-array " +

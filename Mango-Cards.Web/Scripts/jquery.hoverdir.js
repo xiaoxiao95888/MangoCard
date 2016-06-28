@@ -184,7 +184,7 @@
 				
 				if ( !$.isFunction( instance[options] ) || options.charAt(0) === "_" ) {
 
-					logError( "no such method '" + options + "' for hoverdir instance" );
+					logError( "no such method '" + options + "' for hoverdir Instance" );
 					return;
 				
 				}

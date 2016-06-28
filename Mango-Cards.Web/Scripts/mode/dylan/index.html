@@ -140,7 +140,7 @@ define sealed sideways method as
     (class :: subclass(<locator>), string :: <string>)
  => (locator :: <locator>)
   let locator = element($string-to-locator-cache, string, default: #f);
-  if (instance?(locator, class))
+  if (Instance?(locator, class))
     locator
   else
     let locator = string-as-locator(class, string);

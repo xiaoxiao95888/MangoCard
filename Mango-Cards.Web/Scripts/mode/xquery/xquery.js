@@ -42,7 +42,7 @@ CodeMirror.defineMode("xquery", function() {
     var basic = ['after','ancestor','ancestor-or-self','and','as','ascending','assert','attribute','before',
     'by','case','cast','child','comment','declare','default','define','descendant','descendant-or-self',
     'descending','document','document-node','element','else','eq','every','except','external','following',
-    'following-sibling','follows','for','function','if','import','in','instance','intersect','item',
+    'following-sibling','follows','for','function','if','import','in','Instance','intersect','item',
     'let','module','namespace','node','node','of','only','or','order','parent','precedes','preceding',
     'preceding-sibling','processing-instruction','ref','return','returns','satisfies','schema','schema-element',
     'self','some','sortby','stable','text','then','to','treat','typeswitch','union','variable','version','where',

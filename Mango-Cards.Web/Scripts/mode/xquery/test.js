@@ -34,7 +34,7 @@
      "      }");
 
   MT("testEmptySequenceKeyword",
-     "[string \"foo\"] [keyword instance] [keyword of] [keyword empty-sequence]()");
+     "[string \"foo\"] [keyword Instance] [keyword of] [keyword empty-sequence]()");
 
   MT("testMultiAttr",
      "[tag <p ][attribute a1]=[string \"foo\"] [attribute a2]=[string \"bar\"][tag >][variable hello] [variable world][tag </p>]");
@@ -59,7 +59,7 @@
      "[tag <out>]{[def&variable 'http://www.example.com/ns/my':fn]([atom 12])}[tag </out>]");
 
   MT("testProcessingInstructions",
-     "[def&variable data]([comment&meta <?target content?>]) [keyword instance] [keyword of] [atom xs:string]");
+     "[def&variable data]([comment&meta <?target content?>]) [keyword Instance] [keyword of] [atom xs:string]");
 
   MT("testQuoteEscapeDouble",
      "[keyword let] [variable $rootfolder] [keyword :=] [string \"c:\\builds\\winnt\\HEAD\\qa\\scripts\\\"]",

@@ -5,16 +5,13 @@
 @using RazorEngine.Templating;
 @model Mango_Cards.Web.Models.MangoCardAttributeModel
 <!DOCTYPE html>
-
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" initial-scale="1.0" />
     <meta name="viewport" content="width=device-width" initial-scale="1.0">
     <meta name="description" content="@Model.Description">
     <title>@Model.Title</title>
     <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script>
-   
     @Styles.Render("~/Content/CardView")
     <style>
     </style>
@@ -26,7 +23,6 @@
     <div>
         @Html.Raw(Model.HtmlCode)
     </div>
-    @*@Html.Raw(Model.HtmlCode)*@
     @*@Html.Raw(Engine.Razor.RunCompile(Model.PageHtmlCode, Model.PageHtmlCode, Model.GetType(), Model))*@
 </body>
 @Scripts.Render("~/bundles/CardView")

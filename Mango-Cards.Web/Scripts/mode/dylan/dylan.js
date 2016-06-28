@@ -67,7 +67,7 @@ CodeMirror.defineMode("dylan", function(_config) {
     // Keywords that do not require special indentation handling,
     // but which should be highlighted
     other: ["above", "below", "by", "from", "handler", "in",
-            "instance", "let", "local", "otherwise", "slot",
+            "Instance", "let", "local", "otherwise", "slot",
             "subclass", "then", "to", "keyed-by", "virtual"
            ],
 

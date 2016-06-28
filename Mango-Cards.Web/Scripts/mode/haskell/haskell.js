@@ -190,7 +190,7 @@ CodeMirror.defineMode("haskell", function(_config, modeConfig) {
 
     setType("keyword")(
       "case", "class", "data", "default", "deriving", "do", "else", "foreign",
-      "if", "import", "in", "infix", "infixl", "infixr", "instance", "let",
+      "if", "import", "in", "infix", "infixl", "infixr", "Instance", "let",
       "module", "newtype", "of", "then", "type", "where", "_");
 
     setType("keyword")(

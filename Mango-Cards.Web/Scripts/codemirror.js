@@ -55,7 +55,7 @@
 
   // EDITOR CONSTRUCTOR
 
-  // A CodeMirror instance represents an editor. This is the object
+  // A CodeMirror Instance represents an editor. This is the object
   // that user code is usually dealing with.
 
   function CodeMirror(place, options) {
@@ -1075,7 +1075,7 @@
 
   // POSITION OBJECT
 
-  // A Pos instance represents a position within the text.
+  // A Pos Instance represents a position within the text.
   var Pos = CodeMirror.Pos = function(line, ch) {
     if (!(this instanceof Pos)) return new Pos(line, ch);
     this.line = line; this.ch = ch;
@@ -8781,7 +8781,7 @@
         else prev = type;
       }
 
-      // W2. Search backwards from each instance of a European number
+      // W2. Search backwards from each Instance of a European number
       // until the first strong type (R, L, AL, or sor) is found. If an
       // AL is found, change the type of the European number to Arabic
       // number.
@@ -8818,7 +8818,7 @@
         }
       }
 
-      // W7. Search backwards from each instance of a European number
+      // W7. Search backwards from each Instance of a European number
       // until the first strong type (R, L, or sor) is found. If an L is
       // found, then change the type of the European number to L.
       for (var i = 0, cur = outerType; i < len; ++i) {

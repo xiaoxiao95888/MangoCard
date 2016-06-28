@@ -2,7 +2,7 @@
 // Distributed under an MIT license: http://codemirror.net/LICENSE
 
 /*
-For extra ASP classic objects, initialize CodeMirror instance with this option:
+For extra ASP classic objects, initialize CodeMirror Instance with this option:
     isASP: true
 
 E.G.:

@@ -51,7 +51,7 @@ feature -- Access
 
     generator: STRING
             -- Name of current object's generating class
-            -- (base class of the type of which it is a direct instance)
+            -- (base class of the type of which it is a direct Instance)
         external
             "built_in"
         ensure
@@ -61,7 +61,7 @@ feature -- Access
 
     generating_type: TYPE [detachable like Current]
             -- Type of current object
-            -- (type of which it is a direct instance)
+            -- (type of which it is a direct Instance)
         do
             Result := {detachable like Current}
         ensure
@@ -356,7 +356,7 @@ feature -- Platform
 feature {NONE} -- Initialization
 
     default_create
-            -- Process instances of classes with no creation clause.
+            -- Process Instances of classes with no creation clause.
             -- (Default: do nothing.)
         do
         end
