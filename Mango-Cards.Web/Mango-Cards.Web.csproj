@@ -321,10 +321,8 @@
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\PageValueModel.cs" />
     <Compile Include="Models\PvDataModel.cs" />
-    <Compile Include="Models\PV\PvDetail.cs" />
     <Compile Include="Models\PV\PvRecord.cs" />
     <Compile Include="Models\PV\PvUser.cs" />
-    <Compile Include="Models\PV\PvView.cs" />
     <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\ShareTimeModel.cs" />
     <Compile Include="Models\WeChatUserModel.cs" />

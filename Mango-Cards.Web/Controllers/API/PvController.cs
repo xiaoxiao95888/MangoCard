@@ -12,54 +12,28 @@ namespace Mango_Cards.Web.Controllers.API
 {
     public class PvController : BaseApiController
     {
+
         private readonly IMongoDatabase _mdb;
+        private readonly IMongoClient _client;
         public PvController()
         {
-            var mongoClient = new MongoClient();
-            _mdb = mongoClient.GetDatabase("pv_mangocard");
+            _client = new MongoClient();
+            _mdb = _client.GetDatabase("pv_mangocard");
         }
+      
         public object Post(PvRecord model)
         {
-            var collection = _mdb.GetCollection<PvUser>("PvUsers");
+            var collection = _mdb.GetCollection<PvRecord>("PvRecord");
             try
             {
-                var filter = Builders<PvUser>.Filter.Eq("OpenId", model.PvUser.OpenId);
-                var user = collection.Find(filter).FirstOrDefaultAsync().Result;
-                if (user != null)
-                {
-                    if (user.City != model.PvUser.City
-                        || user.Country != model.PvUser.Country
-                        || user.Gender != model.PvUser.Gender
-                        || user.Headimgurl != model.PvUser.Headimgurl
-                        || user.Language != model.PvUser.Language
-                        || user.NickName != model.PvUser.NickName
-                        || user.Province != model.PvUser.Province)
-                    {
-                        var update = Builders<PvUser>.Update.Set("Country", model.PvUser.Country)
-                            .Set("Gender", model.PvUser.Gender)
-                            .Set("Headimgurl", model.PvUser.Headimgurl)
-                            .Set("Language", model.PvUser.Language)
-                            .Set("NickName", model.PvUser.NickName)
-                            .Set("Province", model.PvUser.Province);
-                        collection.UpdateOneAsync(filter, update);
-                    }
-
-                }
-                else
-                {
-                    //插入user
-                    collection.InsertOneAsync(model.PvUser);
-                }
-                //插入浏览记录
-                var pvdetail = new PvDetail
-                {
-                    Id = ObjectId.GenerateNewId(),
-                    OpenId = model.PvUser.OpenId,
-                    MangoCardId = model.MangoCardId,
-                    ViewDate = DateTime.Now
-                };
-                var pvdetailcollection = _mdb.GetCollection<PvDetail>("PvDetails");
-                pvdetailcollection.InsertOneAsync(pvdetail);
+                model.DateTime = DateTime.Now;
+                model.Id = ObjectId.GenerateNewId();
+                model.PvUser.Id = ObjectId.GenerateNewId();
+                collection.InsertOne(model);
+                //var filter = Builders<PvRecord>.Filter.Eq<PvUser>("PvUser.OpenId", model.PvUser.OpenId);//这种写法也可以
+                var filter = Builders<PvRecord>.Filter.Eq(n => n.PvUser.OpenId, model.PvUser.OpenId);
+                var update = Builders<PvRecord>.Update.Set<PvUser>(n => n.PvUser, model.PvUser);
+                collection.UpdateManyAsync(filter, update);
             }
             catch (Exception)
             {
@@ -75,16 +49,16 @@ namespace Mango_Cards.Web.Controllers.API
         /// <returns></returns>
         public object Get(Guid id)
         {
-            var pvUserCollection = _mdb.GetCollection<PvUser>("PvUsers");
-            var ufilter = Builders<PvUser>.Filter.Ne("OpenId", string.Empty);
-            var pvDetailCollection = _mdb.GetCollection<PvDetail>("PvDetails");
-            var dfilter = Builders<PvDetail>.Filter.Ne("OpenId", string.Empty);
-            var model = new PvView
+            var collection = _mdb.GetCollection<PvRecord>("PvRecord");
+            var filter = Builders<PvRecord>.Filter.Eq(n => n.MangoCardId, id);
+            var model = new
             {
-                UserCount = (int?)pvUserCollection.Find(ufilter).CountAsync().Result,
-                ViewCount = (int?)pvDetailCollection.Find(dfilter).CountAsync().Result,
+                ViewCount = collection.Count(filter),
+                UserCount = collection.AsQueryable<PvRecord>().Where(n => n.MangoCardId == id).Select(n => n.PvUser).Distinct().Count()
+
             };
             return model;
+           
         }
     }
 }
