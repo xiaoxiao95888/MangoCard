@@ -173,15 +173,15 @@
 
     </div>
 </div>
-<div id="dataview">
-    <div class="container" data-bind="visible:Cards.viewModel.baseaccessdata.CardTitle()!=null">
+<div id="dataview" data-bind="visible:Cards.viewModel.showdata">
+    <div class="container">
         <div class="row">
             <h2 class="text-center title" style="letter-spacing:0.8rem;">数据 </h2>
         </div>
         <p>
-            <span data-bind="text:Cards.viewModel.baseaccessdata.CardTitle"></span>
+            <span></span>
             <span style="float: right">
-                类型：<span data-bind="text:Cards.viewModel.baseaccessdata.CardType"></span>
+                类型：<span></span>
             </span>
         </p>
         <div class="panel panel-default">
@@ -195,17 +195,20 @@
                 <div class="col-md-6">
                     <div class="col-md-4 col-sm-6 pull-right">
                         <h4 class="text-center">
-                            浏览用户数
+                            用户数
                         </h4>
-                        <p class="text-center" data-bind="text:Cards.viewModel.baseaccessdata.PvDataCount"></p>
+                        <p class="text-center">
+                            <span data-bind="visible:viewModel.baseaccessdata.UserCount()==0">-</span>
+                            <a data-bind="text:Cards.viewModel.baseaccessdata.UserCount()+'位',click:Cards.viewModel.ShowTopUser,visible::viewModel.baseaccessdata.UserCount()>0" href="#"></a>
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="col-md-4 col-sm-6 pull-left">
                         <h4 class="text-center">
-                            分享次数
+                            浏览量
                         </h4>
-                        <p class="text-center" data-bind="text:viewModel.baseaccessdata.ShareTimeCount"></p>
+                        <p class="text-center" data-bind="text:viewModel.baseaccessdata.ViewCount()>0?viewModel.baseaccessdata.ViewCount()+'次':'-'"></p>
                     </div>
                 </div>
             </div>
@@ -311,6 +314,53 @@
             <div class="modal-body" data-bind="qrbind:Cards.viewModel.PreviewCard.MangoCardUrl">
 
             </div>
+            <div class="modal-footer" style="text-align: center">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="topUser-dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <span class="modal-title">最近访问的前10位用户</span>
+            </div>
+
+            <table class="table table-responsive modal-body">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>用户</td>
+                        <td>昵称</td>
+                        <td>性别</td>
+                        <td>语言</td>
+                        <td>国家</td>
+                        <td>省份</td>
+                        <td>城市</td>
+                        <td>访问时间</td>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:Cards.viewModel.baseaccessdata.TopUser">
+                    <tr>
+                        <td style="line-height: 45px" data-bind="text:$index"></td>
+                        <td style="line-height: 45px">
+                            <img data-bind="attr:{src:WeChartUser.Headimgurl,alt:WeChartUser.NickName}" style="width: 45px; height: 45px;" />
+                        </td>
+                        <td style="line-height: 45px" data-bind="text:WeChartUser.NickName"></td>
+                        <td style="line-height: 45px" data-bind="text:WeChartUser.Sex"></td>
+                        <td style="line-height: 45px" data-bind="text:WeChartUser.Language"></td>
+                        <td style="line-height: 45px" data-bind="text:WeChartUser.Country"></td>
+                        <td style="line-height: 45px" data-bind="text:WeChartUser.Province"></td>
+                        <td style="line-height: 45px" data-bind="text:WeChartUser.City"></td>
+                        <td style="line-height: 45px" data-bind="hour:Time"></td>
+                    </tr>
+                </tbody>
+            </table>
+
             <div class="modal-footer" style="text-align: center">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>

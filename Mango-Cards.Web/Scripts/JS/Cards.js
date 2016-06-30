@@ -6,6 +6,7 @@
         medias: ko.observableArray(),
         mediatypetoshow: ko.observable("*"),
         typetoshow: ko.observable("*"),
+        showdata: ko.observable(false),
         MangoCardAttribute: {
             MangoCardId: ko.observable(),
             Title: ko.observable(),
@@ -57,10 +58,9 @@
         },
         selectcard: ko.observable(),
         baseaccessdata: {
-            CardTitle: ko.observable(),
-            CardType: ko.observable(),
-            PvDataCount: ko.observable(),
-            ShareTimeCount: ko.observable()
+            ViewCount: ko.observable("-"),
+            UserCount: ko.observable("-"),
+            TopUser: ko.observableArray()
         },
         codeMirror: ko.observable()
     }
@@ -166,6 +166,27 @@ ko.bindingHandlers.date = {
 
         // Date formats: http://momentjs.com/docs/#/displaying/format/
         var pattern = allBindings.format || "YYYY/MM/DD";
+
+        var output = "-";
+        if (valueUnwrapped !== null && valueUnwrapped !== undefined && valueUnwrapped.length > 0) {
+            output = moment(valueUnwrapped).format(pattern);
+        }
+
+        if ($(element).is("input") === true) {
+            $(element).val(output);
+        } else {
+            $(element).text(output);
+        }
+    }
+};
+ko.bindingHandlers.hour = {
+    update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        var value = valueAccessor();
+        var allBindings = allBindingsAccessor();
+        var valueUnwrapped = ko.utils.unwrapObservable(value);
+
+        // Date formats: http://momentjs.com/docs/#/displaying/format/
+        var pattern = allBindings.format || "YYYY/MM/DD HH:mm:ss";
 
         var output = "-";
         if (valueUnwrapped !== null && valueUnwrapped !== undefined && valueUnwrapped.length > 0) {
@@ -399,7 +420,7 @@ Cards.viewModel.submitaudit = function () {
         backdrop: "static"
     });
 }
-//点击显示数据
+//点击显示访问数据
 Cards.viewModel.data = function () {
     var model = ko.toJS(this);
     Cards.viewModel.selectcard(model);
@@ -410,10 +431,15 @@ Cards.viewModel.data = function () {
             scrollTop: $("#dataview").offset().top - 25
         }, 600);
     });
-    $.get("/api/BasicAccessData/" + model.Id, function (result) {
+    $.get("/api/Pv/" + model.Id, function (result) {
         ko.mapping.fromJS(result, {}, Cards.viewModel.baseaccessdata);
     });
+    Cards.viewModel.showdata(true);
 };
+//点击显示TopUser
+Cards.viewModel.ShowTopUser=function() {
+    $("#topUser-dialog").modal({ show: true, backdrop: "static" });
+}
 //刷新表单数据
 Cards.viewModel.refreshformpagevalue = function (data, event) {
     var dom = $(event.target);

@@ -10,4 +10,11 @@ namespace Mango_Cards.Web.Models.Enum
         男,
         女
     }
+
+    public enum Sex
+    {
+        未知,
+        男,
+        女
+    }
 }

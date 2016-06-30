@@ -79,7 +79,8 @@ var mc = {};
                             dtd.reject();
 
                         } else {
-                            $(mc).trigger("ready", [wechartuser,wx]);
+                            $(mc).trigger("ready", [wechartuser, wx]);
+                            lib.record();
                             dtd.resolve();
                         }
 
@@ -87,6 +88,17 @@ var mc = {};
                 }
             });
             return dtd.promise();
+        },
+        record: function () {
+            var arr = lib.Tool.getCookie("RedirecUrl").split("/");
+            var mangocardid = arr[arr.length - 1];
+            var model = {
+                PvUser: wechartuser,
+                MangoCardId: mangocardid
+            };
+            $.post("/api/Pv", model, function() {
+                dtd.resolve();
+            });
         },
         init: function () {
             lib.loadsignature()

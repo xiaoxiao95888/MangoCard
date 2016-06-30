@@ -42,12 +42,12 @@ namespace Mango_Cards.Web.Controllers
                 HtmlCode = card.HtmlCode,
                 MangoCardId = card.Id
             };
-            var cardId = new HttpCookie("RedirecUrl")
+            var redirecUrl = new HttpCookie("RedirecUrl")
             {
                 Value = Url.Action("RedirectCardView", "Cards", new { id = id }),
                 Expires = DateTime.Now.AddDays(1)
             };
-            Response.Cookies.Add(cardId);
+            Response.Cookies.Add(redirecUrl);
             return View(model) ;
         }
         [AllowAnonymous]

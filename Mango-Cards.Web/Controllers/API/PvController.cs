@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using Mango_Cards.Web.Models.PV;
 using MongoDB.Bson;
@@ -12,15 +13,12 @@ namespace Mango_Cards.Web.Controllers.API
 {
     public class PvController : BaseApiController
     {
-
         private readonly IMongoDatabase _mdb;
-        private readonly IMongoClient _client;
         public PvController()
         {
-            _client = new MongoClient();
-            _mdb = _client.GetDatabase("pv_mangocard");
+            IMongoClient client = new MongoClient();
+            _mdb = client.GetDatabase("pv_mangocard");
         }
-      
         public object Post(PvRecord model)
         {
             var collection = _mdb.GetCollection<PvRecord>("PvRecord");
@@ -42,6 +40,7 @@ namespace Mango_Cards.Web.Controllers.API
             }
             return Success();
         }
+
         /// <summary>
         /// 根据mangocardId查询浏览记录
         /// </summary>
@@ -54,11 +53,22 @@ namespace Mango_Cards.Web.Controllers.API
             var model = new
             {
                 ViewCount = collection.Count(filter),
-                UserCount = collection.AsQueryable<PvRecord>().Where(n => n.MangoCardId == id).Select(n => n.PvUser).Distinct().Count()
-
+                UserCount =
+                    collection.AsQueryable<PvRecord>()
+                        .Where(n => n.MangoCardId == id)
+                        .Select(n => n.PvUser)
+                        .Distinct()
+                        .Count(),
+                TopUser =
+                    collection.AsQueryable()
+                        .Where(n => n.MangoCardId == id)
+                        .GroupBy(n => n.PvUser)
+                        .Select(n => new {WeChartUser = n.Key, Time = n.Select(p => p.DateTime).Last()})
+                        .OrderByDescending(p => p.Time)
+                        .Take(10)
             };
             return model;
-           
         }
     }
 }
+
