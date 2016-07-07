@@ -34,6 +34,14 @@ namespace Mango_Cards.Web.Controllers
         [AllowAnonymous]
         public ActionResult View(Guid id)
         {
+            if (HttpContext.Request.UserAgent != null && HttpContext.Request.UserAgent.ToLower().Contains("micromessenger"))
+            {
+                //微信浏览器
+                if (Session["CardId"] == null || Session["CardId"].ToString() != id.ToString())
+                {
+                    return RedirectToAction("RedirectCardView", new { id = id });
+                }
+            }
             var card = _mangoCardService.GetMangoCard(id);
             var model = new MangoCardAttributeModel
             {
@@ -42,25 +50,19 @@ namespace Mango_Cards.Web.Controllers
                 HtmlCode = card.HtmlCode,
                 MangoCardId = card.Id
             };
-            var redirecUrl = new HttpCookie("RedirecUrl")
-            {
-                Value = Url.Action("RedirectCardView", "Cards", new { id = id }),
-                Expires = DateTime.Now.AddDays(1)
-            };
-            Response.Cookies.Add(redirecUrl);
-            return View(model) ;
+            return View(model);
         }
         [AllowAnonymous]
         public ActionResult CardTemplateView(Guid id)
         {
             var model = Mapper.Map<CardTemplate, CardTemplateDetailModel>(_cardTemplateService.GetCardTemplate(id));
-           
             return View(model);
         }
         [AllowAnonymous]
         //用来缩短预览二维码长度并且跳转到正常的微信网址
         public ActionResult RedirectCardView(Guid id)
         {
+            Session["CardId"] = id;
             var state = Helper.GenerateId();
             var backUrl = "http://" + HttpContext.Request.Url.Host + Url.Action("View", "Cards", new { id = id });
             var url =
@@ -73,6 +75,7 @@ namespace Mango_Cards.Web.Controllers
         //用来缩短预览二维码长度并且跳转到正常的微信网址
         public ActionResult RedirectCardTemplateView(Guid id)
         {
+            Session["CardId"] = id;
             var state = Helper.GenerateId();
             var backUrl = "http://" + HttpContext.Request.Url.Host + Url.Action("CardTemplateView", "Cards", new { id = id });
             var url =
