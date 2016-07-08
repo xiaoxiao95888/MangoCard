@@ -42,6 +42,8 @@ namespace Mango_Cards.Web.Controllers
                     return RedirectToAction("RedirectCardView", new { id = id });
                 }
             }
+            var cardIdCookie = new HttpCookie("CardId") {Value = id.ToString()};
+            Response.Cookies.Add(cardIdCookie);
             var card = _mangoCardService.GetMangoCard(id);
             var model = new MangoCardAttributeModel
             {

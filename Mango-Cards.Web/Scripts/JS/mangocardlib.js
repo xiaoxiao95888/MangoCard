@@ -49,7 +49,7 @@ var mc = {};
     var wechartuser;
     var lib = {
         Tool: {
-            getQueryStringByName: function (name) {
+            getQueryStringByName: function(name) {
                 var result = location.search.match(new RegExp("[\?\&]" + name + "=([^\&]+)", "i"));
                 if (result == null || result.length < 1) {
                     return "";
@@ -57,24 +57,24 @@ var mc = {};
                 return result[1];
             }
         },
-        loadsignature: function (dtd) {
+        loadsignature: function(dtd) {
             var dtd = $.Deferred();
-            $.get("/api/HeaderSetting/", function (result) {
+            $.get("/api/HeaderSetting/", function(result) {
                 signature = result;
                 dtd.resolve();
             });
             return dtd.promise();
         },
-        loadjssdk: function (dtd) {
-            var dtd = $.Deferred();           
+        loadjssdk: function(dtd) {
+            var dtd = $.Deferred();
             $.ajax({
                 type: "get",
                 url: "http://WeChatService.mangoeasy.com:3000/api/JsApiConfig/",
                 data: { url: location.href },
-                beforeSend: function (xhr) {
+                beforeSend: function(xhr) {
                     xhr.setRequestHeader("Authorization", signature);
                 },
-                success: function (xmlDoc, textStatus, xhr) {
+                success: function(xmlDoc, textStatus, xhr) {
                     if (xhr.status === 200) {
                         wx.config({
                             debug: false,
@@ -84,7 +84,7 @@ var mc = {};
                             signature: xhr.responseJSON.Signature,
                             jsApiList: ["onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ", "onMenuShareWeibo", "onMenuShareQZone", "startRecord", "stopRecord", "onVoiceRecordEnd", "playVoice", "pauseVoice", "stopVoice", "onVoicePlayEnd", "uploadVoice", "downloadVoice", "chooseImage", "previewImage", "uploadImage", "downloadImage", "translateVoice", "getNetworkType", "openLocation", "getLocation", "hideOptionMenu", "showOptionMenu", "hideMenuItems", "showMenuItems", "hideAllNonBaseMenuItem", "showAllNonBaseMenuItem", "closeWindow", "scanQRCode", "chooseWXPay", "openProductSpecificView", "addCard", "chooseCard", "openCard"]
                         });
-                        wx.ready(function () {
+                        wx.ready(function() {
 
                         });
                         dtd.resolve();
@@ -94,7 +94,7 @@ var mc = {};
 
             return dtd.promise();
         },
-        loadwechartuser: function (dtd) {
+        loadwechartuser: function(dtd) {
             var dtd = $.Deferred();
             if ($.cookie('WeChartUser') === "" || $.cookie('WeChartUser') === null) {
                 $.ajax({
@@ -110,7 +110,7 @@ var mc = {};
                                 dtd.reject();
                             } else {
                                 $.cookie('WeChartUser', JSON.stringify(xhr.responseJSON));
-                                $(mc).trigger("ready", [$.cookie('WeChartUser'), wx]);
+                                $(mc).trigger("ready", [JSON.parse($.cookie('WeChartUser')), wx]);
                                 dtd.resolve();
                             }
 
@@ -121,14 +121,15 @@ var mc = {};
                 $(mc).trigger("ready", [JSON.parse($.cookie('WeChartUser')), wx]);
                 dtd.resolve();
             }
-            
+
             return dtd.promise();
         },
-        record: function (dtd) {
+        record: function(dtd) {
             var dtd = $.Deferred();
-            var mangocardid = lib.Tool.getCookie("CardId");
+            var mangocardid = $.cookie('CardId');
+            //alert(mangocardid);
             var model = {
-                PvUser: wechartuser,
+                PvUser: JSON.parse($.cookie('WeChartUser')),
                 MangoCardId: mangocardid
             };
             $.post("/api/Pv", model, function() {
@@ -136,16 +137,17 @@ var mc = {};
             });
             return dtd.promise();
         },
-        init: function () {
+        init: function() {
             lib.loadsignature()
                 .then(lib.loadwechartuser)
-                .then(lib.loadjssdk);
+                .then(lib.loadjssdk)
+                .then(lib.record);
         }
     };
     lib.init();
 })(jQuery);
 //test
 //$(mc).on("ready", function(event, user) {
-//    alert(user.openid);
+//    alert(user.nickname);
 //});
 
