@@ -93,7 +93,8 @@ namespace Mango_Cards.Web.Controllers.API
                         Name = p.Name,
                         FieldValue = p.FieldValue,
                         FieldType = p.FieldType,
-                        MediaId = p.MediaId
+                        MediaId = p.MediaId,
+                        Index = p.Index
                     }).ToArray(),
                     WeChatUserId = new Guid(User.Identity.GetUserId()),
                     ThumbnailUrl = card.ThumbnailUrl,
