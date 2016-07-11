@@ -35,20 +35,6 @@
                 <img data-bind="attr:{'src':ThumbnailUrl}" class="img-responsive img-rounded">
             </div>
         </div>
-        @*<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 card-item" data-bind="css:CardTypeId,isotopetype: {container: '#container', itemSelector: '.card-item'}">
-                <div class="grid-item">
-                    <div class="caption img-rounded">
-                        <div class="item-container">
-                            <div class="item-inner-container">
-                                <h4 data-bind="text:Title" style="padding: 10px"></h4>
-                                <h5 style="padding: 5px"><a class="text-white" href="#">预览</a><a class="text-white" href="#" data-bind="click:Cards.viewModel.edit">编辑</a><a class="text-white" href="#" data-bind="click:Cards.viewModel.data">数据</a></h5>
-                                <h5 style="padding: 5px" data-bind="date:UpdateTime"></h5>
-                            </div>
-                        </div>
-                    </div>
-                    <img data-bind="attr:{'src':ThumbnailUrl}" class="img-responsive img-rounded">
-                </div>
-            </div>*@
     </div>
 
 </div>
@@ -60,19 +46,48 @@
         </div>
         <ul class="nav nav-tabs">
             <li class="active" role="presentation">
+                <a href="#" data-bind="click:Cards.viewModel.tab" id="sharesettinglink">分享设置</a>
+            </li>
+            <li role="presentation">
                 <a href="#" data-bind="click:Cards.viewModel.tab" id="normallink">普通模式</a>
             </li>
             <li role="presentation">
                 <a href="#" data-bind="click:Cards.viewModel.tab" id="advancedlink">代码模式</a>
             </li>
-            @*<li class="pull-right">
-                    <span class="text-success" style="display: block; padding: 10px 15px; position: relative;"></span>
-
-                </li>*@
         </ul>
         <p class="operation-tips" style="display: none"></p>
+        <!--分享设置-->
+        <div class="tab-content" style="border-bottom: 1px solid #ddd;border-left: 1px solid #ddd; border-right: 1px solid #ddd; padding:10px;display: none" id="sharesetting">
+            <div class="form-horizontal" style="width: 400px; margin: 0 auto">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" data-bind="">标题</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-bind="value:Cards.viewModel.MangoCard.Title" placeholder="标题">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">缩略图URL</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" data-bind="value:Cards.viewModel.MangoCard.ShareThumbnailUrl" placeholder="缩略图URL">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">描述</label>
+                    <div class="col-sm-9">
+                        <textarea rows="3" class="form-control" data-bind="value:Cards.viewModel.MangoCard.Description" placeholder="描述"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <hr />
+            <p class="text-center">
+                <a href="#" class="btn btn-black" data-bind="click:Cards.viewModel.ShareSettingSave">
+                    保存
+                </a>
+            </p>
+        </div>
         <!--普通编辑模式 -->
-        <div class="tab-content" style="border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; padding:10px;" id="editnormal">
+        <div class="tab-content" style="border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; padding:10px;display: none" id="editnormal">
             <div class="text-center" style="height: 200px; line-height: 200px" data-bind="visible:viewModel.MangoCardAttribute.FieldModels().length==0">
                 没有需要自定义的属性
             </div>
@@ -139,9 +154,9 @@
                     <a href="#" class="btn btn-black" data-bind="click:Cards.viewModel.normalsave">
                         保存
                     </a>
-                    <a href="#" class="btn btn-black" data-bind="click:Cards.viewModel.submitaudit">
-                        发布
-                    </a>
+                    @*<a href="#" class="btn btn-black" data-bind="click:Cards.viewModel.submitaudit">
+                            发布
+                        </a>*@
                 </p>
                 <p class="text-center">
                     <span>
@@ -151,7 +166,7 @@
             </div>
         </div>
         <!--高级编辑模式 -->
-        <div class="tab-content" id="editadvanced" style="border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; padding: 10px">
+        <div class="tab-content" id="editadvanced" style="display: none;border-bottom: 1px solid #ddd; border-left: 1px solid #ddd; border-right: 1px solid #ddd; padding: 10px">
             <div id="editadvancedarea">
             </div>
             <hr />
@@ -159,10 +174,10 @@
                 <a href="#" class="btn btn-black" data-bind="click:Cards.viewModel.advancedsave">
                     保存
                 </a>
-                <a href="#" class="btn btn-black" data-bind="click:Cards.viewModel.submitaudit">
-                    <span>发布</span>
-                    <i class="fa fa-spinner fa-pulse hide"></i>
-                </a>
+                @*<a href="#" class="btn btn-black" data-bind="click:Cards.viewModel.submitaudit">
+                        <span>发布</span>
+                        <i class="fa fa-spinner fa-pulse hide"></i>
+                    </a>*@
             </p>
             <p class="text-center">
                 <span>
@@ -176,12 +191,12 @@
 <div id="dataview" data-bind="visible:Cards.viewModel.showdata">
     <div class="container">
         <div class="row">
-            <h2 class="text-center title" style="letter-spacing:0.8rem;">数据 </h2>
+            <h2 class="text-center title" style="letter-spacing:0.8rem;">数据</h2>
         </div>
         <p>
-            <span></span>
+            <span data-bind="text:Cards.viewModel.selectcard.Title"></span>
             <span style="float: right">
-                类型：<span></span>
+                编号：<span data-bind="text:Cards.viewModel.selectcard.Code"></span>
             </span>
         </p>
         <div class="panel panel-default">
@@ -434,7 +449,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer" style="background-color: #f4f5f9">
+            <div class="modal-footer" style="background-color:#f4f5f9">
                 <span class="pull-left" data-bind="text:Cards.viewModel.Mediae()!= null ? ('已选：'+Cards.viewModel.Mediae().FileName):''"></span>
                 <button type="button" class="btn btn-black" data-bind="attr:{disabled : Cards.viewModel.Mediae()== null},click:Cards.SelectMediaeDetermine">确定</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

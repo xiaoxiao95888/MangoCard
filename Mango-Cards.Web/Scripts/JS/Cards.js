@@ -15,6 +15,13 @@
             Instructions: ko.observable(),
             FieldModels: ko.observableArray()
         },
+        //分享设置
+        MangoCard: {
+            Id: ko.observable(),
+            Title: ko.observable(),
+            Description: ko.observable(),
+            ShareThumbnailUrl: ko.observable()
+        },
         //预览URL
         PreviewCard: {
             MangoCardUrl: ko.observable(),
@@ -56,7 +63,15 @@
             Fields: ko.observableArray(),
             Rows: ko.observableArray()
         },
-        selectcard: ko.observable(),
+        selectcard: {
+            Id: ko.observable(),
+            Title: ko.observable(),
+            Description: ko.observable(),
+            CardTypeId: ko.observable(),
+            Code: ko.observable(),
+            Url: ko.observable()
+
+        },
         baseaccessdata: {
             ViewCount: ko.observable("-"),
             UserCount: ko.observable("-"),
@@ -236,11 +251,11 @@ function addAllColumnHeaders(myList) {
 }
 //点击编辑
 Cards.viewModel.edit = function () {
-    $("#normallink").click();
     var model = ko.toJS(this);
     $.get("/api/MangoCardAttribute/" + model.Id, function (card) {
         ko.mapping.fromJS(card, {}, Cards.viewModel.MangoCardAttribute);
         ko.mapping.fromJS(card, {}, Cards.viewModel.PreviewCard);
+        $("#sharesettinglink").click();
         //定位
         $("html, body").stop().animate({
             scrollTop: $("#dataedit").offset().top - 25
@@ -423,7 +438,7 @@ Cards.viewModel.submitaudit = function () {
 //点击显示访问数据
 Cards.viewModel.data = function () {
     var model = ko.toJS(this);
-    Cards.viewModel.selectcard(model);
+    ko.mapping.fromJS(model, {}, Cards.viewModel.selectcard);
     $.get("/api/PageValue/" + model.Id, function (result) {
         buildHtmlTable(result);
         //定位
@@ -437,7 +452,7 @@ Cards.viewModel.data = function () {
     Cards.viewModel.showdata(true);
 };
 //点击显示TopUser
-Cards.viewModel.ShowTopUser=function() {
+Cards.viewModel.ShowTopUser = function () {
     $("#topUser-dialog").modal({ show: true, backdrop: "static" });
 }
 //刷新表单数据
@@ -609,6 +624,7 @@ Cards.viewModel.tab = function (data, event) {
     dom.tab('show');
     if (dom.attr("id") === "advancedlink") {
         $("#editnormal").hide();
+        $("#sharesetting").hide();
         $.get("/api/MangoCardAttribute/" + Cards.viewModel.MangoCardAttribute.MangoCardId(), function (card) {
             ko.mapping.fromJS(card, {}, Cards.viewModel.MangoCardAttribute);
             $("#editadvanced").show(function () {
@@ -642,9 +658,17 @@ Cards.viewModel.tab = function (data, event) {
 
         });
 
-    } else {
+    } else if (dom.attr("id") === "normallink") {
         $("#editadvanced").hide();
+        $("#sharesetting").hide();
         $("#editnormal").show();
+    } else {
+        $.get("/api/MyCards/" + Cards.viewModel.MangoCardAttribute.MangoCardId(), function (card) {
+            ko.mapping.fromJS(card, {}, Cards.viewModel.MangoCard);
+            $("#editadvanced").hide();
+            $("#editnormal").hide();
+            $("#sharesetting").show();
+        });
     }
 };
 //HTML5上传
