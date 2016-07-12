@@ -41,6 +41,14 @@ namespace Mango_Cards.Library.Models
         /// </summary>
         public bool IsPublish { get; set; }
         /// <summary>
+        /// 是否提交审核
+        /// </summary>
+        public bool IsReview { get; set; }
+        /// <summary>
+        /// 提交的审核记录
+        /// </summary>
+        public virtual  ICollection<CardApproved> CardApproveds { get; set; } 
+        /// <summary>
         /// 浏览量
         /// </summary>
         public virtual ICollection<PvData> PvDatas { get; set; }

@@ -426,14 +426,61 @@ Cards.viewModel.normalsave = function (data, event) {
     }
 
 };
-//发布
-Cards.viewModel.submitaudit = function () {
-    var dialog = $("#publish-dialog");
-    dialog.modal({
-        keyboard: false,
-        show: true,
-        backdrop: "static"
+//保存发布设置
+Cards.viewModel.ShareSettingSave = function (data, event) {
+    var model = ko.mapping.toJS(Cards.viewModel.MangoCard);
+    var dom = $(event.target);
+    dom.button("loading");
+    $.ajax({
+        type: "put",
+        url: "/api/ShareSetting/",
+        contentType: "application/json",
+        data: JSON.stringify(model),
+        dataType: "json",
+        success: function (result) {
+            if (result.Error) {
+                Cards.viewModel.SaveTipsError(result.Message);
+            } else {
+                Cards.viewModel.SaveTipsSuccess();
+                //更新list 更新MangoCardAttribute
+                ko.utils.arrayForEach(Cards.viewModel.mycards(), function (item) {
+                    if (item.Id() === model.Id) {
+                        item.Title(model.Title);
+                    }
+                });
+                Cards.viewModel.MangoCardAttribute.Title(model.Title);
+            }
+            dom.button("reset");
+        }
     });
+}
+//发布
+Cards.viewModel.submitaudit = function (data, event) {
+    //应该先付款再提交申请
+    //var dialog = $("#publish-dialog");
+    //dialog.modal({
+    //    keyboard: false,
+    //    show: true,
+    //    backdrop: "static"
+    //});
+    var conf = confirm("发布后将无法编辑，是否提交发布？");
+    if (conf === true) {
+        var model = ko.mapping.toJS(this);
+        $.ajax({
+            type: "put",
+            url: "/api/Publish/" + model.Id,
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                if (result.Error) {
+
+                } else {
+                    data.IsPublish(false);
+                    data.IsReview(true);
+                }
+            }
+        });
+    }
 }
 //点击显示访问数据
 Cards.viewModel.data = function () {
@@ -474,6 +521,27 @@ Cards.viewModel.refreshformpagevalue = function (data, event) {
         });
     });
 };
+//取消发布
+Cards.viewModel.Unpublish = function (data, event) {
+    var conf = confirm("是否取消发布？");
+    if (conf === true) {
+        var model = ko.mapping.toJS(this);
+        $.ajax({
+            type: "put",
+            url: "/api/Unpublish/" + model.Id,
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                if (result.Error) {
+                   
+                } else {
+                    data.IsPublish(false);
+                    data.IsReview(false);
+                }
+            }
+        });
+    }
+}
 //刷新基础数据
 Cards.viewModel.refreshbasepagevalue = function (data, event) {
     //var dom = $(event.target);

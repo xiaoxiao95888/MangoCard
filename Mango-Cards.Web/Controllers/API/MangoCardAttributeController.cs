@@ -53,6 +53,10 @@ namespace Mango_Cards.Web.Controllers.API
             var card = wechatuser.MangoCards.FirstOrDefault(n => n.IsDeleted == false && n.Id == id);
             if (card != null)
             {
+                if (card.IsReview || card.IsPublish)
+                {
+                    return Failed("禁止修改");
+                }
                 foreach (var field in card.Fields)
                 {
                     foreach (var fieldmodel in model.FieldModels.Where(fieldmodel => field.Id == fieldmodel.Id))

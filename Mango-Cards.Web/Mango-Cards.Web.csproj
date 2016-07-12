@@ -264,8 +264,11 @@
     <Compile Include="Controllers\API\MyCardTypeController.cs" />
     <Compile Include="Controllers\API\PageValueController.cs" />
     <Compile Include="Controllers\API\PayUrlProcessController.cs" />
+    <Compile Include="Controllers\API\PublishController.cs" />
     <Compile Include="Controllers\API\PvController.cs" />
+    <Compile Include="Controllers\API\ShareSettingController.cs" />
     <Compile Include="Controllers\API\TestLoginController.cs" />
+    <Compile Include="Controllers\API\UnpublishController.cs" />
     <Compile Include="Controllers\API\UploadController.cs" />
     <Compile Include="Controllers\API\WeChatUserController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -303,6 +306,7 @@
     <Compile Include="MapperHelper\Implementation\MediaMapper.cs" />
     <Compile Include="MapperHelper\Implementation\MediaTypeMapper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CardApprovedModel.cs" />
     <Compile Include="Models\CardTemplateModel.cs" />
     <Compile Include="Models\CardTypeModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
@@ -790,6 +794,7 @@
     <Content Include="Views\Cards\CardTemplateView.cshtml" />
     <Content Include="Views\ResultNotifyPage\Index.cshtml" />
     <Content Include="Views\Developer\Index.cshtml" />
+    <Content Include="Views\Developer\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

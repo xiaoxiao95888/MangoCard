@@ -58,6 +58,10 @@ namespace Mango_Cards.Web.Controllers.API
             var card = wechatuser.MangoCards.FirstOrDefault(n => n.IsDeleted == false && n.Id == id);
             if (card != null)
             {
+                if (card.IsReview || card.IsPublish)
+                {
+                    return Failed("禁止修改");
+                }
                 card.HtmlCode = model.HtmlCode;
                 try
                 {

@@ -19,6 +19,14 @@ namespace Mango_Cards.Web.Models
         /// 编号
         /// </summary>
         public string Code { get; set; }
+        /// <summary>
+        /// 是否发布
+        /// </summary>
+        public bool IsPublish { get; set; }
+        /// <summary>
+        /// 是否提交审核
+        /// </summary>
+        public bool IsReview { get; set; }
         public string Url { get; set; }
         public decimal? UnitPrice { get; set; }
         public DateTime UpdateTime { get; set; }
