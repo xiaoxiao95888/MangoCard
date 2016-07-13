@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "RegisterAdmin";
+}
+@Scripts.Render("~/bundles/RegisterAdmin")
+<h2>RegisterAdmin</h2>
+
+<table class="table table-responsive table-bordered">
+    <thead>
+        <tr>
+            <th>姓名</th>
+            <th>手机</th>
+            <th>Email</th>
+            <th>昵称</th>
+            <th>国家</th>
+            <th>省份</th>
+            <th>城市</th>
+            <th>提交时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach:viewModel.RegisterUserModels">
+        <tr>
+            <td data-bind="text:Name"></td>
+            <td data-bind="text:PhoneNum"></td>
+            <td data-bind="text:Email"></td>
+            <td data-bind="text:NickName"></td>
+            <td data-bind="text:Country"></td>
+            <td data-bind="text:Province"></td>
+            <td data-bind="text:City"></td>
+            <td data-bind="text:CreatedTime"></td>
+            <td>
+                <a href="#" data-bind="click:RegisterAdmin.viewModel.Pass">通过</a>
+                <a href="#" data-bind="click:RegisterAdmin.viewModel.Reject">驳回</a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="8" data-bind="text:Introduce"></td>
+        </tr>
+    </tbody>
+</table>
+<div class="modal fade" id="RejectMessage">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="text-left" data-bind="text:RegisterAdmin.viewModel.RegisterUserModel.Name"></p>
+
+            </div>
+            <div class="modal-body">
+                <!-- ko foreach: RegisterAdmin.viewModel.RejectReasons -->
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"  data-bind="checkedValue: $data, checked: RegisterAdmin.viewModel.ChosenRejectReasons">
+                        <span data-bind="text:itemValue"></span>
+                    </label>
+                </div>
+                <!-- /ko -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-danger" >确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

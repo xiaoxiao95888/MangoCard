@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ApplyForDeveloper.cs" />
     <Compile Include="Models\CardApproved.cs" />
     <Compile Include="Models\CardTemplate.cs" />
     <Compile Include="Models\Enum\FieldType.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Models\ShareTime.cs" />
     <Compile Include="Models\WeChatUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IApplyForDeveloperService.cs" />
     <Compile Include="Services\ICardApprovedService.cs" />
     <Compile Include="Services\ICardTemplateService.cs" />
     <Compile Include="Services\ICardTypeService.cs" />

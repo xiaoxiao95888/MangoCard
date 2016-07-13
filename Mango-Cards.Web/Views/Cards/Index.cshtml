@@ -375,7 +375,7 @@
                             <img data-bind="attr:{src:WeChartUser.Headimgurl,alt:WeChartUser.NickName}" style="width: 45px; height: 45px;" />
                         </td>
                         <td style="line-height: 45px" data-bind="text:WeChartUser.NickName"></td>
-                        <td style="line-height: 45px" data-bind="text:WeChartUser.Sex"></td>
+                        <td style="line-height: 45px" data-bind="text:(WeChartUser.Sex()==0?'未知':(WeChartUser.Sex()==1?'男':'女'))"></td>
                         <td style="line-height: 45px" data-bind="text:WeChartUser.Language"></td>
                         <td style="line-height: 45px" data-bind="text:WeChartUser.Country"></td>
                         <td style="line-height: 45px" data-bind="text:WeChartUser.Province"></td>

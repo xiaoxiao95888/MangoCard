@@ -31,6 +31,7 @@ namespace Mango_Cards.Library.Models
         /// 是否是开发者
         /// </summary>
         public bool IsDeveloper { get; set; }
+        public virtual ICollection<ApplyForDeveloper> ApplyForDevelopers { get; set; }
         public virtual ICollection<MangoCard> MangoCards { get; set; }
         public virtual ICollection<CardTemplate> CardTemplates { get; set; }
         public virtual ICollection<Media> Mediae { get; set; }

@@ -1,27 +1,32 @@
 ﻿@{
     ViewBag.Title = "注册成为开发者";
 }
-
+@Scripts.Render("~/bundles/DeveloperRegister")
 <div class="item-container">
     <div class="item-inner-container">
-        <div class="container" style="height: 500px;display: -ms-flex;display: -webkit-flex;display: flex;-ms-flex-align: center;-webkit-align-items: center;-webkit-box-align: center;align-items: center;">
-            <div style="width: 300px;margin: 0 auto">
+        <div class="container" style="height: 595px;display: -ms-flex;display: -webkit-flex;display: flex;-ms-flex-align: center;-webkit-align-items: center;-webkit-box-align: center;align-items: center;">
+            <div style="width: 300px; margin: 0 auto" id="register">
                 <div class="form-group">
                     <label>姓名</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Name">
+                    <input type="text" class="form-control" placeholder="Name" data-bind="value:DeveloperRegister.viewModel.ApplyForDeveloper.Name">
                 </div>
                 <div class="form-group">
-                    <label>电话</label>
-                    <input type="tel" class="form-control"  placeholder="Phone">
+                    <label>请填写真实手机</label>
+                    <input type="tel" class="form-control" placeholder="Phone" data-bind="value:DeveloperRegister.viewModel.ApplyForDeveloper.PhoneNum">
                 </div>
                 <div class="form-group">
-                    <label>邮箱</label>
-                    <input type="email" class="form-control" placeholder="Email">
+                    <label>请填写真实邮箱</label>
+                    <input type="email" class="form-control" placeholder="Email" data-bind="value:DeveloperRegister.viewModel.ApplyForDeveloper.Email">
                 </div>
-                <div class="form-group text-center" >
-                    <button type="submit" class="btn btn-default">注册</button>
+                <div class="form-group">
+                    <label>让我们认识你（熟悉哪些技术或者案例连接）</label>
+                    <textarea rows="5" class="form-control" data-bind="value:DeveloperRegister.viewModel.ApplyForDeveloper.Introduce"></textarea>
+                </div>
+                <div class="form-group text-center">
+                    <button type="button" data-bind="click:DeveloperRegister.viewModel.Submit" class="btn btn-default">注册</button>
                 </div>
             </div>
+            <h4 class="text-center" id="tips" style="display: none;margin: 0px auto;">我们将在1个工作日内完成审核，并会将审核结果发送至您填写的邮箱。</h4>
         </div>
     </div>
 </div>

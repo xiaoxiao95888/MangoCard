@@ -36,6 +36,7 @@ namespace Mango_Cards.Web.Controllers.API
                         Language = model.WeChatUserModel.Language,
                         City = model.WeChatUserModel.City,
                         Province = model.WeChatUserModel.Province,
+                        Country = model.WeChatUserModel.Country,
                         Headimgurl = model.WeChatUserModel.Headimgurl
                     };
                     _weChatUserService.Insert(wecharuser);
@@ -47,6 +48,7 @@ namespace Mango_Cards.Web.Controllers.API
                     wecharuser.Gender = (Gender)model.WeChatUserModel.Gender;
                     wecharuser.Language = model.WeChatUserModel.Language;
                     wecharuser.City = model.WeChatUserModel.City;
+                    wecharuser.Country = model.WeChatUserModel.Country;
                     wecharuser.Province = model.WeChatUserModel.Province;
                     wecharuser.Headimgurl = model.WeChatUserModel.Headimgurl;
                     _weChatUserService.Update();

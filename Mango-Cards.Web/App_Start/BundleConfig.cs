@@ -98,7 +98,9 @@ namespace Mango_Cards.Web
             bundles.Add(new StyleBundle("~/Content/CardView").Include(
                "~/Content/CardView.css"
                ));
-
+            //DeveloperRegister
+            bundles.Add(new ScriptBundle("~/bundles/DeveloperRegister").Include(
+                  "~/Scripts/JS/DeveloperRegister.js"));
         }
     }
 }

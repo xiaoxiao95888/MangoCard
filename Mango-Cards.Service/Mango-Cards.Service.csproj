@@ -53,6 +53,7 @@
     <Compile Include="BaseService.cs" />
     <Compile Include="MangoCardsDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ApplyForDeveloperService.cs" />
     <Compile Include="Services\CardApprovedService.cs" />
     <Compile Include="Services\CardTemplateService.cs" />
     <Compile Include="Services\CardTypeService.cs" />

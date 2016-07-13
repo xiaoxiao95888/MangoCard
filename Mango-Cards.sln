@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango-Cards.Service", "Mango-Cards.Service\Mango-Cards.Service.csproj", "{555D4AFA-FFBD-47A9-972E-64BECB9FC7D7}"
 EndProject
@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B5AAEA
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mango-Cards.Library", "Mango-Cards.Library\Mango-Cards.Library.csproj", "{3EA9638D-90A0-491F-92E7-4C8AAADE902D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangoCard-Cards.Admin", "MangoCard-Cards.Admin\MangoCard-Cards.Admin.csproj", "{C9AFC05D-F492-415E-9E87-B2E677FDCD48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{3EA9638D-90A0-491F-92E7-4C8AAADE902D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EA9638D-90A0-491F-92E7-4C8AAADE902D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EA9638D-90A0-491F-92E7-4C8AAADE902D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9AFC05D-F492-415E-9E87-B2E677FDCD48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9AFC05D-F492-415E-9E87-B2E677FDCD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9AFC05D-F492-415E-9E87-B2E677FDCD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9AFC05D-F492-415E-9E87-B2E677FDCD48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
