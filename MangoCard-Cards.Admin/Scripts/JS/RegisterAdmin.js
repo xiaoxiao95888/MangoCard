@@ -44,12 +44,6 @@
                 }
             });
         },
-        ChosenRejectReasons: ko.observableArray(),
-        RejectReasons: ko.observableArray([
-            { itemValue: "手机号码错误" },
-            { itemValue: "请完善你的介绍，我们不是太了解您。" },
-            { itemValue: "您和我们的技能要求不太相符。" }
-        ]),
         Reject: function (data, event) {
             var item = ko.mapping.toJS(data);
             ko.mapping.fromJS(item, {}, RegisterAdmin.viewModel.RegisterUserModel);
@@ -58,6 +52,11 @@
         RejectSubmit: function () {
             var model = ko.mapping.toJS(RegisterAdmin.viewModel.RegisterUserModel);
             model.Reject = true;
+            var str = [];
+                    $("[name='reason']:checked").each(function () {
+                        str.push($(this).next().text());
+                    });
+            model.RejectMessage = str.join(",");
             $.ajax({
                 type: "PUT",
                 url: "/api/RegisterAdmin/",
@@ -69,27 +68,15 @@
                         alert(result.Message);
                     } else {
                         RegisterAdmin.viewModel.Refresh();
+                        $("#RejectMessage").modal("hide");
                     }
                 }
             });
-        },
-        SelectReason: function (data, event) {
-            var dom = $(event.target);
-            var str = RegisterAdmin.viewModel.RegisterUserModel.RejectMessage();
-            str = str + dom.val();
-            RegisterAdmin.viewModel.RegisterUserModel.RejectMessage(str);
         }
+        
     }
 }
-RegisterAdmin.viewModel.RegisterUserModel.RejectMessage = ko.computed({
-    read: function() {
-        var str = "";
-        ko.utils.arrayForEach(RegisterAdmin.viewModel.ChosenRejectReasons(), function(item) {
-            return item.itemValue;
-        });
-        return str;
-    }
-});
+
 $(function () {
     ko.applyBindings(RegisterAdmin);
     $.get("/api/RegisterAdmin/", function (data) {

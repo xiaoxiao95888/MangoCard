@@ -32,6 +32,9 @@ namespace MangoCard_Cards.Admin
             //RegisterAdmin
             bundles.Add(new ScriptBundle("~/bundles/RegisterAdmin").Include(
                     "~/Scripts/JS/RegisterAdmin.js"));
+            //CardAdmin
+            bundles.Add(new ScriptBundle("~/bundles/CardAdmin").Include(
+                "~/Scripts/JS/CardAdmin.js"));
         }
     }
 }

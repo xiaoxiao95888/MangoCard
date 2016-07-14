@@ -47,18 +47,28 @@
 
             </div>
             <div class="modal-body">
-                <!-- ko foreach: RegisterAdmin.viewModel.RejectReasons -->
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox"  data-bind="checkedValue: $data, checked: RegisterAdmin.viewModel.ChosenRejectReasons">
-                        <span data-bind="text:itemValue"></span>
+                        <input type="checkbox" name="reason">
+                        <span>手机号码错误</span>
                     </label>
                 </div>
-                <!-- /ko -->
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="reason">
+                        <span>请完善你的介绍，我们不是太了解您。</span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="reason">
+                        <span>  您和我们的技能要求不太相符。</span>
+                    </label>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-danger" >确定</button>
+                <button type="button" class="btn btn-danger" data-bind="click:RegisterAdmin.viewModel.RejectSubmit">确定</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

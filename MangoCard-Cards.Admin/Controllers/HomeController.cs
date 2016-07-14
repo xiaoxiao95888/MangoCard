@@ -32,7 +32,11 @@ namespace MangoCard_Cards.Admin.Controllers
         
         public ActionResult RegisterAdmin()
         {
-            
+            return View();
+        }
+
+        public ActionResult CardAdmin()
+        {
             return View();
         }
     }

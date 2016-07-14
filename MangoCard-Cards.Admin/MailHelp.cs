@@ -23,7 +23,7 @@ namespace MangoCard_Cards.Admin
             var pwd = ConfigurationManager.AppSettings["MailPWD"];
             var host = ConfigurationManager.AppSettings["Mailhost"];
             var sub = string.Format("MangoCard开发者申请被驳回");
-            var body = string.Format("Hi {0}<br>抱歉的通知您，您的申请被驳回，原因是：<br>{0}", model.RejectMessage);
+            var body = string.Format("Hi {0}<br>抱歉的通知您，您的申请被驳回，原因是：<br>{1}", model.Name, model.RejectMessage);
             SendMail(username, pwd, model.Email, host, sub, body, string.Empty);
         }
         /// <summary>
