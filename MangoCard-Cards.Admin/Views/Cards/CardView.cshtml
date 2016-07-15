@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
 }
+@model MangoCard_Cards.Admin.Models.MangoCardModel
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,15 +10,13 @@
     <title>@Model.Title</title>
     <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script>
-
-    <style>
-    </style>
+    @Styles.Render("~/Content/CardView")
+    @Scripts.Render("~/bundles/CardView")
 </head>
 <body>
     <div>
         @Html.Raw(Model.HtmlCode)
     </div>
-  
 </body>
 
 </html>

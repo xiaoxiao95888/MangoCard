@@ -219,6 +219,7 @@
     <Compile Include="Models\Enum\Gender.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MangoCardModel.cs" />
     <Compile Include="Models\RegisterUserModel.cs" />
     <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -243,6 +244,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\JS\CardAdmin.js" />
+    <Content Include="Scripts\JS\mangocardlib.js" />
     <Content Include="Scripts\JS\RegisterAdmin.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
