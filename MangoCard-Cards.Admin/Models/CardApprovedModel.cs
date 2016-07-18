@@ -13,5 +13,7 @@ namespace MangoCard_Cards.Admin.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public string Url { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public DateTime UpdateTime { get; set; }
     }
 }

@@ -10,6 +10,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/knockoutjs")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/moment")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -28,6 +29,7 @@
                     <li>@Html.ActionLink("关于", "About", "Home")</li>
                     <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
                     <li>@Html.ActionLink("注册人员审核", "RegisterAdmin", "Home")</li>
+                    <li>@Html.ActionLink("MangoCard审核", "CardAdmin", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

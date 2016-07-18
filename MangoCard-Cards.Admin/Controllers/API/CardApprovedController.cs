@@ -1,6 +1,7 @@
 ﻿using Mango_Cards.Library.Services;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -25,14 +26,15 @@ namespace MangoCard_Cards.Admin.Controllers.API
 
         public object Get()
         {
-            var model = _cardApprovedService.GetCardApproveds().Select(n => new CardApprovedModel
+            var model = _cardApprovedService.GetCardApproveds().ToArray().Select(n => new CardApprovedModel
             {
                 Code = n.MangoCard.Code,
                 Description = n.MangoCard.Description,
                 Id = n.Id,
                 MangocardId = n.MangoCardId,
                 Title = n.MangoCard.Title,
-                Url = $"http://{HttpContext.Current.Request.Url.Host}/Cards/CardView/{n.Id}"
+                UpdateTime = n.UpdateTime.GetValueOrDefault(),
+                Url = $"{ConfigurationManager.AppSettings["MangoCardWebHost"]}/Cards/View/{n.MangoCardId}"
             }).ToArray();
             return model;
         }

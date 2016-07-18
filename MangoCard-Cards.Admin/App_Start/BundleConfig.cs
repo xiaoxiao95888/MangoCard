@@ -28,13 +28,20 @@ namespace MangoCard_Cards.Admin
                       "~/Content/site.css"));
             //knockoutjs
             bundles.Add(new ScriptBundle("~/bundles/knockoutjs").Include(
-                    "~/Scripts/knockout-3.2.0.js", "~/Scripts/knockout.mapping-latest.js"));
+                    "~/Scripts/knockout-3.2.0.js",
+                    "~/Scripts/knockout.mapping-latest.js"));
+            //moment
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                "~/Scripts/moment-with-locales.min.js"));
+
             //RegisterAdmin
             bundles.Add(new ScriptBundle("~/bundles/RegisterAdmin").Include(
                     "~/Scripts/JS/RegisterAdmin.js"));
             //CardAdmin
             bundles.Add(new ScriptBundle("~/bundles/CardAdmin").Include(
-                "~/Scripts/JS/CardAdmin.js", "~/Scripts/JS/mangocardlib.js"));
+                "~/Scripts/JS/CardAdmin.js",
+                "~/Scripts/jquery.qrcode.js",
+               "~/Scripts/qrcode.js"));
         }
     }
 }
